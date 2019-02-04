@@ -84,6 +84,13 @@ namespace Raster.Math.Geometry
         #endregion Public Instance Methods
 
         #region Public Static Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
+        /// <param name="point3"></param>
+        /// <returns></returns>
         public static Plane FromVerties(in Vector3 point1, in Vector3 point2, in Vector3 point3)
         {
             
