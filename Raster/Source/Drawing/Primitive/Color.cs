@@ -200,6 +200,66 @@ namespace Raster.Drawing.Primitive
             );
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Add(in Color left, in Color right, out Color result)
+        {
+            result.r = MathF.Min(left.r + right.r, 1.0f);
+            result.g = MathF.Min(left.g + right.g, 1.0f);
+            result.b = MathF.Min(left.b + right.b, 1.0f);
+            result.a = MathF.Min(left.a + right.a, 1.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Subtract(in Color left, in Color right, out Color result)
+        {
+            result.r = MathF.Max(left.r - right.r, 0.0f);
+            result.g = MathF.Max(left.g - right.g, 0.0f);
+            result.b = MathF.Max(left.b - right.b, 0.0f);
+            result.a = MathF.Max(left.a - right.a, 0.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Multiply(in Color left, float right, out Color result)
+        {
+            result.r = MathF.Clamp(left.r * right, 0.0f, 1.0f);
+            result.g = MathF.Clamp(left.g * right, 0.0f, 1.0f);
+            result.b = MathF.Clamp(left.b * right, 0.0f, 1.0f);
+            result.a = MathF.Clamp(left.a * right, 0.0f, 1.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Multiply(in Color left, in Color right, out Color result)
+        {
+            result.r = MathF.Max(left.r * right.r, 0.0f);
+            result.g = MathF.Max(left.g * right.g, 0.0f);
+            result.b = MathF.Max(left.b * right.b, 0.0f);
+            result.a = MathF.Max(left.a * right.a, 0.0f);
+        }
+
         #endregion Public Static Methods
 
         #region Operator Overload
@@ -211,11 +271,9 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public static Color operator +(in Color left, in Color right)
         {
-            return new Color(
-                MathF.Clamp(left.r + right.r, 0.0f, 1.0f),
-                MathF.Clamp(left.g + right.g, 0.0f, 1.0f),
-                MathF.Clamp(left.b + right.b, 0.0f, 1.0f),
-                MathF.Clamp(left.a + right.a, 0.0f, 1.0f));
+            Color result = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+            Add(left, right, out result);
+            return result;
         }
 
         /// <summary>
@@ -226,11 +284,9 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public static Color operator -(in Color left, in Color right)
         {
-            return new Color(
-                MathF.Max(0.0f, left.r - right.r),
-                MathF.Max(0.0f, left.g - right.g),
-                MathF.Max(0.0f, left.b - right.b),
-                MathF.Max(0.0f, left.a - right.a));
+            Color result = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+            Subtract(left, right, out result);
+            return result;
         }
 
         /// <summary>
@@ -241,11 +297,9 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public static Color operator *(float left, in Color right)
         {
-            return new Color(
-                MathF.Clamp(left * right.r, 0.0f, 1.0f),
-                MathF.Clamp(left * right.g, 0.0f, 1.0f),
-                MathF.Clamp(left * right.b, 0.0f, 1.0f),
-                MathF.Clamp(left * right.a, 0.0f, 1.0f));
+            Color result = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+            Multiply(right, left, out result);
+            return result;
         }
 
         /// <summary>
@@ -256,11 +310,9 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public static Color operator *(in Color left, float right)
         {
-            return new Color(
-                MathF.Clamp(left.r * right, 0.0f, 1.0f),
-                MathF.Clamp(left.g * right, 0.0f, 1.0f),
-                MathF.Clamp(left.b * right, 0.0f, 1.0f),
-                MathF.Clamp(left.a * right, 0.0f, 1.0f));
+            Color result = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+            Multiply(left, right, out result);
+            return result;
         }
 
         /// <summary>
@@ -271,11 +323,9 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public static Color operator *(in Color left, in Color right)
         {
-            return new Color(
-                MathF.Clamp(left.r * right.r, 0.0f, 1.0f),
-                MathF.Clamp(left.g * right.g, 0.0f, 1.0f),
-                MathF.Clamp(left.b * right.b, 0.0f, 1.0f),
-                MathF.Clamp(left.a * right.a, 0.0f, 1.0f));
+            Color result = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+            Multiply(left, right, out result);
+            return result;
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using Raster.Private;
 
 namespace Raster.Math.Geometry
 {
@@ -61,7 +62,7 @@ namespace Raster.Math.Geometry
         {
             if (obj is Point3F)
             {
-                return Equals((PointF)obj);
+                return Equals((Point3F)obj);
             }
 
             return false;
@@ -73,7 +74,8 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return X.GetHashCode() ^ Y.GetHashCode();
+            int hash = HashHelpers.Combine(X.GetHashCode(), Y.GetHashCode());
+            return HashHelpers.Combine(hash, Z.GetHashCode());
         }
 
         /// <summary>
@@ -89,31 +91,71 @@ namespace Raster.Math.Geometry
         /// <param name="other"></param>
         /// <returns></returns>
         public bool Equals(Point3F other) => this == other;
+
         /// <summary>
         /// 
         /// </summary>
-        public bool IsEmpty() => X == 0.0f && Y == 0.0f;
+        public bool IsEmpty() => X == 0.0f && Y == 0.0f && Z == 0.0f;
 
         #endregion Public Instance Methods
+
+        #region Public Static Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Point3F Add(in Point3F left, in Point3F right) =>
+            new Point3F(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Point3F Subtract(in Point3F left, in Point3F right) =>
+            new Point3F(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Point3F Multiply(in Point3F left, float right) =>
+            new Point3F(left.X * right, left.Y * right, left.Z * right);
+
+        #endregion Public Static Methods
 
         #region Operator Overload
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
         /// <returns></returns>
         public static Point3F operator +(in Point3F left, in Point3F right) =>
-            new Point3F(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+            Add(left, right);
 
         /// <summary>
-        ///     
+        /// 
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
         /// <returns></returns>
         public static Point3F operator -(in Point3F left, in Point3F right) =>
-            new Point3F(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+            Subtract(left, right);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static Point3F operator *(in Point3F left, float right) =>
+            Multiply(left, right);
 
         /// <summary>
         /// 

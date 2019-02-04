@@ -3,11 +3,20 @@ using System.Runtime.CompilerServices;
 
 namespace Raster.Math.Geometry
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Serializable]
-    public struct Plane : IGeometry, IEquatable<Plane>
+    public struct Plane : IEquatable<Plane>
     {
         #region Public Fields
+        /// <summary>
+        /// 
+        /// </summary>
         public Vector3 Normal;
+        /// <summary>
+        /// 
+        /// </summary>
         public float Distance;
         #endregion
 
@@ -28,6 +37,57 @@ namespace Raster.Math.Geometry
             Distance = d;
         }
         #endregion Constructor
+
+        #region Public Static Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool Equals(object obj)
+        {
+            if (obj is Plane)
+            {
+                return Equals((Plane)obj);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override int GetHashCode()
+        {
+            return Normal.GetHashCode() ^ Distance.GetHashCode();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() =>
+            string.Format("Plane: Normal X = {0}, Y = {1}, Z = {2} Distance = {3}",
+                          Normal.X, Normal.Y, Normal.Z, Distance);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Equals(Plane other) => this == other;
+
+        #endregion Public Instance Methods
+
+        #region Public Static Methods
+        public static Plane FromVerties(in Vector3 point1, in Vector3 point2, in Vector3 point3)
+        {
+            
+        }
 
         /// <summary>
         /// Transforms a normalized Plane by a Matrix
@@ -73,47 +133,5 @@ namespace Raster.Math.Geometry
         }
         
         #endregion Operator Overload
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override bool Equals(object obj)
-        {
-            if (obj is Plane)
-            {
-                return Equals((Plane)obj);
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode()
-        {
-            return Normal.GetHashCode() ^ Distance.GetHashCode();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString() => 
-            string.Format("Plane: Normal X = {0}, Y = {1}, Z = {2} Distance = {3}", 
-                          Normal.X, Normal.Y, Normal.Z, Distance);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(Plane other) => this == other;
     }
 }

@@ -3,6 +3,9 @@ using Raster.Math;
 
 namespace Raster.Math.Geometry
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Serializable]
     public struct AABB : IEquatable<AABB>
     {
@@ -44,57 +47,7 @@ namespace Raster.Math.Geometry
 		}
         #endregion
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="vertices"></param>
-        void GetBoundingBox(IEnumerator<Vector3> vertices)
-		{
-			for (int i = 0; i < vertices.Length; i++)
-			{
-				if (Min.X > vertices[i].X)
-					Min.X = vertices[i].X;
-				
-				if (Max.X < vertices[i].X)
-					Max.X = vertices[i].X;
-				
-				if (Min.Y > vertices[i].X)
-					Min.Y = vertices[i].X;
-				
-				if (Max.Y < vertices[i].X)
-					Max.Y = vertices[i].X;
-				
-				if (Min.Z > vertices[i].X)
-					Min.Z = vertices[i].X;
-				
-				if (Max.Z < vertices[i].X)
-					Max.Z = vertices[i].X;
-			}
-		}
-
-        #region Operator Overload
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static bool operator ==(in AABB left, in AABB right) =>
-            left.Min.X == right.Min.X && left.Min.Y == right.Min.Y && left.Min.Z == right.Min.Z &&
-            left.Max.X == right.Max.X && left.Max.Y == right.Max.Y && left.Max.Z == right.Max.Z;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static bool operator !=(in AABB left, in AABB right) =>
-            left.Min.X != right.Min.X || left.Min.Y != right.Min.Y || left.Min.Z != right.Min.Z ||
-            left.Max.X != right.Max.X || left.Max.Y != right.Max.Y || left.Max.Z != right.Max.Z;
-
-        #endregion
-
+        #region Public Instance Methods
         /// <summary>
         /// 
         /// </summary>
@@ -133,5 +86,30 @@ namespace Raster.Math.Geometry
         /// <param name="other"></param>
         /// <returns></returns>
         public bool Equals(AABB other) => this == other;
+
+        #endregion Public Instance Methods
+
+        #region Operator Overload
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator ==(in AABB left, in AABB right) =>
+            left.Min.X == right.Min.X && left.Min.Y == right.Min.Y && left.Min.Z == right.Min.Z &&
+            left.Max.X == right.Max.X && left.Max.Y == right.Max.Y && left.Max.Z == right.Max.Z;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator !=(in AABB left, in AABB right) =>
+            left.Min.X != right.Min.X || left.Min.Y != right.Min.Y || left.Min.Z != right.Min.Z ||
+            left.Max.X != right.Max.X || left.Max.Y != right.Max.Y || left.Max.Z != right.Max.Z;
+
+        #endregion
     }
 }

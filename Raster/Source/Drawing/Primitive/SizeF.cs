@@ -1,6 +1,7 @@
 ﻿using System;
+using Raster.Private;
 
-namespace Raster.Drawing
+namespace Raster.Drawing.Primitive
 {
     /// <summary>
     /// 
@@ -39,9 +40,14 @@ namespace Raster.Drawing
             Height = height;
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Public Instance Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (obj is SizeF)
@@ -52,10 +58,12 @@ namespace Raster.Drawing
             return false;
         }
 
-        public override int GetHashCode()
-        {
-            return Width.GetHashCode() ^ Height.GetHashCode();
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode() =>
+            HashHelpers.Combine(Width.GetHashCode(), Height.GetHashCode());
 
         /// <summary>
         /// 
@@ -71,9 +79,72 @@ namespace Raster.Drawing
         /// <returns></returns>
         public bool Equals(SizeF other) => this == other;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsEmpty() => Width == 0.0f && Height == 0.0f;
+
         #endregion Public Instance Methods
 
+        #region Public Static Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static SizeF Add(in SizeF left, in SizeF right) =>
+            new SizeF(left.Width + right.Width, left.Height + right.Height);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static SizeF Subtract(in SizeF left, in SizeF right) =>
+            new SizeF(left.Width - right.Width, left.Height - right.Height);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static SizeF Multiply(in SizeF left, float right) =>
+            new SizeF(left.Width * right, left.Height * right);
+
+        #endregion Public Static Methods
+
         #region Operator Overload
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static SizeF operator +(in SizeF left, in SizeF right) =>
+            Add(left, right);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static SizeF operator -(in SizeF left, in SizeF right) =>
+            Subtract(left, right);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static SizeF operator *(in SizeF left, float right) =>
+            Multiply(left, right);
+
         /// <summary>
         /// 
         /// </summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using Raster.Private;
 
 namespace Raster.Math
 {
@@ -84,7 +85,9 @@ namespace Raster.Math
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return X.GetHashCode() ^ Y.GetHashCode() ^ Y.GetHashCode() ^ W.GetHashCode();
+            int hash1 = HashHelpers.Combine(X.GetHashCode(), Y.GetHashCode());
+            int hash2 = HashHelpers.Combine(Z.GetHashCode(), W.GetHashCode());
+            return HashHelpers.Combine(hash1, hash2);
         }
 
         /// <summary>

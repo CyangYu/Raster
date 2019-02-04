@@ -31,48 +31,7 @@ namespace Raster.Math.Geometry
         }
         #endregion Constructor
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="time"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Point3F PointAt(float time)
-        {
-            Direction.Normalize();
-            return new Point3F(Origin.X + time * Direction.X,
-                               Origin.Y + time * Direction.Y,
-                               Origin.Z + time * Direction.Z);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool operator ==(in Ray left, in Ray right)
-        {
-            return (left.Origin.X == right.Origin.X &&
-                    left.Origin.Y == right.Origin.Y &&
-                    left.Origin.Z == right.Origin.Z &&
-                    left.Direction == right.Direction);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static bool operator !=(in Ray left, in Ray right)
-        {
-            return (left.Origin.X != right.Origin.X ||
-                    left.Origin.Y != right.Origin.Y ||
-                    left.Origin.Z != right.Origin.Z ||
-                    left.Direction != right.Direction);
-        }
+        #region Public Instance Methods
         /// <summary>
         /// 
         /// </summary>
@@ -101,8 +60,8 @@ namespace Raster.Math.Geometry
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() => 
-            string.Format("Ray: Origin X = {0}, Y = {1}, Z = {2} Direction: X = {3}, Y = {4}, Z = {5}", 
+        public override string ToString() =>
+            string.Format("Ray: Origin X = {0}, Y = {1}, Z = {2} Direction: X = {3}, Y = {4}, Z = {5}",
                           Origin.X, Origin.Y, Origin.Z, Direction.X, Direction.Y, Direction.Z);
 
 
@@ -113,5 +72,53 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Ray other) => this == other;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Point3F PointAt(float time)
+        {
+            Direction.Normalize();
+            return new Point3F(Origin.X + time * Direction.X,
+                               Origin.Y + time * Direction.Y,
+                               Origin.Z + time * Direction.Z);
+        }
+
+        #endregion Public Instance Methods
+
+        #region Operator Overload
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(in Ray left, in Ray right)
+        {
+            return (left.Origin.X == right.Origin.X &&
+                    left.Origin.Y == right.Origin.Y &&
+                    left.Origin.Z == right.Origin.Z &&
+                    left.Direction == right.Direction);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator !=(in Ray left, in Ray right)
+        {
+            return (left.Origin.X != right.Origin.X ||
+                    left.Origin.Y != right.Origin.Y ||
+                    left.Origin.Z != right.Origin.Z ||
+                    left.Direction != right.Direction);
+        }
+
+        #endregion Operator Overload
     }
 }

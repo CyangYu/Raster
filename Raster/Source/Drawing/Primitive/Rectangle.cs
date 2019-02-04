@@ -1,6 +1,7 @@
 ﻿using System;
+using SysMath = System.Math;
 
-namespace Raster.Drawing
+namespace Raster.Drawing.Primitive
 {
     /// <summary>
     /// 
@@ -40,15 +41,8 @@ namespace Raster.Drawing
         /// </summary>
         public int Left
         {
-            get
-            {
-                return X;
-            }
-
-            set
-            {
-                X = value;
-            }
+            get { return X; }
+            set { X = value; }
         }
 
         /// <summary>
@@ -56,15 +50,8 @@ namespace Raster.Drawing
         /// </summary>
         public int Top
         {
-            get
-            {
-                return Y;
-            }
-
-            set
-            {
-                Y = value;
-            }
+            get { return Y; }
+            set { Y = value; }
         }
 
         /// <summary>
@@ -72,18 +59,8 @@ namespace Raster.Drawing
         /// </summary>
         public int Right
         {
-            get
-            {
-                return unchecked(X + Width);
-            }
-
-            set
-            {
-                if (value >= X)
-                {
-                    Width = value - X;
-                }
-            }
+            get { return unchecked(X + Width); }
+            set { Width = value - X; }
         }
 
         /// <summary>
@@ -91,18 +68,16 @@ namespace Raster.Drawing
         /// </summary>
         public int Bottom
         {
-            get
-            {
-                return X + Width;
-            }
+            get { return unchecked(Y + Height); }
+            set { Height = value - Y; }
+        }
 
-            set
-            {
-                if (value >= Y)
-                {
-                    Height = value - Y;
-                }
-            }
+        /// <summary>
+        /// 
+        /// </summary>
+        public Point Center
+        {
+            get { return new Point(X + (Width >> 1), Y + (Height >> 1)); }
         }
 
         /// <summary>
@@ -110,16 +85,8 @@ namespace Raster.Drawing
         /// </summary>
         public Point TopLeft
         {
-            get
-            {
-                return new Point(X, Y);
-            }
-
-            set
-            {
-                X = value.X;
-                Y = value.Y;
-            }
+            get { return new Point(X, Y); }
+            set { X = value.X; Y = value.Y; }
         }
 
         /// <summary>
@@ -127,23 +94,8 @@ namespace Raster.Drawing
         /// </summary>
         public Point TopRight
         {
-            get
-            {
-                return new Point(X + Width, Y);
-            }
-        }
-
-        public Point Center
-        {
-            get
-            {
-                return new Point(X + (Width >> 1), Y + (Height >> 1));
-            }
-
-            set
-            {
-
-            }
+            get { return new Point(X + Width, Y); }
+            set { Y = value.Y; Width = value.X - X; }
         }
 
         /// <summary>
@@ -151,15 +103,8 @@ namespace Raster.Drawing
         /// </summary>
         public Point BottomLeft
         {
-            get
-            {
-                return new Point(X, Y + Height);
-            }
-
-            set
-            {
-                
-            }
+            get { return new Point(X, Y + Height); }
+            set { X = value.X; Height = value.Y - Y; }
         }
 
         /// <summary>
@@ -167,15 +112,26 @@ namespace Raster.Drawing
         /// </summary>
         public Point BottomRight
         {
-            get
-            {
-                return new Point(X + Width, Y + Height);
-            }
+            get { return new Point(X + Width, Y + Height); }
+            set { Width = value.X - X; Height = value.Y - Y; }
+        }
 
-            set
-            {
+        /// <summary>
+        /// 
+        /// </summary>
+        public Point Location
+        {
+            get { return new Point(X, Y); }
+            set { X = value.X; Y = value.Y; }
+        }
 
-            }
+        /// <summary>
+        /// 
+        /// </summary>
+        public Size Size
+        {
+            get { return new Size(Width, Height); }
+            set { Width = value.Width; Height = value.Height; }
         }
 
         #endregion Public Instance Properties
@@ -183,6 +139,11 @@ namespace Raster.Drawing
         #region Constructor
         public Rectangle(in Rectangle other)
             : this(other.X, other.Y, other.Width, other.Height)
+        {
+        }
+
+        public Rectangle(in Point location, in Size size)
+            : this(location.X, location.Y, size.Width, size.Height)
         {
         }
 
@@ -260,12 +221,162 @@ namespace Raster.Drawing
             (X <= other.X) && (other.X + other.Width <= X + Width) &&
             (Y <= other.Y) && (other.Y + other.Height <= Y + Height);
 
-        public bool Intersect(in Rectangle other)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool IntersectWith(in Rectangle other) =>
+            (other.X < X + Width) && (X < other.X + other.Width) &&
+            (other.Y < Y + Height) && (Y < other.Y + other.Height);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="size"></param>
+        public void Inflate(in Size size) => 
+            Inflate(size.Width, size.Height);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public void Inflate(int width, int height)
         {
-            return false;
+            unchecked
+            {
+                X       -= width;
+                Y       -= height;
+
+                Width   += width << 1;
+                Height  += height << 1;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pos"></param>
+        public void MoveTo(in Point pos) => MoveTo(pos.X, pos.Y);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void MoveTo(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pos"></param>
+        public void Offset(in Point pos) => Offset(pos.X, pos.Y);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void Offset(int x, int y)
+        {
+            unchecked
+            {
+                X += x;
+                Y += y;
+            }
         }
 
         #endregion Public Instance Methods
+
+        #region Public Static Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="top"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <returns></returns>
+        public static Rectangle FromLTRB(int left, int top, int right, int bottom) =>
+            new Rectangle(left, top, right - left, bottom - top);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        /// <returns></returns>
+        public static Rectangle Intersect(in Rectangle value1, in Rectangle value2)
+        {
+            Rectangle result = new Rectangle(0, 0, 0, 0);
+            Intersect(value1, value2, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        /// <returns></returns>
+        public static Rectangle Union(in Rectangle value1, in Rectangle value2)
+        {
+            Rectangle result = new Rectangle(0, 0, 0, 0);
+            Union(value1, value2, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        /// <param name="result"></param>
+        public static void Intersect(in Rectangle value1, in Rectangle value2, out Rectangle result)
+        {
+            int left    = SysMath.Max(value1.X, value2.X);
+            int top     = SysMath.Max(value1.Y, value1.Y);
+            int right   = SysMath.Min(value1.X + value1.Width, value2.X + value2.Width);
+            int bottom  = SysMath.Min(value1.Y + value1.Height, value2.Y + value2.Height);
+
+            if (right >= left && bottom >= top)
+            {
+                result.X        = left;
+                result.Y        = top;
+                result.Width    = right - left;
+                result.Height   = bottom - top;
+            }
+            else
+            {
+                result = Empty;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        /// <param name="result"></param>
+        public static void Union(in Rectangle value1, in Rectangle value2, out Rectangle result)
+        {
+            int left    = SysMath.Min(value1.X, value2.X);
+            int top     = SysMath.Min(value1.Y, value2.Y);
+            int right   = SysMath.Max(value1.X + value1.Width, value2.X + value2.Width);
+            int bottom  = SysMath.Max(value1.Y + value1.Height, value2.Y + value2.Height);
+
+            result.X        = left;
+            result.Y        = top;
+            result.Width    = right - left;
+            result.Height   = bottom - top;
+        }
+
+        #endregion Public Static Methods
 
         #region Operator Overload
         /// <summary>
