@@ -480,7 +480,7 @@ namespace Raster.Math
             float ys = y * s;
             float zs = z * s;
 
-            Matrix4x4 matrix = new Matrix4x4();
+            Matrix4x4 matrix;;
             matrix.M00 = c + c0 * x2;
             matrix.M10 = c0 * xy - zs;
             matrix.M20 = c0 * xz + ys;
@@ -1041,6 +1041,9 @@ namespace Raster.Math
             result.M33 = left.M33 * right;
         }
 
+        #endregion Public Static Methods
+
+        #region Operator Overload
         /// <summary>
         /// 
         /// </summary>
@@ -1050,7 +1053,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 operator +(in Matrix4x4 left, in Matrix4x4 right)
         {
-            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4 result;;
             Add(left, right, out result);
             return result;
         }
@@ -1064,7 +1067,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 operator +(in Matrix4x4 left, float right)
         {
-            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4 result;;
             Add(left, right, out result);
             return result;
         }
@@ -1078,7 +1081,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 operator -(in Matrix4x4 left, float right)
         {
-            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4 result;;
             Subtract(left, right, out result);
             return result;
         }
@@ -1092,7 +1095,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 operator -(in Matrix4x4 left, in Matrix4x4 right)
         {
-            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4 result;;
             Subtract(left, right, out result);
             return result;
         }
@@ -1106,7 +1109,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 operator *(in Matrix4x4 left, float right)
         {
-            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4 result;;
             Subtract(left, right, out result);
             return result;
         }
@@ -1120,7 +1123,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 operator *(float left, in Matrix4x4 right)
         {
-            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4 result;;
             Multiply(right, left, out result);
             return result;
         }
@@ -1134,7 +1137,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x2 operator *(in Matrix4x4 left, in Matrix4x2 right)
         {
-            Matrix4x2 result = new Matrix4x2(0.0f);
+            Matrix4x2 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -1148,7 +1151,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x3 operator *(in Matrix4x4 left, in Matrix4x3 right)
         {
-            Matrix4x3 result = new Matrix4x3(0.0f);
+            Matrix4x3 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -1162,7 +1165,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 operator *(in Matrix4x4 left, in Matrix4x4 right)
         {
-            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -1176,7 +1179,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 operator *(in Matrix4x4 left, in Vector4 right)
         {
-            Vector4 result = new Vector4(0.0f);
+            Vector4 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -1190,7 +1193,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 operator *(in Vector4 left, in Matrix4x4 right)
         {
-            Vector4 result = new Vector4(0.0f);
+            Vector4 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -1204,7 +1207,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 operator /(in Matrix4x4 left, float right)
         {
-            Matrix4x4 result = new Matrix4x4();
+            Matrix4x4 result;;
             Divide(left, right, out result);
             return result;
         }
@@ -1236,5 +1239,7 @@ namespace Raster.Math
                     left.M20 != right.M20 || left.M21 != right.M21 || left.M22 != right.M22 || left.M23 != right.M23 ||
                     left.M30 != right.M30 || left.M31 != right.M31 || left.M32 != right.M32 || left.M33 != right.M33);
         }
+
+        #endregion Operator Overload
     }
 }

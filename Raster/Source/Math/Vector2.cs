@@ -21,7 +21,7 @@ namespace Raster.Math
         public float Y;
         #endregion Public Fields
 
-        #region Public Static Properties
+        #region Public Static Fields
         /// <summary>
         /// 
         /// </summary>
@@ -50,7 +50,7 @@ namespace Raster.Math
         /// 
         /// </summary>
         public static readonly Vector2 NegUnitY = new Vector2(0.0f,  -1.0f);
-        #endregion
+        #endregion Public Static Fields
 
         #region Public Instance Properties
         /// <summary>
@@ -58,10 +58,7 @@ namespace Raster.Math
         /// </summary>
         public float Length
         {
-            get
-            {
-                return MathF.Sqrt(X * X + Y * Y);
-            }
+            get { return MathF.Sqrt(X * X + Y * Y); }
         }
 
         /// <summary>
@@ -69,10 +66,7 @@ namespace Raster.Math
         /// </summary>
         public float LengthSquared
         {
-            get
-            {
-                return X * X + Y * Y;
-            }
+            get { return X * X + Y * Y; }
         }
 
         /// <summary>
@@ -80,43 +74,10 @@ namespace Raster.Math
         /// </summary>
         public Vector2 MidPoint
         {
-            get
-            {
-                return new Vector2(X / 2.0f, Y / 2.0f);
-            }
+            get { return new Vector2(X / 2.0f, Y / 2.0f); }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector2 Normalized
-        {
-            get
-            {
-                float len = X * X + Y * Y;
-                if (len == 0.0f)
-                {
-                    return Vector2.Zero;
-                }
-
-                float inv = 1.0f / MathF.Sqrt(len);
-                return new Vector2(X * inv, Y * inv);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector2 Inverted
-        {
-            get
-            {
-                float x = X != 0.0f ? 1.0f / X : 0.0f;
-                float y = Y != 0.0f ? 1.0f / Y : 0.0f;
-                return new Vector2(x, y);
-            }
-        }
-        #region Public Setter/Getter Properties
+        #endregion Public Instance Properties
 
         #region Constructor
         public Vector2(float value)
@@ -157,12 +118,8 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <returns></returns>
-        public override int GetHashCode()
-        {
-            int hash = this.X.GetHashCode();
-            hash = HashHelpers.Combine(hash, this.Y.GetHashCode());
-            return hash;
-        }
+        public override int GetHashCode() =>
+            HashHelpers.Combine(X.GetHashCode(), Y.GetHashCode());
 
         /// <summary>
         /// 
@@ -185,11 +142,11 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Inverse()
         {
-            if (X != 0.0f)
-                X = 1.0f / X;
+            float lenSqr = X * X + Y * Y;
+            float invNorm = 1.0f / lenSqr;
 
-            if (Y != 0.0f)
-                Y = 1.0f / Y;
+            X *= invNorm;
+            Y *= invNorm;
         }
 
         /// <summary>
@@ -199,18 +156,10 @@ namespace Raster.Math
         public void Normalize()
         {
             float lenSqr = X * X + Y * Y;
+            float invLen = MathHelper.QuickSqrtInv(lenSqr);
 
-            if (lenSqr == 1.0f)
-                return;
-
-            float len = MathF.Sqrt(lenSqr);
-
-            if (len != 0.0f)
-            {
-                float invLen = 1.0f / len;
-                X *= invLen;
-                Y *= invLen;
-            }
+            X *= invLen;
+            Y *= invLen;         
         }
 
         /// <summary>
@@ -249,22 +198,16 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        /// <param name="factor"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Clamp(in Vector2 value, in Vector2 min, in Vector2 max)
         {
-            float x = value.X;
-            x = (min.X > x) ? min.X : x;
-            x = (max.X < x) ? max.X : x;
-
-            float y = value.Y;
-            y = (min.Y > y) ? min.Y : y;
-            y = (max.Y < y) ? max.Y : y;
-
-            return new Vector2(x, y);
+            Vector2 result;
+            Clamp(value, min, max, out result);
+            return result;
         }
 
         /// <summary>
@@ -274,7 +217,7 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Cross(in Vector2 left, in Vector2 right) => 
+        public static float Cross(in Vector2 left, in Vector2 right) =>
             left.X * right.Y - left.Y * right.X;
 
         /// <summary>
@@ -296,7 +239,7 @@ namespace Raster.Math
         /// <param name="other"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public float DistanceSquared(in Vector2 value1, in Vector2 value2)
+        public static float DistanceSquared(in Vector2 value1, in Vector2 value2)
         {
             float dx = value1.X - value2.X;
             float dy = value1.Y - value2.Y;
@@ -310,8 +253,21 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Dot(in Vector2 left, in Vector2 right) => 
+        public static float Dot(in Vector2 left, in Vector2 right) =>
             left.X * right.X + left.Y * right.Y;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value1"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Inverse(in Vector2 value)
+        {
+            Vector2 result;
+            Inverse(value, out result);
+            return result;
+        }
 
         /// <summary>
         /// 
@@ -321,22 +277,11 @@ namespace Raster.Math
         /// <param name="factor"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Lerp(in Vector2 begin, in Vector2 end, float factor) =>
-            new Vector2(begin.X + (end.X - begin.X) * factor,
-                        end.Y + (end.Y - begin.Y) * factor);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value1"></param>
-        /// <param name="value2"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Min(in Vector2 value1, in Vector2 value2)
+        public static Vector2 Lerp(in Vector2 begin, in Vector2 end, float factor)
         {
-            return new Vector2(
-                (value1.X < value2.X) ? value1.X : value2.X,
-                (value1.Y < value2.Y) ? value1.Y : value2.Y);
+            Vector2 result;
+            Lerp(begin, end, factor, out result);
+            return result;
         }
 
         /// <summary>
@@ -348,9 +293,49 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Max(in Vector2 value1, in Vector2 value2)
         {
-            return new Vector2(
-                (value1.X > value2.X) ? value1.X : value2.X,
-                (value1.Y > value2.Y) ? value1.Y : value2.Y);
+            Vector2 result;
+            Max(value1, value2, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Min(in Vector2 value1, in Vector2 value2)
+        {
+            Vector2 result;
+            Min(value1, value2, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value1"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Normalize(in Vector2 value)
+        {
+            Vector2 result;
+            Normalize(value, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Perpendicular(in Vector2 value)
+        {
+            Vector2 result;
+            Perpendicular(value, out result);
+            return result;
         }
 
         /// <summary>
@@ -362,9 +347,9 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Transform(in Vector2 position, in Matrix3x2 matrix)
         {
-            return new Vector2(
-                position.X * matrix.M00 + position.Y * matrix.M10 + matrix.M20,
-                position.X * matrix.M01 + position.Y * matrix.M11 + matrix.M21);
+            Vector2 result;
+            Transform(position, matrix, out result);
+            return result;
         }
 
         /// <summary>
@@ -376,9 +361,9 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Transform(in Vector2 position, in Matrix4x4 matrix)
         {
-            return new Vector2(
-                position.X * matrix.M00 + position.Y * matrix.M10 + matrix.M30,
-                position.X * matrix.M01 + position.Y * matrix.M11 + matrix.M31);
+            Vector2 result;
+            Transform(position, matrix, out result);
+            return result;
         }
 
         /// <summary>
@@ -390,9 +375,9 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 TransformNormal(in Vector2 normal, in Matrix3x2 matrix)
         {
-            return new Vector2(
-                normal.X * matrix.M00 + normal.Y * matrix.M10,
-                normal.X * matrix.M01 + normal.Y * matrix.M11);
+            Vector2 result;
+            TransformNormal(normal, matrix, out result);
+            return result;
         }
 
         /// <summary>
@@ -404,9 +389,177 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 TransformNormal(in Vector2 normal, in Matrix4x4 matrix)
         {
-            return new Vector2(
-                normal.X * matrix.M00 + normal.Y * matrix.M10,
-                normal.X * matrix.M01 + normal.Y * matrix.M11);
+            Vector2 result;
+            TransformNormal(normal, matrix, out result);
+            return result;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Transform(in Vector2 position, in Quaternion rotation)
+        {
+            Vector2 result;
+            Transform(position, rotation, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Clamp(in Vector2 value, in Vector2 min, in Vector2 max, out Vector2 result)
+        {
+            result.X = (min.X > value.X) ? min.X : value.X;
+            result.X = (max.X < value.X) ? max.X : value.X;
+
+            result.Y = (min.Y > value.Y) ? min.Y : value.Y;
+            result.Y = (max.Y < value.Y) ? max.Y : value.Y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Inverse(in Vector2 value, out Vector2 result)
+        {
+            float lenSqr = value.X * value.X + value.Y * value.Y;
+            float invNorm = 1.0f / lenSqr;
+
+            result.X = value.X * invNorm;
+            result.Y = value.Y * invNorm;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        /// <param name="factor"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Lerp(in Vector2 begin, in Vector2 end, float factor, out Vector2 result)
+        {
+            result.X = begin.X + (end.X - begin.X) * factor;
+            result.Y = begin.Y + (end.Y - begin.Y) * factor;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Min(in Vector2 value1, in Vector2 value2, out Vector2 result)
+        {
+            result.X = (value1.X < value2.X) ? value1.X : value2.X;
+            result.Y = (value1.Y < value2.Y) ? value1.Y : value2.Y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Max(in Vector2 value1, in Vector2 value2, out Vector2 result)
+        {
+            result.X = (value1.X > value2.X) ? value1.X : value2.X;
+            result.Y = (value1.Y > value2.Y) ? value1.Y : value2.Y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Normalize(in Vector2 value, out Vector2 result)
+        {
+            float lenSqr = value.X * value.X + value.Y * value.Y;
+            float invNorm = MathHelper.QuickSqrtInv(lenSqr);
+
+            result.X = value.X * invNorm;
+            result.Y = value.Y * invNorm;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Perpendicular(in Vector2 value, out Vector2 result)
+        {
+            float temp = value.X;
+            result.X = -value.Y;
+            result.Y =  temp;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Transform(in Vector2 position, in Matrix3x2 matrix, out Vector2 result)
+        {
+            result.X = position.X * matrix.M00 + position.Y * matrix.M10 + matrix.M20;
+            result.Y = position.X * matrix.M01 + position.Y * matrix.M11 + matrix.M21;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Transform(in Vector2 position, in Matrix4x4 matrix, out Vector2 result)
+        {
+            result.X = position.X * matrix.M00 + position.Y * matrix.M10 + matrix.M30;
+            result.Y = position.X * matrix.M01 + position.Y * matrix.M11 + matrix.M31;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="normal"></param>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void TransformNormal(in Vector2 normal, in Matrix3x2 matrix, out Vector2 result)
+        {
+            result.X = normal.X * matrix.M00 + normal.Y * matrix.M10;
+            result.Y = normal.X * matrix.M01 + normal.Y * matrix.M11;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="normal"></param>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void TransformNormal(in Vector2 normal, in Matrix4x4 matrix, out Vector2 result)
+        {
+            result.X = normal.X * matrix.M00 + normal.Y * matrix.M10;
+            result.Y = normal.X * matrix.M01 + normal.Y * matrix.M11;
         }
 
         /// <summary>
@@ -414,9 +567,9 @@ namespace Raster.Math
         /// </summary>
         /// <param name="position"></param>
         /// <param name="rotation"></param>
-        /// <returns></returns>
+        /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Transform(in Vector2 position, in Quaternion rotation)
+        public static void Transform(in Vector2 position, in Quaternion rotation, out Vector2 result)
         {
             float x2 = rotation.X * rotation.X;
             float y2 = rotation.Y * rotation.Y;
@@ -428,9 +581,8 @@ namespace Raster.Math
             float yy2 = rotation.Y * y2;
             float zz2 = rotation.Z * z2;
 
-            return new Vector2(
-                position.X * (1.0f - yy2 - zz2) + position.Y * (xy2 - wz2),
-                position.X * (xy2 + wz2) + position.Y * (1.0f - xx2 - zz2));
+            result.X = position.X * (1.0f - yy2 - zz2) + position.Y * (xy2 - wz2);
+            result.Y = position.X * (xy2 + wz2) + position.Y * (1.0f - xx2 - zz2);
 
         }
 
@@ -439,13 +591,13 @@ namespace Raster.Math
         /// </summary>
         /// <param name="vec2"></param>
         /// <param name="normal"></param>
-        /// <returns></returns>
+        /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Reflect(in Vector2 vec2, in Vector2 normal)
+        public static void Reflect(in Vector2 vec2, in Vector2 normal, out Vector2 result)
         {
             float dot = vec2.X + normal.X + vec2.Y * normal.Y;
-            return new Vector2(vec2.X - 2.0f * dot * normal.X,
-                               vec2.Y - 2.0f * dot * normal.Y);
+            result.X = vec2.X - 2.0f * dot * normal.X;
+            result.Y = vec2.Y - 2.0f * dot * normal.Y;
         }
 
         #endregion Public Static Methods

@@ -4,7 +4,10 @@ using SysMath = System.Math;
 
 namespace Raster.Math
 {
-    public class MathF
+    /// <summary>
+    /// 
+    /// </summary>
+    public sealed class MathF
     {
         #region Public Static Fields
         /// <summary>
@@ -34,7 +37,7 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public static readonly float Epsilon = 1.192093E-7f;
+        public static readonly float Epsilon = 1.192092896e-07f;
         #endregion Public Static Fields
 
         #region Public Static Methods

@@ -477,7 +477,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x2 operator +(in Matrix4x2 left, in Matrix4x2 right)
         {
-            Matrix4x2 result = new Matrix4x2(0.0f);
+            Matrix4x2 result;
             Add(left, right, out result);
             return result;
         }
@@ -491,7 +491,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x2 operator +(in Matrix4x2 left, float right)
         {
-            Matrix4x2 result = new Matrix4x2(0.0f);
+            Matrix4x2 result;
             Add(left, right, out result);
             return result;
         }
@@ -505,7 +505,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x2 operator -(in Matrix4x2 left, float right)
         {
-            Matrix4x2 result = new Matrix4x2(0.0f);
+            Matrix4x2 result;
             Subtract(left, right, out result);
             return result;
         }
@@ -519,7 +519,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x2 operator -(in Matrix4x2 left, in Matrix4x2 right)
         {
-            Matrix4x2 result = new Matrix4x2(0.0f);
+            Matrix4x2 result;
             Subtract(left, right, out result);
             return result;
         }
@@ -533,7 +533,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x2 operator *(float left, in Matrix4x2 right)
         {
-            Matrix4x2 result = new Matrix4x2(0.0f);
+            Matrix4x2 result;
             Multiply(right, left, out result);
             return result;
         }
@@ -547,7 +547,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x2 operator *(in Matrix4x2 left, float right)
         {
-            Matrix4x2 result = new Matrix4x2(0.0f);
+            Matrix4x2 result;
             Subtract(left, right, out result);
             return result;
         }
@@ -561,7 +561,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x2 operator *(in Matrix4x2 left, in Matrix2x2 right)
         {
-            Matrix4x2 result = new Matrix4x2(0.0f);
+            Matrix4x2 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -575,7 +575,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x3 operator *(in Matrix4x2 left, in Matrix2x3 right)
         {
-            Matrix4x3 result = new Matrix4x3(0.0f);
+            Matrix4x3 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -589,7 +589,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 operator *(in Matrix4x2 left, in Matrix2x4 right)
         {
-            Matrix4x4 result = new Matrix4x4(0.0f);
+            Matrix4x4 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -603,7 +603,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 operator *(in Matrix4x2 left, in Vector2 right)
         {
-            Vector4 result = new Vector4(0.0f);
+            Vector4 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -617,7 +617,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 operator *(in Vector4 left, in Matrix4x2 right)
         {
-            Vector2 result = new Vector2(0.0f);
+            Vector2 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -631,7 +631,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x2 operator /(in Matrix4x2 left, float right)
         {
-            Matrix4x2 result = new Matrix4x2(0.0f);
+            Matrix4x2 result;
             Divide(left, right, out result);
             return result;
         }

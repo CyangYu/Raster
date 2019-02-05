@@ -81,36 +81,6 @@ namespace Raster.Drawing
 
         #endregion Public Instance Methods
 
-        #region Public Static Methods
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static Size Add(in Size left, in Size right) =>
-            new Size(left.Width + right.Width, left.Height + right.Height);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static Size Subtract(in Size left, in Size right) =>
-            new Size(left.Width - right.Width, left.Height - right.Height);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static Size Multiply(in Size left, int right) =>
-            new Size(left.Width * right, left.Height * right);
-
-        #endregion Public Static Methods
-
         #region Operator Overload
         /// <summary>
         /// 
@@ -119,7 +89,7 @@ namespace Raster.Drawing
         /// <param name="right"></param>
         /// <returns></returns>
         public static Size operator +(in Size left, in Size right) =>
-            Add(left, right);
+            new Size(left.Width + right.Width, left.Height + right.Height);
 
         /// <summary>
         /// 
@@ -128,7 +98,7 @@ namespace Raster.Drawing
         /// <param name="right"></param>
         /// <returns></returns>
         public static Size operator -(in Size left, in Size right) =>
-            Subtract(left, right);
+            new Size(left.Width - right.Width, left.Height - right.Height);
 
         /// <summary>
         /// 
@@ -137,7 +107,7 @@ namespace Raster.Drawing
         /// <param name="right"></param>
         /// <returns></returns>
         public static Size operator *(in Size left, int right) =>
-            Multiply(left, right);
+            new Size(left.Width * right, left.Height * right);
 
         /// <summary>
         /// 

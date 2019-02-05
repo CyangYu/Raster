@@ -402,7 +402,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static Matrix2x2 operator +(in Matrix2x2 left, in Matrix2x2 right)
         {
-            Matrix2x2 result = new Matrix2x2();
+            Matrix2x2 result;
             Add(left, right, out result);
             return result;
         }
@@ -415,7 +415,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static Matrix2x2 operator +(in Matrix2x2 left, float right)
         {
-            Matrix2x2 result = new Matrix2x2();
+            Matrix2x2 result;
             Add(left, right, out result);
             return result;
         }
@@ -428,7 +428,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static Matrix2x2 operator -(in Matrix2x2 left, float right)
         {
-            Matrix2x2 result = new Matrix2x2();
+            Matrix2x2 result;
             Subtract(left, right, out result);
             return result;
         }
@@ -441,7 +441,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static Matrix2x2 operator -(in Matrix2x2 left, in Matrix2x2 right)
         {
-            Matrix2x2 result = new Matrix2x2();
+            Matrix2x2 result;
             Subtract(left, right, out result);
             return result;
         }
@@ -454,7 +454,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static Matrix2x2 operator *(in Matrix2x2 left, float right)
         {
-            Matrix2x2 result = new Matrix2x2();
+            Matrix2x2 result;
             Subtract(left, right, out result);
             return result;
         }
@@ -467,7 +467,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static Matrix2x2 operator *(float left, in Matrix2x2 right)
         {
-            Matrix2x2 result = new Matrix2x2();
+            Matrix2x2 result;
             Multiply(right, left, out result);
             return result;
         }
@@ -480,20 +480,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static Matrix2x2 operator *(in Matrix2x2 left, in Matrix2x2 right)
         {
-            Matrix2x2 result = new Matrix2x2();
-            Multiply(left, right, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static Matrix2x2 operator *(in Matrix2x2 left, in Matrix2x2 right)
-        {
-            Matrix2x2 result = new Matrix2x2(0.0f);
+            Matrix2x2 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -506,7 +493,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static Matrix2x3 operator *(in Matrix2x2 left, in Matrix2x3 right)
         {
-            Matrix2x3 result = new Matrix2x3(0.0f);
+            Matrix2x3 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -519,7 +506,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static Matrix2x4 operator *(in Matrix2x2 left, in Matrix2x4 right)
         {
-            Matrix2x4 result = new Matrix2x4(0.0f);
+            Matrix2x4 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -532,7 +519,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static Vector2 operator *(in Matrix2x2 left, in Vector2 right)
         {
-            Vector2 result = new Vector2(0.0f);
+            Vector2 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -545,7 +532,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static Vector2 operator *(in Vector2 left, in Matrix2x2 right)
         {
-            Vector2 result = new Vector2(0.0f);
+            Vector2 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -558,7 +545,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static Matrix2x2 operator /(in Matrix2x2 left, float right)
         {
-            Matrix2x2 result = new Matrix2x2();
+            Matrix2x2 result;
             Divide(left, right, out result);
             return result;
         }

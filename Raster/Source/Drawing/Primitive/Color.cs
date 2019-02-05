@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using Raster.Math;
+using Raster.Private;
 
 namespace Raster.Drawing.Primitive
 {
@@ -134,7 +135,9 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return R.GetHashCode() ^ G.GetHashCode() ^ B.GetHashCode() ^ A.GetHashCode();
+            int hash1 = HashHelpers.Combine(r.GetHashCode(), g.GetHashCode());
+            int hash2 = HashHelpers.Combine(b.GetHashCode(), a.GetHashCode());
+            return HashHelpers.Combine(hash1, hash2);
         }
 
         /// <summary>
@@ -254,10 +257,10 @@ namespace Raster.Drawing.Primitive
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Color left, in Color right, out Color result)
         {
-            result.r = MathF.Max(left.r * right.r, 0.0f);
-            result.g = MathF.Max(left.g * right.g, 0.0f);
-            result.b = MathF.Max(left.b * right.b, 0.0f);
-            result.a = MathF.Max(left.a * right.a, 0.0f);
+            result.r = left.r * right.r;
+            result.g = left.g * right.g;
+            result.b = left.b * right.b;
+            result.a = left.a * right.a;
         }
 
         #endregion Public Static Methods

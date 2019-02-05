@@ -1,4 +1,5 @@
 ﻿using System;
+using Raster.Private;
 
 namespace Raster.Drawing.Primitive
 {
@@ -58,10 +59,8 @@ namespace Raster.Drawing.Primitive
         /// 
         /// </summary>
         /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return X.GetHashCode() ^ Y.GetHashCode();
-        }
+        public override int GetHashCode() =>
+            HashHelpers.Combine(X.GetHashCode(), Y.GetHashCode());
 
         /// <summary>
         /// 
@@ -84,36 +83,6 @@ namespace Raster.Drawing.Primitive
 
         #endregion Public Instance Methods
 
-        #region Public Static Methods
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static PointF Add(in PointF left, in PointF right) =>
-            new PointF(left.X + right.X, left.Y + right.Y);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static PointF Subtract(in PointF left, in PointF right) =>
-            new PointF(left.X - right.X, left.Y - right.Y);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static PointF Multiply(in PointF left, float right) =>
-            new PointF(left.X * right, left.Y * right);
-
-        #endregion Public Static Methods
-
         #region Operator Overload
         /// <summary>
         /// 
@@ -122,7 +91,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="b"></param>
         /// <returns></returns>
         public static PointF operator +(in PointF left, in PointF right) =>
-            Add(left, right);
+            new PointF(left.X + right.X, left.Y + right.Y);
 
         /// <summary>
         /// 
@@ -131,7 +100,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="b"></param>
         /// <returns></returns>
         public static PointF operator -(in PointF left, in PointF right) =>
-            Subtract(left, right);
+            new PointF(left.X - right.X, left.Y - right.Y);
 
         /// <summary>
         /// 
@@ -140,7 +109,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="b"></param>
         /// <returns></returns>
         public static PointF operator *(in PointF left, float right) =>
-            Multiply(left, right);
+            new PointF(left.X * right, left.Y * right);
 
         /// <summary>
         /// 

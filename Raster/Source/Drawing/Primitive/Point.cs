@@ -82,36 +82,6 @@ namespace Raster.Drawing.Primitive
 
         #endregion Public Instance Methods
 
-        #region Public Static Methods
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static Point Add(in Point left, in Point right) =>
-            new Point(left.X + right.X, left.Y + right.Y);
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static Point Subtract(in Point left, in Point right) =>
-            new Point(left.X - right.X, left.Y - right.Y);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static Point Multiply(in Point left, int right) =>
-            new Point(left.X * right, left.Y * right);
-
-        #endregion Public Static Methods
-
         #region Operator Overload
         /// <summary>
         /// 
@@ -120,7 +90,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="b"></param>
         /// <returns></returns>
         public static Point operator +(in Point left, in Point right) =>
-            Add(left, right);
+            new Point(left.X + right.X, left.Y + right.Y);
 
         /// <summary>
         /// 
@@ -129,7 +99,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="b"></param>
         /// <returns></returns>
         public static Point operator -(in Point left, in Point right) =>
-            Subtract(left, right);
+            new Point(left.X - right.X, left.Y - right.Y);
 
         /// <summary>
         /// 
@@ -138,7 +108,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="b"></param>
         /// <returns></returns>
         public static Point operator *(in Point left, int right) =>
-            Multiply(left, right);
+            new Point(left.X * right, left.Y * right);
 
         /// <summary>
         /// 

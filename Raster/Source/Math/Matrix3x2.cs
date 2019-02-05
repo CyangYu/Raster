@@ -427,6 +427,8 @@ namespace Raster.Math
             result.M21 = left.M21 * right;
         }
 
+        #endregion Public Static Methods
+
         #region Operator Overload
         /// <summary>
         /// 
@@ -437,7 +439,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator +(in Matrix3x2 left, in Matrix3x2 right)
         {
-            Matrix3x2 result = new Matrix3x2(0.0f);
+            Matrix3x2 result;
             Add(left, right, out result);
             return result;
         }
@@ -451,7 +453,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator +(in Matrix3x2 left, float right)
         {
-            Matrix3x2 result = new Matrix3x2(0.0f);
+            Matrix3x2 result;
             Add(left, right, out result);
             return result;
         }
@@ -465,7 +467,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator -(in Matrix3x2 left, float right)
         {
-            Matrix3x2 result = new Matrix3x2(0.0f);
+            Matrix3x2 result;
             Subtract(left, right, out result);
             return result;
         }
@@ -479,7 +481,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator -(in Matrix3x2 left, in Matrix3x2 right)
         {
-            Matrix3x2 result = new Matrix3x2(0.0f);
+            Matrix3x2 result;
             Subtract(left, right, out result);
             return result;
         }
@@ -493,7 +495,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator *(in Matrix3x2 left, float right)
         {
-            Matrix3x2 result = new Matrix3x2(0.0f);
+            Matrix3x2 result;
             Subtract(left, right, out result);
             return result;
         }
@@ -507,7 +509,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator *(float left, in Matrix3x2 right)
         {
-            Matrix3x2 result = new Matrix3x2(0.0f);
+            Matrix3x2 result;
             Multiply(right, left, out result);
             return result;
         }
@@ -521,7 +523,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator *(in Matrix3x2 left, in Matrix2x2 right)
         {
-            Matrix3x2 result = new Matrix3x2(0.0f);
+            Matrix3x2 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -535,7 +537,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x3 operator *(in Matrix3x2 left, in Matrix2x3 right)
         {
-            Matrix3x3 result = new Matrix3x3(0.0f);
+            Matrix3x3 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -549,7 +551,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x4 operator *(in Matrix3x2 left, in Matrix2x4 right)
         {
-            Matrix3x4 result = new Matrix3x4(0.0f);
+            Matrix3x4 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -563,7 +565,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 operator *(in Matrix3x2 left, in Vector2 right)
         {
-            Vector3 result = new Vector3(0.0f);
+            Vector3 result;
             Multiply(left, right, out result);
             return result;
         }
@@ -577,7 +579,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 operator *(in Vector3 left, in Matrix3x2 right)
         {
-            Vector2 result = new Vector2(0.0f);
+            Vector2 result;
             Multiply(left, right, out result);
             return result;
         }

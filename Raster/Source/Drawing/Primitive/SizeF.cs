@@ -85,37 +85,7 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public bool IsEmpty() => Width == 0.0f && Height == 0.0f;
 
-        #endregion Public Instance Methods
-
-        #region Public Static Methods
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static SizeF Add(in SizeF left, in SizeF right) =>
-            new SizeF(left.Width + right.Width, left.Height + right.Height);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static SizeF Subtract(in SizeF left, in SizeF right) =>
-            new SizeF(left.Width - right.Width, left.Height - right.Height);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static SizeF Multiply(in SizeF left, float right) =>
-            new SizeF(left.Width * right, left.Height * right);
-
-        #endregion Public Static Methods
+        #endregion Public Instance Method
 
         #region Operator Overload
         /// <summary>
@@ -125,7 +95,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="right"></param>
         /// <returns></returns>
         public static SizeF operator +(in SizeF left, in SizeF right) =>
-            Add(left, right);
+            new SizeF(left.Width + right.Width, left.Height + right.Height);
 
         /// <summary>
         /// 
@@ -134,7 +104,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="right"></param>
         /// <returns></returns>
         public static SizeF operator -(in SizeF left, in SizeF right) =>
-            Subtract(left, right);
+            new SizeF(left.Width - right.Width, left.Height - right.Height);
 
         /// <summary>
         /// 
@@ -143,7 +113,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="right"></param>
         /// <returns></returns>
         public static SizeF operator *(in SizeF left, float right) =>
-            Multiply(left, right);
+             new SizeF(left.Width * right, left.Height * right);
 
         /// <summary>
         /// 
