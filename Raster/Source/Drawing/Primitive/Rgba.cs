@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using Raster.Private;
 
 namespace Raster.Drawing.Primitive
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Serializable]
     public partial struct Rgba : IEquatable<Rgba>
     {
@@ -10,176 +14,91 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        public byte R;
+        private byte r;
         /// <summary>
         /// 
         /// </summary>
-        public byte G;
+        private byte g;
         /// <summary>
         /// 
         /// </summary>
-        public byte B;
+        private byte b;
         /// <summary>
         /// 
         /// </summary>
-        public byte A;
+        private byte a;
         #endregion Public Fields
+
+        #region Public Instance Properties
+        /// <summary>
+        /// 
+        /// </summary>
+        public byte R
+        {
+            get { return r; }
+            set { }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public byte G
+        {
+            get { return g; }
+            set { }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public byte B
+        {
+            get { return b; }
+            set { }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public byte A
+        {
+            get { return a; }
+            set { }
+        }
+
+        #endregion Public Instance Properties
 
         #region Constructor
         public Rgba(Int32 rgba)
         {
 #if BIG_ENDIAN
-            R = (byte)((rgba & 0x000000FF) >>  0);
-            G = (byte)((rgba & 0x0000FF00) >>  8);
-            B = (byte)((rgba & 0x00FF0000) >> 16);
-            A = (byte)((rgba & 0xFF000000) >> 24);
+            r = (byte)((rgba & 0x000000FF) >>  0);
+            g = (byte)((rgba & 0x0000FF00) >>  8);
+            b = (byte)((rgba & 0x00FF0000) >> 16);
+            a = (byte)((rgba & 0xFF000000) >> 24);
 #else
-            R = (byte)((rgba & 0xFF000000) >> 24);
-            G = (byte)((rgba & 0x00FF0000) >> 16);
-            B = (byte)((rgba & 0x0000FF00) >>  8);
-            A = (byte)((rgba & 0x000000FF) >>  0);
+            r = (byte)((rgba & 0xFF000000) >> 24);
+            g = (byte)((rgba & 0x00FF0000) >> 16);
+            b = (byte)((rgba & 0x0000FF00) >>  8);
+            a = (byte)((rgba & 0x000000FF) >>  0);
 #endif
         }
 
         public Rgba(in Rgba rgba)
-            : this(rgba.R, rgba.G, rgba.B, rgba.A)
+            : this(rgba.r, rgba.g, rgba.b, rgba.a)
         {
         }
 
         public Rgba(byte r, byte g, byte b, byte a)
         {
-            R = r;
-            G = g;
-            B = b;
-            A = a;
+            this.r = r;
+            this.g = g;
+            this.b = b;
+            this.a = a;
         }
         #endregion Constructor
 
         #region Public Instance Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Int32 ToInt32()
-        {
-
-#if BIG_ENDIAN
-            return (Int32)((A << 24) | (B << 16) | (G << 8) | R);
-#else 
-            return (Int32)((R << 24) | (G << 16) | (B << 8) | A);
-#endif
-        }
-        #endregion Public Instance Fields
-
-        #region Operator Overload
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Rgba operator +(in Rgba left, in Rgba right)
-        {
-            Rgba rgba = new Rgba();
-            rgba.R = (byte)System.Math.Min(left.R + right.R, byte.MaxValue);
-            rgba.G = (byte)System.Math.Min(left.G + right.G, byte.MaxValue);
-            rgba.B = (byte)System.Math.Min(left.B + right.B, byte.MaxValue);
-            rgba.A = (byte)System.Math.Min(left.A + right.A, byte.MaxValue);
-            return rgba;
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Rgba operator -(in Rgba left, in Rgba right)
-        {
-            Rgba rgba = new Rgba();
-            rgba.R = (byte)System.Math.Max(0, left.R - right.R);
-            rgba.G = (byte)System.Math.Max(0, left.G - right.G);
-            rgba.B = (byte)System.Math.Max(0, left.B - right.B);
-            rgba.A = (byte)System.Math.Max(0, left.A - right.A);
-            return rgba;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Rgba operator *(in int left, in Rgba right)
-        {
-            Rgba rgba = new Rgba();
-            rgba.R = (byte)System.Math.Min(left * right.R, byte.MaxValue);
-            rgba.G = (byte)System.Math.Min(left * right.G, byte.MaxValue);
-            rgba.B = (byte)System.Math.Min(left * right.B, byte.MaxValue);
-            rgba.A = (byte)System.Math.Min(left * right.A, byte.MaxValue);
-            return rgba;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Rgba operator *(in Rgba left, int right)
-        {
-            Rgba rgba = new Rgba();
-            rgba.R = (byte)System.Math.Min(left.R * right, byte.MaxValue);
-            rgba.G = (byte)System.Math.Min(left.R * right, byte.MaxValue);
-            rgba.B = (byte)System.Math.Min(left.R * right, byte.MaxValue);
-            rgba.A = (byte)System.Math.Min(left.R * right, byte.MaxValue);
-            return rgba;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Rgba operator *(in Rgba left, in Rgba right)
-        {
-            Rgba rgba = new Rgba();
-            rgba.R = (byte)System.Math.Min(left.R * right.R, byte.MaxValue);
-            rgba.G = (byte)System.Math.Min(left.G * right.G, byte.MaxValue);
-            rgba.B = (byte)System.Math.Min(left.B * right.B, byte.MaxValue);
-            rgba.A = (byte)System.Math.Min(left.A * right.A, byte.MaxValue);
-            return rgba;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static bool operator ==(in Rgba left, in Rgba right) =>
-            (left.R == right.R && left.G == right.G && left.B == right.B && left.A == right.A);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static bool operator !=(in Rgba left, in Rgba right) =>
-            left.R != right.R || left.G != right.G || left.B != right.B || left.A != right.A;
-
-        #endregion Operator Overload
-
         /// <summary>
         /// 
         /// </summary>
@@ -195,9 +114,15 @@ namespace Raster.Drawing.Primitive
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
-            return R.GetHashCode() ^ G.GetHashCode() ^ B.GetHashCode() ^ A.GetHashCode();
+            int hash1 = HashHelpers.Combine(r, g);
+            int hash2 = HashHelpers.Combine(b, a);
+            return HashHelpers.Combine(hash1, hash2);
         }
 
         /// <summary>
@@ -205,7 +130,7 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         /// <returns></returns>
         public override string ToString() =>
-            string.Format("Rgba: R = {0}, G = {1}, B = {2}, A = {3}", R, G, B, A);
+            string.Format("Rgba: R = {0}, G = {1}, B = {2}, A = {3}", r, g, b, a);
 
         /// <summary>
         /// 
@@ -213,5 +138,206 @@ namespace Raster.Drawing.Primitive
         /// <param name="other"></param>
         /// <returns></returns>
         public bool Equals(Rgba other) => this == other;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Int32 ToInt32()
+        {
+
+#if BIG_ENDIAN
+            return (Int32)((a << 24) | (b << 16) | (g << 8) | r);
+#else 
+            return (Int32)((r << 24) | (g << 16) | (b << 8) | a);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Color ToColor()
+        {
+            return new Color(
+                r / byte.MaxValue,
+                g / byte.MaxValue,
+                b / byte.MaxValue,
+                a / byte.MaxValue);
+        }
+
+        #endregion Public Instance Fields
+
+        #region Public Static Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Add(in Rgba left, in Rgba right, out Rgba result)
+        {
+            result.r = (byte)System.Math.Min(left.r + right.r, byte.MaxValue);
+            result.g = (byte)System.Math.Min(left.g + right.g, byte.MaxValue);
+            result.b = (byte)System.Math.Min(left.b + right.b, byte.MaxValue);
+            result.a = (byte)System.Math.Min(left.a + right.a, byte.MaxValue);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Subtract(in Rgba left, in Rgba right, out Rgba result)
+        {
+            result.r = (byte)System.Math.Max(left.r - right.r, byte.MinValue);
+            result.g = (byte)System.Math.Max(left.g - right.g, byte.MinValue);
+            result.b = (byte)System.Math.Max(left.b - right.b, byte.MinValue);
+            result.a = (byte)System.Math.Max(left.a - right.a, byte.MinValue);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Subtract(in Rgba left, int right, out Rgba result)
+        {
+            result.r = (byte)System.Math.Min(left.r * right, byte.MaxValue);
+            result.g = (byte)System.Math.Min(left.g * right, byte.MaxValue);
+            result.b = (byte)System.Math.Min(left.b * right, byte.MaxValue);
+            result.a = (byte)System.Math.Min(left.a * right, byte.MaxValue);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Multiply(in Rgba left, int right, out Rgba result)
+        {
+            result.r = (byte)System.Math.Min(left.r * right, byte.MaxValue);
+            result.g = (byte)System.Math.Min(left.g * right, byte.MaxValue);
+            result.b = (byte)System.Math.Min(left.b * right, byte.MaxValue);
+            result.a = (byte)System.Math.Min(left.a * right, byte.MaxValue);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Multiply(in Rgba left, in Rgba right, out Rgba result)
+        {
+            result.r = (byte)System.Math.Min(left.r * right.r, byte.MaxValue);
+            result.g = (byte)System.Math.Min(left.g * right.g, byte.MaxValue);
+            result.b = (byte)System.Math.Min(left.b * right.b, byte.MaxValue);
+            result.a = (byte)System.Math.Min(left.a * right.a, byte.MaxValue);
+        }
+
+        #endregion Public Static Methods
+
+        #region Operator Overload
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Rgba operator +(in Rgba left, in Rgba right)
+        {
+            Rgba result;
+            Add(left, right, out result);
+            return result;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Rgba operator -(in Rgba left, in Rgba right)
+        {
+            Rgba result;
+            Subtract(left, right, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Rgba operator *(int left, in Rgba right)
+        {
+            Rgba result;
+            Multiply(right, left, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Rgba operator *(in Rgba left, int right)
+        {
+            Rgba result;
+            Multiply(left, right, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Rgba operator *(in Rgba left, in Rgba right)
+        {
+            Rgba result;
+            Multiply(left, right, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator ==(in Rgba left, in Rgba right) =>
+            left.r == right.r && left.g == right.g && left.b == right.b && left.a == right.a;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator !=(in Rgba left, in Rgba right) =>
+            left.r != right.r || left.g != right.g || left.b != right.b || left.a != right.a;
+
+        #endregion Operator Overload
     }
 }

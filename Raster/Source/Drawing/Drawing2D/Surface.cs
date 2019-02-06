@@ -4,6 +4,9 @@ using Raster.Drawing.Primitive;
 
 namespace Raster.Drawing.Drawing2D
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Surface
     {
         #region Private Fields

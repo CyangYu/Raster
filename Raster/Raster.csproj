@@ -45,9 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\Drawing\Drawing2D\Canvas.cs" />
     <Compile Include="Source\Drawing\Drawing2D\Palette.cs" />
     <Compile Include="Source\Drawing\Drawing2D\PixelFormat.cs" />
-    <Compile Include="Source\Drawing\Drawing2D\PixelType.cs" />
+    <Compile Include="Source\Drawing\Drawing2D\Bitmap.cs" />
+    <Compile Include="Source\Drawing\Drawing2D\Pixmap.cs" />
     <Compile Include="Source\Drawing\Drawing2D\Surface.cs" />
     <Compile Include="Source\Drawing\Primitive\Color.cs" />
     <Compile Include="Source\Drawing\Primitive\KnownColor.cs" />

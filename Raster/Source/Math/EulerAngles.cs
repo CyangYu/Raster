@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using Raster.Private;
 
 namespace Raster.Math
 {
@@ -60,11 +61,20 @@ namespace Raster.Math
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
-            return 0;
+            int hash = HashHelpers.Combine(Pitch.GetHashCode(), Roll.GetHashCode());
+            return HashHelpers.Combine(hash, Yaw.GetHashCode());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString() =>
             string.Format("EulerAngles: Pitch = {0}, Roll = {1}, Yaw = {2}", Pitch, Roll, Yaw);
 
@@ -89,7 +99,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static EulerAngles FromQuaternion(float w, float x, float y, float z)
         {
-            EulerAngles euler = new EulerAngles(0.0f, 0.0f, 0.0f);
+            EulerAngles euler;
             return euler;
         }
 
