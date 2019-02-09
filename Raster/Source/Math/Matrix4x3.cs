@@ -111,6 +111,82 @@ namespace Raster.Math
             M32 = value;
         }
 
+        public Matrix4x3(Matrix2x2 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = 0.0f;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 0.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = 0.0f;
+        }
+
+        public Matrix4x3(Matrix2x3 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = other.M02;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = other.M12;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 0.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = 0.0f;
+        }
+
+        public Matrix4x3(Matrix3x2 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = 0.0f;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = 0.0f;
+
+            M20 = other.M20;
+            M21 = other.M21;
+            M22 = 0.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = 0.0f;
+        }
+
+        public Matrix4x3(Matrix3x3 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = other.M02;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = other.M12;
+
+            M20 = other.M20;
+            M21 = other.M21;
+            M22 = other.M22;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = 0.0f;
+        }
+
         public Matrix4x3(in Matrix4x3 other)
         {
             M00 = other.M00;
@@ -198,6 +274,43 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Matrix4x3 other) => this == other;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Fill(float value)
+        {
+            M00 = value;
+            M01 = value;
+            M02 = value;
+
+            M10 = value;
+            M11 = value;
+            M12 = value;
+
+            M20 = value;
+            M21 = value;
+            M22 = value;
+
+            M30 = value;
+            M31 = value;
+            M32 = value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool IsZero()
+        {
+            return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f &&
+                    M10 == 0.0f && M11 == 0.0f && M12 == 0.0f &&
+                    M20 == 0.0f && M21 == 0.0f && M22 == 0.0f &&
+                    M30 == 0.0f && M31 == 0.0f && M32 == 0.0f);
+        }
 
         /// <summary>
         /// 
@@ -522,6 +635,30 @@ namespace Raster.Math
             result.M30 = left.M30 * inv;
             result.M31 = left.M31 * inv;
             result.M32 = left.M32 * inv;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Transpose(in Matrix4x3 matrix, out Matrix3x4 result)
+        {
+            result.M00 = matrix.M00;
+            result.M01 = matrix.M10;
+            result.M02 = matrix.M20;
+            result.M03 = matrix.M30;
+
+            result.M10 = matrix.M01;
+            result.M11 = matrix.M11;
+            result.M12 = matrix.M21;
+            result.M13 = matrix.M31;
+
+            result.M20 = matrix.M02;
+            result.M21 = matrix.M12;
+            result.M22 = matrix.M22;
+            result.M23 = matrix.M32;
         }
 
         #endregion Public Static Methods

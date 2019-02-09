@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime;
 using System.Runtime.CompilerServices;
 using SysMath = System.Math;
 
@@ -7,7 +8,7 @@ namespace Raster.Math
     /// <summary>
     /// 
     /// </summary>
-    public sealed class MathF
+    public static class MathF
     {
         #region Public Static Fields
         /// <summary>
@@ -148,6 +149,14 @@ namespace Raster.Math
         /// <param name="num"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Exp2(float num) => Pow(2.0f, num);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Floor(float num) => (float)System.Math.Floor((double)num);
 
         /// <summary>
@@ -169,8 +178,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Max(float a, float b) => a > b ? a : b;
@@ -178,8 +187,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Min(float a, float b) => a < b ? a : b;
@@ -187,11 +196,20 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Min(float a, float b, float factor) => (1 - factor) * a + factor * b;
+        public static float Mix(float x, float y, float a) => x * (1 - a) + y * a;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Mod(float x, float y) => y * Floor(x / y);
 
         /// <summary>
         /// 
@@ -250,14 +268,10 @@ namespace Raster.Math
         /// <param name="max"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float SmoothStep(float x, float min, float max)
+        public static float SmoothStep(float edge0, float edge1, float x)
         {
-            if (x <= min)
-                return 0.0f;
-            if (x >= max)
-                return 1.0f;
-
-            return x * x * (3.0f - 2.0f * x);
+            float t = Clamp((x - edge0) / (edge1 - edge0), 0.0f, 1.0f);
+            return t * t * (3.0f - 2.0f * t);
         }
 
         /// <summary>
@@ -292,12 +306,8 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Sqrt(float x)
         {
-            float invsqrt = MathHelper.QuickSqrtInv(x);
-
-            if (invsqrt == 0.0f)
-                return 0.0f;
-
-            return 1.0f / invsqrt;
+            float invsqrt = MathHelper.FastSqrtInverse(x);
+            return invsqrt == 0.0f ? 0.0f : 1.0f / invsqrt;
         }
 
         #endregion Public Static Methods

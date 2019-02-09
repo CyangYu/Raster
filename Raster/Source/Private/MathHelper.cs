@@ -6,7 +6,7 @@ namespace Raster.Math
     /// <summary>
     /// 
     /// </summary>
-    public class MathHelper
+    public static class MathHelper
     {
         /// <summary>
         /// 
@@ -14,7 +14,7 @@ namespace Raster.Math
         /// <param name="f"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float QuickSqrtInv(float f)
+        public static float FastSqrtInverse(float f)
         {
             unsafe
             {
@@ -30,8 +30,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Swap(ref float a, ref float b)
         {

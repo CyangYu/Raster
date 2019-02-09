@@ -452,7 +452,7 @@ namespace Raster.Math
 
             float lenSqr = result.X * result.X + result.Y * result.Y +
                            result.Z * result.Z + result.W * result.W;
-            float invNorm = MathHelper.QuickSqrtInv(lenSqr);
+            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
             result.X *= invNorm;
             result.Y *= invNorm;
@@ -470,7 +470,7 @@ namespace Raster.Math
         {
             float lenSqr = value.X * value.X + value.Y * value.Y +
                            value.Z * value.Z + value.W * value.W;
-            float invNorm = MathHelper.QuickSqrtInv(lenSqr);
+            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
             result.X = value.X * invNorm;
             result.Y = value.Y * invNorm;

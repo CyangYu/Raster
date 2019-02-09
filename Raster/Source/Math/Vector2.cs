@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Raster.Private;
 
 namespace Raster.Math
@@ -8,6 +9,7 @@ namespace Raster.Math
     /// 
     /// </summary>
     [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public struct Vector2 : IEquatable<Vector2>
     {
         #region Public Fields
@@ -156,7 +158,7 @@ namespace Raster.Math
         public void Normalize()
         {
             float lenSqr = X * X + Y * Y;
-            float invLen = MathHelper.QuickSqrtInv(lenSqr);
+            float invLen = MathHelper.FastSqrtInverse(lenSqr);
 
             X *= invLen;
             Y *= invLen;         
@@ -341,6 +343,35 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="vec2"></param>
+        /// <param name="normal"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Reflect(in Vector2 vec2, in Vector2 normal)
+        {
+            Vector2 result;
+            Reflect(vec2, normal, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vec2"></param>
+        /// <param name="normal"></param>
+        /// <param name="eta"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Refract(in Vector2 vec2, in Vector2 normal, float eta)
+        {
+            Vector2 result;
+            Refract(vec2, normal, eta, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="position"></param>
         /// <param name="matrix"></param>
         /// <returns></returns>
@@ -491,7 +522,7 @@ namespace Raster.Math
         public static void Normalize(in Vector2 value, out Vector2 result)
         {
             float lenSqr = value.X * value.X + value.Y * value.Y;
-            float invNorm = MathHelper.QuickSqrtInv(lenSqr);
+            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
             result.X = value.X * invNorm;
             result.Y = value.Y * invNorm;
@@ -583,7 +614,6 @@ namespace Raster.Math
 
             result.X = position.X * (1.0f - yy2 - zz2) + position.Y * (xy2 - wz2);
             result.Y = position.X * (xy2 + wz2) + position.Y * (1.0f - xx2 - zz2);
-
         }
 
         /// <summary>
@@ -596,8 +626,99 @@ namespace Raster.Math
         public static void Reflect(in Vector2 vec2, in Vector2 normal, out Vector2 result)
         {
             float dot = vec2.X + normal.X + vec2.Y * normal.Y;
+
             result.X = vec2.X - 2.0f * dot * normal.X;
             result.Y = vec2.Y - 2.0f * dot * normal.Y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vec2"></param>
+        /// <param name="normal"></param>
+        /// <param name="eta"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Refract(in Vector2 vec2, in Vector2 normal, float eta, out Vector2 result)
+        {
+            float dot = vec2.X * normal.X + vec2.Y * normal.Y;
+            float k = 1.0f - eta * eta * (1.0f - dot * dot);
+
+            if (k < 0.0f)
+            {
+                result = Zero;
+            }
+            else
+            {
+                float sqrtk = MathF.Sqrt(k);
+
+                result.X = eta * vec2.X - (eta * dot + sqrtk) * normal.X;
+                result.Y = eta * vec2.Y - (eta * dot + sqrtk) * normal.Y;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Add(in Vector2 left, in Vector2 right, out Vector2 result)
+        {
+            result.X = left.X + right.X;
+            result.Y = left.Y + right.Y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Subtract(in Vector2 left, in Vector2 right, out Vector2 result)
+        {
+            result.X = left.X + right.X;
+            result.Y = left.Y + right.Y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Multiply(in Vector2 left, float right, out Vector2 result)
+        {
+            result.X = left.X * right;
+            result.Y = left.Y * right;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Multiply(in Vector2 left, in Vector2 right, out Vector2 result)
+        {
+            result.X = left.X * right.X;
+            result.Y = left.Y * right.Y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Negate(in Vector2 value, out Vector2 result)
+        {
+            result.X = -value.X;
+            result.Y = -value.Y;
         }
 
         #endregion Public Static Methods
@@ -611,6 +732,15 @@ namespace Raster.Math
         /// <returns></returns>
         public static Vector2 operator +(in Vector2 left, in Vector2 right) =>
             new Vector2(left.X + right.X, left.Y + right.Y);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 operator -(in Vector2 value) =>
+            new Vector2(-value.X, -value.Y);
 
         /// <summary>
         /// 
@@ -655,28 +785,18 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 operator /(in Vector2 left, in Vector2 right)
-        {
-            if (right.X == 0.0f || right.Y == 0.0f)
-                throw new DivideByZeroException("b contain zero component");
-
-            return new Vector2(left.X / right.X, left.Y / right.Y);
-        }
+        public static Vector2 operator /(in Vector2 left, float right) =>
+            new Vector2(left.X / right, left.Y / right);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="left"></param>
-        /// <param name="divisor"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 operator /(in Vector2 left, float right)
-        {
-            if (right == 0.0f)
-                throw new DivideByZeroException("divisor is zero");
-
-            return new Vector2(left.X / right, left.Y / right);
-        }
+        public static Vector2 operator /(in Vector2 left, in Vector2 right) =>
+            new Vector2(left.X / right.X, left.Y / right.Y);
 
         /// <summary>
         /// 

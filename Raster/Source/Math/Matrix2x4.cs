@@ -85,6 +85,32 @@ namespace Raster.Math
             M13 = value;
         }
 
+        public Matrix2x4(in Matrix2x2 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = 0.0f;
+            M13 = 0.0f;
+        }
+
+        public Matrix2x4(in Matrix2x3 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = other.M02;
+            M03 = 0.0f;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = other.M12;
+            M13 = 0.0f;
+        }
+
         public Matrix2x4(in Matrix2x4 other)
         {
             M00 = other.M00;
@@ -157,6 +183,24 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Matrix2x4 other) => this == other;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Fill(float value)
+        {
+            M00 = value;
+            M01 = value;
+            M02 = value;
+            M03 = value;
+
+            M10 = value;
+            M11 = value;
+            M12 = value;
+            M13 = value;
+        }
 
         /// <summary>
         /// 
@@ -348,7 +392,7 @@ namespace Raster.Math
         {
             result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20;
             result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + left.M02 * right.M21;
-            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + left.M02 * right.M22;;
+            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + left.M02 * right.M22;
 
             result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + left.M12 * right.M20;
             result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + left.M12 * right.M21;
@@ -429,6 +473,27 @@ namespace Raster.Math
             result.M11 = left.M11 * right;
             result.M12 = left.M12 * right;
             result.M13 = left.M13 * right;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Transpose(in Matrix2x4 matrix, out Matrix4x2 result)
+        {
+            result.M00 = matrix.M00;
+            result.M01 = matrix.M10;
+
+            result.M10 = matrix.M01;
+            result.M11 = matrix.M11;
+
+            result.M20 = matrix.M02;
+            result.M21 = matrix.M12;
+
+            result.M30 = matrix.M03;
+            result.M31 = matrix.M13;
         }
 
         #endregion Public Static Methods

@@ -88,6 +88,21 @@ namespace Raster.Math
             M31 = value;
         }
 
+        public Matrix4x2(Matrix2x2 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+
+            M10 = other.M10;
+            M11 = other.M11;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+        }
+
         public Matrix4x2(in Matrix4x2 other)
         {
             M00 = other.M00;
@@ -167,6 +182,39 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Matrix4x2 other) => this == other;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Fill(float value)
+        {
+            M00 = value;
+            M01 = value;
+
+            M10 = value;
+            M11 = value;
+
+            M20 = value;
+            M21 = value;
+
+            M30 = value;
+            M31 = value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool IsZero()
+        {
+            return (M00 == 0.0f && M01 == 0.0f &&
+                    M10 == 0.0f && M11 == 0.0f &&
+                    M20 == 0.0f && M21 == 0.0f &&
+                    M30 == 0.0f && M31 == 0.0f);
+        }
 
         /// <summary>
         /// 
@@ -463,6 +511,25 @@ namespace Raster.Math
 
             result.M30 = left.M30 * inv;
             result.M31 = left.M31 * inv;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Transpose(in Matrix4x2 matrix, out Matrix2x4 result)
+        {
+            result.M00 = matrix.M00;
+            result.M01 = matrix.M10;
+            result.M02 = matrix.M20;
+            result.M03 = matrix.M30;
+
+            result.M10 = matrix.M01;
+            result.M11 = matrix.M11;
+            result.M12 = matrix.M21;
+            result.M13 = matrix.M31;
         }
 
         #endregion Public Static Methods

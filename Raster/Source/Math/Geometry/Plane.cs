@@ -147,6 +147,62 @@ namespace Raster.Math.Geometry
         /// <param name="point1"></param>
         /// <param name="point2"></param>
         /// <param name="point3"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Plane FromVertices(in Vector3 point1, in Vector3 point2, in Vector3 point3)
+        {
+            Plane result;
+            FromVertices(point1, point2, point3, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Plane Normalize(in Plane value)
+        {
+            Plane result;
+            Normalize(value, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="plane"></param>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Plane Transform(in Plane plane, in Matrix4x4 matrix)
+        {
+            Plane result;
+            Transform(plane, matrix, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="plane"></param>
+        /// <param name="rotation"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Plane Transform(in Plane plane, in Quaternion rotation)
+        {
+            Plane result;
+            Transform(plane, rotation, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
+        /// <param name="point3"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void FromVertices(in Vector3 point1, in Vector3 point2, in Vector3 point3, out Plane result)
@@ -167,7 +223,7 @@ namespace Raster.Math.Geometry
 
             if (lenSqr != 0.0f)
             {
-                float invNorm = MathHelper.QuickSqrtInv(lenSqr);
+                float invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
                 result.Normal.X = nx * invNorm;
                 result.Normal.Y = ny * invNorm;
@@ -213,12 +269,18 @@ namespace Raster.Math.Geometry
         /// <param name="matrix"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Transform(in Plane plane, in Matrix4x4 matrix, out Plane result)
         {
-            Matrix4x4 matrix;
+            Matrix4x4 m = new Matrix4x4(0.0f);
 
-
+            result.Normal.X = plane.Normal.X * m.M00 + plane.Normal.Y * m.M01 +
+                              plane.Normal.Z * m.M02 + plane.Distance * m.M03;
+            result.Normal.Y = plane.Normal.X * m.M10 + plane.Normal.Y * m.M11 +
+                              plane.Normal.Z * m.M12 + plane.Distance * m.M13;
+            result.Normal.Z = plane.Normal.X * m.M20 + plane.Normal.Y * m.M21 +
+                              plane.Normal.Z * m.M22 + plane.Distance * m.M23;
+            result.Distance = plane.Normal.X * m.M30 + plane.Normal.Y * m.M31 +
+                              plane.Normal.Z * m.M32 + plane.Distance * m.M33;
         }
 
         /// <summary>
@@ -262,6 +324,8 @@ namespace Raster.Math.Geometry
             result.Normal.Z = plane.Normal.X * m13 + plane.Normal.Y * m23 + plane.Normal.Z * m33;
             result.Distance = plane.Distance;
         }
+
+        #endregion Public Static Methods
 
         #region Operator Overload
         /// <summary>

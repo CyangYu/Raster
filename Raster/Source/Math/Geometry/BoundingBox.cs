@@ -4,46 +4,33 @@ using Raster.Math;
 namespace Raster.Math.Geometry
 {
     /// <summary>
-    /// 
+    /// Axis-Aligned Bounding Box
     /// </summary>
     [Serializable]
-    public struct AABB : IEquatable<AABB>
+    public struct BoundingBox : IEquatable<BoundingBox>
     {
         #region Public Fields
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Min;
+        public Vector3 Minimum;
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Max;
+        public Vector3 Maximum;
         #endregion Public Fields
 
-        #region Public Instance Properties
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector3 Center 
-		{
-			get {
-				return new Vector3((Max.X - Min.X) / 2.0f + Min.X,
-							       (Max.Y - Min.Y) / 2.0f + Min.Y,
-							       (Max.Z - Min.Z) / 2.0f + Min.Z);
-			}
-		}
-
         #region Constructor
-        public AABB(Vector3 min, Vector3 max)
+        public BoundingBox(Vector3 minimum, Vector3 maximum)
         {
-            Min = min;
-            Max = max;
+            Minimum = minimum;
+            Maximum = maximum;
         }
 		
-		public AABB(float xMin, float yMin, float zMin, float xMax, float yMax, float zMax)
+		public BoundingBox(float xMin, float yMin, float zMin, float xMax, float yMax, float zMax)
 		{
-			Min = new Vector3(xMin, yMin, zMin);
-			Max = new Vector3(xMax, yMax, zMax);
+			Minimum = new Vector3(xMin, yMin, zMin);
+			Maximum = new Vector3(xMax, yMax, zMax);
 		}
         #endregion
 
@@ -55,9 +42,9 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            if (obj is AABB)
+            if (obj is BoundingBox)
             {
-                return Equals((AABB)obj);
+                return Equals((BoundingBox)obj);
             }
 
             return false;
@@ -77,15 +64,15 @@ namespace Raster.Math.Geometry
         /// </summary>
         /// <returns></returns>
         public override string ToString() =>
-            string.Format("AABB XMin = {0}, YMin = {1}, ZMin = {2}, XMax = {3}, YMax = {4}, ZMax = {5}",
-                          Min.X, Min.Y, Min.Z, Max.X, Max.Y, Max.Z);
+            string.Format("BoundingBox XMin = {0}, YMin = {1}, ZMin = {2}, XMax = {3}, YMax = {4}, ZMax = {5}",
+                          Minimum.X, Minimum.Y, Minimum.Z, Maximum.X, Maximum.Y, Maximum.Z);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(AABB other) => this == other;
+        public bool Equals(BoundingBox other) => this == other;
 
         #endregion Public Instance Methods
 
@@ -96,9 +83,9 @@ namespace Raster.Math.Geometry
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(in AABB left, in AABB right) =>
-            left.Min.X == right.Min.X && left.Min.Y == right.Min.Y && left.Min.Z == right.Min.Z &&
-            left.Max.X == right.Max.X && left.Max.Y == right.Max.Y && left.Max.Z == right.Max.Z;
+        public static bool operator ==(in BoundingBox left, in BoundingBox right) =>
+            left.Minimum.X == right.Minimum.X && left.Minimum.Y == right.Minimum.Y && left.Minimum.Z == right.Minimum.Z &&
+            left.Maximum.X == right.Maximum.X && left.Maximum.Y == right.Maximum.Y && left.Maximum.Z == right.Maximum.Z;
 
         /// <summary>
         /// 
@@ -106,9 +93,9 @@ namespace Raster.Math.Geometry
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(in AABB left, in AABB right) =>
-            left.Min.X != right.Min.X || left.Min.Y != right.Min.Y || left.Min.Z != right.Min.Z ||
-            left.Max.X != right.Max.X || left.Max.Y != right.Max.Y || left.Max.Z != right.Max.Z;
+        public static bool operator !=(in BoundingBox left, in BoundingBox right) =>
+            left.Minimum.X != right.Minimum.X || left.Minimum.Y != right.Minimum.Y || left.Minimum.Z != right.Minimum.Z ||
+            left.Maximum.X != right.Maximum.X || left.Maximum.Y != right.Maximum.Y || left.Maximum.Z != right.Maximum.Z;
 
         #endregion
     }

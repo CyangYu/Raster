@@ -79,6 +79,18 @@ namespace Raster.Math
             M21 = value;
         }
 
+        public Matrix3x2(Matrix2x2 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+
+            M10 = other.M10;
+            M11 = other.M11;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+        }
+
         public Matrix3x2(Matrix3x2 other)
         {
             M00 = other.M00;
@@ -151,6 +163,23 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Matrix3x2 other) => this == other;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Fill(float value)
+        {
+            M00 = value;
+            M01 = value;
+
+            M10 = value;
+            M11 = value;
+
+            M20 = value;
+            M21 = value;
+        }
 
         /// <summary>
         /// 
@@ -425,6 +454,24 @@ namespace Raster.Math
 
             result.M20 = left.M20 * right;
             result.M21 = left.M21 * right;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Transpose(in Matrix3x2 matrix, out Matrix2x3 result)
+        {
+            result.M00 = matrix.M00;
+            result.M01 = matrix.M10;
+
+            result.M02 = matrix.M20;
+            result.M10 = matrix.M01;
+
+            result.M11 = matrix.M11;
+            result.M12 = matrix.M21;
         }
 
         #endregion Public Static Methods

@@ -86,8 +86,8 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         public static Point operator +(in Point left, in Point right) =>
             new Point(left.X + right.X, left.Y + right.Y);
@@ -95,8 +95,8 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         public static Point operator -(in Point left, in Point right) =>
             new Point(left.X - right.X, left.Y - right.Y);
@@ -104,8 +104,8 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         public static Point operator *(in Point left, int right) =>
             new Point(left.X * right, left.Y * right);
@@ -113,8 +113,8 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         public static bool operator ==(in Point left, in Point right) =>
             left.X == right.X && left.Y == right.Y;
@@ -122,8 +122,8 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         public static bool operator !=(in Point left, in Point right) =>
             left.X != right.X || left.Y != right.Y;

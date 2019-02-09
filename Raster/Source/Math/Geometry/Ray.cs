@@ -4,6 +4,9 @@ using System.Runtime.InteropServices;
 
 namespace Raster.Math.Geometry
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public struct Ray : IEquatable<Ray>
     {
@@ -11,24 +14,46 @@ namespace Raster.Math.Geometry
         /// <summary>
         /// 
         /// </summary>
-        public Point3F Origin;
+        private Vector3 origin;
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Direction;
+        private Vector3 direction;
         #endregion Public Fields
+
+        #region Public Instance Properties
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Origin
+        {
+            get { return origin; }
+            set { origin = value; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Direction
+        {
+            get { return direction; }
+            set { Vector3.Normalize(value, out direction); }
+        }
+
+        #endregion Public Instance Properties
 
         #region Constructor
         public Ray(in Ray other)
-            : this(other.Origin, other.Direction)
+            : this(other.origin, other.direction)
         {
         }
 
-        public Ray(in Point3F origin, in Vector3 direction)
+        public Ray(in Vector3 origin, in Vector3 direction)
         {
-            Origin = origin;
-            Direction = direction;
+            this.origin = origin;
+            this.direction = direction;
         }
+
         #endregion Constructor
 
         #region Public Instance Methods
@@ -53,16 +78,20 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return Origin.GetHashCode() ^ Direction.GetHashCode();
+            return 0;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() =>
-            string.Format("Ray: Origin X = {0}, Y = {1}, Z = {2} Direction: X = {3}, Y = {4}, Z = {5}",
-                          Origin.X, Origin.Y, Origin.Z, Direction.X, Direction.Y, Direction.Z);
+        public override string ToString()
+        {
+            return string.Format("Ray: Origin X = {0}, Y = {1}, Z = {2}, " +
+                                 "Direction: X = {3}, Y = {4}, Z = {5} ",
+                                 origin.X, origin.Y, origin.Z,
+                                 direction.X, direction.Y, direction.Z);
+        }
 
 
         /// <summary>
@@ -79,15 +108,45 @@ namespace Raster.Math.Geometry
         /// <param name="time"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Point3F PointAt(float time)
+        public Vector3 PointAt(float time)
         {
-            Direction.Normalize();
-            return new Point3F(Origin.X + time * Direction.X,
-                               Origin.Y + time * Direction.Y,
-                               Origin.Z + time * Direction.Z);
+            return new Vector3(
+                origin.X + time * direction.X,
+                origin.Y + time * direction.Y,
+                origin.Z + time * direction.Z);
         }
 
         #endregion Public Instance Methods
+
+        #region Public Static Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 PointAt(in Ray ray, float time)
+        {
+            Vector3 result;
+            PointAt(ray, time, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void PointAt(in Ray ray, float time, out Vector3 result)
+        {
+            result.X = ray.origin.X + time * ray.direction.X;
+            result.Y = ray.origin.Y + time * ray.direction.Y;
+            result.Z = ray.origin.Z + time * ray.direction.Z;
+        }
+
+        #endregion Public Static Methods
 
         #region Operator Overload
         /// <summary>
@@ -99,10 +158,12 @@ namespace Raster.Math.Geometry
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(in Ray left, in Ray right)
         {
-            return (left.Origin.X == right.Origin.X &&
-                    left.Origin.Y == right.Origin.Y &&
-                    left.Origin.Z == right.Origin.Z &&
-                    left.Direction == right.Direction);
+            return (left.origin.X == right.origin.X &&
+                    left.origin.Y == right.origin.Y &&
+                    left.origin.Z == right.origin.Z &&
+                    left.direction.X == right.direction.X &&
+                    left.direction.Y == right.direction.Y &&
+                    left.direction.Z == right.direction.Z);
         }
 
         /// <summary>
@@ -113,10 +174,12 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public static bool operator !=(in Ray left, in Ray right)
         {
-            return (left.Origin.X != right.Origin.X ||
-                    left.Origin.Y != right.Origin.Y ||
-                    left.Origin.Z != right.Origin.Z ||
-                    left.Direction != right.Direction);
+            return (left.origin.X != right.origin.X ||
+                    left.origin.Y != right.origin.Y ||
+                    left.origin.Z != right.origin.Z ||
+                    left.direction.X != right.direction.X ||
+                    left.direction.Y != right.direction.Y ||
+                    left.direction.Z != right.direction.Z);
         }
 
         #endregion Operator Overload

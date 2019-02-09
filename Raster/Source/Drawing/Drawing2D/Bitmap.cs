@@ -5,7 +5,7 @@ namespace Raster.Drawing.Drawing2D
     /// <summary>
     /// 
     /// </summary>
-    public class Bitmap
+    public class Bitmap : Pixmap
     {
     }
 }

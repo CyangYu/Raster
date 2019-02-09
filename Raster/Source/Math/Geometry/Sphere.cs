@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace Raster.Math.Geometry
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public struct Sphere : IEquatable<Sphere>
     {
         #region Public Instance Fields
@@ -16,6 +19,25 @@ namespace Raster.Math.Geometry
         public float Radius;
         #endregion Public Instance Fields
 
+        #region Public Instance Properties
+        /// <summary>
+        /// 
+        /// </summary>
+        public float Diameter
+        {
+            get { return 2.0f * Radius; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public float Volume
+        {
+            get { return (4.0f * MathF.PI * Radius * Radius * Radius) / 3.0f; }
+        }
+
+        #endregion Public Instance Properties
+
         #region Constructor
         public Sphere(in Sphere other)
             : this(other.Center, other.Radius)
@@ -27,6 +49,7 @@ namespace Raster.Math.Geometry
             Center = center;
             Radius = radius;
         }
+
         #endregion Constructor
 
         #region Public Instance Methods
@@ -51,19 +74,24 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return Center.GetHashCode() ^ Radius.GetHashCode();
+            return 0;
         }
 
-        public override string ToString() =>
-            string.Format("Sphere: Center X = {0}, Y = {1} Z = {2} Radius = {3}",
-                          Center.X, Center.Y, Center.Z, Radius);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return string.Format("Sphere: Center X = {0}, Y = {1} Z = {2} Radius = {3}",
+                                 Center.X, Center.Y, Center.Z, Radius);
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Sphere other) => this == other;
 
         /// <summary>
@@ -72,13 +100,15 @@ namespace Raster.Math.Geometry
         /// <param name="ray"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int Intersect(in Ray ray)
+        public bool Intersect(in Ray ray)
         {
-            return 0;
+            float distance = 0.0f;
+            return Collision.RayIntersectSphere(ray, this, out distance);
         }
 
         #endregion Public Instance Methods
 
+        #region Operator Overload
         /// <summary>
         /// 
         /// </summary>
@@ -108,5 +138,7 @@ namespace Raster.Math.Geometry
                     left.Center.Z != right.Center.Z && 
 					left.Radius != right.Radius);
         }
+
+        #endregion Operator Overload
     }
 }

@@ -87,8 +87,8 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         public static PointF operator +(in PointF left, in PointF right) =>
             new PointF(left.X + right.X, left.Y + right.Y);
@@ -96,8 +96,8 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         public static PointF operator -(in PointF left, in PointF right) =>
             new PointF(left.X - right.X, left.Y - right.Y);
@@ -105,8 +105,8 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         public static PointF operator *(in PointF left, float right) =>
             new PointF(left.X * right, left.Y * right);

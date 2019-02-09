@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using Raster.Drawing.Primitive;
+using Raster.Math.Geometry;
 
 namespace Raster.Math
 {
@@ -118,18 +119,182 @@ namespace Raster.Math
             M01 = value;
             M02 = value;
             M03 = value;
+
             M10 = value;
             M11 = value;
             M12 = value;
             M13 = value;
+
             M20 = value;
             M21 = value;
             M22 = value;
             M23 = value;
+
             M30 = value;
             M31 = value;
             M32 = value;
             M33 = value;
+        }
+
+        public Matrix4x4(Matrix2x2 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 0.0f;
+            M23 = 0.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = 0.0f;
+            M33 = 0.0f;
+        }
+
+        public Matrix4x4(Matrix2x3 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = other.M02;
+            M03 = 0.0f;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = other.M12;
+            M13 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 0.0f;
+            M23 = 0.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = 0.0f;
+            M33 = 0.0f;
+        }
+
+        public Matrix4x4(Matrix2x4 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = other.M02;
+            M03 = other.M03;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = other.M12;
+            M13 = other.M13;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 0.0f;
+            M23 = 0.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = 0.0f;
+            M33 = 0.0f;
+        }
+
+        public Matrix4x4(Matrix3x2 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = other.M20;
+            M21 = other.M21;
+            M22 = 0.0f;
+            M23 = 0.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = 0.0f;
+            M33 = 0.0f;
+        }
+
+        public Matrix4x4(Matrix3x3 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = other.M02;
+            M03 = 0.0f;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = other.M12;
+            M13 = 0.0f;
+
+            M20 = other.M20;
+            M21 = other.M21;
+            M22 = other.M22;
+            M23 = 0.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = 0.0f;
+            M33 = 0.0f;
+        }
+
+        public Matrix4x4(Matrix3x4 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = other.M02;
+            M03 = other.M03;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = other.M12;
+            M13 = other.M13;
+
+            M20 = other.M20;
+            M21 = other.M21;
+            M22 = other.M22;
+            M23 = other.M23;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = 0.0f;
+            M33 = 0.0f;
+        }
+
+        public Matrix4x4(in Matrix4x3 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = other.M02;
+            M03 = 0.0f;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = other.M12;
+            M13 = 0.0f;
+
+            M20 = other.M20;
+            M21 = other.M21;
+            M22 = other.M22;
+            M23 = 0.0f;
+
+            M30 = other.M30;
+            M31 = other.M31;
+            M32 = other.M32;
+            M33 = 0.0f;
         }
 
         public Matrix4x4(in Matrix4x4 other)
@@ -138,14 +303,17 @@ namespace Raster.Math
             M01 = other.M01;
             M02 = other.M02;
             M03 = other.M03;
+
             M10 = other.M10;
             M11 = other.M11;
             M12 = other.M12;
             M13 = other.M13;
+
             M20 = other.M20;
             M21 = other.M21;
             M22 = other.M22;
             M23 = other.M23;
+
             M30 = other.M30;
             M31 = other.M31;
             M32 = other.M32;
@@ -161,14 +329,17 @@ namespace Raster.Math
             M01 = m01;
             M02 = m02;
             M03 = m03;
+
             M10 = m10;
             M11 = m11;
             M12 = m12;
             M13 = m12;
+
             M20 = m20;
             M21 = m21;
             M22 = m22;
-            M23 = m22;
+            M23 = m23;
+
             M30 = m30;
             M31 = m31;
             M32 = m32;
@@ -219,16 +390,92 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public bool Equals(Matrix4x4 other) => this == other;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        
+        public void Fill(float value)
+        {
+            M00 = value;
+            M01 = value;
+            M02 = value;
+
+            M10 = value;
+            M11 = value;
+            M12 = value;
+
+            M20 = value;
+            M21 = value;
+            M22 = value;
+
+            M30 = value;
+            M31 = value;
+            M32 = value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        
+        public bool IsZero()
+        {
+            return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f && M03 == 0.0f &&
+                    M10 == 0.0f && M11 == 0.0f && M12 == 0.0f && M13 == 0.0f &&
+                    M20 == 0.0f && M21 == 0.0f && M22 == 0.0f && M23 == 0.0f &&
+                    M30 == 0.0f && M31 == 0.0f && M32 == 0.0f && M33 == 0.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        
+        public bool IsIdentity()
+        {
+            return (M00 == 1.0f && M01 == 0.0f && M02 == 0.0f && M03 == 0.0f &&
+                    M10 == 0.0f && M11 == 1.0f && M12 == 0.0f && M13 == 0.0f &&
+                    M20 == 0.0f && M21 == 0.0f && M22 == 1.0f && M23 == 0.0f &&
+                    M30 == 0.0f && M31 == 0.0f && M32 == 0.0f && M33 == 1.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        
+        public void SetIdentity()
+        {
+            M00 = 1.0f;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 1.0f;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 0.0f;
+            M23 = 0.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = 0.0f;
+            M33 = 1.0f;
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="row"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public Vector4 Row(int row)
         {
             switch (row)
@@ -255,7 +502,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="column"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public Vector4 Column(int column)
         {
             switch (column)
@@ -280,7 +527,7 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public void Transpose()
         {
             MathHelper.Swap(ref M01, ref M10);
@@ -295,7 +542,7 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="angle"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public void RotateX(float angle)
         {
             float rad = MathF.Sin(angle);
@@ -303,12 +550,19 @@ namespace Raster.Math
             float c = MathF.Cos(rad);
             float temp = 0.0f;
 
+            // [  1  0  0  0 ]
+            // [  0  c  s  0 ]
+            // [  0 -s  c  0 ]
+            // [  0  0  0  1 ]
             M10 = (temp = M10) * c + M20 * s;
             M20 = M20 * c - temp * s;
+
             M11 = (temp = M11) * c + M21 * s;
             M21 = M21 * c - temp * s;
+
             M12 = (temp = M12) * c + M22 * s;
             M22 = M22 * c - temp * s;
+
             M13 = (temp = M13) * c + M23 * s;
             M23 = M23 * c - temp * s;
         }
@@ -317,7 +571,7 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="angle"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public void RotateY(float angle)
         {
             float rad = MathF.Sin(angle);
@@ -325,12 +579,19 @@ namespace Raster.Math
             float c = MathF.Cos(rad);
             float temp = 0.0f;
 
+            // [  c  0 -s  0 ]
+            // [  0  1  0  0 ]
+            // [  s  0  c  0 ]
+            // [  0  0  0  1 ]
             M20 = (temp = M20) * c + M00 * s;
             M00 = M00 * c - temp * s;
+
             M21 = (temp = M21) * c + M01 * s;
             M01 = M01 * c - temp * s;
+
             M22 = (temp = M22) * c + M02 * s;
             M02 = M02 * c - temp * s;
+
             M23 = (temp = M23) * c + M03 * s;
             M03 = M03 * c - temp * s;
         }
@@ -339,7 +600,7 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="angle"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public void RotateZ(float angle)
         {
             float rad = MathF.Sin(angle);
@@ -347,12 +608,19 @@ namespace Raster.Math
             float c = MathF.Cos(rad);
             float temp = 0.0f;
 
+            // [  c  s  0  0 ]
+            // [ -s  c  0  0 ]
+            // [  0  0  0  0 ]
+            // [  0  0  0  1 ]
             M00 = (temp = M00) * c + M10 * s;
             M10 = M10 * c - temp * s;
+
             M01 = (temp = M01) * c + M11 * s;
             M11 = M11 * c - temp * s;
+
             M02 = (temp = M02) * c + M12 * s;
             M12 = M12 * c - temp * s;
+
             M03 = (temp = M03) * c + M13 * s;
             M13 = M13 * c - temp * s;
         }
@@ -364,7 +632,7 @@ namespace Raster.Math
         /// <param name="y"></param>
         /// <param name="z"></param>
         /// <param name="angle"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public void Rotate(float x, float y, float z, float angle)
         {
             if (x != 0.0f && y == 0.0f && z == 0.0f)
@@ -385,7 +653,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="axis"></param>
         /// <param name="angle"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public void Rotate(in Vector3 axis, float angle) =>
             Rotate(axis.X, axis.Y, axis.Z, angle);
 
@@ -395,17 +663,23 @@ namespace Raster.Math
         /// <param name="sx"></param>
         /// <param name="sy"></param>
         /// <param name="sz"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public void Scale(float sx, float sy, float sz)
         {
+            // [  sx 0  0  0  ]
+            // [  0  sy 0  0  ]
+            // [  0  0  sz 0  ]
+            // [  0  0  0  1  ]
             M00 *= sx;
             M01 *= sx;
             M02 *= sx;
             M03 *= sx;
+
             M10 *= sy;
             M11 *= sy;
             M12 *= sy;
             M13 *= sy;
+
             M20 *= sz;
             M21 *= sz;
             M22 *= sz;
@@ -416,7 +690,7 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="scale"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public void Scale(in Vector3 scale) => Scale(scale.X, scale.Y, scale.Z);
 
         /// <summary>
@@ -425,9 +699,13 @@ namespace Raster.Math
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="dz"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public void Translate(float dx, float dy, float dz)
         {
+            // [ 1  0  0  0 ]
+            // [ 0  1  0  0 ]
+            // [ 0  0  1  0 ]
+            // [ dx dy dz 1 ]
             M30 += M00 * dx + M10 * dy + M20 * dz;
             M31 += M01 * dx + M11 * dy + M21 * dz;
             M32 += M02 * dx + M12 * dy + M22 * dz;
@@ -438,7 +716,7 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="translate"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public void Translate(in Vector3 translate) => Translate(translate.X, translate.Y, translate.Z);
 
         /// <summary>
@@ -449,7 +727,7 @@ namespace Raster.Math
         /// <param name="z"></param>
         /// <param name="angle"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public Matrix4x4 FromAxisAngle(float x, float y, float z, float angle)
         {
             float rad = MathF.Sin(angle);
@@ -465,7 +743,9 @@ namespace Raster.Math
                 z *= invLen;
             }
             else
+            {
                 return Matrix4x4.Identity;
+            }
 
             float c0 = 1.0f - c;
             float x2 = x * x;
@@ -480,19 +760,23 @@ namespace Raster.Math
             float ys = y * s;
             float zs = z * s;
 
-            Matrix4x4 matrix;;
+            Matrix4x4 matrix;
+
             matrix.M00 = c + c0 * x2;
             matrix.M10 = c0 * xy - zs;
             matrix.M20 = c0 * xz + ys;
             matrix.M30 = 0.0f;
+
             matrix.M01 = c0 * xy + zs;
             matrix.M11 = c + c0 * y2;
             matrix.M21 = c0 * yz - xs;
             matrix.M31 = 0.0f;
+
             matrix.M02 = c0 * xz - ys;
             matrix.M12 = c0 * yz + xs;
             matrix.M22 = c + c0 * z2;
             matrix.M32 = 0.0f;
+
             matrix.M03 = 0.0f;
             matrix.M13 = 0.0f;
             matrix.M23 = 0.0f;
@@ -506,7 +790,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="axis"></param>
         /// <param name="angle"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public void FromAxisAngle(in Vector3 axis, float angle) =>
             FromAxisAngle(axis.X, axis.Y, axis.Z, angle);
 
@@ -519,28 +803,33 @@ namespace Raster.Math
         /// <param name="bottom"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public void Frustrum(float left, float right, float top, float bottom, float zNear, float zFar)
         {
             if (left >= right || bottom >= top || zNear >= zFar)
+            {
                 return;
+            }
 
             float invWidth  = 1.0f / (right - left);
-            float invHeight = 1.0f / (bottom - top);
+            float invHeight = 1.0f / (top - bottom);
             float invClip   = 1.0f / (zFar - zNear);
 
             M00 = 2.0f * zNear * invWidth;
             M01 = 0.0f;
             M02 = 0.0f;
             M03 = 0.0f;
+
             M10 = 0.0f;
             M11 = 2.0f * zNear * invHeight;
             M12 = 0.0f;
             M13 = 0.0f;
+
             M20 = (left + right) * invWidth;
             M21 = (top + bottom) * invHeight;
             M22 = -(zNear + zFar) * invClip;
             M23 = -1.0f;
+
             M30 = 0.0f;
             M31 = 0.0f;
             M32 = (-2.0f * zNear + zFar) * invClip;
@@ -559,7 +848,6 @@ namespace Raster.Math
         /// <param name="upX"></param>
         /// <param name="upY"></param>
         /// <param name="upZ"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LookAt(float eyeX, float eyeY, float eyeZ,
                            float centerX, float centerY, float centerZ,
                            float upX, float upY, float upZ)
@@ -568,28 +856,23 @@ namespace Raster.Math
             float forwardY = centerY - eyeY;
             float forwardZ = centerZ - eyeZ;
 
-            float invlen = 0.0f;
-            float len = MathF.Sqrt(forwardX * forwardX + forwardY * forwardY + forwardZ * forwardZ);
+            float lenSqr = forwardX * forwardX + forwardY * forwardY + forwardZ * forwardZ;
+            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
-            if (len > 0.0f)
-            {
-                forwardX *= invlen;
-                forwardY *= invlen;
-                forwardZ *= invlen;
-            }
+            forwardX *= invNorm;
+            forwardY *= invNorm;
+            forwardZ *= invNorm;
 
             float sideX = forwardY * upZ - forwardZ * upY;
             float sideY = forwardX * upZ - forwardZ * upX;
             float sideZ = forwardX * upY - forwardY * upX;
 
-            len = MathF.Sqrt(sideX * sideX + sideY * sideY + sideZ * sideZ);
-            if (len > 0.0f)
-            {
-                invlen = 1.0f / len;
-                sideX *= invlen;
-                sideY *= invlen;
-                sideZ *= invlen;
-            }
+            lenSqr = sideX * sideX + sideY * sideY + sideZ * sideZ;
+            invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+            sideX *= invNorm;
+            sideY *= invNorm;
+            sideZ *= invNorm;
 
             float uX = sideY * forwardZ - sideZ * forwardY;
             float uY = sideZ * forwardX - sideX * forwardZ;
@@ -599,18 +882,62 @@ namespace Raster.Math
             M01 = uX;
             M02 = -forwardX;
             M03 = 0.0f;
+
             M10 = sideY;
             M11 = uY;
             M12 = -forwardY;
             M13 = 0.0f;
+
             M20 = sideZ;
             M21 = uZ;
             M22 = -forwardZ;
             M23 = 0.0f;
+
             M30 = -(sideX * eyeX + sideY * eyeY + sideZ * eyeZ);
             M31 = -(uX * eyeX + uY * eyeY + uZ * eyeZ);
             M32 = (forwardX * eyeX + forwardY * eyeY + forwardZ * eyeZ);
             M33 = 0.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eye"></param>
+        /// <param name="center"></param>
+        /// <param name="up"></param>
+        public void LookAt(in Vector3 eye, in Vector3 center, in Vector3 up) =>
+            LookAt(eye.X, eye.Y, eye.Z, center.X, center.Y, center.Z, up.X, up.Y, up.Z);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void Ortho(float width, float height, float zNear, float zFar)
+        {
+            float invClip = 1.0f / (zFar - zNear);
+
+            M00 = 2.0f / width;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 2.0f / height;
+            M12 = 0.0f;
+            M23 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = -invClip;
+            M23 = 0.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = -zNear * invClip;
+            M33 = 1.0f;
         }
 
         /// <summary>
@@ -622,28 +949,32 @@ namespace Raster.Math
         /// <param name="top"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Ortho(float left, float right, float bottom, float top, float zNear, float zFar)
+        public void OrthoOffCenter(float left, float right, float bottom, float top, float zNear, float zFar)
         {
-            if (top == bottom || left == right || zNear == zFar)
+            if (top >= bottom || left >= right || zNear >= zFar)
+            {
                 return;
+            }
 
             float invWidth  = 1.0f / (right - left);
-            float invHeight = 1.0f / (bottom - top);
+            float invHeight = 1.0f / (top - bottom);
             float invClip   = 1.0f / (zFar - zNear);
 
             M00 = 2.0f * invWidth;
             M01 = 0.0f;
             M02 = 0.0f;
             M03 = 0.0f;
+
             M10 = 0.0f;
             M11 = 2.0f * invHeight;
             M12 = 0.0f;
             M13 = 0.0f;
+
             M20 = 0.0f;
             M21 = 0.0f;
             M22 = -2.0f * invClip;
             M23 = 0.0f;
+
             M30 = -(left + right) * invWidth;
             M31 = -(top + bottom) * invHeight;
             M32 = -(zNear + zFar) * invClip;
@@ -653,12 +984,42 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="rect"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Ortho(RectangleF rect, float zNear, float zFar) =>
-            Ortho(rect.Left, rect.Right, rect.Bottom, rect.Top, zNear, zFar);
+        
+        public void Perspective(float width, float height, float zNear, float zFar)
+        {
+            if (zNear <= 0.0f || zFar <= 0.0f || zNear >= zFar)
+            {
+                return;
+            }
+
+            float negFarRange = float.IsPositiveInfinity(zFar) ?
+                                             -1.0f :
+                                             zFar / (zNear - zFar);
+
+            M00 = 2.0f * zNear / width;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 2.0f * zNear / height;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = negFarRange;
+            M23 = -1.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = zNear * negFarRange;
+            M33 = 0.0f;
+        }
 
         /// <summary>
         /// 
@@ -667,17 +1028,25 @@ namespace Raster.Math
         /// <param name="aspect"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Perspective(float fov, float aspect, float zNear, float zFar)
+        public void PerspectiveFOV(float fov, float aspect, float zNear, float zFar)
         {
-            if (aspect == 0.0f || zNear <= 0.0f || zFar <= 0.0f || zNear >= zFar)
+            if (fov < 0.0f || fov > 180.0f)
+            {
                 return;
+            }
+
+            if (aspect == 0.0f || zNear <= 0.0f || zFar <= 0.0f || zNear >= zFar)
+            {
+                return;
+            }
 
             float radian = MathF.DegToRad(fov * 0.5f);
             float sin = MathF.Sin(radian);
 
             if (sin == 0.0f)
+            {
                 return;
+            }
 
             float cot = MathF.Cos(radian) / sin;
             float invClip = 1.0f / (zFar - zNear);
@@ -686,14 +1055,17 @@ namespace Raster.Math
             M01 = 0.0f;
             M02 = 0.0f;
             M03 = 0.0f;
+
             M10 = 0.0f;
             M11 = cot;
             M12 = 0.0f;
             M13 = 0.0f;
+
             M20 = 0.0f;
             M21 = 0.0f;
             M22 = -(zNear + zFar) * invClip;
             M23 = -1.0f;
+
             M30 = 0.0f;
             M31 = 0.0f;
             M32 = -(2.0f * zNear * zFar) * invClip;
@@ -704,12 +1076,55 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void PerspectiveOffCenter(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+            if (zNear <= 0.0f || zFar <= 0.0f || zNear >= zFar)
+            {
+                return;
+            }
+
+            float invWidth = 1.0f / (right - left);
+            float invHeight = 1.0f / (top - bottom);
+            float negFarRange = float.IsPositiveInfinity(zFar) ?
+                                            -1.0f :
+                                            zFar / (zNear - zFar);
+
+            M00 = 2.0f * zNear * invWidth;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = -2.0f * zNear * invHeight;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = (left + right) * invWidth;
+            M21 = (top + bottom) * invHeight;
+            M22 = negFarRange;
+            M23 = -1.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = zNear * negFarRange;
+            M33 = 0.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
         /// <param name="bottom"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public void Viewport(float left, float bottom, float width, float height, float zNear, float zFar)
         {
             float w2 = width / 2.0f;
@@ -719,14 +1134,17 @@ namespace Raster.Math
             M01 = 0.0f;
             M02 = 0.0f;
             M03 = 0.0f;
+
             M10 = 0.0f;
             M11 = h2;
             M12 = 0.0f;
             M13 = 0.0f;
+
             M20 = 0.0f;
             M21 = 0.0f;
             M22 = (zFar - zNear) / 2.0f;
             M23 = 0.0f;
+
             M30 = left + w2;
             M31 = bottom + h2;
             M32 = (zNear + zFar) / 2.0f;
@@ -738,10 +1156,152 @@ namespace Raster.Math
         /// </summary>
         /// <param name="rect"></param>
         /// <param name="zNear"></param>
-        /// <param name="zFar"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <param name="zFar"></param>  
         public void Viewport(RectangleF rect, float zNear, float zFar) =>
             Viewport(rect.Left, rect.Right, rect.Width, rect.Height, zNear, zFar);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        public void ReflectionMatrix(in Plane value)
+        {
+            Plane p;
+            Plane.Normalize(value, out p);
+
+            float fx = -2.0f * p.Normal.X;
+            float fy = -2.0f * p.Normal.Y;
+            float fz = -2.0f * p.Normal.Z;
+
+            M00 = fx * p.Normal.X + 1.0f;
+            M01 = fy * p.Normal.X;
+            M02 = fz * p.Normal.X;
+            M03 = 0.0f;
+
+            M10 = fx * p.Normal.Y;
+            M11 = fy * p.Normal.Y + 1.0f;
+            M12 = fz * p.Normal.Z;
+            M13 = 0.0f;
+
+            M20 = fx * p.Normal.Z;
+            M21 = fy * p.Normal.Z;
+            M22 = fz * p.Normal.Z + 1.0f;
+            M23 = 0.0f;
+
+            M30 = fx * p.Distance;
+            M31 = fy * p.Distance;
+            M32 = fz * p.Distance;
+            M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lightDirection"></param>
+        /// <param name="plane"></param>
+        public void ShadowMatrix(in Vector3 lightDirection, in Plane plane)
+        {
+            Plane p;
+            Plane.Normalize(plane, out p);
+
+            float dot = Vector3.Dot(p.Normal, lightDirection);
+            float x = -p.Normal.X;
+            float y = -p.Normal.Y;
+            float z = -p.Normal.Z;
+            float d = -p.Distance;
+
+            M00 = x * lightDirection.X + dot;
+            M01 = x * lightDirection.Y;
+            M02 = x * lightDirection.Z;
+            M03 = 0.0f;
+
+            M10 = y * lightDirection.X;
+            M11 = y * lightDirection.Y + dot;
+            M12 = y * lightDirection.Z;
+            M13 = 0.0f;
+
+            M20 = z * lightDirection.X;
+            M21 = z * lightDirection.Z;
+            M22 = z * lightDirection.Z + dot;
+            M23 = 0.0f;
+
+            M30 = d * lightDirection.X;
+            M31 = d * lightDirection.Y;
+            M32 = d * lightDirection.Z;
+            M33 = dot;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="posX"></param>
+        /// <param name="posY"></param>
+        /// <param name="posZ"></param>
+        /// <param name="forwardX"></param>
+        /// <param name="forwardY"></param>
+        /// <param name="forwardZ"></param>
+        /// <param name="upX"></param>
+        /// <param name="upY"></param>
+        /// <param name="upZ"></param>
+        public void WorldMatrix(float posX, float posY, float posZ,
+                                float forwardX, float forwardY, float forwardZ,
+                                float upX, float upY, float upZ)
+        {
+            float lenSqr = forwardX * forwardX * +forwardY * forwardY * forwardZ * forwardZ;
+            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+            float zAxisX = forwardX * invNorm;
+            float zAxisY = forwardY * invNorm;
+            float zAxisZ = forwardZ * invNorm;
+
+            float tempX = upY * zAxisZ - upZ * zAxisY;
+            float tempY = upX * zAxisZ - upZ * zAxisX;
+            float tempZ = upX * zAxisY - upY * zAxisX;
+
+            lenSqr = tempX * tempX + tempY * tempY + tempZ * tempZ;
+            invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+            float xAxisX = tempX * invNorm;
+            float xAxisY = tempY * invNorm;
+            float xAxisZ = tempZ * invNorm;
+
+            float yAxisX = zAxisY * xAxisZ - zAxisZ * xAxisY;
+            float yAxisY = zAxisX * xAxisZ - zAxisZ * xAxisX;
+            float yAxisZ = zAxisX * xAxisY - zAxisY * xAxisX;
+
+            M00 = xAxisX;
+            M01 = xAxisY;
+            M02 = xAxisZ;
+            M03 = 0.0f;
+
+            M10 = yAxisX;
+            M11 = yAxisY;
+            M12 = yAxisZ;
+            M13 = 0.0f;
+
+            M20 = zAxisX;
+            M21 = zAxisY;
+            M22 = zAxisZ;
+            M23 = 0.0f;
+
+            M30 = posX;
+            M31 = posY;
+            M32 = posZ;
+            M33 = 0.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="forward"></param>
+        /// <param name="up"></param>
+        public void WorldMatrix(in Vector3 position, in Vector3 forward, in Vector3 up)
+        {
+            WorldMatrix(position.X, position.Y, position.Z,
+                        forward.X, forward.Y, forward.Z,
+                        up.X, up.Y, up.Z);
+        }
 
         #endregion Public Instance Methods
 
@@ -752,7 +1312,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void Add(in Matrix4x4 left, float right, out Matrix4x4 result)
         {
             result.M00 = left.M00 + right;
@@ -782,7 +1342,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static void Add(in Matrix4x4 left, in Matrix4x4 right, out Matrix4x4 result)
         {
             result.M00 = left.M00 + right.M00;
@@ -811,8 +1371,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <param name="result"></param>     
         public static void Subtract(in Matrix4x4 left, float right, out Matrix4x4 result)
         {
             result.M00 = left.M00 - right;
@@ -842,7 +1401,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static void Subtract(in Matrix4x4 left, in Matrix4x4 right, out Matrix4x4 result)
         {
             result.M00 = left.M00 - right.M00;
@@ -872,7 +1431,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static void Multiply(in Matrix4x4 left, float right, out Matrix4x4 result)
         {
             result.M00 = left.M00 * right;
@@ -902,7 +1461,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static void Multiply(in Matrix4x4 left, in Matrix4x2 right, out Matrix4x2 result)
         {
             result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20 + left.M03 * right.M30;
@@ -924,7 +1483,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static void Multiply(in Matrix4x4 left, in Matrix4x3 right, out Matrix4x3 result)
         {
             result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20 + left.M03 * right.M30;
@@ -950,7 +1509,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static void Multiply(in Matrix4x4 left, in Matrix4x4 right, out Matrix4x4 result)
         {
             result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20 + left.M03 * right.M30;
@@ -980,7 +1539,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static void Multiply(in Matrix4x4 left, in Vector4 right, out Vector4 result)
         {
             result.X = left.M00 * right.X + left.M01 * right.Y + left.M02 * right.Z + left.M03 * right.W;
@@ -995,7 +1554,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static void Multiply(in Vector4 left, in Matrix4x4 right, out Vector4 result)
         {
             result.X = left.X * right.M00 + left.Y * right.M10 + left.Z * right.M20 + left.W * right.M30;
@@ -1010,7 +1569,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static void Divide(in Matrix4x4 left, float right, out Matrix4x4 result)
         {
             if (right == 0.0f)
@@ -1041,6 +1600,35 @@ namespace Raster.Math
             result.M33 = left.M33 * right;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        
+        public static void Transpose(in Matrix4x4 matrix, out Matrix4x4 result)
+        {
+            result.M00 = matrix.M00;
+            result.M01 = matrix.M10;
+            result.M02 = matrix.M20;
+            result.M03 = matrix.M30;
+
+            result.M10 = matrix.M01;
+            result.M11 = matrix.M11;
+            result.M12 = matrix.M21;
+            result.M13 = matrix.M31;
+
+            result.M20 = matrix.M02;
+            result.M21 = matrix.M12;
+            result.M22 = matrix.M22;
+            result.M23 = matrix.M32;
+
+            result.M30 = matrix.M03;
+            result.M31 = matrix.M13;
+            result.M32 = matrix.M23;
+            result.M33 = matrix.M32;
+        }
+
         #endregion Public Static Methods
 
         #region Operator Overload
@@ -1050,7 +1638,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static Matrix4x4 operator +(in Matrix4x4 left, in Matrix4x4 right)
         {
             Matrix4x4 result;;
@@ -1064,7 +1652,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static Matrix4x4 operator +(in Matrix4x4 left, float right)
         {
             Matrix4x4 result;;
@@ -1078,7 +1666,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static Matrix4x4 operator -(in Matrix4x4 left, float right)
         {
             Matrix4x4 result;;
@@ -1092,7 +1680,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static Matrix4x4 operator -(in Matrix4x4 left, in Matrix4x4 right)
         {
             Matrix4x4 result;;
@@ -1106,7 +1694,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static Matrix4x4 operator *(in Matrix4x4 left, float right)
         {
             Matrix4x4 result;;
@@ -1120,7 +1708,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static Matrix4x4 operator *(float left, in Matrix4x4 right)
         {
             Matrix4x4 result;;
@@ -1134,7 +1722,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static Matrix4x2 operator *(in Matrix4x4 left, in Matrix4x2 right)
         {
             Matrix4x2 result;
@@ -1148,7 +1736,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static Matrix4x3 operator *(in Matrix4x4 left, in Matrix4x3 right)
         {
             Matrix4x3 result;
@@ -1162,7 +1750,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static Matrix4x4 operator *(in Matrix4x4 left, in Matrix4x4 right)
         {
             Matrix4x4 result;
@@ -1176,7 +1764,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static Vector4 operator *(in Matrix4x4 left, in Vector4 right)
         {
             Vector4 result;
@@ -1190,7 +1778,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static Vector4 operator *(in Vector4 left, in Matrix4x4 right)
         {
             Vector4 result;
@@ -1204,7 +1792,7 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static Matrix4x4 operator /(in Matrix4x4 left, float right)
         {
             Matrix4x4 result;;

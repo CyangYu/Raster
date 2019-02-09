@@ -75,6 +75,17 @@ namespace Raster.Math
             M12 = value;
         }
 
+        public Matrix2x3(Matrix2x2 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = 0.0f;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = 0.0f;
+        }
+
         public Matrix2x3(Matrix2x3 other)
         {
             M00 = other.M00;
@@ -143,6 +154,22 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Matrix2x3 other) => this == other;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Fill(float value)
+        {
+            M00 = value;
+            M01 = value;
+            M02 = value;
+
+            M10 = value;
+            M11 = value;
+            M12 = value;
+        }
 
         /// <summary>
         /// 
@@ -301,7 +328,7 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        2public static void Multiply(in Matrix2x3 left, in Matrix3x2 right, out Matrix2x2 result)
+        public static void Multiply(in Matrix2x3 left, in Matrix3x2 right, out Matrix2x2 result)
         {
             result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20;
             result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + left.M02 * right.M21;
@@ -399,6 +426,24 @@ namespace Raster.Math
             result.M10 = left.M10 * right;
             result.M11 = left.M11 * right;
             result.M12 = left.M12 * right;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Transpose(in Matrix2x3 matrix, out Matrix3x2 result)
+        {
+            result.M00 = matrix.M00;
+            result.M01 = matrix.M10;
+
+            result.M10 = matrix.M01;
+            result.M11 = matrix.M11;
+
+            result.M20 = matrix.M02;
+            result.M21 = matrix.M12;
         }
 
         #endregion Public Static Methods

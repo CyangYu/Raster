@@ -67,10 +67,7 @@ namespace Raster.Drawing.Drawing2D
         /// </summary>
         public Rectangle ClipRect 
 		{
-			get 
-			{
-				return clipRect;
-			}
+			get { return clipRect; }
 		}
 
         /// <summary>
@@ -78,10 +75,7 @@ namespace Raster.Drawing.Drawing2D
         /// </summary>
         public int RefCount
         {
-            get
-            {
-                return refCount;
-            }
+            get { return refCount; }
         }
 
         #endregion Public Instance Properties

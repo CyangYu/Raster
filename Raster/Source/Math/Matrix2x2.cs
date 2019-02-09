@@ -137,6 +137,20 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Fill(float value)
+        {
+            M00 = value;
+            M01 = value;
+
+            M10 = value;
+            M11 = value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsZero()
@@ -154,6 +168,19 @@ namespace Raster.Math
         {
             return (M00 == 1.0f && M01 == 0.0f &&
                     M10 == 0.0f && M11 == 1.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void SetIdentity()
+        {
+            M00 = 1.0f;
+            M01 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 1.0f;
         }
 
         /// <summary>
@@ -389,6 +416,21 @@ namespace Raster.Math
 
             result.M10 = left.M10 * right;
             result.M11 = left.M11 * right;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Transpose(in Matrix2x2 matrix, out Matrix2x2 result)
+        {
+            result.M00 = matrix.M00;
+            result.M01 = matrix.M10;
+
+            result.M10 = matrix.M01;
+            result.M11 = matrix.M11;
         }
 
         #endregion Public Static Methods

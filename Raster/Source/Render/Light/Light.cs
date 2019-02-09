@@ -53,8 +53,8 @@ namespace Raster.Render.Light
         /// </summary>
         /// <param name="r"></param>
         /// <param name="g"></param>
-        /// <param name="b"></param>
-        /// <param name="a"></param>
+        /// <param name="right"></param>
+        /// <param name="left"></param>
         public void SetLightColor(float r, float g, float b, float a) =>
             Color.SetColor(r, g, b, a);
 

@@ -5,7 +5,7 @@ namespace Raster.Private
     /// <summary>
     /// 
     /// </summary>
-    public class HashHelpers
+    public static class HashHelpers
     {
         /// <summary>
         /// 

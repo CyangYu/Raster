@@ -159,8 +159,8 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         /// <param name="r"></param>
         /// <param name="g"></param>
-        /// <param name="b"></param>
-        /// <param name="a"></param>
+        /// <param name="right"></param>
+        /// <param name="left"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetColor(float r, float g, float b, float a)
         {

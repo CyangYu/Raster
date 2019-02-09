@@ -163,14 +163,12 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Inverse()
         {
-            if (X != 0.0f)
-                X = 1.0f / X;
+            float lenSqr = X * X + Y * Y + Z * Z;
+            float invNorm = 1.0f / lenSqr;
 
-            if (Y != 0.0f)
-                Y = 1.0f / Y;
-
-            if (Z != 0.0f)
-                Z = 1.0f / Z;
+            X *= invNorm;
+            Y *= invNorm;
+            Z *= invNorm;
         }
 
         /// <summary>
@@ -180,7 +178,7 @@ namespace Raster.Math
         public void Normalize()
         {
             float lenSqr = X * X + Y * Y + Z * Z;
-            float invNorm = MathHelper.QuickSqrtInv(lenSqr);
+            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
             X *= invNorm;
             Y *= invNorm;
@@ -238,8 +236,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float AngleBetween(in Vector3 left, in Vector3 right)
@@ -286,8 +284,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Dot(in Vector3 left, in Vector3 right) =>
@@ -430,6 +428,22 @@ namespace Raster.Math
             Reflect(vec3, normal, out result);
             return result;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vec3"></param>
+        /// <param name="normal"></param>
+        /// <param name="eta"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Refract(in Vector3 vec3, in Vector3 normal, float eta)
+        {
+            Vector3 result;
+            Refract(vec3, normal, eta, out result);
+            return result;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -548,7 +562,7 @@ namespace Raster.Math
         {
             float lenSqr = value.X * value.X + value.Y * value.Y +
                            value.Z * value.Z;
-            float invNorm = MathHelper.QuickSqrtInv(lenSqr);
+            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
             result.X = value.X * invNorm;
             result.Y = value.Y * invNorm;
@@ -648,9 +662,93 @@ namespace Raster.Math
         public static void Reflect(in Vector3 vec3, in Vector3 normal, out Vector3 result)
         {
             float dot = vec3.X + normal.X + vec3.Y * normal.Y + vec3.Z * normal.Z;
+
             result.X = vec3.X - 2.0f * dot * normal.X;
             result.Y = vec3.Y - 2.0f * dot * normal.Y;
             result.Z = vec3.Z - 2.0f * dot * normal.Z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vec3"></param>
+        /// <param name="normal"></param>
+        /// <param name="eta"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Refract(in Vector3 vec3, in Vector3 normal, float eta, out Vector3 result)
+        {
+            float dot = vec3.X * normal.X + vec3.Y * normal.Y + vec3.Z * normal.Z;
+            float k = 1.0f - eta * eta * (1.0f - dot * dot);
+
+            if (k < 0.0f)
+            {
+                result = Zero;
+            }
+            else
+            {
+                float sqrtk = MathF.Sqrt(k);
+
+                result.X = eta * vec3.X - (eta * dot + sqrtk) * normal.X;
+                result.Y = eta * vec3.Y - (eta * dot + sqrtk) * normal.Y;
+                result.Z = eta * vec3.Z - (eta * dot + sqrtk) * normal.Z;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Add(in Vector3 left, in Vector3 right, out Vector3 result)
+        {
+            result.X = left.X + right.X;
+            result.Y = left.Y + right.Y;
+            result.Z = left.Z + right.Z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Subtract(in Vector3 left, in Vector3 right, out Vector3 result)
+        {
+            result.X = left.X + right.X;
+            result.Y = left.Y + right.Y;
+            result.Z = left.Z + right.Z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Multiply(in Vector3 left, float right, out Vector3 result)
+        {
+            result.X = left.X * right;
+            result.Y = left.Y * right;
+            result.Z = left.Z * right;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Multiply(in Vector3 left, in Vector3 right, out Vector3 result)
+        {
+            result.X = left.X * right.X;
+            result.Y = left.Y * right.Y;
+            result.Z = left.Z * right.Z;
         }
 
         #endregion Public Static Methods
@@ -659,8 +757,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 operator +(in Vector3 left, in Vector3 right) =>
@@ -669,8 +767,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 operator -(in Vector3 left, in Vector3 right) =>
@@ -680,7 +778,7 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="right"></param>
-        /// <param name="b"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 operator *(float left, in Vector3 right) =>
@@ -689,7 +787,7 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
+        /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -699,8 +797,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 operator *(in Vector3 left, in Vector3 right) =>
@@ -709,38 +807,28 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 operator /(in Vector3 left, in Vector3 right)
-        {
-            if (right.X == 0.0f || right.Y == 0.0f || right.Z == 0.0f)
-                throw new DivideByZeroException("b contain zero component");
-
-            return new Vector3(left.X / right.X, left.Y / right.Y, left.Z / right.Z);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="a"></param>
+        /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 operator /(in Vector3 left, float right)
-        {
-            if (right == 0.0f)
-                throw new DivideByZeroException("right is zero");
-
-            return new Vector3(left.X / right, left.Y / right, left.Z / right);
-        }
+        public static Vector3 operator /(in Vector3 left, float right) =>
+            new Vector3(left.X / right, left.Y / right, left.Z / right);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 operator /(in Vector3 left, in Vector3 right) =>
+            new Vector3(left.X / right.X, left.Y / right.Y, left.Z / right.Z);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         public static bool operator ==(in Vector3 left, in Vector3 right) =>
              left.X == right.X && left.Y == right.Y && left.Z == right.Z;
@@ -748,8 +836,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator !=(in Vector3 left, in Vector3 right) =>

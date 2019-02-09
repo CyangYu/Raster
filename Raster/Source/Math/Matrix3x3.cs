@@ -97,6 +97,51 @@ namespace Raster.Math
             M22 = value;
         }
 
+        public Matrix3x3(Matrix2x2 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = 0.0f;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 0.0f;
+        }
+
+        public Matrix3x3(Matrix2x3 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = other.M02;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = other.M12;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 0.0f;
+        }
+
+        public Matrix3x3(Matrix3x2 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = 0.0f;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = 0.0f;
+
+            M20 = other.M20;
+            M21 = other.M21;
+            M22 = 0.0f;
+        }
+
         public Matrix3x3(Matrix3x3 other)
         {
             M00 = other.M00;
@@ -179,6 +224,26 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Fill(float value)
+        {
+            M00 = value;
+            M01 = value;
+            M02 = value;
+
+            M10 = value;
+            M11 = value;
+            M12 = value;
+
+            M20 = value;
+            M21 = value;
+            M22 = value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsZero()
@@ -198,6 +263,25 @@ namespace Raster.Math
             return (M00 == 1.0f && M01 == 0.0f && M02 == 0.0f &&
                     M10 == 0.0f && M11 == 1.0f && M12 == 0.0f &&
                     M20 == 0.0f && M21 == 0.0f && M22 == 1.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void SetIdentity()
+        {
+            M00 = 1.0f;
+            M01 = 0.0f;
+            M02 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 1.0f;
+            M12 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 0.0f;
         }
 
         /// <summary>
@@ -271,11 +355,16 @@ namespace Raster.Math
             float c = MathF.Cos(rad);
             float temp = 0.0f;
 
-            M00 = (temp = M00) * c + M10 * s;
+            temp = M00;
+            M00 = temp * c + M10 * s;
             M10 = M10 * c - temp * s;
-            M01 = (temp = M01) * c + M11 * s;
-            M11 = M11 * c + temp * s;
-            M02 = (temp = M02) * c + M12 * s;
+
+            temp = M01;
+            M01 = temp * c + M11 * s;
+            M11 = M11 * c - temp * s;
+
+            temp = M02;
+            M02 = temp * c + M12 * s;
             M12 = M12 * c - temp * s;
         }
 
@@ -293,6 +382,26 @@ namespace Raster.Math
             M10 *= sy;
             M11 *= sy;
             M12 *= sy;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Shear(float x, float y)
+        {
+            float temp = 0.0f;
+                        
+            M00 = (temp = M00) + M01  * x;
+            M01 += temp * y;
+
+            M10 += (temp = M10) + M11 * x;
+            M11 += temp * y;
+
+            M20 += (temp = M20) * x;
+            M21 += temp * y;
         }
 
         /// <summary>
@@ -557,6 +666,27 @@ namespace Raster.Math
             result.M20 = left.M20 * right;
             result.M21 = left.M21 * right;
             result.M22 = left.M22 * right;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Transpose(in Matrix3x3 matrix, out Matrix3x3 result)
+        {
+            result.M00 = matrix.M00;
+            result.M01 = matrix.M10;
+            result.M02 = matrix.M20;
+
+            result.M10 = matrix.M01;
+            result.M11 = matrix.M11;
+            result.M12 = matrix.M21;
+
+            result.M20 = matrix.M02;
+            result.M21 = matrix.M12;
+            result.M22 = matrix.M22;
         }
 
         #endregion Public Static Methods

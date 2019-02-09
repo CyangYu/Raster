@@ -180,17 +180,13 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Inverse()
         {
-            if (X != 0.0f)
-                X = 1.0f / X;
+            float lenSqr = X * X + Y * Y + Z * Z + W * W;
+            float invNorm = 1.0f / lenSqr;
 
-            if (Y != 0.0f)
-                Y = 1.0f / Y;
-
-            if (Z != 0.0f)
-                Z = 1.0f / Z;
-
-            if (W != 0.0f)
-                W = 1.0f / W;
+            X *= invNorm;
+            Y *= invNorm;
+            Z *= invNorm;
+            W *= invNorm;
         }
 
         /// <summary>
@@ -200,7 +196,7 @@ namespace Raster.Math
         public void Normalize()
         {
             float lenSqr = X * X + Y * Y + Z * Z + W * W;
-            float invNorm = MathHelper.QuickSqrtInv(lenSqr);
+            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
             X *= invNorm;
             Y *= invNorm;
@@ -221,8 +217,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float AngleBetween(in Vector4 left, in Vector4 right)
@@ -284,8 +280,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Dot(in Vector4 left, in Vector4 right) =>
@@ -447,6 +443,21 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="vec2"></param>
+        /// <param name="normal"></param>
+        /// <param name="eta"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Refract(in Vector4 vec4, in Vector4 normal, float eta)
+        {
+            Vector4 result;
+            Refract(vec4, normal, eta, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="vec4"></param>
         /// <param name="normal"></param>
         /// <returns></returns>
@@ -556,7 +567,7 @@ namespace Raster.Math
         {
             float lenSqr = value.X * value.X + value.Y * value.Y + 
                            value.Z * value.Z + value.W * value.W;
-            float invNorm = MathHelper.QuickSqrtInv(lenSqr);
+            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
             result.X = value.X * invNorm;
             result.Y = value.Y * invNorm;
@@ -708,10 +719,100 @@ namespace Raster.Math
         {
             float dot = vec4.X + normal.X + vec4.Y * normal.Y + 
                         vec4.Z * normal.Z + vec4.W * normal.W;
+
             result.X = vec4.X - 2.0f * dot * normal.X;
             result.Y = vec4.Y - 2.0f * dot * normal.Y;
             result.Z = vec4.Z - 2.0f * dot * normal.Z;
             result.W = vec4.W - 2.0f * dot * normal.W;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vec4"></param>
+        /// <param name="normal"></param>
+        /// <param name="eta"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Refract(in Vector4 vec4, in Vector4 normal, float eta, out Vector4 result)
+        {
+            float dot = vec4.X * normal.X + vec4.Y * normal.Y + 
+                        vec4.Z * normal.Z + vec4.W * normal.W;
+            float k = 1.0f - eta * eta * (1.0f - dot * dot);
+
+            if (k < 0.0f)
+            {
+                result = Zero;
+            }
+            else
+            {
+                float sqrtk = MathF.Sqrt(k);
+
+                result.X = eta * vec4.X - (eta * dot + sqrtk) * normal.X;
+                result.Y = eta * vec4.Y - (eta * dot + sqrtk) * normal.Y;
+                result.Z = eta * vec4.Z - (eta * dot + sqrtk) * normal.Z;
+                result.W = eta * vec4.W - (eta * dot + sqrtk) * normal.W;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Add(in Vector4 left, in Vector4 right, out Vector4 result)
+        {
+            result.X = left.X + right.X;
+            result.Y = left.Y + right.Y;
+            result.Z = left.Z + right.Z;
+            result.W = left.W + right.W;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Subtract(in Vector4 left, in Vector4 right, out Vector4 result)
+        {
+            result.X = left.X - right.X;
+            result.Y = left.Y - right.Y;
+            result.Z = left.Z - right.Z;
+            result.W = left.W - right.W;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Multiply(in Vector4 left, float right, out Vector4 result)
+        {
+            result.X = left.X * right;
+            result.Y = left.Y * right;
+            result.Z = left.Z * right;
+            result.W = left.W * right;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Multiply(in Vector4 left, in Vector4 right, out Vector4 result)
+        {
+            result.X = left.X * right.X;
+            result.Y = left.Y * right.Y;
+            result.Z = left.Z * right.Z;
+            result.W = left.W * right.W;
         }
 
         #endregion Public Static Methods
@@ -720,8 +821,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 operator +(in Vector4 left, in Vector4 right) =>
@@ -730,8 +831,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 operator -(in Vector4 left, in Vector4 right) =>
@@ -740,42 +841,39 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 operator *(float left, in Vector4 right) =>
+            new Vector4(left * right.X, left * right.Y, left * right.Z, left * right.W);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 operator *(in Vector4 left, in Vector4 right) =>
              new Vector4(left.X * right.X, left.Y * right.Y, left.Z * right.Z, left.W + right.W);
+        
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 operator /(in Vector4 left, in Vector4 right)
-        {
-            if (right.X == 0.0f || right.Y == 0.0f || right.Z == 0.0f || right.W == 0.0f)
-                throw new DivideByZeroException("b contain zero component");
-
-            return new Vector4(left.X / right.X, left.Y / right.Y, left.Z / right.Z, left.W / right.W);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 operator /(in Vector4 left, float right)
-        {
-            if (right == 0.0f)
-                throw new DivideByZeroException("right is zero");
-
-            return new Vector4(left.X / right, left.Y / right, left.Z / right, left.W / right);
-        }
+        public static Vector4 operator /(in Vector4 left, in Vector4 right) =>
+            new Vector4(left.X / right.X, left.Y / right.Y, left.Z / right.Z, left.W / right.W);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         public static bool operator ==(in Vector4 left, in Vector4 right) =>
              left.X == right.X && left.Y == right.Y && left.Z == right.Z && left.W == right.W;
@@ -783,8 +881,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator !=(in Vector4 left, in Vector4 right) =>
