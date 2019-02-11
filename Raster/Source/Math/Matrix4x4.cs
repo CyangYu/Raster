@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Raster.Drawing.Primitive;
 using Raster.Math.Geometry;
 
@@ -8,9 +9,22 @@ namespace Raster.Math
     /// <summary>
     /// 
     /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
     public struct Matrix4x4 : IEquatable<Matrix4x4>
     {
-        #region Public Fields
+        #region Private Instance Fields
+        /// <summary>
+        /// 
+        /// </summary>
+        private const float BillboardEpsilon    = 1e-4f;
+        /// <summary>
+        /// 
+        /// </summary>
+        private const float BillboardMinAngle   = 1.0f - (0.1f * (MathF.PI / 180.0f));
+
+        #endregion Private Instance Fields
+
+        #region Public Instance Fields
         /// <summary>
         /// 
         /// </summary>
@@ -370,7 +384,13 @@ namespace Raster.Math
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return 0;
+            unchecked
+            {
+                return M00.GetHashCode() + M01.GetHashCode() + M02.GetHashCode() + M02.GetHashCode() +
+                       M10.GetHashCode() + M11.GetHashCode() + M12.GetHashCode() + M12.GetHashCode() +
+                       M20.GetHashCode() + M21.GetHashCode() + M22.GetHashCode() + M22.GetHashCode() +
+                       M30.GetHashCode() + M31.GetHashCode() + M32.GetHashCode() + M32.GetHashCode();
+            }
         }
 
         /// <summary>
@@ -643,8 +663,8 @@ namespace Raster.Math
                 RotateZ(angle);
             else
             {
-                Matrix4x4 rotation = FromAxisAngle(x, y, z, angle);
-                
+                Matrix4x4 rotation;
+                FromAxisAngle(x, y, z, angle, out rotation);
             }
         }
 
@@ -652,8 +672,7 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="axis"></param>
-        /// <param name="angle"></param>
-        
+        /// <param name="angle"></param> 
         public void Rotate(in Vector3 axis, float angle) =>
             Rotate(axis.X, axis.Y, axis.Z, angle);
 
@@ -663,7 +682,6 @@ namespace Raster.Math
         /// <param name="sx"></param>
         /// <param name="sy"></param>
         /// <param name="sz"></param>
-        
         public void Scale(float sx, float sy, float sz)
         {
             // [  sx 0  0  0  ]
@@ -690,7 +708,6 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="scale"></param>
-        
         public void Scale(in Vector3 scale) => Scale(scale.X, scale.Y, scale.Z);
 
         /// <summary>
@@ -699,7 +716,6 @@ namespace Raster.Math
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="dz"></param>
-        
         public void Translate(float dx, float dy, float dz)
         {
             // [ 1  0  0  0 ]
@@ -716,83 +732,7 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="translate"></param>
-        
         public void Translate(in Vector3 translate) => Translate(translate.X, translate.Y, translate.Z);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        /// <param name="angle"></param>
-        /// <returns></returns>
-        
-        public Matrix4x4 FromAxisAngle(float x, float y, float z, float angle)
-        {
-            float rad = MathF.Sin(angle);
-            float s = MathF.Sin(rad);
-            float c = MathF.Cos(rad);
-
-            float len = MathF.Sqrt(x * x + y * y + z * z);
-            if (len - 0.0f > MathF.Epsilon)
-            {
-                float invLen = 1.0f / len;
-                x *= invLen;
-                y *= invLen;
-                z *= invLen;
-            }
-            else
-            {
-                return Matrix4x4.Identity;
-            }
-
-            float c0 = 1.0f - c;
-            float x2 = x * x;
-            float y2 = y * y;
-            float z2 = z * z;
-
-            float xy = x * y;
-            float xz = x * z;
-            float yz = y * z;
-
-            float xs = x * s;
-            float ys = y * s;
-            float zs = z * s;
-
-            Matrix4x4 matrix;
-
-            matrix.M00 = c + c0 * x2;
-            matrix.M10 = c0 * xy - zs;
-            matrix.M20 = c0 * xz + ys;
-            matrix.M30 = 0.0f;
-
-            matrix.M01 = c0 * xy + zs;
-            matrix.M11 = c + c0 * y2;
-            matrix.M21 = c0 * yz - xs;
-            matrix.M31 = 0.0f;
-
-            matrix.M02 = c0 * xz - ys;
-            matrix.M12 = c0 * yz + xs;
-            matrix.M22 = c + c0 * z2;
-            matrix.M32 = 0.0f;
-
-            matrix.M03 = 0.0f;
-            matrix.M13 = 0.0f;
-            matrix.M23 = 0.0f;
-            matrix.M33 = 1.0f;
-
-            return matrix;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="axis"></param>
-        /// <param name="angle"></param>
-        
-        public void FromAxisAngle(in Vector3 axis, float angle) =>
-            FromAxisAngle(axis.X, axis.Y, axis.Z, angle);
 
         /// <summary>
         /// 
@@ -1160,6 +1100,69 @@ namespace Raster.Math
         public void Viewport(RectangleF rect, float zNear, float zFar) =>
             Viewport(rect.Left, rect.Right, rect.Width, rect.Height, zNear, zFar);
 
+        public void BillboardMatrix(in Vector3 objectPos, in Vector3 cameraPos, in Vector3 cameraUp, in Vector3 cameraForward)
+        {
+            float zAxisX = objectPos.X - cameraPos.X;
+            float zAxisY = objectPos.Y - cameraPos.Y;
+            float zAxisZ = objectPos.Z - cameraPos.Z;
+
+            float lenSqr = zAxisX * zAxisX + zAxisY * zAxisY +
+                           zAxisZ * zAxisZ;
+            float invNorm = 0.0f;
+
+            if (lenSqr < BillboardEpsilon)
+            {
+                zAxisX = -cameraForward.X;
+                zAxisY = -cameraForward.Y;
+                zAxisZ = -cameraForward.Z;
+            }
+            else
+            {
+                invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+                zAxisX *= invNorm;
+                zAxisY *= invNorm;
+                zAxisZ *= invNorm;
+            }
+           
+
+            float tempX = cameraUp.Y * zAxisZ - cameraUp.Z * zAxisY;
+            float tempY = cameraUp.X * zAxisZ - cameraUp.Z * zAxisX;
+            float tempZ = cameraUp.X * zAxisY - cameraUp.Y * zAxisX;
+
+            lenSqr = tempX * tempX + tempY * tempY + tempZ * tempZ;
+            invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+            float xAxisX = tempX * invNorm;
+            float xAxisY = tempY * invNorm;
+            float xAxisZ = tempZ * invNorm;
+
+            float yAxisX = zAxisY * xAxisZ - zAxisZ * xAxisY;
+            float yAxisY = zAxisX * xAxisZ - zAxisZ * xAxisX;
+            float yAxisZ = zAxisX * xAxisY - zAxisY * xAxisX;
+
+            M00 = xAxisX;
+            M01 = xAxisY;
+            M02 = xAxisZ;
+            M03 = 0.0f;
+
+            M10 = yAxisX;
+            M11 = yAxisY;
+            M12 = yAxisZ;
+            M13 = 0.0f;
+
+            M20 = zAxisX;
+            M21 = zAxisY;
+            M22 = zAxisZ;
+            M23 = 0.0f;
+
+            M30 = objectPos.X;
+            M31 = objectPos.Y;
+            M32 = objectPos.Z;
+            M33 = 1.0f;
+
+
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -1287,7 +1290,7 @@ namespace Raster.Math
             M30 = posX;
             M31 = posY;
             M32 = posZ;
-            M33 = 0.0f;
+            M33 = 1.0f;
         }
 
         /// <summary>
@@ -1309,10 +1312,111 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="axis"></param>
+        /// <param name="angle"></param>
+        /// <returns></returns>
+        public Matrix4x4 FromAxisAngle(in AxisAngle axisAngle)
+        {
+            Matrix4x4 result;
+            FromAxisAngle(axisAngle.Axis.X, axisAngle.Axis.Y, axisAngle.Axis.Z, axisAngle.Angle, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <param name="angle"></param>
+        /// <returns></returns>
+        public Matrix4x4 FromAxisAngle(in Vector3 axis, float angle)
+        {
+            Matrix4x4 result;
+            FromAxisAngle(axis.X, axis.Y, axis.Z, angle, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="angle"></param>
+        /// <returns></returns>
+        public Matrix4x4 FromAxisAngle(float x, float y, float z, float angle)
+        {
+            Matrix4x4 result;
+            FromAxisAngle(x, y, z, angle, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="angle"></param>
+        /// <param name="result"></param>
+        public void FromAxisAngle(float x, float y, float z, float angle, out Matrix4x4 result)
+        {
+            float rad = MathF.Sin(angle);
+            float s = MathF.Sin(rad);
+            float c = MathF.Cos(rad);
+
+            float len = MathF.Sqrt(x * x + y * y + z * z);
+            if (len - 0.0f > MathF.Epsilon)
+            {
+                float invLen = 1.0f / len;
+                x *= invLen;
+                y *= invLen;
+                z *= invLen;
+            }
+            else
+            {
+                result = Matrix4x4.Identity;
+            }
+
+            float c0 = 1.0f - c;
+            float x2 = x * x;
+            float y2 = y * y;
+            float z2 = z * z;
+
+            float xy = x * y;
+            float xz = x * z;
+            float yz = y * z;
+
+            float xs = x * s;
+            float ys = y * s;
+            float zs = z * s;
+
+            result.M00 = c + c0 * x2;
+            result.M10 = c0 * xy - zs;
+            result.M20 = c0 * xz + ys;
+            result.M30 = 0.0f;
+
+            result.M01 = c0 * xy + zs;
+            result.M11 = c + c0 * y2;
+            result.M21 = c0 * yz - xs;
+            result.M31 = 0.0f;
+
+            result.M02 = c0 * xz - ys;
+            result.M12 = c0 * yz + xs;
+            result.M22 = c + c0 * z2;
+            result.M32 = 0.0f;
+
+            result.M03 = 0.0f;
+            result.M13 = 0.0f;
+            result.M23 = 0.0f;
+            result.M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-
         public static void Add(in Matrix4x4 left, float right, out Matrix4x4 result)
         {
             result.M00 = left.M00 + right;
@@ -1464,17 +1568,25 @@ namespace Raster.Math
         
         public static void Multiply(in Matrix4x4 left, in Matrix4x2 right, out Matrix4x2 result)
         {
-            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20 + left.M03 * right.M30;
-            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + left.M02 * right.M21 + left.M03 * right.M31;
-
-            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + left.M12 * right.M20 + left.M03 * right.M30;
-            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + left.M12 * right.M21 + left.M03 * right.M31;
+            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
+                         left.M02 * right.M20 + left.M03 * right.M30;
+            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + 
+                         left.M02 * right.M21 + left.M03 * right.M31;
+       
+            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + 
+                         left.M12 * right.M20 + left.M03 * right.M30;
+            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + 
+                         left.M12 * right.M21 + left.M03 * right.M31;
          
-            result.M20 = left.M20 * right.M00 + left.M21 * right.M10 + left.M22 * right.M20 + left.M03 * right.M30;
-            result.M21 = left.M20 * right.M01 + left.M21 * right.M11 + left.M22 * right.M21 + left.M03 * right.M31;
+            result.M20 = left.M20 * right.M00 + left.M21 * right.M10 + 
+                         left.M22 * right.M20 + left.M03 * right.M30;
+            result.M21 = left.M20 * right.M01 + left.M21 * right.M11 + 
+                         left.M22 * right.M21 + left.M03 * right.M31;
          
-            result.M30 = left.M30 * right.M00 + left.M31 * right.M10 + left.M32 * right.M20 + left.M03 * right.M30;
-            result.M31 = left.M30 * right.M01 + left.M31 * right.M11 + left.M32 * right.M21 + left.M03 * right.M31;
+            result.M30 = left.M30 * right.M00 + left.M31 * right.M10 + 
+                         left.M32 * right.M20 + left.M03 * right.M30;
+            result.M31 = left.M30 * right.M01 + left.M31 * right.M11 + 
+                         left.M32 * right.M21 + left.M03 * right.M31;
         }
 
         /// <summary>
@@ -1486,21 +1598,33 @@ namespace Raster.Math
         
         public static void Multiply(in Matrix4x4 left, in Matrix4x3 right, out Matrix4x3 result)
         {
-            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20 + left.M03 * right.M30;
-            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + left.M02 * right.M21 + left.M03 * right.M31;
-            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + left.M02 * right.M22 + left.M03 * right.M32;
+            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
+                         left.M02 * right.M20 + left.M03 * right.M30;
+            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + 
+                         left.M02 * right.M21 + left.M03 * right.M31;
+            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + 
+                         left.M02 * right.M22 + left.M03 * right.M32;
 
-            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + left.M12 * right.M20 + left.M03 * right.M30;
-            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + left.M12 * right.M21 + left.M03 * right.M31;
-            result.M12 = left.M20 * right.M02 + left.M01 * right.M12 + left.M12 * right.M22 + left.M03 * right.M32;
+            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + 
+                         left.M12 * right.M20 + left.M03 * right.M30;
+            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + 
+                         left.M12 * right.M21 + left.M03 * right.M31;
+            result.M12 = left.M20 * right.M02 + left.M01 * right.M12 + 
+                         left.M12 * right.M22 + left.M03 * right.M32;
 
-            result.M20 = left.M20 * right.M00 + left.M21 * right.M10 + left.M22 * right.M20 + left.M03 * right.M30;
-            result.M21 = left.M20 * right.M01 + left.M21 * right.M11 + left.M22 * right.M21 + left.M03 * right.M31;
-            result.M22 = left.M20 * right.M02 + left.M21 * right.M12 + left.M22 * right.M22 + left.M03 * right.M32;
+            result.M20 = left.M20 * right.M00 + left.M21 * right.M10 + 
+                         left.M22 * right.M20 + left.M03 * right.M30;
+            result.M21 = left.M20 * right.M01 + left.M21 * right.M11 + 
+                         left.M22 * right.M21 + left.M03 * right.M31;
+            result.M22 = left.M20 * right.M02 + left.M21 * right.M12 + 
+                         left.M22 * right.M22 + left.M03 * right.M32;
 
-            result.M30 = left.M30 * right.M00 + left.M31 * right.M10 + left.M32 * right.M20 + left.M03 * right.M30;
-            result.M31 = left.M30 * right.M01 + left.M31 * right.M11 + left.M32 * right.M21 + left.M03 * right.M31;
-            result.M32 = left.M30 * right.M02 + left.M31 * right.M12 + left.M32 * right.M22 + left.M03 * right.M32;
+            result.M30 = left.M30 * right.M00 + left.M31 * right.M10 + 
+                         left.M32 * right.M20 + left.M03 * right.M30;
+            result.M31 = left.M30 * right.M01 + left.M31 * right.M11 + 
+                         left.M32 * right.M21 + left.M03 * right.M31;
+            result.M32 = left.M30 * right.M02 + left.M31 * right.M12 + 
+                         left.M32 * right.M22 + left.M03 * right.M32;
         }
 
         /// <summary>
@@ -1512,25 +1636,41 @@ namespace Raster.Math
         
         public static void Multiply(in Matrix4x4 left, in Matrix4x4 right, out Matrix4x4 result)
         {
-            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20 + left.M03 * right.M30;
-            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + left.M02 * right.M21 + left.M03 * right.M31;
-            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + left.M02 * right.M22 + left.M03 * right.M32;
-            result.M03 = left.M00 * right.M03 + left.M01 * right.M13 + left.M02 * right.M23 + left.M03 * right.M33;
+            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
+                         left.M02 * right.M20 + left.M03 * right.M30;
+            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + 
+                         left.M02 * right.M21 + left.M03 * right.M31;
+            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + 
+                         left.M02 * right.M22 + left.M03 * right.M32;
+            result.M03 = left.M00 * right.M03 + left.M01 * right.M13 + 
+                         left.M02 * right.M23 + left.M03 * right.M33;
 
-            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + left.M12 * right.M20 + left.M03 * right.M30;
-            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + left.M12 * right.M21 + left.M03 * right.M31;
-            result.M12 = left.M10 * right.M02 + left.M11 * right.M12 + left.M12 * right.M22 + left.M03 * right.M32;
-            result.M13 = left.M10 * right.M03 + left.M11 * right.M13 + left.M12 * right.M23 + left.M03 * right.M33;
+            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + 
+                         left.M12 * right.M20 + left.M03 * right.M30;
+            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + 
+                         left.M12 * right.M21 + left.M03 * right.M31;
+            result.M12 = left.M10 * right.M02 + left.M11 * right.M12 + 
+                         left.M12 * right.M22 + left.M03 * right.M32;
+            result.M13 = left.M10 * right.M03 + left.M11 * right.M13 + 
+                         left.M12 * right.M23 + left.M03 * right.M33;
 
-            result.M20 = left.M20 * right.M00 + left.M21 * right.M10 + left.M22 * right.M20 + left.M03 * right.M30;
-            result.M21 = left.M20 * right.M01 + left.M21 * right.M11 + left.M22 * right.M21 + left.M03 * right.M31;
-            result.M22 = left.M20 * right.M02 + left.M21 * right.M12 + left.M22 * right.M22 + left.M03 * right.M32;
-            result.M23 = left.M20 * right.M03 + left.M21 * right.M13 + left.M22 * right.M23 + left.M03 * right.M33;
+            result.M20 = left.M20 * right.M00 + left.M21 * right.M10 + 
+                         left.M22 * right.M20 + left.M03 * right.M30;
+            result.M21 = left.M20 * right.M01 + left.M21 * right.M11 + 
+                         left.M22 * right.M21 + left.M03 * right.M31;
+            result.M22 = left.M20 * right.M02 + left.M21 * right.M12 + 
+                         left.M22 * right.M22 + left.M03 * right.M32;
+            result.M23 = left.M20 * right.M03 + left.M21 * right.M13 + 
+                         left.M22 * right.M23 + left.M03 * right.M33;
 
-            result.M30 = left.M30 * right.M00 + left.M31 * right.M10 + left.M32 * right.M20 + left.M03 * right.M30;
-            result.M31 = left.M30 * right.M01 + left.M31 * right.M11 + left.M32 * right.M21 + left.M03 * right.M31;
-            result.M32 = left.M30 * right.M02 + left.M31 * right.M12 + left.M32 * right.M22 + left.M03 * right.M32;
-            result.M33 = left.M30 * right.M03 + left.M31 * right.M13 + left.M32 * right.M23 + left.M03 * right.M33;
+            result.M30 = left.M30 * right.M00 + left.M31 * right.M10 + 
+                         left.M32 * right.M20 + left.M03 * right.M30;
+            result.M31 = left.M30 * right.M01 + left.M31 * right.M11 + 
+                         left.M32 * right.M21 + left.M03 * right.M31;
+            result.M32 = left.M30 * right.M02 + left.M31 * right.M12 + 
+                         left.M32 * right.M22 + left.M03 * right.M32;
+            result.M33 = left.M30 * right.M03 + left.M31 * right.M13 + 
+                         left.M32 * right.M23 + left.M03 * right.M33;
         }
 
         /// <summary>
@@ -1542,10 +1682,14 @@ namespace Raster.Math
         
         public static void Multiply(in Matrix4x4 left, in Vector4 right, out Vector4 result)
         {
-            result.X = left.M00 * right.X + left.M01 * right.Y + left.M02 * right.Z + left.M03 * right.W;
-            result.Y = left.M10 * right.X + left.M11 * right.Y + left.M12 * right.Z + left.M13 * right.W;
-            result.Z = left.M20 * right.X + left.M21 * right.Y + left.M22 * right.Z + left.M23 * right.W;
-            result.W = left.M30 * right.X + left.M31 * right.Y + left.M32 * right.Z + left.M33 * right.W;
+            result.X = left.M00 * right.X + left.M01 * right.Y + 
+                       left.M02 * right.Z + left.M03 * right.W;
+            result.Y = left.M10 * right.X + left.M11 * right.Y + 
+                       left.M12 * right.Z + left.M13 * right.W;
+            result.Z = left.M20 * right.X + left.M21 * right.Y + 
+                       left.M22 * right.Z + left.M23 * right.W;
+            result.W = left.M30 * right.X + left.M31 * right.Y + 
+                       left.M32 * right.Z + left.M33 * right.W;
         }
 
         /// <summary>
@@ -1557,10 +1701,14 @@ namespace Raster.Math
         
         public static void Multiply(in Vector4 left, in Matrix4x4 right, out Vector4 result)
         {
-            result.X = left.X * right.M00 + left.Y * right.M10 + left.Z * right.M20 + left.W * right.M30;
-            result.Y = left.X * right.M01 + left.Y * right.M11 + left.Z * right.M21 + left.W * right.M31;
-            result.Z = left.X * right.M02 + left.Y * right.M12 + left.Z * right.M22 + left.W * right.M32;
-            result.W = left.X * right.M03 + left.Y * right.M13 + left.Z * right.M23 + left.W * right.M33;
+            result.X = left.X * right.M00 + left.Y * right.M10 + 
+                       left.Z * right.M20 + left.W * right.M30;
+            result.Y = left.X * right.M01 + left.Y * right.M11 + 
+                       left.Z * right.M21 + left.W * right.M31;
+            result.Z = left.X * right.M02 + left.Y * right.M12 + 
+                       left.Z * right.M22 + left.W * right.M32;
+            result.W = left.X * right.M03 + left.Y * right.M13 + 
+                       left.Z * right.M23 + left.W * right.M33;
         }
 
         /// <summary>
@@ -1808,10 +1956,14 @@ namespace Raster.Math
         /// <returns></returns>
         public static bool operator ==(in Matrix4x4 left, in Matrix4x4 right)
         {
-            return (left.M00 == right.M00 && left.M01 == right.M01 && left.M02 == right.M02 && left.M03 == right.M03 &&
-                    left.M10 == right.M10 && left.M11 == right.M11 && left.M12 == right.M12 && left.M13 == right.M13 &&
-                    left.M20 == right.M20 && left.M21 == right.M21 && left.M22 == right.M22 && left.M23 == right.M23 &&
-                    left.M30 == right.M30 && left.M31 == right.M31 && left.M32 == right.M32 && left.M33 == right.M33);
+            return (left.M00 == right.M00 && left.M01 == right.M01 && 
+                    left.M02 == right.M02 && left.M03 == right.M03 &&
+                    left.M10 == right.M10 && left.M11 == right.M11 && 
+                    left.M12 == right.M12 && left.M13 == right.M13 &&
+                    left.M20 == right.M20 && left.M21 == right.M21 && 
+                    left.M22 == right.M22 && left.M23 == right.M23 &&
+                    left.M30 == right.M30 && left.M31 == right.M31 && 
+                    left.M32 == right.M32 && left.M33 == right.M33);
         }
 
         /// <summary>
@@ -1822,10 +1974,14 @@ namespace Raster.Math
         /// <returns></returns>
         public static bool operator !=(in Matrix4x4 left, in Matrix4x4 right)
         {
-            return (left.M00 != right.M00 || left.M01 != right.M01 || left.M02 != right.M02 || left.M03 != right.M03 ||
-                    left.M10 != right.M10 || left.M11 != right.M11 || left.M12 != right.M12 || left.M13 != right.M13 ||
-                    left.M20 != right.M20 || left.M21 != right.M21 || left.M22 != right.M22 || left.M23 != right.M23 ||
-                    left.M30 != right.M30 || left.M31 != right.M31 || left.M32 != right.M32 || left.M33 != right.M33);
+            return (left.M00 != right.M00 || left.M01 != right.M01 || 
+                    left.M02 != right.M02 || left.M03 != right.M03 ||
+                    left.M10 != right.M10 || left.M11 != right.M11 || 
+                    left.M12 != right.M12 || left.M13 != right.M13 ||
+                    left.M20 != right.M20 || left.M21 != right.M21 || 
+                    left.M22 != right.M22 || left.M23 != right.M23 ||
+                    left.M30 != right.M30 || left.M31 != right.M31 || 
+                    left.M32 != right.M32 || left.M33 != right.M33);
         }
 
         #endregion Operator Overload

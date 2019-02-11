@@ -7,7 +7,6 @@ namespace Raster.Math
     /// <summary>
     /// 
     /// </summary>
-    [Serializable]
     public struct EulerAngles : IEquatable<EulerAngles>
     {
 		#region Public Fields
@@ -97,9 +96,58 @@ namespace Raster.Math
         /// <param name="z"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static EulerAngles FromQuaternion(float w, float x, float y, float z)
+        public static EulerAngles FromQuaternion(float x, float y, float z, float w)
         {
+            float xx = x * x;
+            float xy = x * y;
+            float xz = x * z;
+            float xw = x * w;
+            float yy = y * y;
+            float yz = y * z;
+            float yw = y * w;
+            float zz = z * z;
+            float zw = z * w;
+
+            float lenSqr = xx + yy + zz + w * w;
+            if (!MathHelper.IsOne(lenSqr) && !MathHelper.IsZero(lenSqr))
+            {
+                xx /= lenSqr;
+                xy /= lenSqr;
+                xz /= lenSqr;
+                xw /= lenSqr;
+                yy /= lenSqr;
+                yz /= lenSqr;
+                yw /= lenSqr;
+                zz /= lenSqr;
+                zw /= lenSqr;
+            }
+
             EulerAngles euler;
+
+            euler.Pitch = MathF.Asin(-2.0f * (yz - xw));
+            if (euler.Pitch < MathF.PI_2)
+            {
+                if (euler.Pitch > -MathF.PI_2)
+                {
+                    euler.Yaw = MathF.Atan2(2.0f * (xz + yw), 1.0f - 2.0f * (xx + yy));
+                    euler.Roll = MathF.Atan2(2.0f * (xy + zw), 1.0f - 2.0f * (xx + zz));
+                } 
+                else
+                {
+                    euler.Roll = 0.0f;
+                    euler.Yaw = -MathF.Atan2(-2.0f * (xy - zw), 1.0f - 2.0f * (yy + zz));
+                }
+            }
+            else
+            {
+                euler.Roll = 0.0f;
+                euler.Yaw = MathF.Atan2(-2.0f * (xy - zw), 1.0f - 2.0f * (yy + zz));
+            }
+
+            euler.Pitch = MathF.RadToDeg(euler.Pitch);
+            euler.Roll = MathF.RadToDeg(euler.Roll);
+            euler.Yaw = MathF.RadToDeg(euler.Yaw);
+
             return euler;
         }
 
@@ -109,10 +157,8 @@ namespace Raster.Math
         /// <param name="quat"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static EulerAngles FromQuaternion(in Quaternion quat)
-        {
-            return FromQuaternion(quat.W, quat.X, quat.Y, quat.Z);
-        }
+        public static EulerAngles FromQuaternion(in Quaternion quaternion) =>
+            FromQuaternion(quaternion.W, quaternion.X, quaternion.Y, quaternion.Z);
 
         #region Operator Overload
         /// <summary>

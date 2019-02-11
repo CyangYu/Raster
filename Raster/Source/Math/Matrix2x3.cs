@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace Raster.Math
 {
     /// <summary>
     /// 
     /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
     public struct Matrix2x3 : IEquatable<Matrix2x3>
     {
         #region Public Fields
@@ -133,7 +135,11 @@ namespace Raster.Math
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return 0;
+            unchecked
+            {
+                return M00.GetHashCode() + M01.GetHashCode() + M02.GetHashCode() +
+                       M10.GetHashCode() + M11.GetHashCode() + M12.GetHashCode();
+            }
         }
 
         /// <summary>
@@ -330,11 +336,15 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix2x3 left, in Matrix3x2 right, out Matrix2x2 result)
         {
-            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20;
-            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + left.M02 * right.M21;
+            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
+                         left.M02 * right.M20;
+            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + 
+                         left.M02 * right.M21;
 
-            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + left.M12 * right.M20;
-            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + left.M12 * right.M21;
+            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + 
+                         left.M12 * right.M20;
+            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + 
+                         left.M12 * right.M21;
         }
 
         /// <summary>
@@ -346,13 +356,19 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix2x3 left, in Matrix3x3 right, out Matrix2x3 result)
         {
-            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20;
-            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + left.M02 * right.M21;
-            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + left.M02 * right.M22;
+            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
+                         left.M02 * right.M20;
+            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + 
+                         left.M02 * right.M21;
+            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + 
+                         left.M02 * right.M22;
 
-            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + left.M12 * right.M20;
-            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + left.M12 * right.M21;
-            result.M12 = left.M10 * right.M02 + left.M11 * right.M12 + left.M12 * right.M22;
+            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + 
+                         left.M12 * right.M20;
+            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + 
+                         left.M12 * right.M21;
+            result.M12 = left.M10 * right.M02 + left.M11 * right.M12 + 
+                         left.M12 * right.M22;
         }
 
         /// <summary>
@@ -364,15 +380,23 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix2x3 left, in Matrix3x4 right, out Matrix2x4 result)
         {
-            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20;
-            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + left.M02 * right.M21;
-            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + left.M02 * right.M22;
-            result.M03 = left.M00 * right.M03 + left.M01 * right.M13 + left.M02 * right.M23;
+            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
+                         left.M02 * right.M20;
+            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + 
+                         left.M02 * right.M21;
+            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + 
+                         left.M02 * right.M22;
+            result.M03 = left.M00 * right.M03 + left.M01 * right.M13 + 
+                         left.M02 * right.M23;
 
-            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + left.M12 * right.M20;
-            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + left.M12 * right.M21;
-            result.M12 = left.M10 * right.M02 + left.M11 * right.M12 + left.M12 * right.M22;
-            result.M13 = left.M00 * right.M03 + left.M01 * right.M13 + left.M02 * right.M23;
+            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + 
+                         left.M12 * right.M20;
+            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + 
+                         left.M12 * right.M21;
+            result.M12 = left.M10 * right.M02 + left.M11 * right.M12 + 
+                         left.M12 * right.M22;
+            result.M13 = left.M00 * right.M03 + left.M01 * right.M13 + 
+                         left.M02 * right.M23;
         }
 
         /// <summary>
@@ -384,8 +408,10 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix2x3 left, in Vector3 right, out Vector2 result)
         {
-            result.X = left.M00 * right.X + left.M01 * right.Y + left.M02 * right.Z;
-            result.Y = left.M10 * right.X + left.M11 * right.Y + left.M12 * right.Z;
+            result.X = left.M00 * right.X + left.M01 * right.Y + 
+                       left.M02 * right.Z;
+            result.Y = left.M10 * right.X + left.M11 * right.Y + 
+                       left.M12 * right.Z;
         }
 
         /// <summary>
@@ -625,8 +651,10 @@ namespace Raster.Math
         /// <returns></returns>
         public static bool operator ==(in Matrix2x3 left, in Matrix2x3 right)
         {
-            return (left.M00 == right.M00 && left.M01 == right.M01 && left.M02 == right.M02 && 
-                    left.M10 == right.M10 && left.M11 == right.M11 && left.M12 == right.M12);
+            return (left.M00 == right.M00 && left.M01 == right.M01 && 
+                    left.M02 == right.M02 && 
+                    left.M10 == right.M10 && left.M11 == right.M11 && 
+                    left.M12 == right.M12);
         }
 
         /// <summary>
@@ -637,8 +665,10 @@ namespace Raster.Math
         /// <returns></returns>
         public static bool operator !=(in Matrix2x3 left, in Matrix2x3 right)
         {
-            return (left.M00 != right.M00 || left.M01 != right.M01 || left.M02 != right.M02 ||
-                    left.M10 != right.M10 || left.M11 != right.M11 || left.M12 != right.M12);
+            return (left.M00 != right.M00 || left.M01 != right.M01 || 
+                    left.M02 != right.M02 ||
+                    left.M10 != right.M10 || left.M11 != right.M11 || 
+                    left.M12 != right.M12);
         }
 
         #endregion Operator Overload

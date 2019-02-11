@@ -7,17 +7,17 @@ namespace Raster.Render.Light
     /// <summary>
     /// 
     /// </summary>
-    public class Light
+    public struct Light
     {
         #region Public Fields
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Direction;
+        public Color Color;
         /// <summary>
         /// 
         /// </summary>
-        public Color4F Color;
+        public Vector3 Direction;
         #endregion Public Fields
 
         #region Constructor
@@ -26,10 +26,11 @@ namespace Raster.Render.Light
         {
         }
 
-        public Light(in Vector3 direction, in Color4F color)
+        public Light(in Vector3 direction, in Color color)
         {
-            Direction = direction.Normalized;
             Color = color;
+            Direction = direction.Normalized;
+            
         }
         #endregion Constructor
 

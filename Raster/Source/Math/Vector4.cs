@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Raster.Private;
 
 namespace Raster.Math
@@ -90,10 +91,7 @@ namespace Raster.Math
         /// </summary>
         public float LengthSquared
         {
-            get
-            {
-                return X * X + Y * Y + Z * Z + W * W;
-            }
+            get { return X * X + Y * Y + Z * Z + W * W; }
         }
 
         /// <summary>
@@ -209,6 +207,13 @@ namespace Raster.Math
         /// </summary>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Vector2 ToVector2() => new Vector2(X, Y);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector3 ToVector3() => new Vector3(X, Y, Z);
 
         #endregion Public Instance Methods
@@ -223,14 +228,18 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float AngleBetween(in Vector4 left, in Vector4 right)
         {
-            float dot = left.X * right.X + left.Y * right.Y + left.Z * right.Z + left.W * right.W;
-            float lenA = left.Length;
-            float lenB = right.Length;
+            float dot = left.X * right.X + left.Y * right.Y + 
+                        left.Z * right.Z + left.W * right.W;
+            float lenProduct = left.Length * right.Length;
 
-            if (lenA == 0.0f || lenB == 0.0f)
-                return 0.0f;
+            if (MathHelper.IsZero(lenProduct))
+            {
+                lenProduct = MathHelper.ZeroTolerance;
+            }
 
-            return dot / (lenA * lenB);
+            float cos = dot / lenProduct;
+            cos = MathF.Clamp(cos, -1.0f, 1.0f);
+            return MathF.Acos(cos);
         }
 
         /// <summary>
@@ -599,10 +608,14 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Transform(in Vector3 position, in Matrix4x4 matrix, out Vector4 result)
         {
-            result.X = position.X * matrix.M00 + position.Y * matrix.M10 + position.Z * matrix.M20 + matrix.M30;
-            result.Y = position.X * matrix.M01 + position.Y * matrix.M11 + position.Z * matrix.M21 + matrix.M31;
-            result.Z = position.X * matrix.M02 + position.Y * matrix.M12 + position.Z * matrix.M22 + matrix.M32;
-            result.W = position.X * matrix.M03 + position.Y * matrix.M13 + position.Z * matrix.M23 + matrix.M33;
+            result.X = position.X * matrix.M00 + position.Y * matrix.M10 + 
+                       position.Z * matrix.M20 + matrix.M30;
+            result.Y = position.X * matrix.M01 + position.Y * matrix.M11 + 
+                       position.Z * matrix.M21 + matrix.M31;
+            result.Z = position.X * matrix.M02 + position.Y * matrix.M12 + 
+                       position.Z * matrix.M22 + matrix.M32;
+            result.W = position.X * matrix.M03 + position.Y * matrix.M13 + 
+                       position.Z * matrix.M23 + matrix.M33;
         }
 
         /// <summary>
@@ -614,10 +627,14 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Transform(in Vector4 position, in Matrix4x4 matrix, out Vector4 result)
         {
-            result.X = position.X * matrix.M00 + position.Y * matrix.M10 + position.Z * matrix.M20 + position.W * matrix.M30;
-            result.Y = position.X * matrix.M01 + position.Y * matrix.M11 + position.Z * matrix.M21 + position.W * matrix.M31;
-            result.Z = position.X * matrix.M02 + position.Y * matrix.M12 + position.Z * matrix.M22 + position.W * matrix.M32;
-            result.W = position.X * matrix.M03 + position.Y * matrix.M13 + position.Z * matrix.M23 + position.W * matrix.M33;
+            result.X = position.X * matrix.M00 + position.Y * matrix.M10 + 
+                       position.Z * matrix.M20 + position.W * matrix.M30;
+            result.Y = position.X * matrix.M01 + position.Y * matrix.M11 + 
+                       position.Z * matrix.M21 + position.W * matrix.M31;
+            result.Z = position.X * matrix.M02 + position.Y * matrix.M12 + 
+                       position.Z * matrix.M22 + position.W * matrix.M32;
+            result.W = position.X * matrix.M03 + position.Y * matrix.M13 + 
+                       position.Z * matrix.M23 + position.W * matrix.M33;
         }
 
         /// <summary>
@@ -673,9 +690,12 @@ namespace Raster.Math
             float yz2 = rotation.Y * z2;
             float zz2 = rotation.Z * z2;
 
-            result.X = position.X * (1.0f - yy2 - zz2) + position.Y * (xy2 - wz2) + position.Z * (xz2 + wy2);
-            result.Y = position.X * (xy2 + wz2) + position.Y * (1.0f - xx2 - zz2) + position.Z * (yz2 - wx2);
-            result.Z = position.X * (xz2 - wy2) + position.Y * (yz2 + wx2) + position.Z * (1.0f - xx2 - yy2);
+            result.X = position.X * (1.0f - yy2 - zz2) + position.Y * (xy2 - wz2) + 
+                       position.Z * (xz2 + wy2);
+            result.Y = position.X * (xy2 + wz2) + position.Y * (1.0f - xx2 - zz2) + 
+                       position.Z * (yz2 - wx2);
+            result.Z = position.X * (xz2 - wy2) + position.Y * (yz2 + wx2) + 
+                       position.Z * (1.0f - xx2 - yy2);
             result.W = 1.0f;
         }
 
@@ -702,9 +722,12 @@ namespace Raster.Math
             float yz2 = rotation.Y * z2;
             float zz2 = rotation.Z * z2;
 
-            result.X = position.X * (1.0f - yy2 - zz2) + position.Y * (xy2 - wz2) + position.Z * (xz2 + wy2);
-            result.Y = position.X * (xy2 + wz2) + position.Y * (1.0f - xx2 - zz2) + position.Z * (yz2 - wx2);
-            result.Z = position.X * (xz2 - wy2) + position.Y * (yz2 + wx2) + position.Z * (1.0f - xx2 - yy2);
+            result.X = position.X * (1.0f - yy2 - zz2) + position.Y * (xy2 - wz2) + 
+                       position.Z * (xz2 + wy2);
+            result.Y = position.X * (xy2 + wz2) + position.Y * (1.0f - xx2 - zz2) + 
+                       position.Z * (yz2 - wx2);
+            result.Z = position.X * (xz2 - wy2) + position.Y * (yz2 + wx2) + 
+                       position.Z * (1.0f - xx2 - yy2);
             result.W = position.W;
         }
 
@@ -827,6 +850,15 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 operator +(in Vector4 left, in Vector4 right) =>
             new Vector4(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 operator -(in Vector4 value) =>
+            new Vector4(-value.X, -value.Y, -value.Z, -value.W);
 
         /// <summary>
         /// 

@@ -188,13 +188,16 @@ namespace Raster.Math
         public static float AngleBetween(in Vector2 left, in Vector2 right)
         {
             float dot = left.X * right.X + left.Y * right.Y;
-            float lenA = left.Length;
-            float lenB = right.Length;
+            float lenProduct = left.Length * right.Length;
 
-            if (lenA == 0.0f || lenB == 0.0f)
-                return 0.0f;
+            if (MathHelper.IsZero(lenProduct))
+            {
+                lenProduct = MathHelper.ZeroTolerance;
+            }
 
-            return dot / (lenA * lenB);
+            float cos = dot / lenProduct;
+            cos = MathF.Clamp(cos, -1.0f, 1.0f);
+            return MathF.Acos(cos);
         }
 
         /// <summary>
@@ -225,7 +228,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="other"></param>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Distance(in Vector2 value1, in Vector2 value2)
@@ -238,7 +242,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="other"></param>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float DistanceSquared(in Vector2 value1, in Vector2 value2)
@@ -317,6 +322,19 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Negate(in Vector2 value)
+        {
+            Vector2 result;
+            Negate(value, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="value1"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -376,7 +394,7 @@ namespace Raster.Math
         /// <param name="matrix"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Transform(in Vector2 position, in Matrix3x2 matrix)
+        public static Vector2 Transform(in Vector2 position, in Matrix3x3 matrix)
         {
             Vector2 result;
             Transform(position, matrix, out result);
@@ -404,7 +422,7 @@ namespace Raster.Math
         /// <param name="matrix"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 TransformNormal(in Vector2 normal, in Matrix3x2 matrix)
+        public static Vector2 TransformNormal(in Vector2 normal, in Matrix3x3 matrix)
         {
             Vector2 result;
             TransformNormal(normal, matrix, out result);
@@ -424,7 +442,6 @@ namespace Raster.Math
             TransformNormal(normal, matrix, out result);
             return result;
         }
-
 
         /// <summary>
         /// 
@@ -548,7 +565,7 @@ namespace Raster.Math
         /// <param name="matrix"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Transform(in Vector2 position, in Matrix3x2 matrix, out Vector2 result)
+        public static void Transform(in Vector2 position, in Matrix3x3 matrix, out Vector2 result)
         {
             result.X = position.X * matrix.M00 + position.Y * matrix.M10 + matrix.M20;
             result.Y = position.X * matrix.M01 + position.Y * matrix.M11 + matrix.M21;
@@ -574,7 +591,7 @@ namespace Raster.Math
         /// <param name="matrix"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void TransformNormal(in Vector2 normal, in Matrix3x2 matrix, out Vector2 result)
+        public static void TransformNormal(in Vector2 normal, in Matrix3x3 matrix, out Vector2 result)
         {
             result.X = normal.X * matrix.M00 + normal.Y * matrix.M10;
             result.Y = normal.X * matrix.M01 + normal.Y * matrix.M11;

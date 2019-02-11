@@ -141,7 +141,12 @@ namespace Raster.Math
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return 0;
+            unchecked
+            {
+                return M00.GetHashCode() + M01.GetHashCode() +
+                       M10.GetHashCode() + M11.GetHashCode() +
+                       M20.GetHashCode() + M21.GetHashCode();
+            }
         }
 
         /// <summary>
@@ -668,7 +673,7 @@ namespace Raster.Math
         {
             return (left.M00 != right.M00 || left.M01 != right.M01 ||
                     left.M10 != right.M10 || left.M11 != right.M11 ||
-                    left.M20 != right.M20 || left.M21 != right.M21);
+                    left.M20 != right.M20 || left.M21 != right.M21); 
         }
 
         #endregion Operator Overload

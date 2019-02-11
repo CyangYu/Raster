@@ -58,7 +58,10 @@
     <Compile Include="Source\Drawing\Primitive\Rgba.cs" />
     <Compile Include="Source\Drawing\Primitive\Size.cs" />
     <Compile Include="Source\IO\ILogProvider.cs" />
+    <Compile Include="Source\Math\AxisAngle.cs" />
     <Compile Include="Source\Math\Geometry\BoundingBox.cs" />
+    <Compile Include="Source\Math\Geometry\Box2D.cs" />
+    <Compile Include="Source\Math\Geometry\OrientedBox.cs" />
     <Compile Include="Source\Math\Geometry\Capsule.cs" />
     <Compile Include="Source\Math\Geometry\Circle.cs" />
     <Compile Include="Source\Math\Geometry\Frustum.cs" />

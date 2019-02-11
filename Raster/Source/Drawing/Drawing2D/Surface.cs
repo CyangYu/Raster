@@ -44,11 +44,7 @@ namespace Raster.Drawing.Drawing2D
         /// </summary>
         public int Width 
 		{
-			get 
-			{
-				return width;
-			}
-			
+			get { return width; }
 		}
 		
         /// <summary>
@@ -56,10 +52,7 @@ namespace Raster.Drawing.Drawing2D
         /// </summary>
 		public int Height
 		{
-			get 
-			{
-				return height;
-			}
+			get { return height; }
 		}
 
         /// <summary>

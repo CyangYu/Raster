@@ -332,13 +332,13 @@ namespace Raster.Math
         {
             float sr, cr, sp, cp, sy, cy;
 
-            float halfRoll = 0.5f * roll;
-            sr = MathF.Sin(halfRoll);
-            cr = MathF.Cos(halfRoll);
-
             float halfPitch = 0.5f * pitch;
             sp = MathF.Sin(halfPitch);
             cp = MathF.Cos(halfPitch);
+
+            float halfRoll = 0.5f * roll;
+            sr = MathF.Sin(halfRoll);
+            cr = MathF.Cos(halfRoll);
 
             float halfYaw = 0.5f * yaw;
             sy = MathF.Sin(halfYaw);

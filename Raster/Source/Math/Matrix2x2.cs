@@ -113,7 +113,11 @@ namespace Raster.Math
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return 0;
+            unchecked
+            {
+                return M00.GetHashCode() + M01.GetHashCode() +
+                       M10.GetHashCode() + M11.GetHashCode();
+            }
         }
 
         /// <summary>
@@ -307,9 +311,11 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix2x2 left, float right, out Matrix2x2 result)
         {
+            // First Row
             result.M00 = left.M00 * right;
             result.M01 = left.M01 * right;
 
+            // Second Row
             result.M10 = left.M10 * right;
             result.M11 = left.M11 * right;
         }

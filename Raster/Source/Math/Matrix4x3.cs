@@ -251,7 +251,13 @@ namespace Raster.Math
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return 0;
+            unchecked
+            {
+                return M00.GetHashCode() + M01.GetHashCode() + M02.GetHashCode() +
+                       M10.GetHashCode() + M11.GetHashCode() + M12.GetHashCode() +
+                       M20.GetHashCode() + M21.GetHashCode() + M22.GetHashCode() +
+                       M30.GetHashCode() + M31.GetHashCode() + M32.GetHashCode();
+            }
         }
 
         /// <summary>
@@ -505,17 +511,25 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix4x3 left, in Matrix3x2 right, out Matrix4x2 result)
         {
-            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20;
-            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + left.M02 * right.M21;
+            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
+                         left.M02 * right.M20;
+            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + 
+                         left.M02 * right.M21;
 
-            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + left.M12 * right.M20;
-            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + left.M12 * right.M21;
+            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + 
+                         left.M12 * right.M20;
+            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + 
+                         left.M12 * right.M21;
 
-            result.M20 = left.M20 * right.M00 + left.M21 * right.M10 + left.M22 * right.M20;
-            result.M21 = left.M20 * right.M01 + left.M21 * right.M11 + left.M22 * right.M21;
+            result.M20 = left.M20 * right.M00 + left.M21 * right.M10 + 
+                         left.M22 * right.M20;
+            result.M21 = left.M20 * right.M01 + left.M21 * right.M11 + 
+                         left.M22 * right.M21;
 
-            result.M30 = left.M30 * right.M00 + left.M31 * right.M10 + left.M32 * right.M20;
-            result.M31 = left.M30 * right.M01 + left.M31 * right.M11 + left.M32 * right.M21;
+            result.M30 = left.M30 * right.M00 + left.M31 * right.M10 + 
+                         left.M32 * right.M20;
+            result.M31 = left.M30 * right.M01 + left.M31 * right.M11 + 
+                         left.M32 * right.M21;
         }
 
         /// <summary>
@@ -527,21 +541,33 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix4x3 left, in Matrix3x3 right, out Matrix4x3 result)
         {
-            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20;
-            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + left.M02 * right.M21;
-            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + left.M02 * right.M22;
+            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
+                         left.M02 * right.M20;
+            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + 
+                         left.M02 * right.M21;
+            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + 
+                         left.M02 * right.M22;
            
-            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + left.M12 * right.M20;
-            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + left.M12 * right.M21;
-            result.M12 = left.M10 * right.M02 + left.M11 * right.M12 + left.M12 * right.M22;
+            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + 
+                         left.M12 * right.M20;
+            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + 
+                         left.M12 * right.M21;
+            result.M12 = left.M10 * right.M02 + left.M11 * right.M12 + 
+                         left.M12 * right.M22;
             
-            result.M20 = left.M20 * right.M00 + left.M21 * right.M10 + left.M22 * right.M20;
-            result.M21 = left.M20 * right.M01 + left.M21 * right.M11 + left.M22 * right.M21;
-            result.M22 = left.M20 * right.M02 + left.M21 * right.M12 + left.M22 * right.M22;
+            result.M20 = left.M20 * right.M00 + left.M21 * right.M10 + 
+                         left.M22 * right.M20;
+            result.M21 = left.M20 * right.M01 + left.M21 * right.M11 + 
+                         left.M22 * right.M21;
+            result.M22 = left.M20 * right.M02 + left.M21 * right.M12 + 
+                         left.M22 * right.M22;
             
-            result.M30 = left.M30 * right.M00 + left.M31 * right.M10 + left.M32 * right.M20;
-            result.M31 = left.M30 * right.M01 + left.M31 * right.M11 + left.M32 * right.M21;
-            result.M32 = left.M30 * right.M02 + left.M31 * right.M12 + left.M32 * right.M22;
+            result.M30 = left.M30 * right.M00 + left.M31 * right.M10 + 
+                         left.M32 * right.M20;
+            result.M31 = left.M30 * right.M01 + left.M31 * right.M11 + 
+                         left.M32 * right.M21;
+            result.M32 = left.M30 * right.M02 + left.M31 * right.M12 + 
+                         left.M32 * right.M22;
         }
 
         /// <summary>
@@ -553,25 +579,41 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix4x3 left, in Matrix3x4 right, out Matrix4x4 result)
         {
-            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20;
-            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + left.M02 * right.M21;
-            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + left.M02 * right.M22;
-            result.M03 = left.M00 * right.M03 + left.M01 * right.M13 + left.M02 * right.M23;
+            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
+                         left.M02 * right.M20;
+            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + 
+                         left.M02 * right.M21;
+            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + 
+                         left.M02 * right.M22;
+            result.M03 = left.M00 * right.M03 + left.M01 * right.M13 + 
+                         left.M02 * right.M23;
 
-            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + left.M12 * right.M20;
-            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + left.M12 * right.M21;
-            result.M12 = left.M10 * right.M02 + left.M11 * right.M12 + left.M12 * right.M22;
-            result.M13 = left.M10 * right.M03 + left.M11 * right.M13 + left.M12 * right.M23;
+            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + 
+                         left.M12 * right.M20;
+            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + 
+                         left.M12 * right.M21;
+            result.M12 = left.M10 * right.M02 + left.M11 * right.M12 + 
+                         left.M12 * right.M22;
+            result.M13 = left.M10 * right.M03 + left.M11 * right.M13 + 
+                         left.M12 * right.M23;
 
-            result.M20 = left.M20 * right.M00 + left.M21 * right.M10 + left.M22 * right.M20;
-            result.M21 = left.M20 * right.M01 + left.M21 * right.M11 + left.M22 * right.M21;
-            result.M22 = left.M20 * right.M02 + left.M21 * right.M12 + left.M22 * right.M22;
-            result.M23 = left.M00 * right.M02 + left.M01 * right.M12 + left.M22 * right.M23;
+            result.M20 = left.M20 * right.M00 + left.M21 * right.M10 + 
+                         left.M22 * right.M20;
+            result.M21 = left.M20 * right.M01 + left.M21 * right.M11 + 
+                         left.M22 * right.M21;
+            result.M22 = left.M20 * right.M02 + left.M21 * right.M12 + 
+                         left.M22 * right.M22;
+            result.M23 = left.M00 * right.M02 + left.M01 * right.M12 + 
+                         left.M22 * right.M23;
 
-            result.M30 = left.M30 * right.M00 + left.M31 * right.M10 + left.M32 * right.M20;
-            result.M31 = left.M30 * right.M01 + left.M31 * right.M11 + left.M32 * right.M21;
-            result.M32 = left.M30 * right.M02 + left.M31 * right.M12 + left.M32 * right.M22;
-            result.M33 = left.M30 * right.M03 + left.M31 * right.M13 + left.M32 * right.M23;
+            result.M30 = left.M30 * right.M00 + left.M31 * right.M10 + 
+                         left.M32 * right.M20;
+            result.M31 = left.M30 * right.M01 + left.M31 * right.M11 + 
+                         left.M32 * right.M21;
+            result.M32 = left.M30 * right.M02 + left.M31 * right.M12 + 
+                         left.M32 * right.M22;
+            result.M33 = left.M30 * right.M03 + left.M31 * right.M13 + 
+                         left.M32 * right.M23;
         }
 
         /// <summary>
@@ -583,10 +625,14 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix4x3 left, in Vector3 right, out Vector4 result)
         {
-            result.X = left.M00 * right.X + left.M01 * right.Y + left.M02 * right.Z;
-            result.Y = left.M10 * right.X + left.M11 * right.Y + left.M12 * right.Z;
-            result.Z = left.M20 * right.X + left.M21 * right.Y + left.M22 * right.Z;
-            result.W = left.M30 * right.X + left.M31 * right.Y + left.M32 * right.Z;
+            result.X = left.M00 * right.X + left.M01 * right.Y + 
+                       left.M02 * right.Z;
+            result.Y = left.M10 * right.X + left.M11 * right.Y + 
+                       left.M12 * right.Z;
+            result.Z = left.M20 * right.X + left.M21 * right.Y + 
+                       left.M22 * right.Z;
+            result.W = left.M30 * right.X + left.M31 * right.Y + 
+                       left.M32 * right.Z;
         }
 
         /// <summary>
@@ -598,9 +644,12 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Vector4 left, in Matrix4x3 right, out Vector3 result)
         {
-            result.X = left.X * right.M00 + left.Y * right.M10 + left.Z * right.M20 + left.W * right.M30;
-            result.Y = left.X * right.M01 + left.Y * right.M11 + left.Z * right.M21 + left.W * right.M31;
-            result.Z = left.X * right.M02 + left.Y * right.M12 + left.Z * right.M22 + left.W * right.M32;
+            result.X = left.X * right.M00 + left.Y * right.M10 + 
+                       left.Z * right.M20 + left.W * right.M30;
+            result.Y = left.X * right.M01 + left.Y * right.M11 + 
+                       left.Z * right.M21 + left.W * right.M31;
+            result.Z = left.X * right.M02 + left.Y * right.M12 + 
+                       left.Z * right.M22 + left.W * right.M32;
         }
 
         /// <summary>
@@ -840,10 +889,14 @@ namespace Raster.Math
         /// <returns></returns>
         public static bool operator ==(in Matrix4x3 left, in Matrix4x3 right)
         {
-            return (left.M00 == right.M00 && left.M01 == right.M01 && left.M02 == right.M02 &&
-                    left.M10 == right.M10 && left.M11 == right.M11 && left.M12 == right.M12 &&
-                    left.M20 == right.M20 && left.M21 == right.M21 && left.M22 == right.M22 &&
-                    left.M30 == right.M30 && left.M31 == right.M31 && left.M32 == right.M32);
+            return (left.M00 == right.M00 && left.M01 == right.M01 && 
+                    left.M02 == right.M02 &&
+                    left.M10 == right.M10 && left.M11 == right.M11 && 
+                    left.M12 == right.M12 &&
+                    left.M20 == right.M20 && left.M21 == right.M21 && 
+                    left.M22 == right.M22 &&
+                    left.M30 == right.M30 && left.M31 == right.M31 && 
+                    left.M32 == right.M32);
         }
 
         /// <summary>
@@ -854,10 +907,14 @@ namespace Raster.Math
         /// <returns></returns>
         public static bool operator !=(in Matrix4x3 left, in Matrix4x3 right)
         {
-            return (left.M00 != right.M00 || left.M01 != right.M01 || left.M02 != right.M02 ||
-                    left.M10 != right.M10 || left.M11 != right.M11 || left.M12 != right.M12 ||
-                    left.M20 != right.M20 || left.M21 != right.M21 || left.M22 != right.M22 ||
-                    left.M30 != right.M30 || left.M31 != right.M31 || left.M32 != right.M32);
+            return (left.M00 != right.M00 || left.M01 != right.M01 || 
+                    left.M02 != right.M02 ||
+                    left.M10 != right.M10 || left.M11 != right.M11 || 
+                    left.M12 != right.M12 ||
+                    left.M20 != right.M20 || left.M21 != right.M21 || 
+                    left.M22 != right.M22 ||
+                    left.M30 != right.M30 || left.M31 != right.M31 || 
+                    left.M32 != right.M32);
         }
 
         #endregion Operator Overload

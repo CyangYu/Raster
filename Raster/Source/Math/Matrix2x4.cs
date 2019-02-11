@@ -162,7 +162,13 @@ namespace Raster.Math
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return 0;
+            unchecked
+            {
+                return M00.GetHashCode() + M01.GetHashCode() +
+                       M02.GetHashCode() + M03.GetHashCode() +
+                       M10.GetHashCode() + M11.GetHashCode() +
+                       M12.GetHashCode() + M13.GetHashCode();
+            }
         }
 
         /// <summary>
@@ -374,11 +380,15 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix2x4 left, in Matrix4x2 right, out Matrix2x2 result)
         {
-            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20;
-            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + left.M02 * right.M21;
+            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
+                         left.M02 * right.M20;
+            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + 
+                         left.M02 * right.M21;
 
-            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + left.M12 * right.M20;
-            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + left.M12 * right.M21;
+            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + 
+                         left.M12 * right.M20;
+            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + 
+                         left.M12 * right.M21;
         }
 
         /// <summary>
@@ -390,13 +400,19 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix2x4 left, in Matrix4x3 right, out Matrix2x3 result)
         {
-            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + left.M02 * right.M20;
-            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + left.M02 * right.M21;
-            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + left.M02 * right.M22;
+            result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
+                         left.M02 * right.M20;
+            result.M01 = left.M00 * right.M01 + left.M01 * right.M11 + 
+                         left.M02 * right.M21;
+            result.M02 = left.M00 * right.M02 + left.M01 * right.M12 + 
+                         left.M02 * right.M22;
 
-            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + left.M12 * right.M20;
-            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + left.M12 * right.M21;
-            result.M12 = left.M10 * right.M02 + left.M11 * right.M12 + left.M12 * right.M22;
+            result.M10 = left.M10 * right.M00 + left.M11 * right.M10 + 
+                         left.M12 * right.M20;
+            result.M11 = left.M10 * right.M01 + left.M11 * right.M11 + 
+                         left.M12 * right.M21;
+            result.M12 = left.M10 * right.M02 + left.M11 * right.M12 + 
+                         left.M12 * right.M22;
         }
 
         /// <summary>
@@ -667,17 +683,6 @@ namespace Raster.Math
             return result;
         }
 
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static bool operator !=(in Matrix2x4 left, in Matrix2x4 right)
-        {
-            return (left.M00 != right.M00 || left.M01 != right.M01 || left.M02 != right.M02 || left.M03 != right.M03 ||
-                    left.M10 != right.M10 || left.M11 != right.M11 || left.M12 != right.M12 || left.M13 != right.M13);
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -686,8 +691,23 @@ namespace Raster.Math
         /// <returns></returns>
         public static bool operator ==(in Matrix2x4 left, in Matrix2x4 right)
         {
-            return (left.M00 == right.M00 && left.M01 == right.M01 && left.M02 == right.M02 && left.M03 == right.M03 &&
-                    left.M10 == right.M10 && left.M11 == right.M11 && left.M12 == right.M12 && left.M13 == right.M13);
+            return (left.M00 == right.M00 && left.M01 == right.M01 && 
+                    left.M02 == right.M02 && left.M03 == right.M03 &&
+                    left.M10 == right.M10 && left.M11 == right.M11 && 
+                    left.M12 == right.M12 && left.M13 == right.M13);
+        }
+
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator !=(in Matrix2x4 left, in Matrix2x4 right)
+        {
+            return (left.M00 != right.M00 || left.M01 != right.M01 || 
+                    left.M02 != right.M02 || left.M03 != right.M03 ||
+                    left.M10 != right.M10 || left.M11 != right.M11 || 
+                    left.M12 != right.M12 || left.M13 != right.M13);
         }
 
         #endregion Operator Overload

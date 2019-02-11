@@ -15,17 +15,22 @@ namespace Raster.Math.Geometry
         /// <param name="ray"></param>
         /// <param name="sphere"></param>
         /// <returns></returns>
-        public static bool RayIntersectSphere(in Ray ray, in Sphere sphere, out float distance)
+        public static bool RayIntersectSphere(in Ray ray, in Sphere sphere)
         {
-            Vector3 vec3;
-            Vector3.Subtract(ray.Origin, sphere.Center, out vec3);
+            return true;
+        }
 
-            float a = Vector3.Dot(ray.Direction, ray.Direction);
-            float b = Vector3.Dot(vec3, ray.Direction);
-            float c = Vector3.Dot(vec3, vec3) - (sphere.Radius * sphere.Radius);
-
-            float discriminant = b * b - 4.0f * a * c;
-            return (discriminant - 0.0f) > MathF.Epsilon;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sphere0"></param>
+        /// <param name="sphere1"></param>
+        /// <param name="tolerance"></param>
+        /// <returns></returns>
+        public static bool SphereIntersectSphere(in Sphere sphere0, in Sphere sphere1, float tolerance = 0.000001f)
+        { 
+             return Vector3.DistanceSquared(sphere0.Center, sphere1.Center) <= 
+                    MathHelper.Square(MathF.Max(0.0f, sphere0.Radius + sphere1.Radius + tolerance));
         }
     }
 }

@@ -159,7 +159,13 @@ namespace Raster.Math
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return 0;
+            unchecked
+            {
+                return M00.GetHashCode() + M01.GetHashCode() +
+                       M10.GetHashCode() + M11.GetHashCode() +
+                       M20.GetHashCode() + M21.GetHashCode() +
+                       M30.GetHashCode() + M31.GetHashCode();
+            }
         }
 
         /// <summary>
@@ -479,8 +485,10 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Vector4 left, in Matrix4x2 right, out Vector2 result)
         {
-            result.X = left.X * right.M00 + left.Y * right.M10 + left.Z * right.M20 + left.W * right.M30;
-            result.Y = left.X * right.M01 + left.Y * right.M11 + left.Z * right.M21 + left.W * right.M31;
+            result.X = left.X * right.M00 + left.Y * right.M10 + 
+                       left.Z * right.M20 + left.W * right.M30;
+            result.Y = left.X * right.M01 + left.Y * right.M11 + 
+                       left.Z * right.M21 + left.W * right.M31;
         }
 
         /// <summary>
