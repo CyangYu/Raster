@@ -2,7 +2,10 @@
 
 namespace Raster.Math.Geometry
 {
-    public struct Box2D : IEquatable<Box2D>
+    /// <summary>
+    /// 
+    /// </summary>
+    public struct BoundingBox2d : IEquatable<BoundingBox2d>
     {
         /// <summary>
         /// 
@@ -11,9 +14,9 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            if (obj is OrientedBox)
+            if (obj is BoundingBox2d)
             {
-                return Equals((OrientedBox)obj);
+                return Equals((BoundingBox2d)obj);
             }
 
             return false;
@@ -33,13 +36,13 @@ namespace Raster.Math.Geometry
         /// </summary>
         /// <returns></returns>
         public override string ToString() =>
-            string.Format("Box2D: ");
+            string.Format("BoundingBox2d: ");
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(OrientedBox other) => true;
+        public bool Equals(BoundingBox2d other) => true;
     }
 }

@@ -2,6 +2,9 @@
 
 namespace Raster.Math.Geometry
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public struct OrientedBox : IEquatable<OrientedBox>
     {
         #region Public Instance Methods
