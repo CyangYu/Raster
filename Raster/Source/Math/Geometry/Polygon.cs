@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace Raster.Math.Geometry
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public struct Polygon : IEquatable<Polygon>
     {
         #region Public Instance Methods

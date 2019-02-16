@@ -185,29 +185,27 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="axis"></param>
-        /// <param name="angle"></param>
+        /// <param name="axisAngle"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Quaternion FromAxisAngle(in Vector3 axis, float angle)
+        public static Quaternion FromAxisAngle(in AxisAngle axisAngle)
         {
             Quaternion result;
-            FromAxisAngle(axis, angle, out result);
+            FromAxisAngle(axisAngle, out result);
             return result;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pitch"></param>
-        /// <param name="roll"></param>
+        /// <param name="eulerAngles"></param>
         /// <param name="yaw"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Quaternion FromEulerAngles(float pitch, float roll, float yaw)
+        public static Quaternion FromEulerAngles(in EulerAngles eulerAngles, float yaw)
         {
             Quaternion result;
-            FromEulerAngles(pitch, roll, yaw, out result);
+            FromEulerAngles(eulerAngles, out result);
             return result;
         }
 
@@ -308,15 +306,15 @@ namespace Raster.Math
         /// <param name="angle"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void FromAxisAngle(in Vector3 axis, float angle, out Quaternion result)
+        public static void FromAxisAngle(in AxisAngle axisAngle, out Quaternion result)
         {
-            float halfAngle = 0.5f * angle;
+            float halfAngle = 0.5f * axisAngle.Angle;
             float s = MathF.Sin(halfAngle);
             float c = MathF.Cos(halfAngle);
 
-            result.X = axis.X * s;
-            result.Y = axis.Y * s;
-            result.Z = axis.Z * s;
+            result.X = axisAngle.Axis.X * s;
+            result.Y = axisAngle.Axis.Y * s;
+            result.Z = axisAngle.Axis.Z * s;
             result.W = c;
         }
 
@@ -328,19 +326,19 @@ namespace Raster.Math
         /// <param name="yaw"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void FromEulerAngles(float pitch, float roll, float yaw, out Quaternion result)
+        public static void FromEulerAngles(in EulerAngles eulerAngles, out Quaternion result)
         {
             float sr, cr, sp, cp, sy, cy;
 
-            float halfPitch = 0.5f * pitch;
+            float halfPitch = 0.5f * eulerAngles.Pitch;
             sp = MathF.Sin(halfPitch);
             cp = MathF.Cos(halfPitch);
 
-            float halfRoll = 0.5f * roll;
+            float halfRoll = 0.5f * eulerAngles.Roll;
             sr = MathF.Sin(halfRoll);
             cr = MathF.Cos(halfRoll);
 
-            float halfYaw = 0.5f * yaw;
+            float halfYaw = 0.5f * eulerAngles.Yaw;
             sy = MathF.Sin(halfYaw);
             cy = MathF.Cos(halfYaw);
 

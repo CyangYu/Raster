@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Raster.Math
 {
-    public class GenericMatrix
+    public class GenericMatrix<T>
     {
         #region Public Fields
         /// <summary>
@@ -20,24 +20,26 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        private float[,] matrix;
+        private T[] matrix;
         #endregion Public Fields
 
+        #region Public Instance Properties
+        /// <summary>
+        /// 
+        /// </summary>
         public int Row
         {
-            get
-            {
-                return row;
-            }
+            get { return row; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int Column
         {
-            get
-            {
-                return column;
-            }
+            get { return column; }
         }
+        #endregion Public Instance Properties
 
         #region Constructor
         public GenericMatrix(int r, int c)
@@ -47,8 +49,9 @@ namespace Raster.Math
 
             row     = r;
             column  = c;
-            matrix  = new float[r, c];
+            matrix  = new T[r * c];
         }
+   
         #endregion Constructor
         
     }

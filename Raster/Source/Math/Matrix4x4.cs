@@ -1204,8 +1204,7 @@ namespace Raster.Math
         /// <param name="plane"></param>
         public void ShadowMatrix(in Vector3 lightDirection, in Plane plane)
         {
-            Plane p;
-            Plane.Normalize(plane, out p);
+            Plane p = Plane.Normalize(plane);
 
             float dot = Vector3.Dot(p.Normal, lightDirection);
             float x = -p.Normal.X;
@@ -1237,73 +1236,34 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="posX"></param>
-        /// <param name="posY"></param>
-        /// <param name="posZ"></param>
-        /// <param name="forwardX"></param>
-        /// <param name="forwardY"></param>
-        /// <param name="forwardZ"></param>
-        /// <param name="upX"></param>
-        /// <param name="upY"></param>
-        /// <param name="upZ"></param>
-        public void WorldMatrix(float posX, float posY, float posZ,
-                                float forwardX, float forwardY, float forwardZ,
-                                float upX, float upY, float upZ)
-        {
-            float lenSqr = forwardX * forwardX * +forwardY * forwardY * forwardZ * forwardZ;
-            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
-
-            float zAxisX = forwardX * invNorm;
-            float zAxisY = forwardY * invNorm;
-            float zAxisZ = forwardZ * invNorm;
-
-            float tempX = upY * zAxisZ - upZ * zAxisY;
-            float tempY = upX * zAxisZ - upZ * zAxisX;
-            float tempZ = upX * zAxisY - upY * zAxisX;
-
-            lenSqr = tempX * tempX + tempY * tempY + tempZ * tempZ;
-            invNorm = MathHelper.FastSqrtInverse(lenSqr);
-
-            float xAxisX = tempX * invNorm;
-            float xAxisY = tempY * invNorm;
-            float xAxisZ = tempZ * invNorm;
-
-            float yAxisX = zAxisY * xAxisZ - zAxisZ * xAxisY;
-            float yAxisY = zAxisX * xAxisZ - zAxisZ * xAxisX;
-            float yAxisZ = zAxisX * xAxisY - zAxisY * xAxisX;
-
-            M00 = xAxisX;
-            M01 = xAxisY;
-            M02 = xAxisZ;
-            M03 = 0.0f;
-
-            M10 = yAxisX;
-            M11 = yAxisY;
-            M12 = yAxisZ;
-            M13 = 0.0f;
-
-            M20 = zAxisX;
-            M21 = zAxisY;
-            M22 = zAxisZ;
-            M23 = 0.0f;
-
-            M30 = posX;
-            M31 = posY;
-            M32 = posZ;
-            M33 = 1.0f;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="position"></param>
         /// <param name="forward"></param>
         /// <param name="up"></param>
         public void WorldMatrix(in Vector3 position, in Vector3 forward, in Vector3 up)
         {
-            WorldMatrix(position.X, position.Y, position.Z,
-                        forward.X, forward.Y, forward.Z,
-                        up.X, up.Y, up.Z);
+            Vector3 zAxis = Vector3.Normalize(forward);
+            Vector3 xAxis = Vector3.Normalize(Vector3.Cross(up, zAxis));
+            Vector3 yAxis = Vector3.Cross(zAxis, xAxis);
+
+            M00 = xAxis.X;
+            M01 = xAxis.Y;
+            M02 = xAxis.Z;
+            M03 = 0.0f;
+
+            M10 = yAxis.X;
+            M11 = yAxis.Y;
+            M12 = yAxis.Z;
+            M13 = 0.0f;
+
+            M20 = zAxis.X;
+            M21 = zAxis.Y;
+            M22 = zAxis.Z;
+            M23 = 0.0f;
+
+            M30 = position.X;
+            M31 = position.Y;
+            M32 = position.Z;
+            M33 = 1.0f;
         }
 
         #endregion Public Instance Methods
@@ -1312,7 +1272,9 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="axis"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
         /// <param name="angle"></param>
         /// <returns></returns>
         public Matrix4x4 FromAxisAngle(in AxisAngle axisAngle)
@@ -1325,52 +1287,20 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="axis"></param>
-        /// <param name="angle"></param>
-        /// <returns></returns>
-        public Matrix4x4 FromAxisAngle(in Vector3 axis, float angle)
-        {
-            Matrix4x4 result;
-            FromAxisAngle(axis.X, axis.Y, axis.Z, angle, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        /// <param name="angle"></param>
-        /// <returns></returns>
-        public Matrix4x4 FromAxisAngle(float x, float y, float z, float angle)
-        {
-            Matrix4x4 result;
-            FromAxisAngle(x, y, z, angle, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        /// <param name="angle"></param>
+        /// <param name="axisAngle"></param>
         /// <param name="result"></param>
         public void FromAxisAngle(float x, float y, float z, float angle, out Matrix4x4 result)
         {
-            float rad = MathF.Sin(angle);
+            float rad = MathF.DegToRad(angle);
             float s = MathF.Sin(rad);
             float c = MathF.Cos(rad);
 
-            float len = MathF.Sqrt(x * x + y * y + z * z);
-            if (len - 0.0f > MathF.Epsilon)
+            float invNorm = MathHelper.FastSqrtInverse(x * x + y * y + z * z);
+            if (!MathHelper.IsZero(invNorm)
             {
-                float invLen = 1.0f / len;
-                x *= invLen;
-                y *= invLen;
-                z *= invLen;
+                x *= invNorm;
+                y *= invNorm;
+                z *= invNorm;
             }
             else
             {
