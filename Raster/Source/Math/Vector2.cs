@@ -267,6 +267,23 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="value1"></param>
+        /// <param name="tangent1"></param>
+        /// <param name="value2"></param>
+        /// <param name="tangent2"></param>
+        /// <param name="factor"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Hermite(in Vector2 value1, in Vector2 tangent1, in Vector2 value2, in Vector2 tangent2, float factor)
+        {
+            Vector2 result;
+            Hermite(value1, tangent1, value2, tangent2, factor, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value1"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Inverse(in Vector2 value)
@@ -387,6 +404,14 @@ namespace Raster.Math
             return result;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 SmoothStep(in Vector2 begin, in Vector2 end, float factor)
+        {
+            Vector2 result;
+            SmoothStep(begin, end, factor, out result);
+            return result;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -477,6 +502,29 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="value1"></param>
+        /// <param name="tangent1"></param>
+        /// <param name="value2"></param>
+        /// <param name="tangent2"></param>
+        /// <param name="factor"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Hermite(in Vector2 value1, in Vector2 tangent1, in Vector2 value2, in Vector2 tangent2, float factor, out Vector2 result)
+        {
+            float squared = factor * factor;
+            float cubed = factor * squared;
+            float part1 = ((2.0f * cubed) - (3.0f * squared)) + 1.0f;
+            float part2 = (-2.0f * cubed) + (3.0f * squared);
+            float part3 = (cubed - (2.0f * squared)) + factor;
+            float part4 = cubed - squared;
+
+            result.X = (value1.X * part1) + (value2.X * part2) + (tangent1.X * part3) + (tangent2.X * part4);
+            result.Y = (value1.Y * part1) + (value2.Y * part2) + (tangent1.Y * part3) + (tangent2.Y * part4);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="value"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -561,6 +609,63 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="vec2"></param>
+        /// <param name="normal"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Reflect(in Vector2 vec2, in Vector2 normal, out Vector2 result)
+        {
+            float dot = vec2.X + normal.X + vec2.Y * normal.Y;
+
+            result.X = vec2.X - 2.0f * dot * normal.X;
+            result.Y = vec2.Y - 2.0f * dot * normal.Y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vec2"></param>
+        /// <param name="normal"></param>
+        /// <param name="eta"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Refract(in Vector2 vec2, in Vector2 normal, float eta, out Vector2 result)
+        {
+            float dot = vec2.X * normal.X + vec2.Y * normal.Y;
+            float k = 1.0f - eta * eta * (1.0f - dot * dot);
+
+            if (k < 0.0f)
+            {
+                result = Zero;
+            }
+            else
+            {
+                float sqrtk = MathF.Sqrt(k);
+
+                result.X = eta * vec2.X - (eta * dot + sqrtk) * normal.X;
+                result.Y = eta * vec2.Y - (eta * dot + sqrtk) * normal.Y;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        /// <param name="x"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SmoothStep(in Vector2 begin, in Vector2 end, float x, out Vector2 result)
+        {
+            float step = MathF.SmoothStep(0.0f, 1.0f, x);
+
+            result.X = begin.X + (end.X - begin.X) * step;
+            result.Y = begin.Y + (end.Y - begin.Y) * step;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="position"></param>
         /// <param name="matrix"></param>
         /// <param name="result"></param>
@@ -631,47 +736,6 @@ namespace Raster.Math
 
             result.X = position.X * (1.0f - yy2 - zz2) + position.Y * (xy2 - wz2);
             result.Y = position.X * (xy2 + wz2) + position.Y * (1.0f - xx2 - zz2);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="vec2"></param>
-        /// <param name="normal"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Reflect(in Vector2 vec2, in Vector2 normal, out Vector2 result)
-        {
-            float dot = vec2.X + normal.X + vec2.Y * normal.Y;
-
-            result.X = vec2.X - 2.0f * dot * normal.X;
-            result.Y = vec2.Y - 2.0f * dot * normal.Y;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="vec2"></param>
-        /// <param name="normal"></param>
-        /// <param name="eta"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Refract(in Vector2 vec2, in Vector2 normal, float eta, out Vector2 result)
-        {
-            float dot = vec2.X * normal.X + vec2.Y * normal.Y;
-            float k = 1.0f - eta * eta * (1.0f - dot * dot);
-
-            if (k < 0.0f)
-            {
-                result = Zero;
-            }
-            else
-            {
-                float sqrtk = MathF.Sqrt(k);
-
-                result.X = eta * vec2.X - (eta * dot + sqrtk) * normal.X;
-                result.Y = eta * vec2.Y - (eta * dot + sqrtk) * normal.Y;
-            }
         }
 
         /// <summary>
