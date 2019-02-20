@@ -300,6 +300,23 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="value1"></param>
+        /// <param name="tangent1"></param>
+        /// <param name="value2"></param>
+        /// <param name="tangent2"></param>
+        /// <param name="factor"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Hermite(in Vector3 value1, in Vector3 tangent1, in Vector3 value2, in Vector3 tangent2, float factor)
+        {
+            Vector3 result;
+            Hermite(value1, tangent1, value2, tangent2, factor, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value1"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Inverse(in Vector3 value)
@@ -381,6 +398,50 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="vec3"></param>
+        /// <param name="normal"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Reflect(in Vector3 vec3, in Vector3 normal)
+        {
+            Vector3 result;
+            Reflect(vec3, normal, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vec3"></param>
+        /// <param name="normal"></param>
+        /// <param name="eta"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Refract(in Vector3 vec3, in Vector3 normal, float eta)
+        {
+            Vector3 result;
+            Refract(vec3, normal, eta, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        /// <param name="factor"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 SmoothStep(in Vector3 begin, in Vector3 end, float factor)
+        {
+            Vector3 result;
+            SmoothStep(begin, end, factor, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="position"></param>
         /// <param name="matrix"></param>
         /// <returns></returns>
@@ -417,35 +478,6 @@ namespace Raster.Math
         {
             Vector3 result;
             Transform(position, rotation, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="vec3"></param>
-        /// <param name="normal"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Reflect(in Vector3 vec3, in Vector3 normal)
-        {
-            Vector3 result;
-            Reflect(vec3, normal, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="vec3"></param>
-        /// <param name="normal"></param>
-        /// <param name="eta"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Refract(in Vector3 vec3, in Vector3 normal, float eta)
-        {
-            Vector3 result;
-            Refract(vec3, normal, eta, out result);
             return result;
         }
 
@@ -495,6 +527,30 @@ namespace Raster.Math
             float dy = value1.Y - value2.Y;
             float dz = value1.Z - value2.Z;
             return MathF.Sqrt(dx * dx + dy * dy + dz * dz);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value1"></param>
+        /// <param name="tangent1"></param>
+        /// <param name="value2"></param>
+        /// <param name="tangent2"></param>
+        /// <param name="factor"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Hermite(in Vector3 value1, in Vector3 tangent1, in Vector3 value2, in Vector3 tangent2, float factor, out Vector3 result)
+        {
+            float squared = factor * factor;
+            float cubed = factor * squared;
+            float part1 = ((2.0f * cubed) - (3.0f * squared)) + 1.0f;
+            float part2 = (-2.0f * cubed) + (3.0f * squared);
+            float part3 = (cubed - (2.0f * squared)) + factor;
+            float part4 = cubed - squared;
+
+            result.X = (value1.X * part1) + (value2.X * part2) + (tangent1.X * part3) + (tangent2.X * part4);
+            result.Y = (value1.Y * part1) + (value2.Y * part2) + (tangent1.Y * part3) + (tangent2.Y * part4);
+            result.Z = (value1.Z * part1) + (value2.Z * part2) + (tangent1.Z * part3) + (tangent2.Z * part4);
         }
 
         /// <summary>
@@ -604,6 +660,68 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="vec3"></param>
+        /// <param name="normal"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Reflect(in Vector3 vec3, in Vector3 normal, out Vector3 result)
+        {
+            float dot = vec3.X + normal.X + vec3.Y * normal.Y +
+                        vec3.Z * normal.Z;
+
+            result.X = vec3.X - 2.0f * dot * normal.X;
+            result.Y = vec3.Y - 2.0f * dot * normal.Y;
+            result.Z = vec3.Z - 2.0f * dot * normal.Z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vec3"></param>
+        /// <param name="normal"></param>
+        /// <param name="eta"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Refract(in Vector3 vec3, in Vector3 normal, float eta, out Vector3 result)
+        {
+            float dot = vec3.X * normal.X + vec3.Y * normal.Y +
+                        vec3.Z * normal.Z;
+            float k = 1.0f - eta * eta * (1.0f - dot * dot);
+
+            if (k < 0.0f)
+            {
+                result = Zero;
+            }
+            else
+            {
+                float sqrtk = MathF.Sqrt(k);
+
+                result.X = eta * vec3.X - (eta * dot + sqrtk) * normal.X;
+                result.Y = eta * vec3.Y - (eta * dot + sqrtk) * normal.Y;
+                result.Z = eta * vec3.Z - (eta * dot + sqrtk) * normal.Z;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        /// <param name="x"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SmoothStep(in Vector3 begin, in Vector3 end, float x, out Vector3 result)
+        {
+            float step = MathF.SmoothStep(0.0f, 1.0f, x);
+
+            result.X = begin.X + (end.X - begin.X) * step;
+            result.Y = begin.Y + (end.Y - begin.Y) * step;
+            result.Z = begin.Z + (end.Z - begin.Z) * step;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="position"></param>
         /// <param name="matrix"></param>
         /// <param name="result"></param>
@@ -664,51 +782,6 @@ namespace Raster.Math
                        position.Z * (yz2 - wx2);
             result.Z = position.X * (xz2 - wy2) + position.Y * (yz2 + wx2) + 
                        position.Z * (1.0f - xx2 - yy2);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="vec3"></param>
-        /// <param name="normal"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Reflect(in Vector3 vec3, in Vector3 normal, out Vector3 result)
-        {
-            float dot = vec3.X + normal.X + vec3.Y * normal.Y + 
-                        vec3.Z * normal.Z;
-
-            result.X = vec3.X - 2.0f * dot * normal.X;
-            result.Y = vec3.Y - 2.0f * dot * normal.Y;
-            result.Z = vec3.Z - 2.0f * dot * normal.Z;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="vec3"></param>
-        /// <param name="normal"></param>
-        /// <param name="eta"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Refract(in Vector3 vec3, in Vector3 normal, float eta, out Vector3 result)
-        {
-            float dot = vec3.X * normal.X + vec3.Y * normal.Y + 
-                        vec3.Z * normal.Z;
-            float k = 1.0f - eta * eta * (1.0f - dot * dot);
-
-            if (k < 0.0f)
-            {
-                result = Zero;
-            }
-            else
-            {
-                float sqrtk = MathF.Sqrt(k);
-
-                result.X = eta * vec3.X - (eta * dot + sqrtk) * normal.X;
-                result.Y = eta * vec3.Y - (eta * dot + sqrtk) * normal.Y;
-                result.Z = eta * vec3.Z - (eta * dot + sqrtk) * normal.Z;
-            }
         }
 
         /// <summary>

@@ -111,19 +111,25 @@ namespace Raster.Math
         #endregion Public Static Methods
 
         #region Public Instance Properties
-        public float[] RawData
+        /// <summary>
+        /// 
+        /// </summary>
+        public float Determinant
         {
             get
             {
-                return new float[4 * 4]
-                {
-                    M00, M01, M02, M03,
-                    M10, M11, M12, M13,
-                    M20, M21, M22, M23,
-                    M30, M31, M32, M33
-                };
+                float d0 = M22 * M33 - M23 * M32;
+                float d1 = M21 * M33 - M23 * M32;
+                float d2 = M21 * M32 - M22 * M31;
+                float d3 = M20 * M33 - M23 * M30;
+                float d4 = M20 * M32 - M22 * M30;
+                float d5 = M20 * M31 - M21 * M30;
+
+                float det = M00;
+                return 0.0f;
             }
         }
+
         #endregion Public Instance Properties
 
         #region Constructor

@@ -98,8 +98,10 @@
     <Compile Include="Source\Math\Geometry\Collision.cs" />
     <Compile Include="Source\Private\MathHelper.cs" />
     <Compile Include="Source\Private\HashHelper.cs" />
+    <Compile Include="Source\Render\Billboard.cs" />
     <Compile Include="Source\Render\Camera.cs" />
     <Compile Include="Source\Render\Light\Light.cs" />
+    <Compile Include="Source\Render\Light\PointLight.cs" />
     <Compile Include="Test\TestMatrix4x4.cs" />
   </ItemGroup>
   <ItemGroup />
