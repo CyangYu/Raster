@@ -148,9 +148,9 @@ namespace Raster.Math
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Matrix2x3: M00 = {0}, M01 = {1}, M02 = {2}, " +
-                                            "M10 = {3}, M11 = {4}, M12 = {5} ",
-                                            M00, M01, M02, M10, M11, M12);
+            return string.Format("Matrix2x3: [[{0}, {1}, {2}], " +
+                                             "[{3}, {4}, {5}]]",
+                                 M00, M01, M02, M10, M11, M12);
         }
 
         /// <summary>

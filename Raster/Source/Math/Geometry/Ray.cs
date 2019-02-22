@@ -14,33 +14,12 @@ namespace Raster.Math.Geometry
         /// <summary>
         /// 
         /// </summary>
-        private Vector3 origin;
+        public Vector3 origin;
         /// <summary>
         /// 
         /// </summary>
-        private Vector3 direction;
+        public Vector3 direction;
         #endregion Public Fields
-
-        #region Public Instance Properties
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector3 Origin
-        {
-            get { return origin; }
-            set { origin = value; }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector3 Direction
-        {
-            get { return direction; }
-            set { Vector3.Normalize(value, out direction); }
-        }
-
-        #endregion Public Instance Properties
 
         #region Constructor
         public Ray(in Ray other)
@@ -119,20 +98,6 @@ namespace Raster.Math.Geometry
         #endregion Public Instance Methods
 
         #region Public Static Methods
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ray"></param>
-        /// <param name="time"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 PointAt(in Ray ray, float time)
-        {
-            Vector3 result;
-            PointAt(ray, time, out result);
-            return result;
-        }
-
         /// <summary>
         /// 
         /// </summary>

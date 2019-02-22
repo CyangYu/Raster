@@ -174,11 +174,11 @@ namespace Raster.Math
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Matrix4x2: M00 = {0},  M01 = {1}, " +
-                                            "M10 = {4},  M11 = {5}, " +
-                                            "M20 = {8},  M21 = {9}, " +
-                                            "M30 = {12}, M31 = {13  ",
-                                            M00, M01, M10, M11, M20, M21, M30, M31);
+            return string.Format("Matrix4x2: [[{0}, {1}], " +
+                                             "[{4}, {5}], " +
+                                             "[{8}, {9}], " +
+                                             "[{10},{11}]]",
+                                 M00, M01, M10, M11, M20, M21, M30, M31);
         }
 
         /// <summary>

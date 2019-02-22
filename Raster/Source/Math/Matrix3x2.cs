@@ -155,10 +155,10 @@ namespace Raster.Math
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Matrix3x2: M00 = {0}, M01 = {1}, " +
-                                            "M10 = {2}, M11 = {3}, " +
-                                            "M20 = {4}, M21 = {5}  ",
-                                            M00, M01, M10, M11, M20, M21);
+            return string.Format("Matrix3x2: [[{0}, {1}], " +
+                                             "[{2}, {3}], " +
+                                             "[{4}, {5}]]",
+                                 M00, M01, M10, M11, M20, M21);
         }
 
         /// <summary>

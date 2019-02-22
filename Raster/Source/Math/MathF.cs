@@ -218,7 +218,7 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Max(float a, float b) => a > b ? a : b;
+        public static float Max(float a, float b) => SysMath.Max(a, b);
 
         /// <summary>
         /// 
@@ -227,7 +227,7 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Min(float a, float b) => a < b ? a : b;
+        public static float Min(float a, float b) => SysMath.Min(a, b);
 
         /// <summary>
         /// 

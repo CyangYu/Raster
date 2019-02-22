@@ -253,10 +253,10 @@ namespace Raster.Math
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Matrix3x4: M00 = {0}, M01 = {1}, M02 = {2}, M03 = {3}, " +
-                                            "M10 = {4}, M11 = {5}, M12 = {6}, M13 = {7}, " +
-                                            "M20 = {8}, M21 = {9}, M22 = {10}, M23 = {11} ",
-                                            M00, M01, M02, M03, M10, M11, M12, M13, M20, M21, M22, M23);
+            return string.Format("Matrix3x4: [[{0}, {1}, {2}, {3}], " +
+                                             "[{4}, {5}, {6}, {7}], " +
+                                             "[{8}, {9}, {10},{11}]",
+                                 M00, M01, M02, M03, M10, M11, M12, M13, M20, M21, M22, M23);
         }
 
         /// <summary>

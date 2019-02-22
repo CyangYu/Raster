@@ -50,7 +50,7 @@ namespace Raster.Math.Geometry
 
         #endregion Constructor
 
-        #region Public Static Methods
+        #region Public Instance Methods
         /// <summary>
         /// 
         /// </summary>
@@ -81,9 +81,11 @@ namespace Raster.Math.Geometry
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() =>
-            string.Format("Plane: Normal X = {0}, Y = {1}, Z = {2} Distance = {3}",
+        public override string ToString()
+        {
+            return string.Format("Plane: Normal X = {0}, Y = {1}, Z = {2} Distance = {3}",
                           Normal.X, Normal.Y, Normal.Z, Distance);
+        }
 
         /// <summary>
         /// 

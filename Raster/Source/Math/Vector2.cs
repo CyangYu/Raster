@@ -157,11 +157,8 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Normalize()
         {
-            float lenSqr = X * X + Y * Y;
-            float invLen = MathHelper.FastSqrtInverse(lenSqr);
-
-            X *= invLen;
-            Y *= invLen;         
+            float Z = 0.0f, W = 0.0f;
+            MathHelper.Normalize(ref X, ref Y, ref Z, ref W);
         }
 
         /// <summary>
@@ -586,11 +583,9 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Normalize(in Vector2 value, out Vector2 result)
         {
-            float lenSqr = value.X * value.X + value.Y * value.Y;
-            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
-
-            result.X = value.X * invNorm;
-            result.Y = value.Y * invNorm;
+            float Z, W;
+            MathHelper.Normalize(value.X, value.Y, 0.0f, 0.0f, 
+                                 out result.X, out result.Y, out Z, out W);
         }
 
         /// <summary>

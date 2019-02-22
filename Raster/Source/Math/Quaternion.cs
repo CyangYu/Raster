@@ -150,6 +150,12 @@ namespace Raster.Math
         /// </summary>
         public void Conjugate() => W = -W;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Normalize() =>
+             MathHelper.Normalize(ref X, ref Y, ref Z, ref W);
+
         #endregion Public Instance Methods
 
         #region Public Static Methods
@@ -215,25 +221,13 @@ namespace Raster.Math
         /// <param name="matrix"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Quaternion FromRotationMatrix(in Matrix4x4 matrix)
+        public static Quaternion FromRotationMatrix(in Matrix3x3 matrix)
         {
             Quaternion result;
             FromRotationMatrix(matrix, out result);
             return result;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Quaternion Inverse(in Quaternion value)
-        {
-            Quaternion result;
-            Inverse(value, out result);
-            return result;
-        }
 
         /// <summary>
         /// 
@@ -284,14 +278,14 @@ namespace Raster.Math
         /// <param name="value1"></param>
         /// <param name="value2"></param>
         /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Concatenate(in Quaternion value1, in Quaternion value2, out Quaternion result)
         {
             float cx = value2.Y * value1.Z - value2.Z * value1.Y;
             float cy = value2.Z * value1.X - value2.X * value1.Z;
             float cz = value2.X * value1.Y - value2.Y * value1.X;
 
-            float dot = value2.X * value1.X + value2.Y * value1.Y + value2.Z * value1.Z;
+            float dot = value2.X * value1.X + value2.Y * value1.Y + 
+                        value2.Z * value1.Z;
 
             result.X = value2.X * value1.W + value1.X * value2.W + cx;
             result.Y = value2.Y * value1.W + value1.Y * value2.W + cy;
@@ -305,7 +299,6 @@ namespace Raster.Math
         /// <param name="axis"></param>
         /// <param name="angle"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void FromAxisAngle(in AxisAngle axisAngle, out Quaternion result)
         {
             float halfAngle = 0.5f * axisAngle.Angle;
@@ -321,11 +314,22 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="xAxis"></param>
+        /// <param name="yAxis"></param>
+        /// <param name="zAxis"></param>
+        /// <param name="result"></param>
+        public static void FromAxes(in Vector3 xAxis, in Vector3 yAxis, in Vector3 zAxis, out Quaternion result)
+        {
+            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="pitch"></param>
         /// <param name="roll"></param>
         /// <param name="yaw"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void FromEulerAngles(in EulerAngles eulerAngles, out Quaternion result)
         {
             float sr, cr, sp, cp, sy, cy;
@@ -342,10 +346,13 @@ namespace Raster.Math
             sy = MathF.Sin(halfYaw);
             cy = MathF.Cos(halfYaw);
 
-            result.X = cy * sp * cr + sy * cp * sr;
+            float crcy = cr * cy;
+            float srsy = sr * sy;
+
+            result.X = crcy * sp + srsy * cp;
             result.Y = sy * cp * cr - cy * sp * sr;
             result.Z = cy * cp * sr - sy * cp * cr;
-            result.W = cy * cp * cr + sy * sp * sr;
+            result.W = crcy * cp + srsy * sp;
         }
 
         /// <summary>
@@ -353,8 +360,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="matrix"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void FromRotationMatrix(in Matrix4x4 matrix, out Quaternion result)
+        public static void FromRotationMatrix(in Matrix3x3 matrix, out Quaternion result)
         {
             float trace = matrix.M00 + matrix.M11 + matrix.M22 + matrix.M33;
             
@@ -402,29 +408,10 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Inverse(in Quaternion value, out Quaternion result)
-        {
-            float lenSqr = value.X * value.X + value.Y * value.Y +
-                           value.Z * value.Z + value.W * value.W;
-            float invNorm = 1.0f / lenSqr;
-
-            result.X = -value.X * invNorm;
-            result.Y = -value.Y * invNorm;
-            result.Z = -value.Z * invNorm;
-            result.W =  value.W * invNorm;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="value1"></param>
         /// <param name="value2"></param>
         /// <param name="factor"></param>
         /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Lerp(in Quaternion value1, in Quaternion value2, float factor, out Quaternion result)
         {
             float t = factor;
@@ -461,19 +448,80 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        /// <param name="t"></param>
+        /// <param name="result"></param>
+        public static void NLerp(in Quaternion value1, in Quaternion value2, float t, out Quaternion result)
+        {
+            if (t <= 0.0f)
+            {
+                result = value1;
+                return;
+            }
+            else if (t >= 1.0f)
+            {
+                result = value2;
+                return;
+            }
+
+            result = value2;
+            float dot = Quaternion.Dot(value1, value2);
+            if (dot < 0.0f)
+            {
+                result = -value2;
+            }
+
+            result.X = value1.X * (1.0f - t) + value2.X * t;
+            result.Y = value1.Y * (1.0f - t) + value2.Y * t;
+            result.Z = value1.Z * (1.0f - t) + value2.Z * t;
+            result.W = value2.W * (1.0f - t) + value2.W * t;
+            result.Normalize();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="value"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Normalize(in Quaternion value, out Quaternion result)
         {
-            float lenSqr = value.X * value.X + value.Y * value.Y +
-                           value.Z * value.Z + value.W * value.W;
-            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
+            MathHelper.Normalize(value.X, value.Y, value.Z, value.W,
+                                 out result.X, out result.Y, out result.Z, out result.W);
+        }
 
-            result.X = value.X * invNorm;
-            result.Y = value.Y * invNorm;
-            result.Z = value.Z * invNorm;
-            result.W = value.W * invNorm;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="result"></param>
+        public static void RotationTo(in Vector3 from, in Vector3 to, out Quaternion result)
+        {
+            Vector3.Normalize(from, out Vector3 v0);
+            Vector3.Normalize(to, out Vector3 v1);
+
+            float d = Vector3.Dot(v0, v1) + 1.0f;
+            if (MathHelper.IsZero(d))
+            {
+                Vector3 axis = Vector3.Cross(Vector3.UnitX, v0);
+                if (MathHelper.IsZero(axis.LengthSquared))
+                {
+                    Vector3.Cross(Vector3.UnitY, v0, out axis);
+                }
+
+                axis.Normalize();
+                result.X = axis.X;
+                result.Y = axis.Y;
+                result.Z = axis.Z;
+                result.W = 0.0f;
+
+                return;
+            }
+
+            float inv = MathHelper.FastSqrtInverse(2.0f * d);
+            Vector3 axis = Vector3.Cross(v0, v1);
         }
 
         /// <summary>
@@ -483,7 +531,6 @@ namespace Raster.Math
         /// <param name="value2"></param>
         /// <param name="factor"></param>
         /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Slerp(in Quaternion value1, in Quaternion value2, float factor, out Quaternion result)
         {
             float t = factor;
@@ -641,6 +688,17 @@ namespace Raster.Math
             Quaternion result;
             Add(left, right, out result);
             return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="quaternion"></param>
+        /// <returns></returns>
+        public static Quaternion operator -(in Quaternion quaternion)
+        {
+            return new Quaternion(-quaternion.X, -quaternion.Y, 
+                                  -quaternion.Z, -quaternion.W);
         }
 
         /// <summary>

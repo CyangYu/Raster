@@ -12,30 +12,41 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        private Vector3 axis;
+        public Vector3 Axis;
         /// <summary>
         /// 
         /// </summary>
-        private float angle;
+        public float Angle;
         #endregion Private Instance Fields
 
-        #region Public Instance Properties
-        /// <summary>
-        /// The axis should be normalized vector
-        /// </summary>
-        public Vector3 Axis
-        {
-            get { return axis; }
-            set { axis = Vector3.Normalize(value); }
-        }
-
+        #region Public Static Fields
         /// <summary>
         /// 
         /// </summary>
-        public float Angle
+        public static AxisAngle Zero = new AxisAngle(0.0f, 0.0f, 0.0f, 0.0f);
+        #endregion
+
+        #region Constructor
+        public AxisAngle(in AxisAngle axisAngle)
+            : this(axisAngle.Axis, axisAngle.Angle)
         {
-            get { return angle; }
-            set { angle = value; }
+        }
+
+        public AxisAngle(in Vector3 axis, float angle)
+        {
+            Axis.X = axis.X;
+            Axis.Y = axis.Y;
+            Axis.Z = axis.Z;
+            Angle  = angle;
+
+            Axis.Normalize();
+        }
+
+        public AxisAngle(float x, float y, float z, float angle)
+        {
+            Axis = new Vector3(x, y, z);
+            Axis.Normalize();
+            Angle = angle;
         }
 
         #region Public Instance Methods
@@ -67,9 +78,11 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() =>
-            string.Format("AxisAngle: Axis  X = {0}, Y = {1}, Z = {2} Angle = {3}", 
-                          Axis.X, Axis.Y, Axis.Z, Angle);
+        public override string ToString()
+        {
+            return string.Format("AxisAngle: Axis  X = {0}, Y = {1}, Z = {2} Angle = {3}",
+                                 Axis.X, Axis.Y, Axis.Z, Angle);
+        }
 
         /// <summary>
         /// 
@@ -85,17 +98,54 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        /// <param name="w"></param>
+        /// <param name="eulerAngles"></param>
         /// <param name="axisAngle"></param>
+        public static void FromEulerAngles(in EulerAngles eulerAngles, out AxisAngle axisAngle)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="axisAngle"></param>
+        public static void FromRotationMatrix(in Matrix3x3 matrix, out AxisAngle axisAngle)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="quaternion"></param>
+        /// <param name="AxisAngle"></param>
         public static void FromQuaternion(in Quaternion quaternion, out AxisAngle axisAngle)
         {
-            axisAngle.axis.X = quaternion.X;
-            axisAngle.axis.Y = quaternion.Y;
-            axisAngle.axis.Z = quaternion.Z;
-            axisAngle.angle  = quaternion.W;
+            float lenSqr = quaternion.LengthSquared;
+            if (!MathHelper.IsZero(lenSqr))
+            {
+                axisAngle.Axis.X = quaternion.X;
+                axisAngle.Axis.Y = quaternion.Y;
+                axisAngle.Axis.Z = quaternion.Z;
+
+                if (!MathHelper.IsOne(lenSqr))
+                {
+                    float invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+                    axisAngle.Axis.X *= invNorm;
+                    axisAngle.Axis.Y *= invNorm;
+                    axisAngle.Axis.Z *= invNorm;
+                }
+
+                axisAngle.Angle = 2.0f * MathF.Acos(quaternion.W);
+            }
+            else
+            {
+                axisAngle = Zero;
+            }
+
+            axisAngle.Angle = MathF.DegToRad(axisAngle.Angle);
         }
 
         #region Operator Overload
@@ -105,19 +155,23 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(in AxisAngle left, in AxisAngle right) =>
-            left.axis.X == right.axis.X && left.axis.Y == right.axis.Y && left.axis.Z == right.axis.Z && 
-            left.angle == right.angle;
+        public static bool operator ==(in AxisAngle left, in AxisAngle right)
+        {
+            return left.Axis.X == right.Axis.X && left.Axis.Y == right.Axis.Y && left.Axis.Z == right.Axis.Z &&
+                   left.Angle == right.Angle;
+        }
 
         /// <summary>
-        /// 009989099908866
+        /// 
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(in AxisAngle left, in AxisAngle right) =>
-           left.axis.X != right.axis.X || left.axis.Y != right.axis.Y || left.axis.Z != right.axis.Z ||
-           left.angle != right.angle;
+        public static bool operator !=(in AxisAngle left, in AxisAngle right)
+        {
+            return left.Axis.X != right.Axis.X || left.Axis.Y != right.Axis.Y || left.Axis.Z != right.Axis.Z ||
+                   left.Angle != right.Angle;
+        }
 
         #endregion Operator Overload
     }

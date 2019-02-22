@@ -409,7 +409,7 @@ namespace Raster.Math
                                              "[{4}, {5}, {6},  {7}], " +
                                              "[{8}, {9}, {10}, {11}], " +
                                              "[{12},{13}, {14}, {15}]]",
-                                            M00, M01, M02, M03, M10, M11, M12, M13, M20, M21, M22, M23, M30, M31, M32, M33);
+                                 M00, M01, M02, M03, M10, M11, M12, M13, M20, M21, M22, M23, M30, M31, M32, M33);
         }
 
         /// <summary>
@@ -670,7 +670,8 @@ namespace Raster.Math
             else
             {
                 Matrix4x4 rotation;
-                FromAxisAngle(x, y, z, angle, out rotation);
+                AxisAngle axisAngle = new AxisAngle(x, y, z, angle);
+                FromAxisAngle(axisAngle, out rotation);
             }
         }
 
@@ -1283,10 +1284,29 @@ namespace Raster.Math
         /// <param name="z"></param>
         /// <param name="angle"></param>
         /// <returns></returns>
-        public Matrix4x4 FromAxisAngle(in AxisAngle axisAngle)
+        public static Matrix4x4 FromAxisAngle(in AxisAngle axisAngle)
         {
             Matrix4x4 result;
-            FromAxisAngle(axisAngle.Axis.X, axisAngle.Axis.Y, axisAngle.Axis.Z, axisAngle.Angle, out result);
+            FromAxisAngle(axisAngle, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngle"></param>
+        /// <returns></returns>
+        public static Matrix4x4 FromAxisAngle(in EulerAngles eulerAngle)
+        {
+            Matrix4x4 result;
+            FromEulerAngles(eulerAngle, out result);
+            return result;
+        }
+
+        public static Matrix4x4 FromQuaternion(in Quaternion quaternion)
+        {
+            Matrix4x4 result;
+            FromQuaternion(quaternion, out result);
             return result;
         }
 
@@ -1295,36 +1315,24 @@ namespace Raster.Math
         /// </summary>
         /// <param name="axisAngle"></param>
         /// <param name="result"></param>
-        public void FromAxisAngle(float x, float y, float z, float angle, out Matrix4x4 result)
+        public static void FromAxisAngle(in AxisAngle axisAngle, out Matrix4x4 result)
         {
-            float rad = MathF.DegToRad(angle);
-            float s = MathF.Sin(rad);
-            float c = MathF.Cos(rad);
-
-            float invNorm = MathHelper.FastSqrtInverse(x * x + y * y + z * z);
-            if (!MathHelper.IsZero(invNorm)
-            {
-                x *= invNorm;
-                y *= invNorm;
-                z *= invNorm;
-            }
-            else
-            {
-                result = Matrix4x4.Identity;
-            }
+            float s = MathF.Sin(axisAngle.Angle);
+            float c = MathF.Cos(axisAngle.Angle);
+            Vector3 axis = axisAngle.Axis;
 
             float c0 = 1.0f - c;
-            float x2 = x * x;
-            float y2 = y * y;
-            float z2 = z * z;
+            float x2 = axis.X * axis.X;
+            float y2 = axis.Y * axis.Y;
+            float z2 = axis.Z * axis.Z;
 
-            float xy = x * y;
-            float xz = x * z;
-            float yz = y * z;
+            float xy = axis.X * axis.Y;
+            float xz = axis.X * axis.Z;
+            float yz = axis.Y * axis.Z;
 
-            float xs = x * s;
-            float ys = y * s;
-            float zs = z * s;
+            float xs = axis.X * s;
+            float ys = axis.Y * s;
+            float zs = axis.Z * s;
 
             result.M00 = c + c0 * x2;
             result.M10 = c0 * xy - zs;
@@ -1345,6 +1353,31 @@ namespace Raster.Math
             result.M13 = 0.0f;
             result.M23 = 0.0f;
             result.M33 = 1.0f;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pitch"></param>
+        /// <param name="roll"></param>
+        /// <param name="yaw"></param>
+        /// <param name="result"></param>
+        public static void FromEulerAngles(in EulerAngles eulerAngles, out Matrix4x4 result)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="w"></param>
+        /// <param name="result"></param>
+        public static void FromQuaternion(in Quaternion quaternion, out Matrix4x4 result)
+        {
+
         }
 
         /// <summary>

@@ -163,28 +163,10 @@ namespace Raster.Math
         /// 
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Inverse()
-        {
-            float lenSqr = X * X + Y * Y + Z * Z;
-            float invNorm = 1.0f / lenSqr;
-
-            X *= invNorm;
-            Y *= invNorm;
-            Z *= invNorm;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Normalize()
         {
-            float lenSqr = X * X + Y * Y + Z * Z;
-            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
-
-            X *= invNorm;
-            Y *= invNorm;
-            Z *= invNorm;
+            float W = 0.0f;
+            MathHelper.Normalize(ref X, ref Y, ref Z, ref W);
         }
 
         /// <summary>
@@ -310,19 +292,6 @@ namespace Raster.Math
         {
             Vector3 result;
             Hermite(value1, tangent1, value2, tangent2, factor, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value1"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Inverse(in Vector3 value)
-        {
-            Vector3 result;
-            Inverse(value, out result);
             return result;
         }
 
@@ -556,23 +525,6 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Inverse(in Vector3 value, out Vector3 result)
-        {
-            float lenSqr = value.X * value.X + value.Y * value.Y +
-                           value.Z * value.Z;
-            float invNorm = 1.0f / lenSqr;
-
-            result.X = value.X * invNorm;
-            result.Y = value.Y * invNorm;
-            result.Z = value.Z * invNorm;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="begin"></param>
         /// <param name="end"></param>
         /// <param name="factor"></param>
@@ -621,13 +573,9 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Normalize(in Vector3 value, out Vector3 result)
         {
-            float lenSqr = value.X * value.X + value.Y * value.Y +
-                           value.Z * value.Z;
-            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
-
-            result.X = value.X * invNorm;
-            result.Y = value.Y * invNorm;
-            result.Z = value.Z * invNorm;
+            float W = 0.0f;
+            MathHelper.Normalize(value.X, value.Y, 0.0f, 0.0f, 
+                                 out result.X, out result.Y, out result.Z, out W);
         }
 
         /// <summary>
