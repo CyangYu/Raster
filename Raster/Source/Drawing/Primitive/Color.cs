@@ -274,8 +274,7 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public static Color operator +(in Color left, in Color right)
         {
-            Color result = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-            Add(left, right, out result);
+            Add(left, right, out Color result);
             return result;
         }
 
@@ -287,8 +286,7 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public static Color operator -(in Color left, in Color right)
         {
-            Color result = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-            Subtract(left, right, out result);
+            Subtract(left, right, out Color result);
             return result;
         }
 
@@ -300,8 +298,7 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public static Color operator *(float left, in Color right)
         {
-            Color result = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-            Multiply(right, left, out result);
+            Multiply(right, left, out Color result);
             return result;
         }
 
@@ -313,8 +310,7 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public static Color operator *(in Color left, float right)
         {
-            Color result = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-            Multiply(left, right, out result);
+            Multiply(left, right, out Color result);
             return result;
         }
 
@@ -326,8 +322,7 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public static Color operator *(in Color left, in Color right)
         {
-            Color result = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-            Multiply(left, right, out result);
+            Multiply(left, right, out Color result);
             return result;
         }
 

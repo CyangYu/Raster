@@ -260,7 +260,7 @@ namespace Raster.Drawing.Primitive
         public static Rgba operator +(in Rgba left, in Rgba right)
         {
             Rgba result;
-            Add(left, right, out result);
+            Add(left, right, out Quaternion result);
             return result;
         }
         
@@ -274,7 +274,7 @@ namespace Raster.Drawing.Primitive
         public static Rgba operator -(in Rgba left, in Rgba right)
         {
             Rgba result;
-            Subtract(left, right, out result);
+            Subtract(left, right, out Quaternion result);
             return result;
         }
 
@@ -288,7 +288,7 @@ namespace Raster.Drawing.Primitive
         public static Rgba operator *(int left, in Rgba right)
         {
             Rgba result;
-            Multiply(right, left, out result);
+            Multiply(right, left, out Quaternion result);
             return result;
         }
 
@@ -302,7 +302,7 @@ namespace Raster.Drawing.Primitive
         public static Rgba operator *(in Rgba left, int right)
         {
             Rgba result;
-            Multiply(left, right, out result);
+            Multiply(left, right, out Quaternion result);
             return result;
         }
 
@@ -316,7 +316,7 @@ namespace Raster.Drawing.Primitive
         public static Rgba operator *(in Rgba left, in Rgba right)
         {
             Rgba result;
-            Multiply(left, right, out result);
+            Multiply(left, right, out Quaternion result);
             return result;
         }
 

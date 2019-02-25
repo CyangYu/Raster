@@ -68,9 +68,11 @@ namespace Raster.Math.Geometry
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() =>
-            string.Format("BoundingBox: XMin = {0}, YMin = {1}, ZMin = {2}, XMax = {3}, YMax = {4}, ZMax = {5}",
+        public override string ToString()
+        {
+            return string.Format("BoundingBox: XMin = {0}, YMin = {1}, ZMin = {2}, XMax = {3}, YMax = {4}, ZMax = {5}",
                           Minimum.X, Minimum.Y, Minimum.Z, Maximum.X, Maximum.Y, Maximum.Z);
+        }
 
         /// <summary>
         /// 

@@ -9,7 +9,7 @@ namespace Raster.Math
     /// <summary>
     /// 
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public struct Matrix4x4 : IEquatable<Matrix4x4>
     {
         #region Private Instance Fields
@@ -125,7 +125,6 @@ namespace Raster.Math
                 float d4 = M20 * M32 - M22 * M30;
                 float d5 = M20 * M31 - M21 * M30;
 
-                float det = M00;
                 return 0.0f;
             }
         }
@@ -519,7 +518,7 @@ namespace Raster.Math
                     return new Vector4(M30, M31, M32, M33);
 
                 default:
-                    throw new IndexOutOfRangeException();
+                    throw new IndexOutOfRangeException("The index of row is greater than 3");
             }
         }
 
@@ -546,7 +545,7 @@ namespace Raster.Math
                     return new Vector4(M03, M13, M23, M33);
 
                 default:
-                    throw new IndexOutOfRangeException();
+                    throw new IndexOutOfRangeException("The index of column is greater than 3");
             }
         }
 
@@ -1286,8 +1285,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static Matrix4x4 FromAxisAngle(in AxisAngle axisAngle)
         {
-            Matrix4x4 result;
-            FromAxisAngle(axisAngle, out result);
+            FromAxisAngle(axisAngle, out Matrix4x4 result);
             return result;
         }
 
@@ -1298,15 +1296,13 @@ namespace Raster.Math
         /// <returns></returns>
         public static Matrix4x4 FromAxisAngle(in EulerAngles eulerAngle)
         {
-            Matrix4x4 result;
-            FromEulerAngles(eulerAngle, out result);
+            FromEulerAngles(eulerAngle, out Matrix4x4 result);
             return result;
         }
 
         public static Matrix4x4 FromQuaternion(in Quaternion quaternion)
         {
-            Matrix4x4 result;
-            FromQuaternion(quaternion, out result);
+            FromQuaternion(quaternion, out Matrix4x4 result);
             return result;
         }
 
@@ -1364,7 +1360,7 @@ namespace Raster.Math
         /// <param name="result"></param>
         public static void FromEulerAngles(in EulerAngles eulerAngles, out Matrix4x4 result)
         {
-
+            
         }
 
         /// <summary>
@@ -1758,8 +1754,7 @@ namespace Raster.Math
         
         public static Matrix4x4 operator +(in Matrix4x4 left, in Matrix4x4 right)
         {
-            Matrix4x4 result;;
-            Add(left, right, out result);
+            Add(left, right, out Matrix4x4 result);
             return result;
         }
 
@@ -1772,8 +1767,7 @@ namespace Raster.Math
         
         public static Matrix4x4 operator +(in Matrix4x4 left, float right)
         {
-            Matrix4x4 result;;
-            Add(left, right, out result);
+            Add(left, right, out Matrix4x4 result);
             return result;
         }
 
@@ -1786,8 +1780,7 @@ namespace Raster.Math
         
         public static Matrix4x4 operator -(in Matrix4x4 left, float right)
         {
-            Matrix4x4 result;;
-            Subtract(left, right, out result);
+            Subtract(left, right, out Matrix4x4 result);
             return result;
         }
 
@@ -1800,8 +1793,7 @@ namespace Raster.Math
         
         public static Matrix4x4 operator -(in Matrix4x4 left, in Matrix4x4 right)
         {
-            Matrix4x4 result;;
-            Subtract(left, right, out result);
+            Subtract(left, right, out Matrix4x4 result);
             return result;
         }
 
@@ -1814,8 +1806,7 @@ namespace Raster.Math
         
         public static Matrix4x4 operator *(in Matrix4x4 left, float right)
         {
-            Matrix4x4 result;;
-            Subtract(left, right, out result);
+            Multiply(left, right, out Matrix4x4 result);
             return result;
         }
 
@@ -1828,8 +1819,7 @@ namespace Raster.Math
         
         public static Matrix4x4 operator *(float left, in Matrix4x4 right)
         {
-            Matrix4x4 result;;
-            Multiply(right, left, out result);
+            Multiply(right, left, out Matrix4x4 result);
             return result;
         }
 
@@ -1842,8 +1832,7 @@ namespace Raster.Math
         
         public static Matrix4x2 operator *(in Matrix4x4 left, in Matrix4x2 right)
         {
-            Matrix4x2 result;
-            Multiply(left, right, out result);
+            Multiply(left, right, out Matrix4x2 result);
             return result;
         }
 
@@ -1856,8 +1845,7 @@ namespace Raster.Math
         
         public static Matrix4x3 operator *(in Matrix4x4 left, in Matrix4x3 right)
         {
-            Matrix4x3 result;
-            Multiply(left, right, out result);
+            Multiply(left, right, out Matrix4x3 result);
             return result;
         }
 
@@ -1870,8 +1858,7 @@ namespace Raster.Math
         
         public static Matrix4x4 operator *(in Matrix4x4 left, in Matrix4x4 right)
         {
-            Matrix4x4 result;
-            Multiply(left, right, out result);
+            Multiply(left, right, out Matrix4x4 result);
             return result;
         }
 
@@ -1884,8 +1871,7 @@ namespace Raster.Math
         
         public static Vector4 operator *(in Matrix4x4 left, in Vector4 right)
         {
-            Vector4 result;
-            Multiply(left, right, out result);
+            Multiply(left, right, out Vector4 result);
             return result;
         }
 
@@ -1898,8 +1884,7 @@ namespace Raster.Math
         
         public static Vector4 operator *(in Vector4 left, in Matrix4x4 right)
         {
-            Vector4 result;
-            Multiply(left, right, out result);
+            Multiply(left, right, out Vector4 result);
             return result;
         }
 
@@ -1912,8 +1897,7 @@ namespace Raster.Math
         
         public static Matrix4x4 operator /(in Matrix4x4 left, float right)
         {
-            Matrix4x4 result;;
-            Divide(left, right, out result);
+            Divide(left, right, out Matrix4x4 result);
             return result;
         }
 

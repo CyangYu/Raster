@@ -35,8 +35,10 @@ namespace Raster.Math.Geometry
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() =>
-            string.Format("BoundingBox2d: ");
+        public override string ToString()
+        {
+            return string.Format("BoundingBox2d: ");
+        }
 
         /// <summary>
         /// 

@@ -176,8 +176,23 @@ namespace Raster.Math
         /// 
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Normalize() => 
-            MathHelper.Normalize(ref X, ref Y, ref Z, ref W);
+        public void Normalize()
+        {
+            float lenSqr = X * X + Y * Y + Z * Z + W * W;
+
+            if (!MathHelper.IsZero(lenSqr))
+            {
+                if (!MathHelper.IsOne(lenSqr))
+                {
+                    float invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+                    X *= invNorm;
+                    Y *= invNorm;
+                    Z *= invNorm;
+                    W *= invNorm;
+                }
+            }
+        }
 
         /// <summary>
         /// 
@@ -192,6 +207,86 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector3 ToVector3() => new Vector3(X, Y, Z);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Add(in Vector4 other)
+        {
+            X += other.X;
+            Y += other.Y;
+            Z += other.Z;
+            W += other.W;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Subtract(in Vector4 other)
+        {
+            X -= other.X;
+            Y -= other.Y;
+            Z -= other.Z;
+            W -= other.W;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="factor"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Multiply(float factor)
+        {
+            X *= factor;
+            Y *= factor;
+            Z *= factor;
+            W *= factor;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Multiply(in Vector4 other)
+        {
+            X *= other.X;
+            Y *= other.Y;
+            Z *= other.Z;
+            W *= other.W;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="divisor"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Divide(float divisor)
+        {
+            float inv = 1.0f / divisor;
+            X *= inv;
+            Y *= inv;
+            Z *= inv;
+            W *= inv;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Divide(in Vector4 other)
+        {
+            X /= other.X;
+            Y /= other.Y;
+            Z /= other.Z;
+            W /= other.W;
+        }
 
         #endregion Public Instance Methods
 
@@ -228,8 +323,8 @@ namespace Raster.Math
         /// <returns></returns>
         public static Vector4 Clamp(in Vector4 value, in Vector4 min, in Vector4 max)
         {
-            Vector4 result;
-            Clamp(value, min, max, out result);
+            
+            Clamp(value, min, max, out Vector4 result);
             return result;
         }
 
@@ -285,8 +380,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Hermite(in Vector4 value1, in Vector4 tangent1, in Vector4 value2, in Vector4 tangent2, float factor)
         {
-            Vector4 result;
-            Hermite(value1, tangent1, value2, tangent2, factor, out result);
+            Hermite(value1, tangent1, value2, tangent2, factor, out Vector4 result);
             return result;
         }
 
@@ -299,9 +393,8 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Lerp(in Vector4 begin, in Vector4 end, float factor)
-        {
-            Vector4 result;
-            Lerp(begin, end, factor, out result);
+        {        
+            Lerp(begin, end, factor, out Vector4 result);
             return result;
         }
 
@@ -313,9 +406,8 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Max(in Vector4 value1, in Vector4 value2)
-        {
-            Vector4 result;
-            Max(value1, value2, out result);
+        {        
+            Max(value1, value2, out Vector4 result);
             return result;
         }
 
@@ -327,9 +419,8 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Min(in Vector4 value1, in Vector4 value2)
-        {
-            Vector4 result;
-            Min(value1, value2, out result);
+        {         
+            Min(value1, value2, out Vector4 result);
             return result;
         }
 
@@ -341,8 +432,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Normalize(in Vector4 value)
         {
-            Vector4 result;
-            Normalize(value, out result);
+            Normalize(value, out Vector4 result);
             return result;
         }
 
@@ -355,8 +445,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Reflect(in Vector4 vec4, in Vector4 normal)
         {
-            Vector4 result;
-            Reflect(vec4, normal, out result);
+            Reflect(vec4, normal, out Vector4 result);
             return result;
         }
 
@@ -369,9 +458,8 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Refract(in Vector4 vec4, in Vector4 normal, float eta)
-        {
-            Vector4 result;
-            Refract(vec4, normal, eta, out result);
+        { 
+            Refract(vec4, normal, eta, out Vector4 result);
             return result;
         }
 
@@ -384,9 +472,8 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 SmoothStep(in Vector4 begin, in Vector4 end, float factor)
-        {
-            Vector4 result;
-            SmoothStep(begin, end, factor, out result);
+        {            
+            SmoothStep(begin, end, factor, out Vector4 result);
             return result;
         }
 
@@ -398,9 +485,8 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Transform(in Vector2 position, in Matrix4x4 matrix)
-        {
-            Vector4 result;
-            Transform(position, matrix, out result);
+        {            
+            Transform(position, matrix, out Vector4 result);
             return result;
         }
 
@@ -412,9 +498,8 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Transform(in Vector3 position, in Matrix4x4 matrix)
-        {
-            Vector4 result;
-            Transform(position, matrix, out result);
+        {            
+            Transform(position, matrix, out Vector4 result);
             return result;
         }
 
@@ -426,9 +511,8 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Transform(in Vector4 position, in Matrix4x4 matrix)
-        {
-            Vector4 result;
-            Transform(position, matrix, out result);
+        {          
+            Transform(position, matrix, out Vector4 result);
             return result;
         }
 
@@ -440,9 +524,8 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Transform(in Vector2 position, in Quaternion rotation)
-        {
-            Vector4 result;
-            Transform(position, rotation, out result);
+        {           
+            Transform(position, rotation, out Vector4 result);
             return result;
         }
 
@@ -454,9 +537,8 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Transform(in Vector3 position, in Quaternion rotation)
-        {
-            Vector4 result;
-            Transform(position, rotation, out result);
+        {            
+            Transform(position, rotation, out Vector4 result);
             return result;
         }
 
@@ -468,9 +550,8 @@ namespace Raster.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Transform(in Vector4 position, in Quaternion rotation)
-        {
-            Vector4 result;
-            Transform(position, rotation, out result);
+        {            
+            Transform(position, rotation, out Vector4 result);
             return result;
         }
 
@@ -576,8 +657,30 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Normalize(in Vector4 value, out Vector4 result)
         {
-            MathHelper.Normalize(value.X, value.Y, value.Z, value.W, 
-                                 out result.X, out result.Y, out result.Z, out result.W);
+            float lenSqr = value.X * value.X + value.Y * value.Y + 
+                           value.Z * value.Z + value.W * value.W;
+
+            if (!MathHelper.IsZero(lenSqr))
+            {
+                result.X = value.X;
+                result.Y = value.Y;
+                result.Z = value.Z;
+                result.W = value.W;
+
+                if (!MathHelper.IsOne(lenSqr))
+                {
+                    float invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+                    result.X *= invNorm;
+                    result.Y *= invNorm;
+                    result.Z *= invNorm;
+                    result.W *= invNorm;
+                }
+            }
+            else
+            {
+                result = Vector4.Zero;
+            }
         }
 
         /// <summary>

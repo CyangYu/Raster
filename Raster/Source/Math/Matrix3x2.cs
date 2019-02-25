@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace Raster.Math
 {
     /// <summary>
     /// 
     /// </summary>
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public struct Matrix3x2 : IEquatable<Matrix3x2>
     {
         #region Public Fields
@@ -51,16 +53,11 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public float[] RawData
+        public float Determinant
         {
             get
             {
-                return new float[3 * 2]
-                {
-                    M00, M01,
-                    M10, M11,
-                    M20, M21
-                };
+                return (M00 * M11) - (M01 * M10);
             }
         }
 
@@ -218,7 +215,7 @@ namespace Raster.Math
                     return new Vector2(M20, M21);
 
                 default:
-                    throw new IndexOutOfRangeException("");
+                    throw new IndexOutOfRangeException("The index of row is greater than 2");
             }
         }
 
@@ -239,7 +236,7 @@ namespace Raster.Math
                     return new Vector3(M01, M11, M21);
 
                 default:
-                    throw new IndexOutOfRangeException("");
+                    throw new IndexOutOfRangeException("The index of column is greater than 1");
             }
         }
 
@@ -491,8 +488,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator +(in Matrix3x2 left, in Matrix3x2 right)
         {
-            Matrix3x2 result;
-            Add(left, right, out result);
+            Add(left, right, out Matrix3x2 result);
             return result;
         }
 
@@ -505,8 +501,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator +(in Matrix3x2 left, float right)
         {
-            Matrix3x2 result;
-            Add(left, right, out result);
+            Add(left, right, out Matrix3x2 result);
             return result;
         }
 
@@ -519,8 +514,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator -(in Matrix3x2 left, float right)
         {
-            Matrix3x2 result;
-            Subtract(left, right, out result);
+            Subtract(left, right, out Matrix3x2 result);
             return result;
         }
 
@@ -533,8 +527,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator -(in Matrix3x2 left, in Matrix3x2 right)
         {
-            Matrix3x2 result;
-            Subtract(left, right, out result);
+            Subtract(left, right, out Matrix3x2 result);
             return result;
         }
 
@@ -547,8 +540,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator *(in Matrix3x2 left, float right)
         {
-            Matrix3x2 result;
-            Subtract(left, right, out result);
+            Multiply(left, right, out Matrix3x2 result);
             return result;
         }
 
@@ -561,8 +553,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator *(float left, in Matrix3x2 right)
         {
-            Matrix3x2 result;
-            Multiply(right, left, out result);
+            Multiply(right, left, out Matrix3x2 result);
             return result;
         }
 
@@ -575,8 +566,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator *(in Matrix3x2 left, in Matrix2x2 right)
         {
-            Matrix3x2 result;
-            Multiply(left, right, out result);
+            Multiply(left, right, out Matrix3x2 result);
             return result;
         }
 
@@ -589,8 +579,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x3 operator *(in Matrix3x2 left, in Matrix2x3 right)
         {
-            Matrix3x3 result;
-            Multiply(left, right, out result);
+            Multiply(left, right, out Matrix3x3 result);
             return result;
         }
 
@@ -603,8 +592,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x4 operator *(in Matrix3x2 left, in Matrix2x4 right)
         {
-            Matrix3x4 result;
-            Multiply(left, right, out result);
+            Multiply(left, right, out Matrix3x4 result);
             return result;
         }
 
@@ -617,8 +605,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 operator *(in Matrix3x2 left, in Vector2 right)
         {
-            Vector3 result;
-            Multiply(left, right, out result);
+            Multiply(left, right, out Vector3 result);
             return result;
         }
 
@@ -631,8 +618,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 operator *(in Vector3 left, in Matrix3x2 right)
         {
-            Vector2 result;
-            Multiply(left, right, out result);
+            Multiply(left, right, out Vector2 result);
             return result;
         }
 
@@ -645,8 +631,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix3x2 operator /(in Matrix3x2 left, float right)
         {
-            Matrix3x2 result = new Matrix3x2();
-            Divide(left, right, out result);
+            Divide(left, right, out Matrix3x2 result);
             return result;
         }
 

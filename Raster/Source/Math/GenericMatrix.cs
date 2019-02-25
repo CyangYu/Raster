@@ -39,6 +39,7 @@ namespace Raster.Math
         {
             get { return column; }
         }
+
         #endregion Public Instance Properties
 
         #region Constructor

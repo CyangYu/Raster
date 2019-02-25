@@ -93,8 +93,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static EulerAngles FromAxisAngle(in AxisAngle axisAngle)
         {
-            EulerAngles eulerAngles;
-            FromAxisAngle(axisAngle.Axis.X, axisAngle.Axis.Y, axisAngle.Axis.Z, axisAngle.Angle, out eulerAngles);
+            FromAxisAngle(axisAngle.Axis.X, axisAngle.Axis.Y, axisAngle.Axis.Z, axisAngle.Angle, out EulerAngles eulerAngles);
             return eulerAngles;
         }
 
@@ -105,8 +104,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static EulerAngles FromRotationMatrix(in Matrix4x4 matrix)
         {
-            EulerAngles eulerAngles;
-            FromRotationMatrix(matrix, out eulerAngles);
+            FromRotationMatrix(matrix, out EulerAngles eulerAngles);
             return eulerAngles;
         }
 
@@ -117,8 +115,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static EulerAngles FromQuaternion(in Quaternion quaternion)
         {
-            EulerAngles eulerAngles;
-            FromQuaternion(quaternion.X, quaternion.Y, quaternion.Z, quaternion.W, out eulerAngles);
+            FromQuaternion(quaternion.X, quaternion.Y, quaternion.Z, quaternion.W, out EulerAngles eulerAngles);
             return eulerAngles;
         }
 

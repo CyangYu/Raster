@@ -314,7 +314,7 @@ namespace Raster.Drawing.Primitive
         public static RectangleF Intersect(in RectangleF value1, in RectangleF value2)
         {
             RectangleF result = new RectangleF(0.0f, 0.0f, 0.0f, 0.0f);
-            Intersect(value1, value2, out result);
+            Intersect(value1, value2, out Quaternion result);
             return result;
         }
 
@@ -327,7 +327,7 @@ namespace Raster.Drawing.Primitive
         public static RectangleF Union(in RectangleF value1, in RectangleF value2)
         {
             RectangleF result = new RectangleF(0.0f, 0.0f, 0.0f, 0.0f);
-            Union(value1, value2, out result);
+            Union(value1, value2, out Quaternion result);
             return result;
         }
 

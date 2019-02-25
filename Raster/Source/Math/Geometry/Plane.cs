@@ -153,8 +153,7 @@ namespace Raster.Math.Geometry
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Plane FromVertices(in Vector3 point1, in Vector3 point2, in Vector3 point3)
         {
-            Plane result;
-            FromVertices(point1, point2, point3, out result);
+            FromVertices(point1, point2, point3, out Plane result);
             return result;
         }
 
@@ -166,8 +165,7 @@ namespace Raster.Math.Geometry
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Plane Normalize(in Plane value)
         {
-            Plane result;
-            Normalize(value, out result);
+            Normalize(value, out Plane result);
             return result;
         }
 
@@ -180,8 +178,7 @@ namespace Raster.Math.Geometry
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Plane Transform(in Plane plane, in Matrix4x4 matrix)
         {
-            Plane result;
-            Transform(plane, matrix, out result);
+            Transform(plane, matrix, out Plane result);
             return result;
         }
 
@@ -194,8 +191,7 @@ namespace Raster.Math.Geometry
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Plane Transform(in Plane plane, in Quaternion rotation)
         {
-            Plane result;
-            Transform(plane, rotation, out result);
+            Transform(plane, rotation, out Plane result);
             return result;
         }
 

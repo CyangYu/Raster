@@ -153,8 +153,23 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public void Normalize() =>
-             MathHelper.Normalize(ref X, ref Y, ref Z, ref W);
+        public void Normalize()
+        {
+            float lenSqr = X * X + Y * Y + Z * Z + W * W;
+
+            if (!MathHelper.IsZero(lenSqr))
+            {
+                if (!MathHelper.IsOne(lenSqr))
+                {
+                    float invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+                    X *= invNorm;
+                    Y *= invNorm;
+                    Z *= invNorm;
+                    W *= invNorm;
+                }
+            }
+        }
 
         #endregion Public Instance Methods
 
@@ -183,8 +198,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion Concatenate(in Quaternion value1, in Quaternion value2)
         {
-            Quaternion result;
-            Concatenate(value1, value2, out result);
+            Concatenate(value1, value2, out Quaternion result);
             return result;
         }
 
@@ -196,8 +210,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion FromAxisAngle(in AxisAngle axisAngle)
         {
-            Quaternion result;
-            FromAxisAngle(axisAngle, out result);
+            FromAxisAngle(axisAngle, out Quaternion result);
             return result;
         }
 
@@ -210,8 +223,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion FromEulerAngles(in EulerAngles eulerAngles, float yaw)
         {
-            Quaternion result;
-            FromEulerAngles(eulerAngles, out result);
+            FromEulerAngles(eulerAngles, out Quaternion result);
             return result;
         }
 
@@ -223,8 +235,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion FromRotationMatrix(in Matrix3x3 matrix)
         {
-            Quaternion result;
-            FromRotationMatrix(matrix, out result);
+            FromRotationMatrix(matrix, out Quaternion result);
             return result;
         }
 
@@ -239,8 +250,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion Lerp(in Quaternion value1, in Quaternion value2, float factor)
         {
-            Quaternion result;
-            Lerp(value1, value2, factor, out result);
+            Lerp(value1, value2, factor, out Quaternion result);
             return result;
         }
 
@@ -252,8 +262,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion Normalize(in Quaternion value)
         {
-            Quaternion result;
-            Normalize(value, out result);
+            Normalize(value, out Quaternion result);
             return result;
         }
 
@@ -267,8 +276,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion SLerp(in Quaternion value1, in Quaternion value2, float factor)
         {
-            Quaternion result;
-            Slerp(value1, value2, factor, out result);
+            Slerp(value1, value2, factor, out Quaternion result);
             return result;
         }
 
@@ -362,7 +370,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static void FromRotationMatrix(in Matrix3x3 matrix, out Quaternion result)
         {
-            float trace = matrix.M00 + matrix.M11 + matrix.M22 + matrix.M33;
+            float trace = matrix.M00 + matrix.M11 + matrix.M22;
             
             if (trace > 0.0f)
             {
@@ -487,8 +495,30 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Normalize(in Quaternion value, out Quaternion result)
         {
-            MathHelper.Normalize(value.X, value.Y, value.Z, value.W,
-                                 out result.X, out result.Y, out result.Z, out result.W);
+            float lenSqr = value.X * value.X + value.Y * value.Y +
+                           value.Z * value.Z + value.W * value.W;
+
+            if (!MathHelper.IsZero(lenSqr))
+            {
+                result.X = value.X;
+                result.Y = value.Y;
+                result.Z = value.Z;
+                result.W = value.W;
+
+                if (!MathHelper.IsOne(lenSqr))
+                {
+                    float invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+                    result.X *= invNorm;
+                    result.Y *= invNorm;
+                    result.Z *= invNorm;
+                    result.W *= invNorm;
+                }
+            }
+            else
+            {
+                result = Quaternion.Zero;
+            }
         }
 
         /// <summary>
@@ -505,7 +535,7 @@ namespace Raster.Math
             float d = Vector3.Dot(v0, v1) + 1.0f;
             if (MathHelper.IsZero(d))
             {
-                Vector3 axis = Vector3.Cross(Vector3.UnitX, v0);
+                Vector3.Cross(Vector3.UnitX, v0, out Vector3 axis);
                 if (MathHelper.IsZero(axis.LengthSquared))
                 {
                     Vector3.Cross(Vector3.UnitY, v0, out axis);
@@ -683,23 +713,16 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Quaternion operator +(in Quaternion left, in Quaternion right)
-        {
-            Quaternion result;
-            Add(left, right, out result);
-            return result;
-        }
+        public static Quaternion operator +(in Quaternion left, in Quaternion right) =>
+            new Quaternion(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="quaternion"></param>
         /// <returns></returns>
-        public static Quaternion operator -(in Quaternion quaternion)
-        {
-            return new Quaternion(-quaternion.X, -quaternion.Y, 
-                                  -quaternion.Z, -quaternion.W);
-        }
+        public static Quaternion operator -(in Quaternion quaternion) =>
+            new Quaternion(-quaternion.X, -quaternion.Y, -quaternion.Z, -quaternion.W);
 
         /// <summary>
         /// 
@@ -708,12 +731,8 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Quaternion operator -(in Quaternion left, in Quaternion right)
-        {
-            Quaternion result;
-            Subtract(left, right, out result);
-            return result;
-        }
+        public static Quaternion operator -(in Quaternion left, in Quaternion right) =>
+            new Quaternion(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
 
         /// <summary>
         /// 
@@ -722,12 +741,8 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Quaternion operator *(in Quaternion left, float right)
-        {
-            Quaternion result;
-            Multiply(left, right, out result);
-            return result;
-        }
+        public static Quaternion operator *(in Quaternion left, float right) =>
+            new Quaternion(left.X * right, left.Y * right, left.Z * right, left.W * right);
 
         /// <summary>
         /// 
@@ -738,8 +753,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion operator *(in Quaternion left, in Quaternion right)
         {
-            Quaternion result;
-            Multiply(left, right, out result);
+            Multiply(left, right, out Quaternion result);
             return result;
         }
 
@@ -752,8 +766,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion operator /(in Quaternion left, in Quaternion right)
         {
-            Quaternion result;
-            Divide(left, right, out result);
+            Divide(left, right, out Quaternion result);
             return result;
         }
 
