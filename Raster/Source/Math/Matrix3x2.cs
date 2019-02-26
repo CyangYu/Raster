@@ -347,9 +347,9 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Matrix3x2 left, in Vector2 right, out Vector3 result)
         {
-            result.X = left.M00 * right.X + left.M01 * right.Y;
-            result.Y = left.M10 * right.X + left.M11 * right.Y;
-            result.Z = left.M20 * right.X + left.M21 * right.Y;
+            result.R = left.M00 * right.R + left.M01 * right.Y;
+            result.Y = left.M10 * right.R + left.M11 * right.Y;
+            result.Z = left.M20 * right.R + left.M21 * right.Y;
         }
 
         /// <summary>
@@ -361,8 +361,8 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Vector3 left, in Matrix3x2 right, out Vector2 result)
         {
-            result.X = left.X * right.M00 + left.Y * right.M10 + left.Z * right.M20;
-            result.Y = left.X * right.M01 + left.Y * right.M11 + left.Z * right.M21;
+            result.R = left.R * right.M00 + left.Y * right.M10 + left.Z * right.M20;
+            result.Y = left.R * right.M01 + left.Y * right.M11 + left.Z * right.M21;
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        public float X;
+        public float R;
         /// <summary>
         /// 
         /// </summary>
@@ -28,13 +28,13 @@ namespace Raster.Drawing.Primitive
 
         #region Constructor
         public PointF(in PointF other)
-            : this(other.X, other.Y)
+            : this(other.R, other.Y)
         {
         }
 
         public PointF(float x, float y)
         {
-            X = x;
+            R = x;
             Y = y;
         }
         #endregion Constructor
@@ -60,14 +60,14 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode() =>
-            HashHelpers.Combine(X.GetHashCode(), Y.GetHashCode());
+            HashHelpers.Combine(R.GetHashCode(), Y.GetHashCode());
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         public override string ToString() =>
-            string.Format("PointF X = {0} Y = {1}", X, Y);
+            string.Format("PointF R = {0} Y = {1}", R, Y);
 
         /// <summary>
         /// 
@@ -79,7 +79,7 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        public bool IsEmpty() => X == 0.0f && Y == 0.0f;
+        public bool IsEmpty() => R == 0.0f && Y == 0.0f;
 
         #endregion Public Instance Methods
 
@@ -91,7 +91,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="right"></param>
         /// <returns></returns>
         public static PointF operator +(in PointF left, in PointF right) =>
-            new PointF(left.X + right.X, left.Y + right.Y);
+            new PointF(left.R + right.R, left.Y + right.Y);
 
         /// <summary>
         /// 
@@ -100,7 +100,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="right"></param>
         /// <returns></returns>
         public static PointF operator -(in PointF left, in PointF right) =>
-            new PointF(left.X - right.X, left.Y - right.Y);
+            new PointF(left.R - right.R, left.Y - right.Y);
 
         /// <summary>
         /// 
@@ -109,7 +109,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="right"></param>
         /// <returns></returns>
         public static PointF operator *(in PointF left, float right) =>
-            new PointF(left.X * right, left.Y * right);
+            new PointF(left.R * right, left.Y * right);
 
         /// <summary>
         /// 
@@ -118,7 +118,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="right"></param>
         /// <returns></returns>
         public static bool operator ==(in PointF left, in PointF right) =>
-            left.X == right.X && left.Y == right.Y;
+            left.R == right.R && left.Y == right.Y;
 
         /// <summary>
         /// 
@@ -127,7 +127,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="right"></param>
         /// <returns></returns>
         public static bool operator !=(in PointF left, in PointF right) =>
-            left.X != right.X || left.Y != right.Y;
+            left.R != right.R || left.Y != right.Y;
 
         #endregion Operator Overload
     }

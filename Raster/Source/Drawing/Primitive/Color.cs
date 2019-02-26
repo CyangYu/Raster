@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Raster.Math;
 using Raster.Private;
 
@@ -9,6 +10,7 @@ namespace Raster.Drawing.Primitive
     ///
     /// </summary>
     [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public partial struct Color : IEquatable<Color>
     {
         #region Public Fields
@@ -36,15 +38,8 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         public float R
         {
-            get
-            {
-                return r;
-            }
-
-            set
-            {
-                r = MathF.Clamp(0.0f, 1.0f, value);
-            }
+            get { return r; }
+            set { r = MathF.Clamp(0.0f, 1.0f, value); }
         }
 
         /// <summary>
@@ -52,15 +47,8 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         public float G
         {
-            get
-            {
-                return g;
-            }
-
-            set
-            {
-                g = MathF.Clamp(0.0f, 1.0f, value);
-            }
+            get { return g; }
+            set { g = MathF.Clamp(0.0f, 1.0f, value); }
         }
 
         /// <summary>
@@ -68,15 +56,8 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         public float B
         {
-            get
-            {
-                return b;
-            }
-
-            set
-            {
-                b = MathF.Clamp(0.0f, 1.0f, value);
-            }
+            get { return b; }
+            set { b = MathF.Clamp(0.0f, 1.0f, value); }
         }
 
         /// <summary>
@@ -84,16 +65,129 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         public float A
         {
-            get
-            {
-                return a;
-            }
-
-            set
-            {
-                a = MathF.Clamp(0.0f, 1.0f, value);
-            }
+            get { return a; }
+            set { a = MathF.Clamp(0.0f, 1.0f, value); }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color RGBA => new Color(r, g, b, a);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color RGAB => new Color(r, g, a, b);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color RBGA => new Color(r, b, g, a);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color RBAG => new Color(r, b, a, g);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color RAGB => new Color(r, a, g, b);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color RABG => new Color(r, a, b, g);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color GRBA => new Color(g, r, b, a);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color GRAB => new Color(g, r, a, b);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color GBRA => new Color(g, b, r, a);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color GBAR => new Color(g, b, a, r);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color GARB => new Color(g, a, r, b);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color GABR => new Color(g, a, b, r);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color BRGA => new Color(b, r, g, a);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color BRAG => new Color(b, r, a, g);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color BGRA => new Color(b, r, g, a);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color BGAR => new Color(b, g, a, r);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color BARG => new Color(b, a, r, g);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color BAGR => new Color(b, a, g, r);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color ARGB => new Color(a, r, g, b);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color ARBG => new Color(a, r, b, g);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color AGRB => new Color(a, g, r, b);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color AGBR => new Color(a, g, b, r);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color ABRG => new Color(a, b, r, g);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color ABGR => new Color(a, b, g, r);
 
         #endregion Public Instance Properties
 

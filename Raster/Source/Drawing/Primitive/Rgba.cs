@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Raster.Private;
 
 namespace Raster.Drawing.Primitive
@@ -8,6 +9,7 @@ namespace Raster.Drawing.Primitive
     /// 
     /// </summary>
     [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public partial struct Rgba : IEquatable<Rgba>
     {
         #region Public Fields

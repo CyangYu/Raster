@@ -58,26 +58,27 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public float Length
-        {
-            get { return MathF.Sqrt(X * X + Y * Y); }
-        }
+        public Vector2 XY => new Vector2(X, Y);
 
         /// <summary>
         /// 
         /// </summary>
-        public float LengthSquared
-        {
-            get { return X * X + Y * Y; }
-        }
+        public Vector2 YX => new Vector2(Y, X);
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 MidPoint
-        {
-            get { return new Vector2(X / 2.0f, Y / 2.0f); }
-        }
+        public float Length => MathF.Sqrt(X * X + Y * Y);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public float LengthSquared => X * X + Y * Y;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector2 MidPoint => new Vector2(X / 2.0f, Y / 2.0f);
 
         #endregion Public Instance Properties
 
@@ -347,7 +348,9 @@ namespace Raster.Math
         /// <param name="factor"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Hermite(in Vector2 value1, in Vector2 tangent1, in Vector2 value2, in Vector2 tangent2, float factor)
+        public static Vector2 Hermite(in Vector2 value1, in Vector2 tangent1, 
+                                      in Vector2 value2, in Vector2 tangent2, 
+                                      float factor)
         {
             Hermite(value1, tangent1, value2, tangent2, factor, out Vector2 result);
             return result;
@@ -555,7 +558,9 @@ namespace Raster.Math
         /// <param name="factor"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Hermite(in Vector2 value1, in Vector2 tangent1, in Vector2 value2, in Vector2 tangent2, float factor, out Vector2 result)
+        public static void Hermite(in Vector2 value1, in Vector2 tangent1, 
+                                   in Vector2 value2, in Vector2 tangent2, 
+                                   float factor, out Vector2 result)
         {
             float squared = factor * factor;
             float cubed = factor * squared;

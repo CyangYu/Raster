@@ -9,6 +9,7 @@ namespace Raster.Math
     /// 
     /// </summary>
     [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public struct Vector4 : IEquatable<Vector4>
     {
         #region Public Fields
@@ -81,26 +82,137 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public float Length
-        {
-            get { return MathF.Sqrt(X * X + Y * Y + Z * Z + W * W); }
-        }
+        public Vector4 XYZW => new Vector4(X, Y, Z, W);
 
         /// <summary>
         /// 
         /// </summary>
-        public float LengthSquared
-        {
-            get { return X * X + Y * Y + Z * Z + W * W; }
-        }
+        public Vector4 XYWZ => new Vector4(X, Y, W, Z);
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 MidPoint
-        {
-            get { return new Vector4(X / 2.0f, Y / 2.0f, Z / 2.0f, W / 2.0f); }
-        }
+        public Vector4 XZYW => new Vector4(X, Z, Y, W);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 XZWY => new Vector4(X, Z, W, Y);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 XWYZ => new Vector4(X, W, Y, Z);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 XWZY => new Vector4(X, W, Z, Y);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 YXZW => new Vector4(Y, X, Z, W);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 YXWZ => new Vector4(Y, X, W, Z);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 YZXW => new Vector4(Y, Z, X, W);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 YZWX => new Vector4(Y, Z, W, X);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 YWZX => new Vector4(Y, W, Z, X);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 YWXZ => new Vector4(Y, W, X, Z);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 ZXYW => new Vector4(Z, X, Y, W);
+
+         /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 ZXWY => new Vector4(Z, X, W, Y);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 ZYXW => new Vector4(Z, Y, X, W);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 ZYWX => new Vector4(Z, Y, W, X);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 ZWXY => new Vector4(Z, W, X, Y);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 ZWYX => new Vector4(Z, W, Y, X);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 WXYZ => new Vector4(W, X, Y, Z);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 WXZY => new Vector4(W, X, Z, Y);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 WYXZ => new Vector4(W, Y, X, Z);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 WYZX => new Vector4(W, Y, Z, X);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 WZXY => new Vector4(W, Z, X, Y);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 WZYX => new Vector4(W, Z, Y, X);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public float Length => MathF.Sqrt(X * X + Y * Y + Z * Z + W * W);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public float LengthSquared => X * X + Y * Y + Z * Z + W * W;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 MidPoint => new Vector4(X / 2.0f, Y / 2.0f, Z / 2.0f, W / 2.0f);
 
         #endregion Public Instance Properties
 
@@ -323,7 +435,6 @@ namespace Raster.Math
         /// <returns></returns>
         public static Vector4 Clamp(in Vector4 value, in Vector4 min, in Vector4 max)
         {
-            
             Clamp(value, min, max, out Vector4 result);
             return result;
         }
@@ -378,7 +489,9 @@ namespace Raster.Math
         /// <param name="factor"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Hermite(in Vector4 value1, in Vector4 tangent1, in Vector4 value2, in Vector4 tangent2, float factor)
+        public static Vector4 Hermite(in Vector4 value1, in Vector4 tangent1, 
+                                      in Vector4 value2, in Vector4 tangent2, 
+                                      float factor)
         {
             Hermite(value1, tangent1, value2, tangent2, factor, out Vector4 result);
             return result;
@@ -588,7 +701,9 @@ namespace Raster.Math
         /// <param name="factor"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Hermite(in Vector4 value1, in Vector4 tangent1, in Vector4 value2, in Vector4 tangent2, float factor, out Vector4 result)
+        public static void Hermite(in Vector4 value1, in Vector4 tangent1, 
+                                   in Vector4 value2, in Vector4 tangent2, 
+                                   float factor, out Vector4 result)
         {
             float squared = factor * factor;
             float cubed = factor * squared;

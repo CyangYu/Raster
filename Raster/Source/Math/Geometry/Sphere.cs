@@ -83,7 +83,7 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Sphere: Center X = {0}, Y = {1} Z = {2} Radius = {3}",
+            return string.Format("Sphere: Center R = {0}, Y = {1} Z = {2} Radius = {3}",
                                  Center.X, Center.Y, Center.Z, Radius);
         }
 

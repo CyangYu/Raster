@@ -71,26 +71,47 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public float Length
-        {
-            get { return MathF.Sqrt(X * X + Y * Y + Z * Z); }
-        }
+        public Vector3 XYZ => new Vector3(X, Y, Z);
 
         /// <summary>
         /// 
         /// </summary>
-        public float LengthSquared
-        {
-            get { return X * X + Y * Y + Z * Z; }
-        }
+        public Vector3 XZY => new Vector3(X, Z, Y);
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 MidPoint
-        {
-            get { return new Vector3(X / 2.0f, Y / 2.0f, Z / 2.0f); }
-        }
+        public Vector3 YXZ => new Vector3(Y, X, Z);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 YZX => new Vector3(Y, Z, X);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 ZXY => new Vector3(Z, X, Y);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 ZYX => new Vector3(Z, Y, X);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public float Length => MathF.Sqrt(X * X + Y * Y + Z * Z);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public float LengthSquared => X * X + Y * Y + Z * Z;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 MidPoint => new Vector3(X / 2.0f, Y / 2.0f, Z / 2.0f);
 
         #endregion Public Instance Properties
 
@@ -371,7 +392,9 @@ namespace Raster.Math
         /// <param name="factor"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Hermite(in Vector3 value1, in Vector3 tangent1, in Vector3 value2, in Vector3 tangent2, float factor)
+        public static Vector3 Hermite(in Vector3 value1, in Vector3 tangent1, 
+                                      in Vector3 value2, in Vector3 tangent2, 
+                                      float factor)
         {
             Hermite(value1, tangent1, value2, tangent2, factor, out Vector3 result);
             return result;
@@ -579,7 +602,9 @@ namespace Raster.Math
         /// <param name="factor"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Hermite(in Vector3 value1, in Vector3 tangent1, in Vector3 value2, in Vector3 tangent2, float factor, out Vector3 result)
+        public static void Hermite(in Vector3 value1, in Vector3 tangent1, 
+                                   in Vector3 value2, in Vector3 tangent2, 
+                                   float factor, out Vector3 result)
         {
             float squared = factor * factor;
             float cubed = factor * squared;

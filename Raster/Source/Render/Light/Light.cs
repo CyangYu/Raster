@@ -43,7 +43,7 @@ namespace Raster.Render.Light
         /// <param name="z"></param>
         public void SetLightDirection(float x, float y, float z)
         {
-            Direction.X = x;
+            Direction.R = x;
             Direction.Y = y;
             Direction.Z = z;
             Direction.Normalize();

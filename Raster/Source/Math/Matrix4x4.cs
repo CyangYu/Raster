@@ -501,21 +501,21 @@ namespace Raster.Math
         /// <param name="row"></param>
         /// <returns></returns>
         
-        public Vector4 Row(int row)
+        public Color Row(int row)
         {
             switch (row)
             {
                 case 0:
-                    return new Vector4(M00, M01, M02, M03);
+                    return new Color(M00, M01, M02, M03);
 
                 case 1:
-                    return new Vector4(M10, M11, M12, M13);
+                    return new Color(M10, M11, M12, M13);
 
                 case 2:
-                    return new Vector4(M20, M21, M22, M23);
+                    return new Color(M20, M21, M22, M23);
 
                 case 3:
-                    return new Vector4(M30, M31, M32, M33);
+                    return new Color(M30, M31, M32, M33);
 
                 default:
                     throw new IndexOutOfRangeException("The index of row is greater than 3");
@@ -528,21 +528,21 @@ namespace Raster.Math
         /// <param name="column"></param>
         /// <returns></returns>
         
-        public Vector4 Column(int column)
+        public Color Column(int column)
         {
             switch (column)
             {
                 case 0:
-                    return new Vector4(M00, M10, M20, M30);
+                    return new Color(M00, M10, M20, M30);
 
                 case 1:
-                    return new Vector4(M01, M11, M21, M31);
+                    return new Color(M01, M11, M21, M31);
 
                 case 2:
-                    return new Vector4(M02, M12, M22, M32);
+                    return new Color(M02, M12, M22, M32);
 
                 case 3:
-                    return new Vector4(M03, M13, M23, M33);
+                    return new Color(M03, M13, M23, M33);
 
                 default:
                     throw new IndexOutOfRangeException("The index of column is greater than 3");
@@ -568,7 +568,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="angle"></param>
         
-        public void RotateX(float angle)
+        public void RotateR(float angle)
         {
             float rad = MathF.Sin(angle);
             float s = MathF.Sin(rad);
@@ -661,7 +661,7 @@ namespace Raster.Math
         public void Rotate(float x, float y, float z, float angle)
         {
             if (x != 0.0f && y == 0.0f && z == 0.0f)
-                RotateX(angle);
+                RotateR(angle);
             else if (x == 0.0f && y != 0.0f && z == 0.0f)
                 RotateY(angle);
             else if (x == 0.0f && y == 0.0f && z != 0.0f)
@@ -680,7 +680,7 @@ namespace Raster.Math
         /// <param name="axis"></param>
         /// <param name="angle"></param> 
         public void Rotate(in Vector3 axis, float angle) =>
-            Rotate(axis.X, axis.Y, axis.Z, angle);
+            Rotate(axis.R, axis.Y, axis.Z, angle);
 
         /// <summary>
         /// 
@@ -714,7 +714,7 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="scale"></param>
-        public void Scale(in Vector3 scale) => Scale(scale.X, scale.Y, scale.Z);
+        public void Scale(in Vector3 scale) => Scale(scale.R, scale.Y, scale.Z);
 
         /// <summary>
         /// 
@@ -738,7 +738,7 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="translate"></param>
-        public void Translate(in Vector3 translate) => Translate(translate.X, translate.Y, translate.Z);
+        public void Translate(in Vector3 translate) => Translate(translate.R, translate.Y, translate.Z);
 
         /// <summary>
         /// 
@@ -785,48 +785,48 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="eyeX"></param>
+        /// <param name="eyeR"></param>
         /// <param name="eyeY"></param>
         /// <param name="eyeZ"></param>
-        /// <param name="centerX"></param>
+        /// <param name="centerR"></param>
         /// <param name="centerY"></param>
         /// <param name="centerZ"></param>
-        /// <param name="upX"></param>
+        /// <param name="upR"></param>
         /// <param name="upY"></param>
         /// <param name="upZ"></param>
-        public void LookAt(float eyeX, float eyeY, float eyeZ,
-                           float centerX, float centerY, float centerZ,
-                           float upX, float upY, float upZ)
+        public void LookAt(float eyeR, float eyeY, float eyeZ,
+                           float centerR, float centerY, float centerZ,
+                           float upR, float upY, float upZ)
         {
-            float forwardX = centerX - eyeX;
+            float forwardR = centerR - eyeR;
             float forwardY = centerY - eyeY;
             float forwardZ = centerZ - eyeZ;
 
-            float lenSqr = forwardX * forwardX + forwardY * forwardY + forwardZ * forwardZ;
+            float lenSqr = forwardR * forwardR + forwardY * forwardY + forwardZ * forwardZ;
             float invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
-            forwardX *= invNorm;
+            forwardR *= invNorm;
             forwardY *= invNorm;
             forwardZ *= invNorm;
 
-            float sideX = forwardY * upZ - forwardZ * upY;
-            float sideY = forwardX * upZ - forwardZ * upX;
-            float sideZ = forwardX * upY - forwardY * upX;
+            float sideR = forwardY * upZ - forwardZ * upY;
+            float sideY = forwardR * upZ - forwardZ * upR;
+            float sideZ = forwardR * upY - forwardY * upR;
 
-            lenSqr = sideX * sideX + sideY * sideY + sideZ * sideZ;
+            lenSqr = sideR * sideR + sideY * sideY + sideZ * sideZ;
             invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
-            sideX *= invNorm;
+            sideR *= invNorm;
             sideY *= invNorm;
             sideZ *= invNorm;
 
-            float uX = sideY * forwardZ - sideZ * forwardY;
-            float uY = sideZ * forwardX - sideX * forwardZ;
-            float uZ = sideX * forwardY - sideY * forwardX;
+            float uR = sideY * forwardZ - sideZ * forwardY;
+            float uY = sideZ * forwardR - sideR * forwardZ;
+            float uZ = sideR * forwardY - sideY * forwardR;
 
-            M00 = sideX;
-            M01 = uX;
-            M02 = -forwardX;
+            M00 = sideR;
+            M01 = uR;
+            M02 = -forwardR;
             M03 = 0.0f;
 
             M10 = sideY;
@@ -839,9 +839,9 @@ namespace Raster.Math
             M22 = -forwardZ;
             M23 = 0.0f;
 
-            M30 = -(sideX * eyeX + sideY * eyeY + sideZ * eyeZ);
-            M31 = -(uX * eyeX + uY * eyeY + uZ * eyeZ);
-            M32 = (forwardX * eyeX + forwardY * eyeY + forwardZ * eyeZ);
+            M30 = -(sideR * eyeR + sideY * eyeY + sideZ * eyeZ);
+            M31 = -(uR * eyeR + uY * eyeY + uZ * eyeZ);
+            M32 = (forwardR * eyeR + forwardY * eyeY + forwardZ * eyeZ);
             M33 = 0.0f;
         }
 
@@ -852,7 +852,7 @@ namespace Raster.Math
         /// <param name="center"></param>
         /// <param name="up"></param>
         public void LookAt(in Vector3 eye, in Vector3 center, in Vector3 up) =>
-            LookAt(eye.X, eye.Y, eye.Z, center.X, center.Y, center.Z, up.X, up.Y, up.Z);
+            LookAt(eye.R, eye.Y, eye.Z, center.R, center.Y, center.Z, up.R, up.Y, up.Z);
 
         /// <summary>
         /// 
@@ -1108,17 +1108,17 @@ namespace Raster.Math
 
         public void BillboardMatrix(in Vector3 objectPos, in Vector3 cameraPos, in Vector3 cameraUp, in Vector3 cameraForward)
         {
-            float zAxisX = objectPos.X - cameraPos.X;
+            float zAxisR = objectPos.R - cameraPos.R;
             float zAxisY = objectPos.Y - cameraPos.Y;
             float zAxisZ = objectPos.Z - cameraPos.Z;
 
-            float lenSqr = zAxisX * zAxisX + zAxisY * zAxisY +
+            float lenSqr = zAxisR * zAxisR + zAxisY * zAxisY +
                            zAxisZ * zAxisZ;
             float invNorm = 0.0f;
 
             if (lenSqr < BillboardEpsilon)
             {
-                zAxisX = -cameraForward.X;
+                zAxisR = -cameraForward.R;
                 zAxisY = -cameraForward.Y;
                 zAxisZ = -cameraForward.Z;
             }
@@ -1126,43 +1126,43 @@ namespace Raster.Math
             {
                 invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
-                zAxisX *= invNorm;
+                zAxisR *= invNorm;
                 zAxisY *= invNorm;
                 zAxisZ *= invNorm;
             }
            
 
-            float tempX = cameraUp.Y * zAxisZ - cameraUp.Z * zAxisY;
-            float tempY = cameraUp.X * zAxisZ - cameraUp.Z * zAxisX;
-            float tempZ = cameraUp.X * zAxisY - cameraUp.Y * zAxisX;
+            float tempR = cameraUp.Y * zAxisZ - cameraUp.Z * zAxisY;
+            float tempY = cameraUp.R * zAxisZ - cameraUp.Z * zAxisR;
+            float tempZ = cameraUp.R * zAxisY - cameraUp.Y * zAxisR;
 
-            lenSqr = tempX * tempX + tempY * tempY + tempZ * tempZ;
+            lenSqr = tempR * tempR + tempY * tempY + tempZ * tempZ;
             invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
-            float xAxisX = tempX * invNorm;
+            float xAxisR = tempR * invNorm;
             float xAxisY = tempY * invNorm;
             float xAxisZ = tempZ * invNorm;
 
-            float yAxisX = zAxisY * xAxisZ - zAxisZ * xAxisY;
-            float yAxisY = zAxisX * xAxisZ - zAxisZ * xAxisX;
-            float yAxisZ = zAxisX * xAxisY - zAxisY * xAxisX;
+            float yAxisR = zAxisY * xAxisZ - zAxisZ * xAxisY;
+            float yAxisY = zAxisR * xAxisZ - zAxisZ * xAxisR;
+            float yAxisZ = zAxisR * xAxisY - zAxisY * xAxisR;
 
-            M00 = xAxisX;
+            M00 = xAxisR;
             M01 = xAxisY;
             M02 = xAxisZ;
             M03 = 0.0f;
 
-            M10 = yAxisX;
+            M10 = yAxisR;
             M11 = yAxisY;
             M12 = yAxisZ;
             M13 = 0.0f;
 
-            M20 = zAxisX;
+            M20 = zAxisR;
             M21 = zAxisY;
             M22 = zAxisZ;
             M23 = 0.0f;
 
-            M30 = objectPos.X;
+            M30 = objectPos.R;
             M31 = objectPos.Y;
             M32 = objectPos.Z;
             M33 = 1.0f;
@@ -1178,13 +1178,13 @@ namespace Raster.Math
             Plane p;
             Plane.Normalize(value, out p);
 
-            float fx = -2.0f * p.Normal.X;
+            float fx = -2.0f * p.Normal.R;
             float fy = -2.0f * p.Normal.Y;
             float fz = -2.0f * p.Normal.Z;
 
-            M00 = fx * p.Normal.X + 1.0f;
-            M01 = fy * p.Normal.X;
-            M02 = fz * p.Normal.X;
+            M00 = fx * p.Normal.R + 1.0f;
+            M01 = fy * p.Normal.R;
+            M02 = fz * p.Normal.R;
             M03 = 0.0f;
 
             M10 = fx * p.Normal.Y;
@@ -1213,27 +1213,27 @@ namespace Raster.Math
             Plane p = Plane.Normalize(plane);
 
             float dot = Vector3.Dot(p.Normal, lightDirection);
-            float x = -p.Normal.X;
+            float x = -p.Normal.R;
             float y = -p.Normal.Y;
             float z = -p.Normal.Z;
             float d = -p.Distance;
 
-            M00 = x * lightDirection.X + dot;
+            M00 = x * lightDirection.R + dot;
             M01 = x * lightDirection.Y;
             M02 = x * lightDirection.Z;
             M03 = 0.0f;
 
-            M10 = y * lightDirection.X;
+            M10 = y * lightDirection.R;
             M11 = y * lightDirection.Y + dot;
             M12 = y * lightDirection.Z;
             M13 = 0.0f;
 
-            M20 = z * lightDirection.X;
+            M20 = z * lightDirection.R;
             M21 = z * lightDirection.Z;
             M22 = z * lightDirection.Z + dot;
             M23 = 0.0f;
 
-            M30 = d * lightDirection.X;
+            M30 = d * lightDirection.R;
             M31 = d * lightDirection.Y;
             M32 = d * lightDirection.Z;
             M33 = dot;
@@ -1251,22 +1251,22 @@ namespace Raster.Math
             Vector3 xAxis = Vector3.Normalize(Vector3.Cross(up, zAxis));
             Vector3 yAxis = Vector3.Cross(zAxis, xAxis);
 
-            M00 = xAxis.X;
+            M00 = xAxis.R;
             M01 = xAxis.Y;
             M02 = xAxis.Z;
             M03 = 0.0f;
 
-            M10 = yAxis.X;
+            M10 = yAxis.R;
             M11 = yAxis.Y;
             M12 = yAxis.Z;
             M13 = 0.0f;
 
-            M20 = zAxis.X;
+            M20 = zAxis.R;
             M21 = zAxis.Y;
             M22 = zAxis.Z;
             M23 = 0.0f;
 
-            M30 = position.X;
+            M30 = position.R;
             M31 = position.Y;
             M32 = position.Z;
             M33 = 1.0f;
@@ -1318,15 +1318,15 @@ namespace Raster.Math
             Vector3 axis = axisAngle.Axis;
 
             float c0 = 1.0f - c;
-            float x2 = axis.X * axis.X;
+            float x2 = axis.R * axis.R;
             float y2 = axis.Y * axis.Y;
             float z2 = axis.Z * axis.Z;
 
-            float xy = axis.X * axis.Y;
-            float xz = axis.X * axis.Z;
+            float xy = axis.R * axis.Y;
+            float xz = axis.R * axis.Z;
             float yz = axis.Y * axis.Z;
 
-            float xs = axis.X * s;
+            float xs = axis.R * s;
             float ys = axis.Y * s;
             float zs = axis.Z * s;
 
@@ -1645,15 +1645,15 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <param name="result"></param>
         
-        public static void Multiply(in Matrix4x4 left, in Vector4 right, out Vector4 result)
+        public static void Multiply(in Matrix4x4 left, in Color right, out Color result)
         {
-            result.X = left.M00 * right.X + left.M01 * right.Y + 
+            result.R = left.M00 * right.R + left.M01 * right.Y + 
                        left.M02 * right.Z + left.M03 * right.W;
-            result.Y = left.M10 * right.X + left.M11 * right.Y + 
+            result.Y = left.M10 * right.R + left.M11 * right.Y + 
                        left.M12 * right.Z + left.M13 * right.W;
-            result.Z = left.M20 * right.X + left.M21 * right.Y + 
+            result.Z = left.M20 * right.R + left.M21 * right.Y + 
                        left.M22 * right.Z + left.M23 * right.W;
-            result.W = left.M30 * right.X + left.M31 * right.Y + 
+            result.W = left.M30 * right.R + left.M31 * right.Y + 
                        left.M32 * right.Z + left.M33 * right.W;
         }
 
@@ -1664,15 +1664,15 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <param name="result"></param>
         
-        public static void Multiply(in Vector4 left, in Matrix4x4 right, out Vector4 result)
+        public static void Multiply(in Color left, in Matrix4x4 right, out Color result)
         {
-            result.X = left.X * right.M00 + left.Y * right.M10 + 
+            result.R = left.R * right.M00 + left.Y * right.M10 + 
                        left.Z * right.M20 + left.W * right.M30;
-            result.Y = left.X * right.M01 + left.Y * right.M11 + 
+            result.Y = left.R * right.M01 + left.Y * right.M11 + 
                        left.Z * right.M21 + left.W * right.M31;
-            result.Z = left.X * right.M02 + left.Y * right.M12 + 
+            result.Z = left.R * right.M02 + left.Y * right.M12 + 
                        left.Z * right.M22 + left.W * right.M32;
-            result.W = left.X * right.M03 + left.Y * right.M13 + 
+            result.W = left.R * right.M03 + left.Y * right.M13 + 
                        left.Z * right.M23 + left.W * right.M33;
         }
 
@@ -1869,9 +1869,9 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         
-        public static Vector4 operator *(in Matrix4x4 left, in Vector4 right)
+        public static Color operator *(in Matrix4x4 left, in Color right)
         {
-            Multiply(left, right, out Vector4 result);
+            Multiply(left, right, out Color result);
             return result;
         }
 
@@ -1882,9 +1882,9 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         
-        public static Vector4 operator *(in Vector4 left, in Matrix4x4 right)
+        public static Color operator *(in Color left, in Matrix4x4 right)
         {
-            Multiply(left, right, out Vector4 result);
+            Multiply(left, right, out Color result);
             return result;
         }
 

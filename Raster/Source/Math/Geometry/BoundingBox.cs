@@ -71,7 +71,7 @@ namespace Raster.Math.Geometry
         public override string ToString()
         {
             return string.Format("BoundingBox: XMin = {0}, YMin = {1}, ZMin = {2}, XMax = {3}, YMax = {4}, ZMax = {5}",
-                          Minimum.X, Minimum.Y, Minimum.Z, Maximum.X, Maximum.Y, Maximum.Z);
+                                 Minimum.X, Minimum.Y, Minimum.Z, Maximum.X, Maximum.Y, Maximum.Z);
         }
 
         /// <summary>
@@ -90,11 +90,13 @@ namespace Raster.Math.Geometry
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(in AABB left, in AABB right) =>
-            left.Minimum.X == right.Minimum.X && left.Minimum.Y == right.Minimum.Y && 
-            left.Minimum.Z == right.Minimum.Z &&
-            left.Maximum.X == right.Maximum.X && left.Maximum.Y == right.Maximum.Y && 
-            left.Maximum.Z == right.Maximum.Z;
+        public static bool operator ==(in AABB left, in AABB right)
+        {
+            return left.Minimum.X == right.Minimum.X && left.Minimum.Y == right.Minimum.Y &&
+                   left.Minimum.Z == right.Minimum.Z &&
+                   left.Maximum.X == right.Maximum.X && left.Maximum.Y == right.Maximum.Y &&
+                   left.Maximum.Z == right.Maximum.Z;
+        }
 
         /// <summary>
         /// 
@@ -102,11 +104,13 @@ namespace Raster.Math.Geometry
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(in AABB left, in AABB right) =>
-            left.Minimum.X != right.Minimum.X || left.Minimum.Y != right.Minimum.Y || 
-            left.Minimum.Z != right.Minimum.Z ||
-            left.Maximum.X != right.Maximum.X || left.Maximum.Y != right.Maximum.Y || 
-            left.Maximum.Z != right.Maximum.Z;
+        public static bool operator !=(in AABB left, in AABB right)
+        {
+            return left.Minimum.X != right.Minimum.X || left.Minimum.Y != right.Minimum.Y ||
+                   left.Minimum.Z != right.Minimum.Z ||
+                   left.Maximum.X != right.Maximum.X || left.Maximum.Y != right.Maximum.Y ||
+                   left.Maximum.Z != right.Maximum.Z;
+        }
 
         #endregion Operator Overload
     }
