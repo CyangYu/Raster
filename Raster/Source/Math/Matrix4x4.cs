@@ -114,18 +114,54 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        public Vector4 Row0     => new Vector4(M00, M01, M02, M03);
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 Row1     => new Vector4(M10, M11, M12, M13);
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 Row2     => new Vector4(M20, M21, M22, M23);
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 Row3     => new Vector4(M30, M31, M32, M33);
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 Column0  => new Vector4(M00, M10, M20, M30);
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 Column1  => new Vector4(M01, M11, M21, M31);
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 Column2  => new Vector4(M02, M12, M22, M32);
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 Column3  => new Vector4(M03, M13, M23, M33);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float Determinant
         {
             get
             {
                 float d0 = M22 * M33 - M23 * M32;
-                float d1 = M21 * M33 - M23 * M32;
+                float d1 = M21 * M33 - M23 * M31;
                 float d2 = M21 * M32 - M22 * M31;
                 float d3 = M20 * M33 - M23 * M30;
                 float d4 = M20 * M32 - M22 * M30;
                 float d5 = M20 * M31 - M21 * M30;
 
-                return 0.0f;
+                return M00 * (M11 * d0 - M12 * d1 + M13 * d2) -
+                       M01 * (M10 * d0 - M12 * d3 + M13 * d4) +
+                       M02 * (M10 * d1 - M11 * d3 + M13 * d5) -
+                       M03 * (M10 * d2 - M11 * d4 + M12 * d5);
             }
         }
 
@@ -459,7 +495,6 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <returns></returns>
-        
         public bool IsIdentity()
         {
             return (M00 == 1.0f && M01 == 0.0f && M02 == 0.0f && M03 == 0.0f &&
@@ -471,7 +506,6 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        
         public void SetIdentity()
         {
             M00 = 1.0f;
@@ -498,61 +532,32 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="row"></param>
-        /// <returns></returns>
-        
-        public Vector4 Row(int row)
+        public void SetZero()
         {
-            switch (row)
-            {
-                case 0:
-                    return new Vector4(M00, M01, M02, M03);
+            M00 = 0.0f;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
 
-                case 1:
-                    return new Vector4(M10, M11, M12, M13);
+            M10 = 0.0f;
+            M11 = 0.0f;
+            M12 = 0.0f;
+            M13 = 0.0f;
 
-                case 2:
-                    return new Vector4(M20, M21, M22, M23);
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 0.0f;
+            M23 = 0.0f;
 
-                case 3:
-                    return new Vector4(M30, M31, M32, M33);
-
-                default:
-                    throw new IndexOutOfRangeException("The index of row is greater than 3");
-            }
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = 0.0f;
+            M33 = 0.0f;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="column"></param>
-        /// <returns></returns>
-        
-        public Vector4 Column(int column)
-        {
-            switch (column)
-            {
-                case 0:
-                    return new Vector4(M00, M10, M20, M30);
-
-                case 1:
-                    return new Vector4(M01, M11, M21, M31);
-
-                case 2:
-                    return new Vector4(M02, M12, M22, M32);
-
-                case 3:
-                    return new Vector4(M03, M13, M23, M33);
-
-                default:
-                    throw new IndexOutOfRangeException("The index of column is greater than 3");
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        
         public void Transpose()
         {
             MathHelper.Swap(ref M01, ref M10);
@@ -595,8 +600,7 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="angle"></param>
-        
+        /// <param name="angle"></param>   
         public void RotateY(float angle)
         {
             float rad = MathF.Sin(angle);
@@ -625,7 +629,6 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="angle"></param>
-        
         public void RotateZ(float angle)
         {
             float rad = MathF.Sin(angle);
@@ -657,7 +660,6 @@ namespace Raster.Math
         /// <param name="y"></param>
         /// <param name="z"></param>
         /// <param name="angle"></param>
-        
         public void Rotate(float x, float y, float z, float angle)
         {
             if (x != 0.0f && y == 0.0f && z == 0.0f)
@@ -749,7 +751,6 @@ namespace Raster.Math
         /// <param name="bottom"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
-        
         public void Frustrum(float left, float right, float top, float bottom, float zNear, float zFar)
         {
             if (left >= right || bottom >= top || zNear >= zFar)
@@ -934,7 +935,6 @@ namespace Raster.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
-        
         public void Perspective(float width, float height, float zNear, float zFar)
         {
             if (zNear <= 0.0f || zFar <= 0.0f || zNear >= zFar)
@@ -1070,7 +1070,6 @@ namespace Raster.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
-        
         public void Viewport(float left, float bottom, float width, float height, float zNear, float zFar)
         {
             float w2 = width / 2.0f;
@@ -1292,23 +1291,6 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="eulerAngle"></param>
-        /// <returns></returns>
-        public static Matrix4x4 FromAxisAngle(in EulerAngles eulerAngle)
-        {
-            FromEulerAngles(eulerAngle, out Matrix4x4 result);
-            return result;
-        }
-
-        public static Matrix4x4 FromQuaternion(in Quaternion quaternion)
-        {
-            FromQuaternion(quaternion, out Matrix4x4 result);
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="axisAngle"></param>
         /// <param name="result"></param>
         public static void FromAxisAngle(in AxisAngle axisAngle, out Matrix4x4 result)
@@ -1350,31 +1332,6 @@ namespace Raster.Math
             result.M23 = 0.0f;
             result.M33 = 1.0f;
         }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pitch"></param>
-        /// <param name="roll"></param>
-        /// <param name="yaw"></param>
-        /// <param name="result"></param>
-        public static void FromEulerAngles(in EulerAngles eulerAngles, out Matrix4x4 result)
-        {
-            
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        /// <param name="w"></param>
-        /// <param name="result"></param>
-        public static void FromQuaternion(in Quaternion quaternion, out Matrix4x4 result)
-        {
-
-        }
 
         /// <summary>
         /// 
@@ -1410,8 +1367,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        
+        /// <param name="result"></param>   
         public static void Add(in Matrix4x4 left, in Matrix4x4 right, out Matrix4x4 result)
         {
             result.M00 = left.M00 + right.M00;
@@ -1470,7 +1426,6 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        
         public static void Subtract(in Matrix4x4 left, in Matrix4x4 right, out Matrix4x4 result)
         {
             result.M00 = left.M00 - right.M00;
@@ -1499,8 +1454,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        
+        /// <param name="result"></param>   
         public static void Multiply(in Matrix4x4 left, float right, out Matrix4x4 result)
         {
             result.M00 = left.M00 * right;
@@ -1530,7 +1484,6 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        
         public static void Multiply(in Matrix4x4 left, in Matrix4x2 right, out Matrix4x2 result)
         {
             result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
@@ -1560,7 +1513,6 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        
         public static void Multiply(in Matrix4x4 left, in Matrix4x3 right, out Matrix4x3 result)
         {
             result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
@@ -1598,7 +1550,6 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        
         public static void Multiply(in Matrix4x4 left, in Matrix4x4 right, out Matrix4x4 result)
         {
             result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
@@ -1644,7 +1595,6 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        
         public static void Multiply(in Matrix4x4 left, in Vector4 right, out Vector4 result)
         {
             result.X = left.M00 * right.X + left.M01 * right.Y + 
@@ -1663,7 +1613,6 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        
         public static void Multiply(in Vector4 left, in Matrix4x4 right, out Vector4 result)
         {
             result.X = left.X * right.M00 + left.Y * right.M10 + 

@@ -61,6 +61,7 @@
     <Compile Include="Source\Math\AxisAngle.cs" />
     <Compile Include="Source\Math\Geometry\BoundingBox.cs" />
     <Compile Include="Source\Math\Geometry\BoundingBox2d.cs" />
+    <Compile Include="Source\Math\Geometry\IHitable.cs" />
     <Compile Include="Source\Math\Geometry\OrientedBox.cs" />
     <Compile Include="Source\Math\Geometry\Capsule.cs" />
     <Compile Include="Source\Math\Geometry\Circle.cs" />
