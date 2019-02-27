@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using Raster.Private;
 
 namespace Raster.Drawing
@@ -7,6 +8,7 @@ namespace Raster.Drawing
     /// 
     /// </summary>
     [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public struct Size : IEquatable<Size>
     {
         #region Public Fields

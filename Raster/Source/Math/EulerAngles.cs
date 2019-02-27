@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Raster.Private;
 
 namespace Raster.Math
@@ -7,6 +8,8 @@ namespace Raster.Math
     /// <summary>
     /// 
     /// </summary>
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public struct EulerAngles : IEquatable<EulerAngles>
     {
 		#region Public Fields

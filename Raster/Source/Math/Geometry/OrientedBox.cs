@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Raster.Math.Geometry
 {
     /// <summary>
     /// 
     /// </summary>
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public struct OrientedBox : IEquatable<OrientedBox>
     {
         #region Public Instance Methods

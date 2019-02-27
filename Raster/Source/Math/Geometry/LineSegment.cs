@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace Raster.Math.Geometry
 {
     /// <summary>
     /// 
     /// </summary>
-    public struct LineSegment : IEquatable<LineSegment>
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
+    public struct LineSegment : IEquatable<LineSegment>, IHitable
     {
         #region Public Instance Methods
         /// <summary>

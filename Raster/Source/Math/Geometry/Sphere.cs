@@ -6,7 +6,7 @@ namespace Raster.Math.Geometry
     /// <summary>
     /// 
     /// </summary>
-    public struct Sphere : IEquatable<Sphere>
+    public struct Sphere : IEquatable<Sphere>, IHitable
     {
         #region Public Instance Fields
         /// <summary>

@@ -1,13 +1,29 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace Raster.Math.Geometry
 {
     /// <summary>
     /// 
     /// </summary>
-    public struct Triangle : IEquatable<Triangle>
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
+    public struct Triangle : IEquatable<Triangle>, IHitable
     {
+        #region Public Instance Fields
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Vertex0;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Vertex1;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Vertex2;
+        #endregion Public Instance Fields
+
         #region Public Instance Methods
         /// <summary>
         /// 

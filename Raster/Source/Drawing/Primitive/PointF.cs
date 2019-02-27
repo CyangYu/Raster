@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using Raster.Private;
 
 namespace Raster.Drawing.Primitive
@@ -6,6 +7,8 @@ namespace Raster.Drawing.Primitive
     /// <summary>
     /// 
     /// </summary>
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public struct PointF : IEquatable<PointF>
     {
         #region Public Instance Fields
