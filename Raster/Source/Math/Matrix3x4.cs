@@ -302,6 +302,17 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        public bool IsZero()
+        {
+            return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f && M03 == 0.0f &&
+                    M10 == 0.0f && M11 == 0.0f && M12 == 0.0f && M13 == 0.0f &&
+                    M20 == 0.0f && M21 == 0.0f && M22 == 0.0f && M23 == 0.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="value"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Fill(float value)
@@ -325,76 +336,22 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool IsZero()
+        public void SetZero()
         {
-            return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f && M03 == 0.0f &&
-                    M10 == 0.0f && M11 == 0.0f && M12 == 0.0f && M13 == 0.0f &&
-                    M20 == 0.0f && M21 == 0.0f && M22 == 0.0f && M23 == 0.0f);
-        }
+            M00 = 0.0f;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool IsIdentity()
-        {
-            return (M00 == 1.0f && M01 == 0.0f && M02 == 0.0f && M03 == 0.0f &&
-                    M10 == 0.0f && M11 == 1.0f && M12 == 0.0f && M13 == 0.0f &&
-                    M20 == 0.0f && M21 == 0.0f && M22 == 1.0f && M23 == 0.0f);
-        }
+            M10 = 0.0f;
+            M11 = 0.0f;
+            M12 = 0.0f;
+            M13 = 0.0f;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="row"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector4 Row(int row)
-        {
-            switch (row)
-            {
-                case 0:
-                    return new Vector4(M00, M01, M02, M03);
-
-                case 1:
-                    return new Vector4(M10, M11, M12, M13);
-
-                case 2:
-                    return new Vector4(M20, M21, M22, M23);
-
-                default:
-                    throw new IndexOutOfRangeException("The index of row is greater than 2");
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="column"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector3 Column(int column)
-        {
-            switch (column)
-            {
-                case 0:
-                    return new Vector3(M00, M10, M20);
-
-                case 1:
-                    return new Vector3(M01, M11, M21);
-
-                case 2:
-                    return new Vector3(M02, M12, M22);
-
-                case 3:
-                    return new Vector3(M03, M13, M23);
-
-                default:
-                    throw new IndexOutOfRangeException("The index of column is greater than 3");
-            }
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 0.0f;
+            M23 = 0.0f;
         }
 
         #endregion Public Instance Methods

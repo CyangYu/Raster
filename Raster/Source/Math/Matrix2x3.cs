@@ -213,46 +213,16 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="row"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector3 Row(int row)
+        public void SetZero()
         {
-            switch (row)
-            {
-                case 0:
-                    return new Vector3(M00, M01, M02);
+            M00 = 0.0f;
+            M01 = 0.0f;
+            M02 = 0.0f;
 
-                case 1:
-                    return new Vector3(M10, M11, M12);
+            M10 = 0.0f;
+            M11 = 0.0f;
+            M12 = 0.0f;
 
-                default:
-                    throw new IndexOutOfRangeException("The index of row is greater than 1");
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="column"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector2 Column(int column)
-        {
-            switch (column)
-            {
-                case 0:
-                    return new Vector2(M00, M10);
-
-                case 1:
-                    return new Vector2(M01, M11);
-
-                case 2:
-                    return new Vector2(M02, M12);
-
-                default:
-                    throw new IndexOutOfRangeException("The index of row is greater than 2");
-            }
         }
 
         #endregion Public Instance Methods

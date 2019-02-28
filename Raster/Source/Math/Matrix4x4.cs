@@ -457,32 +457,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value"></param>
-        
-        public void Fill(float value)
-        {
-            M00 = value;
-            M01 = value;
-            M02 = value;
-
-            M10 = value;
-            M11 = value;
-            M12 = value;
-
-            M20 = value;
-            M21 = value;
-            M22 = value;
-
-            M30 = value;
-            M31 = value;
-            M32 = value;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <returns></returns>
-        
+
         public bool IsZero()
         {
             return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f && M03 == 0.0f &&
@@ -501,6 +477,29 @@ namespace Raster.Math
                     M10 == 0.0f && M11 == 1.0f && M12 == 0.0f && M13 == 0.0f &&
                     M20 == 0.0f && M21 == 0.0f && M22 == 1.0f && M23 == 0.0f &&
                     M30 == 0.0f && M31 == 0.0f && M32 == 0.0f && M33 == 1.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        public void Fill(float value)
+        {
+            M00 = value;
+            M01 = value;
+            M02 = value;
+
+            M10 = value;
+            M11 = value;
+            M12 = value;
+
+            M20 = value;
+            M21 = value;
+            M22 = value;
+
+            M30 = value;
+            M31 = value;
+            M32 = value;
         }
 
         /// <summary>
@@ -1631,7 +1630,6 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        
         public static void Divide(in Matrix4x4 left, float right, out Matrix4x4 result)
         {
             if (right == 0.0f)
@@ -1667,7 +1665,16 @@ namespace Raster.Math
         /// </summary>
         /// <param name="matrix"></param>
         /// <param name="result"></param>
-        
+        public static void Inverse(in Matrix4x4 matrix, out Matrix4x4 result)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
         public static void Transpose(in Matrix4x4 matrix, out Matrix4x4 result)
         {
             result.M00 = matrix.M00;
@@ -1700,7 +1707,6 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        
         public static Matrix4x4 operator +(in Matrix4x4 left, in Matrix4x4 right)
         {
             Add(left, right, out Matrix4x4 result);
@@ -1713,7 +1719,6 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        
         public static Matrix4x4 operator +(in Matrix4x4 left, float right)
         {
             Add(left, right, out Matrix4x4 result);
@@ -1725,8 +1730,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        
+        /// <returns></returns>        
         public static Matrix4x4 operator -(in Matrix4x4 left, float right)
         {
             Subtract(left, right, out Matrix4x4 result);
@@ -1738,8 +1742,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        
+        /// <returns></returns>       
         public static Matrix4x4 operator -(in Matrix4x4 left, in Matrix4x4 right)
         {
             Subtract(left, right, out Matrix4x4 result);
@@ -1751,8 +1754,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        
+        /// <returns></returns> 
         public static Matrix4x4 operator *(in Matrix4x4 left, float right)
         {
             Multiply(left, right, out Matrix4x4 result);
@@ -1764,8 +1766,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        
+        /// <returns></returns>        
         public static Matrix4x4 operator *(float left, in Matrix4x4 right)
         {
             Multiply(right, left, out Matrix4x4 result);
@@ -1777,8 +1778,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        
+        /// <returns></returns>        
         public static Matrix4x2 operator *(in Matrix4x4 left, in Matrix4x2 right)
         {
             Multiply(left, right, out Matrix4x2 result);
@@ -1790,8 +1790,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        
+        /// <returns></returns>      
         public static Matrix4x3 operator *(in Matrix4x4 left, in Matrix4x3 right)
         {
             Multiply(left, right, out Matrix4x3 result);
@@ -1803,8 +1802,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        
+        /// <returns></returns>       
         public static Matrix4x4 operator *(in Matrix4x4 left, in Matrix4x4 right)
         {
             Multiply(left, right, out Matrix4x4 result);
@@ -1816,8 +1814,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        
+        /// <returns></returns>       
         public static Vector4 operator *(in Matrix4x4 left, in Vector4 right)
         {
             Multiply(left, right, out Vector4 result);
@@ -1829,8 +1826,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        
+        /// <returns></returns>       
         public static Vector4 operator *(in Vector4 left, in Matrix4x4 right)
         {
             Multiply(left, right, out Vector4 result);
@@ -1842,8 +1838,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        
+        /// <returns></returns>       
         public static Matrix4x4 operator /(in Matrix4x4 left, float right)
         {
             Divide(left, right, out Matrix4x4 result);

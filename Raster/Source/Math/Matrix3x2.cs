@@ -195,7 +195,6 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="value"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Fill(float value)
         {
             M00 = value;
@@ -211,6 +210,20 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        public void SetZero()
+        {
+            M00 = 0.0f;
+            M01 = 0.0f;
+                
+            M10 = 0.0f;
+            M11 = 0.0f;
+                  
+            M20 = 0.0f;
+            M21 = 0.0f;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsZero()
@@ -218,51 +231,6 @@ namespace Raster.Math
             return (M00 == 0.0f && M01 == 0.0f &&
                     M10 == 0.0f && M11 == 0.0f &&
                     M20 == 0.0f && M21 == 0.0f);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="row"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector2 Row(int row)
-        {
-            switch (row)
-            {
-                case 0:
-                    return new Vector2(M00, M01);
-
-                case 1:
-                    return new Vector2(M10, M11);
-
-                case 2:
-                    return new Vector2(M20, M21);
-
-                default:
-                    throw new IndexOutOfRangeException("The index of row is greater than 2");
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="column"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector3 Column(int column)
-        {
-            switch (column)
-            {
-                case 0:
-                    return new Vector3(M00, M10, M20);
-
-                case 1:
-                    return new Vector3(M01, M11, M21);
-
-                default:
-                    throw new IndexOutOfRangeException("The index of column is greater than 1");
-            }
         }
 
         #endregion Public Instance Methods

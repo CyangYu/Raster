@@ -309,14 +309,12 @@ namespace Raster.Math
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Matrix4x3 other) => this == other;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="value"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Fill(float value)
         {
             M00 = value;
@@ -340,7 +338,6 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsZero()
         {
             return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f &&
@@ -348,56 +345,27 @@ namespace Raster.Math
                     M20 == 0.0f && M21 == 0.0f && M22 == 0.0f &&
                     M30 == 0.0f && M31 == 0.0f && M32 == 0.0f);
         }
-
+        
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="row"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector3 Row(int row)
+        public void SetZero()
         {
-            switch (row)
-            {
-                case 0:
-                    return new Vector3(M00, M01, M02);
+            M00 = 0.0f;
+            M01 = 0.0f;
+            M02 = 0.0f;
 
-                case 1:
-                    return new Vector3(M10, M11, M12);
+            M10 = 0.0f;
+            M11 = 0.0f;
+            M12 = 0.0f;
 
-                case 2:
-                    return new Vector3(M20, M21, M22);
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 0.0f;
 
-                case 3:
-                    return new Vector3(M30, M31, M32);
-
-                default:
-                    throw new IndexOutOfRangeException("The index of row is greater than 3");
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="column"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector4 Column(int column)
-        {
-            switch (column)
-            {
-                case 0:
-                    return new Vector4(M00, M10, M20, M30);
-
-                case 1:
-                    return new Vector4(M01, M11, M21, M31);
-
-                case 2:
-                    return new Vector4(M02, M12, M22, M32);
-
-                default:
-                    throw new IndexOutOfRangeException("The index of column is greater than 2");
-            }
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = 0.0f;
         }
 
         #endregion Public Instance Methods
