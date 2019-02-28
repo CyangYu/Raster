@@ -48,12 +48,29 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        public Vector2 Row0     => new Vector2(M00, M01);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector2 Row1     => new Vector2(M10, M11);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector2 Column0  => new Vector2(M00, M10);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector2 Column1  => new Vector2(M01, M11);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float Determinant
         {
-            get
-            {
-                return M00 * M11 - M01 * M10;
-            }
+            get { return M00 * M11 - M01 * M10; }
         }
 
         #endregion Public Instance Properties

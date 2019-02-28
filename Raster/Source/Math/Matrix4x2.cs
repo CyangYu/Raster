@@ -59,17 +59,44 @@ namespace Raster.Math
         #endregion Public Static Fields
 
         #region Public Instance Properties
-        public float[] RawData
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector2 Row0 => new Vector2(M00, M01);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector2 Row1 => new Vector2(M10, M11);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector2 Row2 => new Vector2(M20, M21);
+
+        // <summary>
+        /// 
+        /// </summary>
+        public Vector2 Row3 => new Vector2(M30, M31);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 Column0 => new Vector4(M00, M10, M20, M30);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 Column1 => new Vector4(M01, M11, M21, M31);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public float Determinant
         {
             get
             {
-                return new float[4 * 2]
-                {
-                    M00, M01,
-                    M10, M11,
-                    M20, M21,
-                    M30, M31
-                };
+                return 0.0f;
             }
         }
         #endregion Public Instance Properties

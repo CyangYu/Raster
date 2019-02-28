@@ -696,6 +696,69 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        public static void OutProduct(in Vector3 left, in Vector2 right, out Matrix3x2 result)
+        {
+            result.M00 = left.X * right.X;
+            result.M01 = left.X * right.Y;
+
+            result.M10 = left.Y * right.X;
+            result.M11 = left.Y * right.Y;
+
+            result.M20 = left.Z * right.X;
+            result.M21 = left.Z * right.Y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        public static void OutProduct(in Vector3 left, in Vector3 right, out Matrix3x3 result)
+        {
+            result.M00 = left.X * right.X;
+            result.M01 = left.X * right.Y;
+            result.M02 = left.X * right.Z;
+
+            result.M10 = left.Y * right.X;
+            result.M11 = left.Y * right.Y;
+            result.M12 = left.Y * right.Z;
+
+            result.M20 = left.Z * right.X;
+            result.M21 = left.Z * right.Y;
+            result.M22 = left.Z * right.Z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        public static void OutProduct(in Vector3 left, in Vector4 right, out Matrix3x4 result)
+        {
+            result.M00 = left.X * right.X;
+            result.M01 = left.X * right.Y;
+            result.M02 = left.X * right.Z;
+            result.M03 = left.X * right.W;
+
+            result.M10 = left.Y * right.X;
+            result.M11 = left.Y * right.Y;
+            result.M12 = left.Y * right.Z;
+            result.M13 = left.Y * right.W;
+
+            result.M20 = left.Z * right.X;
+            result.M21 = left.Z * right.Y;
+            result.M22 = left.Z * right.Z;
+            result.M23 = left.Z * right.W;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="vec3"></param>
         /// <param name="perp"></param>
         /// <returns></returns>

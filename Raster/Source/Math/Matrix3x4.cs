@@ -73,16 +73,46 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public float[] RawData
+        public Vector4 Row0 => new Vector4(M00, M01, M02, M03);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 Row1 => new Vector4(M10, M11, M12, M13);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 Row2 => new Vector4(M20, M21, M22, M23);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Column0 => new Vector3(M00, M10, M20);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Column1 => new Vector3(M01, M11, M21);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Column2 => new Vector3(M02, M12, M22);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Column3 => new Vector3(M03, M13, M23);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public float Determinant
         {
             get
             {
-                return new float[3 * 4]
-                {
-                    M00, M01, M02, M03,
-                    M10, M11, M12, M13,
-                    M20, M21, M22, M23
-                };
+                return 0.0f;
             }
         }
 
