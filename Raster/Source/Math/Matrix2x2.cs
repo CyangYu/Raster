@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace Raster.Math
@@ -221,10 +220,44 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static Matrix2x2 Transpose(in Matrix2x2 matrix)
+        {
+            Transpose(matrix, out Matrix2x2 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        public static bool Inverse(in Matrix2x2 matrix, out Matrix2x2 result)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        public static void Transpose(in Matrix2x2 matrix, out Matrix2x2 result)
+        {
+            result.M00 = matrix.M00;
+            result.M01 = matrix.M10;
+
+            result.M10 = matrix.M01;
+            result.M11 = matrix.M11;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        
         public static void Add(in Matrix2x2 left, float right, out Matrix2x2 result)
         {
             result.M00 = left.M00 + right;
@@ -239,8 +272,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        
+        /// <param name="result"></param>       
         public static void Add(in Matrix2x2 left, in Matrix2x2 right, out Matrix2x2 result)
         {
             result.M00 = left.M00 + right.M00;
@@ -255,8 +287,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        
+        /// <param name="result"></param>       
         public static void Subtract(in Matrix2x2 left, float right, out Matrix2x2 result)
         {
             result.M00 = left.M00 - right;
@@ -271,8 +302,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        
+        /// <param name="result"></param>       
         public static void Subtract(in Matrix2x2 left, in Matrix2x2 right, out Matrix2x2 result)
         {
             result.M00 = left.M00 - right.M00;
@@ -304,8 +334,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        
+        /// <param name="result"></param>       
         public static void Multiply(in Matrix2x2 left, in Matrix2x2 right, out Matrix2x2 result)
         {
             result.M00 = left.M00 * right.M00 + left.M01 * right.M10;
@@ -320,8 +349,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        
+        /// <param name="result"></param>       
         public static void Multiply(in Matrix2x2 left, in Matrix2x3 right, out Matrix2x3 result)
         {
             result.M00 = left.M00 * right.M00 + left.M01 * right.M10;
@@ -338,8 +366,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        
+        /// <param name="result"></param>        
         public static void Multiply(in Matrix2x2 left, in Matrix2x4 right, out Matrix2x4 result)
         {
             result.M00 = left.M00 * right.M00 + left.M01 * right.M10;
@@ -358,8 +385,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        
+        /// <param name="result"></param>       
         public static void Multiply(in Matrix2x2 left, in Vector2 right, out Vector2 result)
         {
             result.X = left.M00 * right.X + left.M01 * right.Y;
@@ -371,12 +397,25 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        
+        /// <param name="result"></param>        
         public static void Multiply(in Vector2 left, in Matrix2x2 right, out Vector2 result)
         {
             result.X = left.X * right.M00 + left.Y * right.M10;
             result.Y = left.X * right.M01 + left.Y * right.M11;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        public static void Negate(in Matrix2x2 matrix, out Matrix2x2 result)
+        {
+            result.M00 = -matrix.M00;
+            result.M01 = -matrix.M01;
+
+            result.M10 = -matrix.M10;
+            result.M11 = -matrix.M11;
         }
 
         /// <summary>
@@ -400,30 +439,6 @@ namespace Raster.Math
 
             result.M10 = left.M10 * right;
             result.M11 = left.M11 * right;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="matrix"></param>
-        /// <param name="result"></param>
-        public static void Inverse(in Matrix2x2 matrix, out Matrix4x4 result)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="matrix"></param>
-        /// <param name="result"></param>
-        public static void Transpose(in Matrix2x2 matrix, out Matrix2x2 result)
-        {
-            result.M00 = matrix.M00;
-            result.M01 = matrix.M10;
-
-            result.M10 = matrix.M01;
-            result.M11 = matrix.M11;
         }
 
         #endregion Public Static Methods
@@ -450,6 +465,17 @@ namespace Raster.Math
         public static Matrix2x2 operator +(in Matrix2x2 left, float right)
         {
             Add(left, right, out Matrix2x2 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static Matrix2x2 operator -(in Matrix2x2 matrix)
+        {
+            Negate(matrix, out Matrix2x2 result);
             return result;
         }
 

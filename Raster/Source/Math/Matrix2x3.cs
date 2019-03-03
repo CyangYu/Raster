@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace Raster.Math
@@ -179,14 +178,14 @@ namespace Raster.Math
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public bool Equals(Matrix2x3 other) => this == other;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="value"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public void Fill(float value)
         {
             M00 = value;
@@ -202,7 +201,7 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public bool IsZero()
         {
             return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f &&
@@ -231,10 +230,37 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static Matrix2x3 Transpose(in Matrix2x3 matrix)
+        {
+            Transpose(matrix, out Matrix3x2 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>       
+        public static void Transpose(in Matrix2x3 matrix, out Matrix3x2 result)
+        {
+            result.M00 = matrix.M00;
+            result.M01 = matrix.M10;
+
+            result.M10 = matrix.M01;
+            result.M11 = matrix.M11;
+
+            result.M20 = matrix.M02;
+            result.M21 = matrix.M12;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Add(in Matrix2x3 left, float right, out Matrix2x3 result)
         {
             result.M00 = left.M00 + right;
@@ -251,8 +277,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <param name="result"></param>       
         public static void Add(in Matrix2x3 left, in Matrix2x3 right, out Matrix2x3 result)
         {
             result.M00 = left.M00 + right.M00;
@@ -269,8 +294,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <param name="result"></param>       
         public static void Subtract(in Matrix2x3 left, float right, out Matrix2x3 result)
         {
             result.M00 = left.M00 - right;
@@ -287,8 +311,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <param name="result"></param>       
         public static void Subtract(in Matrix2x3 left, in Matrix2x3 right, out Matrix2x3 result)
         {
             result.M00 = left.M00 - right.M00;
@@ -305,8 +328,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <param name="result"></param>        
         public static void Multiply(in Matrix2x3 left, float right, out Matrix2x3 result)
         {
             result.M00 = left.M00 * right;
@@ -323,8 +345,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <param name="result"></param>        
         public static void Multiply(in Matrix2x3 left, in Matrix3x2 right, out Matrix2x2 result)
         {
             result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
@@ -343,8 +364,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <param name="result"></param>       
         public static void Multiply(in Matrix2x3 left, in Matrix3x3 right, out Matrix2x3 result)
         {
             result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
@@ -367,8 +387,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <param name="result"></param>        
         public static void Multiply(in Matrix2x3 left, in Matrix3x4 right, out Matrix2x4 result)
         {
             result.M00 = left.M00 * right.M00 + left.M01 * right.M10 + 
@@ -395,13 +414,12 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <param name="result"></param>        
         public static void Multiply(in Matrix2x3 left, in Vector3 right, out Vector2 result)
         {
-            result.R = left.M00 * right.R + left.M01 * right.Y + 
+            result.X = left.M00 * right.X + left.M01 * right.Y + 
                        left.M02 * right.Z;
-            result.Y = left.M10 * right.R + left.M11 * right.Y + 
+            result.Y = left.M10 * right.X + left.M11 * right.Y + 
                        left.M12 * right.Z;
         }
 
@@ -410,13 +428,28 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <param name="result"></param>        
         public static void Multiply(in Vector2 left, in Matrix2x3 right, out Vector3 result)
         {
-            result.R = left.R * right.M00 + left.Y * right.M10;
-            result.Y = left.R * right.M01 + left.Y * right.M11;
-            result.Z = left.R * right.M02 + left.Y * right.M12;
+            result.X = left.X * right.M00 + left.Y * right.M10;
+            result.Y = left.X * right.M01 + left.Y * right.M11;
+            result.Z = left.X * right.M02 + left.Y * right.M12;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        public static void Negate(in Matrix2x3 matrix, out Matrix2x3 result)
+        {
+            result.M00 = -matrix.M00;
+            result.M01 = -matrix.M01;
+            result.M02 = -matrix.M02;
+
+            result.M10 = -matrix.M10;
+            result.M11 = -matrix.M11;
+            result.M12 = -matrix.M12;
         }
 
         /// <summary>
@@ -424,8 +457,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <param name="result"></param>       
         public static void Divide(in Matrix2x3 left, float right, out Matrix2x3 result)
         {
             if (right == 0.0f)
@@ -445,24 +477,6 @@ namespace Raster.Math
             result.M12 = left.M12 * right;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="matrix"></param>
-        /// <param name="result"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Transpose(in Matrix2x3 matrix, out Matrix3x2 result)
-        {
-            result.M00 = matrix.M00;
-            result.M01 = matrix.M10;
-
-            result.M10 = matrix.M01;
-            result.M11 = matrix.M11;
-
-            result.M20 = matrix.M02;
-            result.M21 = matrix.M12;
-        }
-
         #endregion Public Static Methods
 
         #region Operator Overload
@@ -471,8 +485,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <returns></returns>       
         public static Matrix2x3 operator +(in Matrix2x3 left, in Matrix2x3 right)
         {
             Add(left, right, out Matrix2x3 result);
@@ -484,8 +497,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <returns></returns>        
         public static Matrix2x3 operator +(in Matrix2x3 left, float right)
         {
             Add(left, right, out Matrix2x3 result);
@@ -495,10 +507,20 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static Matrix2x3 operator -(in Matrix2x3 matrix)
+        {
+            Negate(matrix, out Matrix2x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <returns></returns>       
         public static Matrix2x3 operator -(in Matrix2x3 left, float right)
         {
             Subtract(left, right, out Matrix2x3 result);
@@ -510,8 +532,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <returns></returns>       
         public static Matrix2x3 operator -(in Matrix2x3 left, in Matrix2x3 right)
         {
             Subtract(left, right, out Matrix2x3 result);
@@ -523,8 +544,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <returns></returns>       
         public static Matrix2x3 operator *(in Matrix2x3 left, float right)
         {
             Subtract(left, right, out Matrix2x3 result);
@@ -536,8 +556,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <returns></returns>        
         public static Matrix2x3 operator *(float left, in Matrix2x3 right)
         {
             Multiply(right, left, out Matrix2x3 result);
@@ -549,8 +568,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <returns></returns>        
         public static Matrix2x2 operator *(in Matrix2x3 left, in Matrix3x2 right)
         {
             Multiply(left, right, out Matrix2x2 result);
@@ -562,8 +580,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <returns></returns>       
         public static Matrix2x3 operator *(in Matrix2x3 left, in Matrix3x3 right)
         {
             Multiply(left, right, out Matrix2x3 result);
@@ -575,8 +592,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <returns></returns>        
         public static Matrix2x4 operator *(in Matrix2x3 left, in Matrix3x4 right)
         {
             Multiply(left, right, out Matrix2x4 result);
@@ -588,8 +604,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <returns></returns>       
        public static Vector2 operator *(in Matrix2x3 left, in Vector3 right)
         {
             Multiply(left, right, out Vector2 result);
@@ -601,8 +616,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <returns></returns>        
         public static Vector3 operator *(in Vector2 left, in Matrix2x3 right)
         {
             Multiply(left, right, out Vector3 result);
@@ -614,8 +628,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <returns></returns>       
         public static Matrix2x3 operator /(in Matrix2x3 left, float right)
         {
             Divide(left, right, out Matrix2x3 result);

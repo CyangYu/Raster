@@ -54,40 +54,29 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public Quaternion Conjugated
-        {
-            get { return new Quaternion(-X, -Y, -Z, W); }
-        }
+        public Quaternion Conjugated => new Quaternion(-X, -Y, -Z, W);
 
         /// <summary>
         /// 
         /// </summary>
-        public bool IsIdentity
-        {
-            get { return X == 0.0f && Y == 0.0f && Z == 0.0f && W == 1.0f; }
-        }
+        public bool IsIdentity => 
+            X == 0.0f && Y == 0.0f && Z == 0.0f && W == 1.0f;
 
         /// <summary>
         /// 
         /// </summary>
-        public float Length
-        {
-            get { return MathF.Sqrt(X * X + Y * Y + Z * Z + W * W); }
-        }
+        public float Length => MathF.Sqrt(X * X + Y * Y + Z * Z + W * W);
 
         /// <summary>
         /// 
         /// </summary>
-        public float LengthSquared
-        {
-            get { return X * X + Y * Y + Z * Z; }
-        }
+        public float LengthSquared => X * X + Y * Y + Z * Z + W * W;
 
         #endregion Public Instance Properties
 
         #region Constructor
-        public Quaternion(in Quaternion quat)
-			: this(quat.X, quat.Y, quat.Z, quat.W)
+        public Quaternion(in Quaternion other)
+			: this(other.X, other.Y, other.Z, other.W)
 		{
 		}
 		

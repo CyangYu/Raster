@@ -103,22 +103,22 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="matrix"></param>
+        /// <param name="quaternion"></param>
         /// <returns></returns>
-        public static EulerAngles FromRotationMatrix(in Matrix4x4 matrix)
+        public static EulerAngles FromQuaternion(in Quaternion quaternion)
         {
-            FromRotationMatrix(matrix, out EulerAngles eulerAngles);
+            FromQuaternion(quaternion.X, quaternion.Y, quaternion.Z, quaternion.W, out EulerAngles eulerAngles);
             return eulerAngles;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="quaternion"></param>
+        /// <param name="matrix"></param>
         /// <returns></returns>
-        public static EulerAngles FromQuaternion(in Quaternion quaternion)
+        public static EulerAngles FromRotationMatrixToXYZ(in Matrix4x4 matrix)
         {
-            FromQuaternion(quaternion.X, quaternion.Y, quaternion.Z, quaternion.W, out EulerAngles eulerAngles);
+            FromRotationMatrixToXYZ(matrix, out EulerAngles eulerAngles);
             return eulerAngles;
         }
 
@@ -201,7 +201,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="matrix"></param>
         /// <param name="eulerAngles"></param>
-        public static void FromRotationMatrix(in Matrix4x4 matrix, out EulerAngles eulerAngles)
+        public static void FromRotationMatrixToXYZ(in Matrix4x4 matrix, out EulerAngles eulerAngles)
         {
             eulerAngles.Pitch = 0.0f;
             eulerAngles.Roll = 0.0f;

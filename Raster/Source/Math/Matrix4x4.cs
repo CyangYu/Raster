@@ -151,17 +151,21 @@ namespace Raster.Math
         {
             get
             {
-                float d0 = M22 * M33 - M23 * M32;
-                float d1 = M21 * M33 - M23 * M31;
-                float d2 = M21 * M32 - M22 * M31;
-                float d3 = M20 * M33 - M23 * M30;
-                float d4 = M20 * M32 - M22 * M30;
-                float d5 = M20 * M31 - M21 * M30;
+                // a = M00, b = M01, c = M02, d = M03,
+                // e = M10, f = M11, g = M12, h = M13,
+                // i = M20, j = M21, k = M22, l = M23,
+                // m = M30, n = M31, o = M32, p = M33
+                float kp_lo = M22 * M33 - M23 * M32;
+                float jp_ln = M21 * M33 - M23 * M31;
+                float jo_kn = M21 * M32 - M22 * M31;
+                float ip_lm = M20 * M33 - M23 * M30;
+                float io_km = M20 * M32 - M22 * M30;
+                float in_jm = M20 * M31 - M21 * M30;
 
-                return M00 * (M11 * d0 - M12 * d1 + M13 * d2) -
-                       M01 * (M10 * d0 - M12 * d3 + M13 * d4) +
-                       M02 * (M10 * d1 - M11 * d3 + M13 * d5) -
-                       M03 * (M10 * d2 - M11 * d4 + M12 * d5);
+                return M00 * (M11 * kp_lo - M12 * jp_ln + M13 * jo_kn) -
+                       M01 * (M10 * kp_lo - M12 * ip_lm + M13 * io_km) +
+                       M02 * (M10 * jp_ln - M11 * ip_lm + M13 * in_jm) -
+                       M03 * (M10 * jo_kn - M11 * io_km + M12 * in_jm);
             }
         }
 
@@ -325,6 +329,29 @@ namespace Raster.Math
 
             M30 = 0.0f;
             M31 = 0.0f;
+            M32 = 0.0f;
+            M33 = 0.0f;
+        }
+
+        public Matrix4x4(in Matrix4x2 other)
+        {
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = other.M20;
+            M21 = other.M21;
+            M22 = 0.0f;
+            M23 = 0.0f;
+
+            M30 = other.M30;
+            M31 = other.M31;
             M32 = 0.0f;
             M33 = 0.0f;
         }
@@ -1290,6 +1317,40 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static Matrix4x4 Inverse(in Matrix4x4 matrix)
+        {
+            Inverse(matrix, out Matrix4x4 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="rotation"></param>
+        /// <returns></returns>
+        public static Matrix4x4 Transform(in Matrix4x4 matrix, in Quaternion rotation)
+        {
+            Transform(matrix, rotation, out Matrix4x4 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static Matrix4x4 Transpose(in Matrix4x4 matrix)
+        {
+            Transpose(matrix, out Matrix4x4 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="axisAngle"></param>
         /// <param name="result"></param>
         public static void FromAxisAngle(in AxisAngle axisAngle, out Matrix4x4 result)
@@ -1330,6 +1391,165 @@ namespace Raster.Math
             result.M13 = 0.0f;
             result.M23 = 0.0f;
             result.M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        public static bool Inverse(in Matrix4x4 matrix, out Matrix4x4 result)
+        {
+            // a = M00, b = M01, c = M02, d = M03,
+            // e = M10, f = M11, g = M12, h = M13,
+            // i = M20, j = M21, k = M22, l = M23,
+            // m = M30, n = M31, o = M32, p = M33
+            float kp_lo = matrix.M22 * matrix.M33 - matrix.M23 * matrix.M32;
+            float jp_ln = matrix.M21 * matrix.M33 - matrix.M23 * matrix.M31;
+            float jo_kn = matrix.M21 * matrix.M32 - matrix.M22 * matrix.M31;
+            float ip_lm = matrix.M20 * matrix.M33 - matrix.M23 * matrix.M30;
+            float io_km = matrix.M20 * matrix.M32 - matrix.M22 * matrix.M30;
+            float in_jm = matrix.M20 * matrix.M31 - matrix.M21 * matrix.M30;
+
+            float a00 = +(matrix.M11 * kp_lo - matrix.M12 * jp_ln + matrix.M13 * jo_kn);
+            float a01 = -(matrix.M10 * kp_lo - matrix.M12 * ip_lm + matrix.M13 * io_km);
+            float a02 = +(matrix.M10 * jp_ln - matrix.M11 * ip_lm + matrix.M13 * in_jm);
+            float a03 = -(matrix.M10 * jo_kn - matrix.M11 * io_km + matrix.M12 * in_jm);
+
+            float det = matrix.M00 * a00 + matrix.M01 * a01 +
+                        matrix.M02 * a02 + matrix.M03 * a03;
+
+            if (MathF.Abs(det) < float.Epsilon)
+            {
+                result = new Matrix4x4(float.NaN);
+                return false;
+            }
+
+            float invDet = 1.0f / det;
+
+            result.M00 = a00 * invDet;
+            result.M10 = a01 * invDet;
+            result.M20 = a02 * invDet;
+            result.M30 = a03 * invDet;
+
+            result.M01 = -(matrix.M01 * kp_lo - matrix.M02 * jp_ln + matrix.M03 * jo_kn) * invDet;
+            result.M11 = +(matrix.M00 * kp_lo - matrix.M02 * ip_lm + matrix.M03 * io_km) * invDet;
+            result.M21 = -(matrix.M00 * jp_ln - matrix.M01 * ip_lm + matrix.M03 * in_jm) * invDet;
+            result.M31 = +(matrix.M00 * jo_kn - matrix.M01 * io_km + matrix.M02 * in_jm) * invDet;
+
+            float gp_ho = matrix.M12 * matrix.M33 - matrix.M13 * matrix.M32;
+            float fp_hn = matrix.M11 * matrix.M33 - matrix.M13 * matrix.M31;
+            float fo_gn = matrix.M11 * matrix.M32 - matrix.M12 * matrix.M31;
+            float ep_hm = matrix.M10 * matrix.M33 - matrix.M13 * matrix.M30;
+            float eo_gm = matrix.M10 * matrix.M32 - matrix.M12 * matrix.M30;
+            float en_fm = matrix.M10 * matrix.M31 - matrix.M11 * matrix.M30;
+
+            result.M02 = +(matrix.M01 * gp_ho - matrix.M02 * fp_hn + matrix.M03 * fo_gn) * invDet;
+            result.M12 = -(matrix.M00 * gp_ho - matrix.M02 * ep_hm + matrix.M03 * eo_gm) * invDet;
+            result.M22 = +(matrix.M00 * fp_hn - matrix.M01 * ep_hm + matrix.M03 * en_fm) * invDet;
+            result.M32 = -(matrix.M00 * fo_gn - matrix.M01 * eo_gm + matrix.M02 * en_fm) * invDet;
+
+            float gl_hk = matrix.M12 * matrix.M23 - matrix.M13 * matrix.M22;
+            float fl_hj = matrix.M11 * matrix.M23 - matrix.M13 * matrix.M21;
+            float fk_gj = matrix.M11 * matrix.M22 - matrix.M12 * matrix.M21;
+            float el_hi = matrix.M10 * matrix.M23 - matrix.M13 * matrix.M20;
+            float ek_gi = matrix.M10 * matrix.M22 - matrix.M12 * matrix.M20;
+            float ej_fi = matrix.M10 * matrix.M21 - matrix.M11 * matrix.M20;
+
+            result.M03 = -(matrix.M01 * gl_hk - matrix.M02 * fl_hj + matrix.M03 * fk_gj) * invDet;
+            result.M13 = +(matrix.M00 * gl_hk - matrix.M02 * el_hi + matrix.M03 * ek_gi) * invDet;
+            result.M23 = -(matrix.M00 * fl_hj - matrix.M01 * el_hi + matrix.M03 * ej_fi) * invDet;
+            result.M33 = +(matrix.M00 * fk_gj - matrix.M01 * ek_gi + matrix.M02 * ej_fi) * invDet;
+
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="rotation"></param>
+        /// <param name="result"></param>
+        public static void Transform(in Matrix4x4 matrix, in Quaternion rotation, out Matrix4x4 result)
+        {
+            // Compute rotation matrix
+            float x2 = rotation.X + rotation.Y;
+            float y2 = rotation.Y + rotation.Y;
+            float z2 = rotation.Z + rotation.Z;
+
+            float wx2 = rotation.W * x2;
+            float wy2 = rotation.W * y2;
+            float wz2 = rotation.W * z2;
+            float xx2 = rotation.X * x2;
+            float xy2 = rotation.X * y2;
+            float xz2 = rotation.X * z2;
+            float yy2 = rotation.Y * y2;
+            float yz2 = rotation.Y * z2;
+            float zz2 = rotation.Z * z2;
+
+            float q00 = 1.0f - yy2 - zz2;
+            float q10 = xy2 - wz2;
+            float q20 = xz2 + wy2;
+
+            float q01 = xy2 + wz2;
+            float q11 = 1.0f - xx2 - zz2;
+            float q21 = yz2 - wx2;
+
+            float q02 = xz2 - wy2;
+            float q12 = yz2 + wx2;
+            float q22 = 1.0f - xx2 - yy2;
+
+            // First Row
+            result.M00 = matrix.M00 * q00 + matrix.M01 * q10 + matrix.M02 * q20;
+            result.M01 = matrix.M00 * q01 + matrix.M01 * q11 + matrix.M02 * q21;
+            result.M02 = matrix.M00 * q02 + matrix.M01 * q12 + matrix.M03 * q22;
+            result.M03 = matrix.M03;
+
+            // Second Row
+            result.M10 = matrix.M10 * q00 + matrix.M11 * q10 + matrix.M12 * q20;
+            result.M11 = matrix.M10 * q01 + matrix.M11 * q11 + matrix.M12 * q21;
+            result.M12 = matrix.M10 * q02 + matrix.M11 * q12 + matrix.M12 * q22;
+            result.M13 = matrix.M13;
+
+            // Third Row
+            result.M20 = matrix.M20 * q00 + matrix.M21 * q10 + matrix.M22 * q20;
+            result.M21 = matrix.M20 * q01 + matrix.M21 * q11 + matrix.M22 * q21;
+            result.M22 = matrix.M20 * q02 + matrix.M21 * q12 + matrix.M22 * q22;
+            result.M23 = matrix.M23;
+
+            // Fourth row
+            result.M30 = matrix.M30 * q00 + matrix.M31 * q10 + matrix.M32 * q20;
+            result.M31 = matrix.M30 * q01 + matrix.M31 * q11 + matrix.M32 * q21;
+            result.M32 = matrix.M30 * q02 + matrix.M31 * q12 + matrix.M32 * q22;
+            result.M33 = matrix.M33;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        public static void Transpose(in Matrix4x4 matrix, out Matrix4x4 result)
+        {
+            result.M00 = matrix.M00;
+            result.M01 = matrix.M10;
+            result.M02 = matrix.M20;
+            result.M03 = matrix.M30;
+
+            result.M10 = matrix.M01;
+            result.M11 = matrix.M11;
+            result.M12 = matrix.M21;
+            result.M13 = matrix.M31;
+
+            result.M20 = matrix.M02;
+            result.M21 = matrix.M12;
+            result.M22 = matrix.M22;
+            result.M23 = matrix.M32;
+
+            result.M30 = matrix.M03;
+            result.M31 = matrix.M13;
+            result.M32 = matrix.M23;
+            result.M33 = matrix.M32;
         }
 
         /// <summary>
@@ -1627,6 +1847,34 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        public static void Negate(in Matrix4x4 matrix, out Matrix4x4 result)
+        {
+            result.M00 = -matrix.M00;
+            result.M01 = -matrix.M01;
+            result.M02 = -matrix.M02;
+            result.M03 = -matrix.M03;
+
+            result.M10 = -matrix.M10;
+            result.M11 = -matrix.M11;
+            result.M12 = -matrix.M12;
+            result.M13 = -matrix.M12;
+
+            result.M20 = -matrix.M20;
+            result.M21 = -matrix.M21;
+            result.M22 = -matrix.M22;
+            result.M23 = -matrix.M23;
+
+            result.M30 = -matrix.M30;
+            result.M31 = -matrix.M31;
+            result.M32 = -matrix.M32;
+            result.M33 = -matrix.M33;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="result"></param>
@@ -1660,44 +1908,6 @@ namespace Raster.Math
             result.M33 = left.M33 * right;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="matrix"></param>
-        /// <param name="result"></param>
-        public static void Inverse(in Matrix4x4 matrix, out Matrix4x4 result)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="matrix"></param>
-        /// <param name="result"></param>
-        public static void Transpose(in Matrix4x4 matrix, out Matrix4x4 result)
-        {
-            result.M00 = matrix.M00;
-            result.M01 = matrix.M10;
-            result.M02 = matrix.M20;
-            result.M03 = matrix.M30;
-
-            result.M10 = matrix.M01;
-            result.M11 = matrix.M11;
-            result.M12 = matrix.M21;
-            result.M13 = matrix.M31;
-
-            result.M20 = matrix.M02;
-            result.M21 = matrix.M12;
-            result.M22 = matrix.M22;
-            result.M23 = matrix.M32;
-
-            result.M30 = matrix.M03;
-            result.M31 = matrix.M13;
-            result.M32 = matrix.M23;
-            result.M33 = matrix.M32;
-        }
-
         #endregion Public Static Methods
 
         #region Operator Overload
@@ -1722,6 +1932,17 @@ namespace Raster.Math
         public static Matrix4x4 operator +(in Matrix4x4 left, float right)
         {
             Add(left, right, out Matrix4x4 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static Matrix4x4 operator -(in Matrix4x4 matrix)
+        {
+            Negate(matrix, out Matrix4x4 result);
             return result;
         }
 

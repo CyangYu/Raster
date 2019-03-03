@@ -37,7 +37,7 @@ namespace Raster.Math
 
         public AxisAngle(in Vector3 axis, float angle)
         {
-            Axis.R = axis.R;
+            Axis.X = axis.X;
             Axis.Y = axis.Y;
             Axis.Z = axis.Z;
             Angle  = angle;
@@ -84,7 +84,7 @@ namespace Raster.Math
         public override string ToString()
         {
             return string.Format("AxisAngle: Axis  R = {0}, Y = {1}, Z = {2} Angle = {3}",
-                                 Axis.R, Axis.Y, Axis.Z, Angle);
+                                 Axis.X, Axis.Y, Axis.Z, Angle);
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Raster.Math
             float lenSqr = quaternion.LengthSquared;
             if (!MathHelper.IsZero(lenSqr))
             {
-                axisAngle.Axis.R = quaternion.R;
+                axisAngle.Axis.X = quaternion.X;
                 axisAngle.Axis.Y = quaternion.Y;
                 axisAngle.Axis.Z = quaternion.Z;
 
@@ -136,7 +136,7 @@ namespace Raster.Math
                 {
                     float invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
-                    axisAngle.Axis.R *= invNorm;
+                    axisAngle.Axis.X *= invNorm;
                     axisAngle.Axis.Y *= invNorm;
                     axisAngle.Axis.Z *= invNorm;
                 }
@@ -160,7 +160,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static bool operator ==(in AxisAngle left, in AxisAngle right)
         {
-            return left.Axis.R == right.Axis.R && left.Axis.Y == right.Axis.Y && left.Axis.Z == right.Axis.Z &&
+            return left.Axis.X == right.Axis.X && left.Axis.Y == right.Axis.Y && left.Axis.Z == right.Axis.Z &&
                    left.Angle == right.Angle;
         }
 
@@ -172,7 +172,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static bool operator !=(in AxisAngle left, in AxisAngle right)
         {
-            return left.Axis.R != right.Axis.R || left.Axis.Y != right.Axis.Y || left.Axis.Z != right.Axis.Z ||
+            return left.Axis.X != right.Axis.X || left.Axis.Y != right.Axis.Y || left.Axis.Z != right.Axis.Z ||
                    left.Angle != right.Angle;
         }
 
