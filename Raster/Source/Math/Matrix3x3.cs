@@ -352,16 +352,13 @@ namespace Raster.Math
             float c = MathF.Cos(rad);
             float temp = 0.0f;
 
-            temp = M00;
-            M00 = temp * c + M10 * s;
+            M00 = (temp = M00) * c + M10 * s;
             M10 = M10 * c - temp * s;
 
-            temp = M01;
-            M01 = temp * c + M11 * s;
+            M01 = (temp = M01) * c + M11 * s;
             M11 = M11 * c - temp * s;
 
-            temp = M02;
-            M02 = temp * c + M12 * s;
+            M02 = (temp = M02) * c + M12 * s;
             M12 = M12 * c - temp * s;
         }
 
@@ -460,11 +457,104 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="result"></param>
+        public static void FromEulerAnglesXZY(in EulerAngles eulerAngles, out Matrix3x3 result)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="result"></param>
+        public static void FromEulerAnglesYXZ(in EulerAngles eulerAngles, out Matrix3x3 result)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="result"></param>
+        public static void FromEulerAnglesYZX(in EulerAngles eulerAngles, out Matrix3x3 result)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="result"></param>
+        public static void FromEulerAnglesZXY(in EulerAngles eulerAngles, out Matrix3x3 result)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="result"></param>
+        public static void FromEulerAnglesZYX(in EulerAngles eulerAngles, out Matrix3x3 result)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="quaternion"></param>
         /// <param name="result"></param>
         public static void FromQuaternion(in Quaternion quaternion, out Matrix3x3 result)
         {
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        public static bool Inverse(in Matrix3x3 matrix, out Matrix3x3 result)
+        {
+            result.M00 = matrix.M11 * matrix.M22 - matrix.M12 * matrix.M21;
+            result.M01 = matrix.M02 * matrix.M21 - matrix.M01 * matrix.M22;
+            result.M02 = matrix.M01 * matrix.M12 - matrix.M02 * matrix.M11;
+
+            result.M10 = matrix.M12 * matrix.M20 - matrix.M10 * matrix.M22;
+            result.M11 = matrix.M00 * matrix.M22 - matrix.M02 * matrix.M20;
+            result.M12 = matrix.M02 * matrix.M10 - matrix.M00 * matrix.M12;
+
+            result.M20 = matrix.M10 * matrix.M21 - matrix.M11 * matrix.M20;
+            result.M21 = matrix.M01 * matrix.M20 - matrix.M00 * matrix.M21;
+            result.M22 = matrix.M00 * matrix.M11 - matrix.M01 * matrix.M10;
+
+            float det = matrix.M00 * result.M00 + matrix.M01 * result.M10 +
+                        matrix.M02 * result.M20;
+
+            if (MathF.Abs(det) <= MathF.Epsilon)
+            {
+                return false;
+            }
+
+            float invDet = 1.0f * det;
+
+            result.M00 *= invDet;
+            result.M01 *= invDet;
+            result.M02 *= invDet;
+
+            result.M10 *= invDet;
+            result.M11 *= invDet;
+            result.M12 *= invDet;
+
+            result.M20 *= invDet;
+            result.M21 *= invDet;
+            result.M22 *= invDet;
+            return true;
         }
 
         /// <summary>

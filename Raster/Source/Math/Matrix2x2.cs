@@ -214,6 +214,32 @@ namespace Raster.Math
         /// </summary>
         public void Transpose() => MathHelper.Swap(ref M01, ref M10);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        public void Add(in Matrix2x2 other)
+        {
+            M00 += other.M00;
+            M01 += other.M01;
+               
+            M10 += other.M10;
+            M11 += other.M11;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        public void Subtract(in Matrix2x2 other)
+        {
+            M00 -= other.M00;
+            M01 -= other.M01;
+
+            M10 -= other.M10;
+            M11 -= other.M11;
+        }
+
         #endregion Public Instance Methods
 
         #region Public Static Methods

@@ -52,7 +52,11 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Row0 => new Vector2(M00, M01);
+        public Vector2 Row0
+        {
+            get { return new Vector2(M00, M01); }
+            set { M00 = value.X; M01 = value.Y; }
+        }
 
         /// <summary>
         /// 

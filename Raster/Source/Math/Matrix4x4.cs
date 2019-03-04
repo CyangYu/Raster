@@ -1308,9 +1308,9 @@ namespace Raster.Math
         /// <param name="z"></param>
         /// <param name="angle"></param>
         /// <returns></returns>
-        public static Matrix4x4 FromAxisAngle(in AxisAngle axisAngle)
+        public static Matrix4x4 FromAxisAngle(in AxisAngle axis)
         {
-            FromAxisAngle(axisAngle, out Matrix4x4 result);
+            FromAxisAngle(axis, out Matrix4x4 result);
             return result;
         }
 
@@ -1353,24 +1353,23 @@ namespace Raster.Math
         /// </summary>
         /// <param name="axisAngle"></param>
         /// <param name="result"></param>
-        public static void FromAxisAngle(in AxisAngle axisAngle, out Matrix4x4 result)
+        public static void FromAxisAngle(in AxisAngle axis, out Matrix4x4 result)
         {
-            float s = MathF.Sin(axisAngle.Angle);
-            float c = MathF.Cos(axisAngle.Angle);
-            Vector3 axis = axisAngle.Axis;
+            float s = MathF.Sin(axis.Angle);
+            float c = MathF.Cos(axis.Angle);
 
             float c0 = 1.0f - c;
-            float x2 = axis.X * axis.X;
-            float y2 = axis.Y * axis.Y;
-            float z2 = axis.Z * axis.Z;
+            float x2 = axis.Axis.X * axis.Axis.X;
+            float y2 = axis.Axis.Y * axis.Axis.Y;
+            float z2 = axis.Axis.Z * axis.Axis.Z;
 
-            float xy = axis.X * axis.Y;
-            float xz = axis.X * axis.Z;
-            float yz = axis.Y * axis.Z;
+            float xy = axis.Axis.X * axis.Axis.Y;
+            float xz = axis.Axis.X * axis.Axis.Z;
+            float yz = axis.Axis.Y * axis.Axis.Z;
 
-            float xs = axis.X * s;
-            float ys = axis.Y * s;
-            float zs = axis.Z * s;
+            float xs = axis.Axis.X * s;
+            float ys = axis.Axis.Y * s;
+            float zs = axis.Axis.Z * s;
 
             result.M00 = c + c0 * x2;
             result.M10 = c0 * xy - zs;

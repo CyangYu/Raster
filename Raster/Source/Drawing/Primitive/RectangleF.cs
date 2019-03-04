@@ -188,9 +188,11 @@ namespace Raster.Drawing.Primitive
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() =>
-            string.Format("RectangeF X = {0}, Y = {1}, Width = {2}, Height = {3}",
-                           X, Y, Width, Height);
+        public override string ToString()
+		{
+            return string.Format("RectangeF X = {0}, Y = {1}, Width = {2}, Height = {3}",
+								 X, Y, Width, Height);
+		}
 
         /// <summary>
         /// 
@@ -219,25 +221,28 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         /// <param name="pt"></param>
         /// <returns></returns>
-
         public bool Contain(in Point pt) => Contain(pt.X, pt.Y);
         /// <summary>
         /// 
         /// </summary>
         /// <param name="rect"></param>
         /// <returns></returns>
-        public bool Contain(in RectangleF other) =>
-            (X <= other.X) && (other.Right <= Right) &&
-            (Y <= other.Y) && (other.Bottom <= Bottom);
+        public bool Contain(in RectangleF other) 
+		{
+            return (X <= other.X) && (other.Right <= Right) &&
+				   (Y <= other.Y) && (other.Bottom <= Bottom);
+		}
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool IntersectWith(in RectangleF other) =>
-            (other.X < X + Width) && (X < other.X + other.Width) &&
-            (other.Y < Y + Height) && (Y < other.Y + other.Height);
+        public bool IntersectWith(in RectangleF other)
+		{
+            return (other.X < X + Width) && (X < other.X + other.Width) &&
+				   (other.Y < Y + Height) && (Y < other.Y + other.Height);
+		}
 
         /// <summary>
         /// 
@@ -315,8 +320,7 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public static RectangleF Intersect(in RectangleF value1, in RectangleF value2)
         {
-            RectangleF result = new RectangleF(0.0f, 0.0f, 0.0f, 0.0f);
-            Intersect(value1, value2, out Quaternion result);
+            Intersect(value1, value2, out RectangleF result);
             return result;
         }
 
@@ -328,8 +332,7 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public static RectangleF Union(in RectangleF value1, in RectangleF value2)
         {
-            RectangleF result = new RectangleF(0.0f, 0.0f, 0.0f, 0.0f);
-            Union(value1, value2, out Quaternion result);
+            Union(value1, value2, out RectangleF result);
             return result;
         }
 
@@ -378,29 +381,33 @@ namespace Raster.Drawing.Primitive
             result.Height   = bottom - top;
         }
 
-        #endregion Public Instance Methods
+		#endregion Public Instance Methods
 
-        #region Operator Overload
+		#region Operator Overload
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="left"></param>
+		/// <param name="right"></param>
+		/// <returns></returns>
+		public static bool operator ==(in RectangleF left, in RectangleF right)
+		{
+			return left.X == right.X && left.Y == right.Y &&
+				   left.Width == right.Width && left.Height == right.Height;
+		}
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(in RectangleF left, in RectangleF right) =>
-            left.X == right.X && left.Y == right.Y && 
-            left.Width == right.Width && left.Height == right.Height;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static bool operator !=(in RectangleF left, in RectangleF right) =>
-          left.X != right.X || left.Y != right.Y || 
-          left.Width != right.Width || left.Height != right.Height;
-
+        public static bool operator !=(in RectangleF left, in RectangleF right) 
+		{
+          return left.X != right.X || left.Y != right.Y || 
+				 left.Width != right.Width || left.Height != right.Height;
+		}
+		
         #endregion Operator Overload
     }
 }
