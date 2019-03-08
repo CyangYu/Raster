@@ -66,10 +66,8 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Ray: Origin R = {0}, Y = {1}, Z = {2}, " +
-                                 "Direction: R = {3}, Y = {4}, Z = {5} ",
-                                 origin.R, origin.Y, origin.Z,
-                                 direction.R, direction.Y, direction.Z);
+            return string.Format("Ray: Origin X = {0}, Y = {1}, Z = {2}, Direction: X = {3}, Y = {4}, Z = {5} ",
+                                 origin.X, origin.Y, origin.Z, direction.X, direction.Y, direction.Z);
         }
 
 
@@ -90,7 +88,7 @@ namespace Raster.Math.Geometry
         public Vector3 PointAt(float time)
         {
             return new Vector3(
-                origin.R + time * direction.R,
+                origin.X + time * direction.X,
                 origin.Y + time * direction.Y,
                 origin.Z + time * direction.Z);
         }
@@ -106,7 +104,7 @@ namespace Raster.Math.Geometry
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void PointAt(in Ray ray, float time, out Vector3 result)
         {
-            result.R = ray.origin.R + time * ray.direction.R;
+            result.X = ray.origin.X + time * ray.direction.X;
             result.Y = ray.origin.Y + time * ray.direction.Y;
             result.Z = ray.origin.Z + time * ray.direction.Z;
         }

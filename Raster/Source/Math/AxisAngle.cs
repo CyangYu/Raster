@@ -48,8 +48,8 @@ namespace Raster.Math
         public AxisAngle(float x, float y, float z, float angle)
         {
             Axis = new Vector3(x, y, z);
-            Axis.Normalize();
             Angle = angle;
+            Axis.Normalize();
         }
 
         #region Public Instance Methods
@@ -137,8 +137,6 @@ namespace Raster.Math
             {
                 axisAngle = Zero;
             }
-
-            axisAngle.Angle = MathF.DegToRad(axisAngle.Angle);
         }
 
         /// <summary>

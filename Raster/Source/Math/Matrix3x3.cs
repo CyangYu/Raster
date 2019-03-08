@@ -347,9 +347,8 @@ namespace Raster.Math
         /// <param name="angle"></param>       
         public void Rotate(float angle)
         {
-            float rad = MathF.DegToRad(angle);
-            float s = MathF.Sin(rad);
-            float c = MathF.Cos(rad);
+            float s = MathF.Sin(angle);
+            float c = MathF.Cos(angle);
             float temp = 0.0f;
 
             M00 = (temp = M00) * c + M10 * s;
@@ -439,69 +438,197 @@ namespace Raster.Math
         /// </summary>
         /// <param name="axisAngle"></param>
         /// <param name="result"></param>
-        public static void FromAxisAngle(in AxisAngle axisAngle, out Matrix3x3 result)
+        public static void FromAxisAngle(in AxisAngle axis, out Matrix3x3 result)
         {
+            float cos = MathF.Cos(axis.Angle);
+            float sin = MathF.Sin(axis.Angle);
 
+            float c0 = 1.0f - cos;
+            float x2 = axis.Axis.X * axis.Axis.X;
+            float y2 = axis.Axis.Y * axis.Axis.Y;
+            float z2 = axis.Axis.Z * axis.Axis.Z;
+
+            float xy = axis.Axis.X * axis.Axis.Y;
+            float xz = axis.Axis.X * axis.Axis.Z;
+            float yz = axis.Axis.Y * axis.Axis.Z;
+
+            float xs = axis.Axis.X * sin;
+            float ys = axis.Axis.Y * sin;
+            float zs = axis.Axis.Z * sin;
+
+            result.M00 = cos + c0 * x2;
+            result.M10 = c0 * xy - zs;
+            result.M20 = c0 * xz + ys;
+
+            result.M01 = c0 * xy + zs;
+            result.M11 = cos + c0 * y2;
+            result.M21 = c0 * yz - xs;
+
+            result.M02 = c0 * xz - ys;
+            result.M12 = c0 * yz + xs;
+            result.M22 = cos + c0 * z2;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="eulerAngles"></param>
+        /// <param name="euler"></param>
         /// <param name="result"></param>
-        public static void FromEulerAnglesXYZ(in EulerAngles eulerAngles, out Matrix3x3 result)
+        public static void FromEulerAnglesXYZ(in EulerAngles euler, out Matrix3x3 result)
         {
+            float cp = MathF.Cos(euler.Pitch);
+            float sp = MathF.Sin(euler.Pitch);
+            float cr = MathF.Cos(euler.Roll);
+            float sr = MathF.Sin(euler.Roll);
+            float cy = MathF.Cos(euler.Yaw);
+            float sy = MathF.Sin(euler.Yaw);
 
+            result.M00 = ;
+            result.M01 = ;
+            result.M02 = ;
+
+            result.M10 = ;
+            result.M11 = ;
+            result.M12 = ;
+
+            result.M20 = ;
+            result.M21 = ;
+            result.M22 = ;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="eulerAngles"></param>
+        /// <param name="euler"></param>
         /// <param name="result"></param>
-        public static void FromEulerAnglesXZY(in EulerAngles eulerAngles, out Matrix3x3 result)
+        public static void FromEulerAnglesXZY(in EulerAngles euler, out Matrix3x3 result)
         {
+            float cp = MathF.Cos(euler.Pitch);
+            float sp = MathF.Sin(euler.Pitch);
+            float cr = MathF.Cos(euler.Roll);
+            float sr = MathF.Sin(euler.Roll);
+            float cy = MathF.Cos(euler.Yaw);
+            float sy = MathF.Sin(euler.Yaw);
 
+            result.M00 = ;
+            result.M01 = ;
+            result.M02 = ;
+
+            result.M10 = ;
+            result.M11 = ;
+            result.M12 = ;
+
+            result.M20 = ;
+            result.M21 = ;
+            result.M22 = ;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="eulerAngles"></param>
+        /// <param name="euler"></param>
         /// <param name="result"></param>
-        public static void FromEulerAnglesYXZ(in EulerAngles eulerAngles, out Matrix3x3 result)
+        public static void FromEulerAnglesYXZ(in EulerAngles euler, out Matrix3x3 result)
         {
+            float cp = MathF.Cos(euler.Pitch);
+            float sp = MathF.Sin(euler.Pitch);
+            float cr = MathF.Cos(euler.Roll);
+            float sr = MathF.Sin(euler.Roll);
+            float cy = MathF.Cos(euler.Yaw);
+            float sy = MathF.Sin(euler.Yaw);
 
+            result.M00 = ;
+            result.M01 = ;
+            result.M02 = ;
+
+            result.M10 = ;
+            result.M11 = ;
+            result.M12 = ;
+
+            result.M20 = ;
+            result.M21 = ;
+            result.M22 = ;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="eulerAngles"></param>
+        /// <param name="euler"></param>
         /// <param name="result"></param>
-        public static void FromEulerAnglesYZX(in EulerAngles eulerAngles, out Matrix3x3 result)
+        public static void FromEulerAnglesYZX(in EulerAngles euler, out Matrix3x3 result)
         {
+            float cp = MathF.Cos(euler.Pitch);
+            float sp = MathF.Sin(euler.Pitch);
+            float cr = MathF.Cos(euler.Roll);
+            float sr = MathF.Sin(euler.Roll);
+            float cy = MathF.Cos(euler.Yaw);
+            float sy = MathF.Sin(euler.Yaw);
 
+            result.M00 = ;
+            result.M01 = ;
+            result.M02 = ;
+
+            result.M10 = ;
+            result.M11 = ;
+            result.M12 = ;
+
+            result.M20 = ;
+            result.M21 = ;
+            result.M22 = ;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="eulerAngles"></param>
+        /// <param name="euler"></param>
         /// <param name="result"></param>
-        public static void FromEulerAnglesZXY(in EulerAngles eulerAngles, out Matrix3x3 result)
+        public static void FromEulerAnglesZXY(in EulerAngles euler, out Matrix3x3 result)
         {
+            float cp = MathF.Cos(euler.Pitch);
+            float sp = MathF.Sin(euler.Pitch);
+            float cr = MathF.Cos(euler.Roll);
+            float sr = MathF.Sin(euler.Roll);
+            float cy = MathF.Cos(euler.Yaw);
+            float sy = MathF.Sin(euler.Yaw);
 
+            result.M00 = ;
+            result.M01 = ;
+            result.M02 = ;
+
+            result.M10 = ;
+            result.M11 = ;
+            result.M12 = ;
+
+            result.M20 = ;
+            result.M21 = ;
+            result.M22 = ;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="eulerAngles"></param>
+        /// <param name="euler"></param>
         /// <param name="result"></param>
-        public static void FromEulerAnglesZYX(in EulerAngles eulerAngles, out Matrix3x3 result)
+        public static void FromEulerAnglesZYX(in EulerAngles euler, out Matrix3x3 result)
         {
+            float cp = MathF.Cos(euler.Pitch);
+            float sp = MathF.Sin(euler.Pitch);
+            float cr = MathF.Cos(euler.Roll);
+            float sr = MathF.Sin(euler.Roll);
+            float cy = MathF.Cos(euler.Yaw);
+            float sy = MathF.Sin(euler.Yaw);
 
+            result.M00 = ;
+            result.M01 = ;
+            result.M02 = ;
+
+            result.M10 = ;
+            result.M11 = ;
+            result.M12 = ;
+
+            result.M20 = ;
+            result.M21 = ;
+            result.M22 = ;
         }
 
         /// <summary>
@@ -511,7 +638,32 @@ namespace Raster.Math
         /// <param name="result"></param>
         public static void FromQuaternion(in Quaternion quaternion, out Matrix3x3 result)
         {
+            // Compute rotation matrix
+            float x2 = quaternion.X + quaternion.Y;
+            float y2 = quaternion.Y + quaternion.Y;
+            float z2 = quaternion.Z + quaternion.Z;
 
+            float wx2 = quaternion.W * x2;
+            float wy2 = quaternion.W * y2;
+            float wz2 = quaternion.W * z2;
+            float xx2 = quaternion.X * x2;
+            float xy2 = quaternion.X * y2;
+            float xz2 = quaternion.X * z2;
+            float yy2 = quaternion.Y * y2;
+            float yz2 = quaternion.Y * z2;
+            float zz2 = quaternion.Z * z2;
+
+            result.M00 = 1.0f - yy2 - zz2;
+            result.M10 = xy2 - wz2;
+            result.M20 = xz2 + wy2;
+
+            result.M01 = xy2 + wz2;
+            result.M11 = 1.0f - xx2 - zz2;
+            result.M21 = yz2 - wx2;
+
+            result.M02 = xz2 - wy2;
+            result.M12 = yz2 + wx2;
+            result.M22 = 1.0f - xx2 - yy2;
         }
 
         /// <summary>

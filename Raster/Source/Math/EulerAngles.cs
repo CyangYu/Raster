@@ -96,8 +96,8 @@ namespace Raster.Math
         /// <returns></returns>
         public static EulerAngles FromAxisAngle(in AxisAngle axis)
         {
-            FromAxisAngle(axis, out EulerAngles euler);
-            return euler;
+            FromAxisAngle(axis, out EulerAngles result);
+            return result;
         }
 
         /// <summary>
@@ -107,8 +107,8 @@ namespace Raster.Math
         /// <returns></returns>
         public static EulerAngles FromQuaternion(in Quaternion quaternion)
         {
-            FromQuaternion(quaternion.X, quaternion.Y, quaternion.Z, quaternion.W, out EulerAngles euler);
-            return euler;
+            FromQuaternion(quaternion.X, quaternion.Y, quaternion.Z, quaternion.W, out EulerAngles result);
+            return result;
         }
 
         /// <summary>
@@ -118,8 +118,8 @@ namespace Raster.Math
         /// <returns></returns>
         public static EulerAngles FromRotationMatrixToXYZ(in Matrix3x3 matrix)
         {
-            FromRotationMatrixToXYZ(matrix, out EulerAngles euler);
-            return euler;
+            FromRotationMatrixToXYZ(matrix, out EulerAngles result);
+            return result;
         }
 
         /// <summary>
@@ -130,11 +130,11 @@ namespace Raster.Math
         /// <param name="z"></param>
         /// <param name="angle"></param>
         /// <param name="euler"></param>
-        public static void FromAxisAngle(in AxisAngle axis, out EulerAngles euler)
+        public static void FromAxisAngle(in AxisAngle axis, out EulerAngles result)
         {
-            euler.Pitch = 0.0f;
-            euler.Roll = 0.0f;
-            euler.Yaw = 0.0f;
+            result.Pitch = 0.0f;
+            result.Roll = 0.0f;
+            result.Yaw = 0.0f;
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Raster.Math
         /// <param name="y"></param>
         /// <param name="z"></param>
         /// <returns></returns>
-        public static void FromQuaternion(float x, float y, float z, float w, out EulerAngles euler)
+        public static void FromQuaternion(float x, float y, float z, float w, out EulerAngles result)
         {
             float xx = x * x;
             float xy = x * y;
@@ -171,29 +171,25 @@ namespace Raster.Math
                 zw /= lenSqr;
             }
 
-            euler.Pitch = MathF.Asin(-2.0f * (yz - xw));
-            if (euler.Pitch < MathF.PI_2)
+            result.Pitch = MathF.Asin(-2.0f * (yz - xw));
+            if (result.Pitch < MathF.PI_2)
             {
-                if (euler.Pitch > -MathF.PI_2)
+                if (result.Pitch > -MathF.PI_2)
                 {
-                    euler.Yaw = MathF.Atan2(2.0f * (xz + yw), 1.0f - 2.0f * (xx + yy));
-                    euler.Roll = MathF.Atan2(2.0f * (xy + zw), 1.0f - 2.0f * (xx + zz));
+                    result.Yaw = MathF.Atan2(2.0f * (xz + yw), 1.0f - 2.0f * (xx + yy));
+                    result.Roll = MathF.Atan2(2.0f * (xy + zw), 1.0f - 2.0f * (xx + zz));
                 } 
                 else
                 {
-                    euler.Roll = 0.0f;
-                    euler.Yaw = -MathF.Atan2(-2.0f * (xy - zw), 1.0f - 2.0f * (yy + zz));
+                    result.Roll = 0.0f;
+                    result.Yaw = -MathF.Atan2(-2.0f * (xy - zw), 1.0f - 2.0f * (yy + zz));
                 }
             }
             else
             {
-                euler.Roll = 0.0f;
-                euler.Yaw = MathF.Atan2(-2.0f * (xy - zw), 1.0f - 2.0f * (yy + zz));
+                result.Roll = 0.0f;
+                result.Yaw = MathF.Atan2(-2.0f * (xy - zw), 1.0f - 2.0f * (yy + zz));
             }
-
-            euler.Pitch = MathF.RadToDeg(euler.Pitch);
-            euler.Roll = MathF.RadToDeg(euler.Roll);
-            euler.Yaw = MathF.RadToDeg(euler.Yaw);
         }
 
         /// <summary>
@@ -201,30 +197,112 @@ namespace Raster.Math
         /// </summary>
         /// <param name="matrix"></param>
         /// <param name="euler"></param>
-        public static bool FromRotationMatrixToXYZ(in Matrix3x3 matrix, out EulerAngles euler)
+        public static void FromRotationMatrixToXYZ(in Matrix3x3 matrix, out EulerAngles result)
         {
-            euler.Pitch = MathF.Asin(-matrix.M02);
-            if (euler.Pitch < MathF.Half_PI)
+            result.Pitch = MathF.Asin(matrix.M02);
+            if (result.Pitch < MathF.Half_PI)
             {
-                if (euler.Pitch > -MathF.Half_PI)
+                if (result.Pitch > -MathF.Half_PI)
                 {
-                    euler.Roll = MathF.Atan2(-matrix.M12, matrix.M22);
-                    euler.Yaw = MathF.Atan2(-matrix.M01, matrix.M00);
+                    result.Roll = MathF.Atan2(-matrix.M01, matrix.M00);
+                    result.Yaw  = MathF.Atan2(-matrix.M12, matrix.M22);
+                }
+                else
+                {
+                    result.Roll = 0.0f;
+                    result.Yaw  = -MathF.Atan2(matrix.M10, matrix.M11);
+                }
+            }
+            else
+            {
+                result.Roll = 0.0f;
+                result.Yaw  = MathF.Atan2(matrix.M10, matrix.M11);
+            }            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="euler"></param>
+        public static void FromRotationMatrixToXZY(in Matrix3x3 matrix, out EulerAngles result)
+        { 
+            result.Pitch = MathF.Asin(-matrix.M01);
+            if (result.Pitch < -MathF.Half_PI)
+            {
+                if (result.Pitch > -MathF.Half_PI)
+                {
+                    result.Roll = MathF.Atan2(matrix.M02, matrix.M00);
+                    result.Yaw  = MathF.Atan2(matrix.M21, matrix.M11);
+                }
+                else
+                {
+                    result.Roll = 0.0f;
+                    result.Yaw  = -MathF.Atan2(-matrix.M20, matrix.M22);
+                }
+            }
+            else
+            {
+                result.Roll = 0.0f;
+                result.Yaw  = MathF.Atan2(-matrix.M20, matrix.M22);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="euler"></param>
+        public static void FromRotationMatrixToYXZ(in Matrix3x3 matrix, out EulerAngles result)
+        {
+            result.Pitch = MathF.Asin(-matrix.M12);
+            if (result.Pitch < -MathF.Half_PI)
+            {
+                if (result.Pitch > -MathF.Half_PI)
+                {
+                    result.Roll = MathF.Atan2(matrix.M10, matrix.M11);
+                    result.Yaw  = MathF.Atan2(matrix.M02, matrix.M22);
+                }
+                else
+                {
+                    result.Roll = 0.0f;
+                    result.Yaw  = -MathF.Atan2(-matrix.M01, matrix.M00);
+                }
+            }
+            else
+            {
+                result.Roll = 0.0f;
+                result.Yaw  = MathF.Atan2(-matrix.M01, matrix.M00);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="euler"></param>
+        public static bool FromRotationMatrixToYZX(in Matrix3x3 matrix, out EulerAngles result)
+        {
+            result.Pitch = MathF.Asin(matrix.M10);
+            if (result.Pitch < -MathF.Half_PI)
+            {
+                if (result.Pitch > -MathF.Half_PI)
+                {
+                    result.Roll = MathF.Atan2(-matrix.M12, matrix.M11);
+                    result.Yaw  = MathF.Atan2(-matrix.M20, matrix.M00);
                     return true;
                 }
                 else
                 {
-                    float yaw = MathF.Atan2(matrix.M10, matrix.M11);
-                    euler.Roll = 0.0f;
-                    euler.Yaw = euler.Roll - yaw;
+                    result.Roll = 0.0f;
+                    result.Yaw  = -MathF.Atan2(matrix.M21, matrix.M22);
                     return false;
                 }
             }
             else
             {
-                float yaw = MathF.Atan2(matrix.M10, matrix.M11);
-                euler.Roll = 0.0f;
-                euler.Yaw = yaw - euler.Roll;
+                result.Roll = 0.0f;
+                result.Yaw = MathF.Atan2(-matrix.M21, matrix.M22);
                 return false;
             }
         }
@@ -234,9 +312,27 @@ namespace Raster.Math
         /// </summary>
         /// <param name="matrix"></param>
         /// <param name="euler"></param>
-        public static void FromRotationMatrixToXZY(in Matrix3x3 matrix, out EulerAngles euler)
+        public static void FromRotationMatrixToZXY(in Matrix3x3 matrix, out EulerAngles result)
         {
-
+            result.Pitch = MathF.Asin(matrix.M21);
+            if (result.Pitch < -MathF.Half_PI)
+            {
+                if (result.Pitch > -MathF.Half_PI)
+                {
+                    result.Roll = MathF.Atan2(-matrix.M20, matrix.M22);
+                    result.Yaw  = MathF.Atan2(-matrix.M01, matrix.M11);
+                }
+                else
+                {
+                    result.Roll = 0.0f;
+                    result.Yaw  = -MathF.Atan2(matrix.M02, matrix.M00);
+                }
+            }
+            else
+            {
+                result.Roll = 0.0f;
+                result.Yaw  = MathF.Atan2(matrix.M02, matrix.M00);
+            }
         }
 
         /// <summary>
@@ -244,43 +340,27 @@ namespace Raster.Math
         /// </summary>
         /// <param name="matrix"></param>
         /// <param name="euler"></param>
-        public static bool FromRotationMatrixToYXZ(in Matrix3x3 matrix, out EulerAngles euler)
+        public static void FromRotationMatrixToZYX(in Matrix3x3 matrix, out EulerAngles result)
         {
-            euler.Pitch = 0.0f;
-            euler.Roll = 0.0f;
-            euler.Yaw = 0.0f;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="matrix"></param>
-        /// <param name="euler"></param>
-        public static void FromRotationMatrixToYZX(in Matrix3x3 matrix, out EulerAngles euler)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="matrix"></param>
-        /// <param name="euler"></param>
-        public static bool FromRotationMatrixToZXY(in Matrix3x3 matrix, out EulerAngles euler)
-        {
-            euler.Pitch = 0.0f;
-            euler.Roll = 0.0f;
-            euler.Yaw = 0.0f;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="matrix"></param>
-        /// <param name="euler"></param>
-        public static void FromRotationMatrixToZYX(in Matrix3x3 matrix, out EulerAngles euler)
-        {
-
+            result.Pitch = MathF.Asin(-matrix.M20);
+            if (result.Pitch < -MathF.Half_PI)
+            {
+                if (result.Pitch > -MathF.Half_PI)
+                {
+                    result.Roll = MathF.Atan2(matrix.M21, matrix.M22);
+                    result.Yaw  = MathF.Atan2(matrix.M10, matrix.M00);
+                }
+                else
+                {
+                    result.Roll = 0.0f;
+                    result.Yaw  = -MathF.Atan2(-matrix.M01, matrix.M02);
+                }
+            }
+            else
+            {
+                result.Roll = 0.0f;
+                result.Yaw  = MathF.Atan2(-matrix.M01, matrix.M02);
+            }
         }
 
         #region Operator Overload

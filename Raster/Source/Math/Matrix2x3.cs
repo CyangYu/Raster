@@ -232,7 +232,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="matrix"></param>
         /// <returns></returns>
-        public static Matrix2x3 Transpose(in Matrix2x3 matrix)
+        public static Matrix3x2 Transpose(in Matrix2x3 matrix)
         {
             Transpose(matrix, out Matrix3x2 result);
             return result;

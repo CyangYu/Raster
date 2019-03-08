@@ -14,67 +14,67 @@ namespace Raster.Math
         /// <summary>
         /// E
         /// </summary>
-        public const float E          = 2.7182818284590452353602874713526625f;
+        public const float E            = 2.7182818284590452353602874713526625f;
         /// <summary>
         /// PI
         /// </summary>
-        public const float PI         = 3.1415926535897932384626433832795029f;
+        public const float PI           = 3.1415926535897932384626433832795029f;
         /// <summary>
         /// PI * 2.0
         /// </summary>
-        public const float PI_2       = 6.2831853071795864769252867665590058f;
+        public const float PI_2         = 6.2831853071795864769252867665590058f;
         /// <summary>
         /// PI * 4.0
         /// </summary>
-        public const float PI_4       = 12.5663706143591729538505735331180116f;
+        public const float PI_4         = 12.5663706143591729538505735331180116f;
         /// <summary>
         /// PI / 2.0
         /// </summary>
-        public const float Half_PI    = 1.5707963267948966192313216916397514f;
+        public const float Half_PI      = 1.5707963267948966192313216916397514f;
         /// <summary>
         /// PI / 4.0
         /// </summary>
-        public const float Quart_PI   = 0.7853981633974483096156608458198757f;
+        public const float Quart_PI     = 0.7853981633974483096156608458198757f;
         /// <summary>
         /// 1.0f / PI
         /// </summary>
-        public const float D_1_PI     = 0.3183098861837906715377675267450287f;
+        public const float Inv_PI       = 0.3183098861837906715377675267450287f;
         /// <summary>
         /// 2.0f / PI
         /// </summary>
-        public const float D_2_PI     = 0.6366197723675813430755350534900574f;
+        public const float Inv_PI_2     = 0.6366197723675813430755350534900574f;
         /// <summary>
         /// log 2.0 E
         /// </summary>
-        public const float Log2E      = 1.4426950408889634073599246810018921f;
+        public const float Log2E        = 1.4426950408889634073599246810018921f;
         /// <summary>
         /// log 10.0 E
         /// </summary>
-        public const float Log10E     = 0.4342944819032518276511289189166051f;
+        public const float Log10E       = 0.4342944819032518276511289189166051f;
         /// <summary>
         /// log E 2.0
         /// </summary>
-        public const float LogE2      = 0.6931471805599453094172321214581766f;
+        public const float LogE2        = 0.6931471805599453094172321214581766f;
         /// <summary>
         /// log E 10.0
         /// </summary>
-        public const float LogE10     = 2.3025850929940456840179914546843642f;
+        public const float LogE10       = 2.3025850929940456840179914546843642f;
         /// <summary>
         /// Sqrt(2.0)
         /// </summary>
-        public const float Sqrt2      = 1.4142135623730950488016887242096981f;
+        public const float Sqrt2        = 1.4142135623730950488016887242096981f;
         /// <summary>
         /// 1.0 / Sqrt(2.0)
         /// </summary>
-        public const float D_1_Sqrt2  = 0.7071067811865475244008443621048490f;
+        public const float Div_1_Sqrt2  = 0.7071067811865475244008443621048490f;
         /// <summary>
         /// 2.0 / Sqrt(2.0)
         /// </summary>
-        public const float D_2_Sqrt2  = 1.1283791670955125738961589031215452f;
+        public const float Div_2_Sqrt2  = 1.1283791670955125738961589031215452f;
         /// <summary>
         /// 
         /// </summary>
-        public const float Epsilon    = 0.0000001192092896f;
+        public const float Epsilon      = 0.0000001192092896f;
         #endregion Public Static Fields
 
         #region Public Static Methods
@@ -343,7 +343,7 @@ namespace Raster.Math
         public static float Sqrt(float x)
         {
             float invsqrt = MathHelper.FastSqrtInverse(x);
-            return invsqrt == 0.0f ? 0.0f : 1.0f / invsqrt;
+            return invsqrt == 0.0f ? float.NaN : 1.0f / invsqrt;
         }
 
         #endregion Public Static Methods
