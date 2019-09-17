@@ -58,28 +58,54 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 XY => new Vector2(X, Y);
+        public Vector2 XY
+        {
+            get { return new Vector2(X, Y); }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 YX => new Vector2(Y, X);
+        public Vector2 YX
+        {
+            get { return new Vector2(Y, X); }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public float Length => MathF.Sqrt(X * X + Y * Y);
+        public float Length
+        {
+            get { return MathF.Sqrt(X * X + Y * Y); }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public float LengthSquared => X * X + Y * Y;
+        public float LengthSquared
+        {
+            get { return X * X + Y * Y; }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 MidPoint => new Vector2(X / 2.0f, Y / 2.0f);
+        public Vector2 MidPoint
+        {
+            get { return new Vector2(X / 2.0f, Y / 2.0f); }
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector2 Normalized
+        {
+            get
+            {
+                Normalize(in this, out Vector2 result);
+                return result;
+            }
+        }
         #endregion Public Instance Properties
 
         #region Constructor
@@ -121,15 +147,19 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <returns></returns>
-        public override int GetHashCode() =>
-            HashHelpers.Combine(X.GetHashCode(), Y.GetHashCode());
+        public override int GetHashCode()
+        {
+            return HashHelpers.Combine(X.GetHashCode(), Y.GetHashCode());
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() =>
-            string.Format("Vector2: X = {0}, Y = [1}", X, Y);
+        public override string ToString()
+        {
+            return string.Format("Vector2: X = {0}, Y = [1}", X, Y);
+        }
 
         /// <summary>
         /// 
@@ -927,8 +957,10 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static Vector2 operator +(in Vector2 left, in Vector2 right) =>
-            new Vector2(left.X + right.X, left.Y + right.Y);
+        public static Vector2 operator +(in Vector2 left, in Vector2 right)
+        {
+            return new Vector2(left.X + right.X, left.Y + right.Y);
+        }
 
         /// <summary>
         /// 
@@ -936,8 +968,10 @@ namespace Raster.Math
         /// <param name="value"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 operator -(in Vector2 value) =>
-            new Vector2(-value.X, -value.Y);
+        public static Vector2 operator -(in Vector2 value)
+        {
+            return new Vector2(-value.X, -value.Y);
+        }
 
         /// <summary>
         /// 
@@ -945,8 +979,10 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static Vector2 operator -(in Vector2 left, in Vector2 right) =>
-            new Vector2(left.X - right.X, left.Y - right.Y);
+        public static Vector2 operator -(in Vector2 left, in Vector2 right)
+        {
+            return new Vector2(left.X - right.X, left.Y - right.Y);
+        }
 
         /// <summary>
         /// 
@@ -954,8 +990,10 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static Vector2 operator *(float left, in Vector2 right) =>
-            new Vector2(left * right.X, left * right.Y);
+        public static Vector2 operator *(float left, in Vector2 right)
+        {
+            return new Vector2(left * right.X, left * right.Y);
+        }
 
         /// <summary>
         /// 
@@ -963,8 +1001,10 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static Vector2 operator *(in Vector2 left, float right) =>
-            new Vector2(left.X * right, left.Y * right);
+        public static Vector2 operator *(in Vector2 left, float right)
+        {
+            return new Vector2(left.X * right, left.Y * right);
+        }
 
         /// <summary>
         /// 
@@ -972,8 +1012,22 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static Vector2 operator *(in Vector2 left, in Vector2 right) =>
-            new Vector2(left.X * right.X, left.Y * right.Y);
+        public static Vector2 operator *(in Vector2 left, in Vector2 right)
+        {
+            return new Vector2(left.X * right.X, left.Y * right.Y);
+        }
+          
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 operator /(in Vector2 left, float right)
+        {
+            return new Vector2(left.X / right, left.Y / right);
+        }  
 
         /// <summary>
         /// 
@@ -982,8 +1036,22 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 operator /(in Vector2 left, float right) =>
-            new Vector2(left.X / right, left.Y / right);
+        public static Vector2 operator /(in Vector2 left, in Vector2 right)
+        {
+            return new Vector2(left.X / right.X, left.Y / right.Y);
+        }
+            
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator ==(in Vector2 left, in Vector2 right)
+        {
+            return left.X == right.X && left.Y == right.Y;
+        }
+            
 
         /// <summary>
         /// 
@@ -991,28 +1059,11 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 operator /(in Vector2 left, in Vector2 right) =>
-            new Vector2(left.X / right.X, left.Y / right.Y);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static bool operator ==(in Vector2 left, in Vector2 right) =>
-            left.X == right.X && left.Y == right.Y;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static bool operator !=(in Vector2 left, in Vector2 right) =>
-            left.X != right.X || left.Y != right.Y;
-
+        public static bool operator !=(in Vector2 left, in Vector2 right)
+        {
+            return left.X != right.X || left.Y != right.Y;
+        }
+            
         #endregion Operator Overload
     }
 }

@@ -113,35 +113,107 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Row0     => new Vector4(M00, M01, M02, M03);
+        public Vector4 Row0
+        {
+            get { return new Vector4(M00, M01, M02, M03); }
+            set
+            {
+                M00 = value.X;
+                M01 = value.Y;
+                M02 = value.Z;
+                M03 = value.W;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Row1     => new Vector4(M10, M11, M12, M13);
+        public Vector4 Row1
+        {
+            get { return new Vector4(M10, M11, M12, M13); }
+            set
+            {
+                M10 = value.X;
+                M11 = value.Y;
+                M12 = value.Z;
+                M13 = value.W;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Row2     => new Vector4(M20, M21, M22, M23);
+        public Vector4 Row2
+        {
+            get { return new Vector4(M20, M21, M22, M23); }
+            set
+            {
+                M20 = value.X;
+                M21 = value.Y;
+                M22 = value.Z;
+                M23 = value.W;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Row3     => new Vector4(M30, M31, M32, M33);
+        public Vector4 Row3
+        {
+            get { return new Vector4(M30, M31, M32, M33); }
+            set
+            {
+                M30 = value.X;
+                M31 = value.Y;
+                M32 = value.Z;
+                M33 = value.W;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Column0  => new Vector4(M00, M10, M20, M30);
+        public Vector4 Column0
+        {
+            get { return new Vector4(M00, M10, M20, M30); }
+            set
+            {
+                M00 = value.X;
+                M10 = value.Y;
+                M20 = value.Z;
+                M30 = value.W;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Column1  => new Vector4(M01, M11, M21, M31);
+        public Vector4 Column1
+        {
+            get { return new Vector4(M01, M11, M21, M31); }
+            set
+            {
+                M01 = value.X;
+                M11 = value.Y;
+                M21 = value.Z;
+                M31 = value.W;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Column2  => new Vector4(M02, M12, M22, M32);
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector4 Column3  => new Vector4(M03, M13, M23, M33);
+        public Vector4 Column2
+        {
+            get { return new Vector4(M02, M12, M22, M32); }
+            set
+            {
+                M02 = value.X;
+                M12 = value.Y;
+                M22 = value.Z;
+                M32 = value.W;
+            }
+        }
 
         /// <summary>
         /// 
@@ -692,7 +764,38 @@ namespace Raster.Math
                 RotateZ(angle);
             else
             {
-               
+                float cos = MathF.Cos(angle);
+                float sin = MathF.Sin(angle);
+
+                float c0 = 1.0f - cos;
+                float x2 = x * x;
+                float y2 = y * y;
+                float z2 = z * z;
+
+                float xy = x * y;
+                float xz = x * z;
+                float yz = y * z;
+
+                float xs = x * sin;
+                float ys = y * sin;
+                float zs = z * sin;
+
+                M00 = cos + c0 * x2;
+                M10 = c0 * xy - zs;
+                M20 = c0 * xz + ys;
+
+                M01 = c0 * xy + zs;
+                M11 = cos + c0 * y2;
+                M21 = c0 * yz - xs;
+
+                M02 = c0 * xz - ys;
+                M12 = c0 * yz + xs;
+                M22 = cos + c0 * z2;
+
+                M03 = 0.0f;
+                M13 = 0.0f;
+                M23 = 0.0f;
+                M33 = 1.0f;
             }
         }
 

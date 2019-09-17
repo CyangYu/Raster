@@ -72,37 +72,103 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Row0 => new Vector4(M00, M01, M02, M03);
+        public Vector4 Row0
+        {
+            get { return new Vector4(M00, M01, M02, M03); }
+            set
+            {
+                M00 = value.X;
+                M01 = value.Y;
+                M02 = value.Z;
+                M03 = value.W;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Row1 => new Vector4(M10, M11, M12, M13);
+        public Vector4 Row1
+        {
+            get { return new Vector4(M10, M11, M12, M13); }
+            set
+            {
+                M10 = value.X;
+                M11 = value.Y;
+                M12 = value.Z;
+                M13 = value.W;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Row2 => new Vector4(M20, M21, M22, M23);
+        public Vector4 Row2
+        {
+            get { return new Vector4(M20, M21, M22, M23); }
+            set
+            {
+                M20 = value.X;
+                M21 = value.Y;
+                M22 = value.Z;
+                M23 = value.W;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Column0 => new Vector3(M00, M10, M20);
+        public Vector3 Column0
+        {
+            get { return new Vector3(M00, M10, M20); }
+            set
+            {
+                M00 = value.X;
+                M10 = value.Y;
+                M20 = value.Z;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Column1 => new Vector3(M01, M11, M21);
+        public Vector3 Column1
+        {
+            get { return new Vector3(M01, M11, M21); }
+            set
+            {
+                M01 = value.X;
+                M11 = value.Y;
+                M21 = value.Z;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Column2 => new Vector3(M02, M12, M22);
+        public Vector3 Column2
+        {
+            get { return new Vector3(M02, M12, M22); }
+            set
+            {
+                M02 = value.X;
+                M12 = value.Y;
+                M22 = value.Z;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Column3 => new Vector3(M03, M13, M23);
+        public Vector3 Column3
+        {
+            get { return new Vector3(M03, M13, M23); }
+            set
+            {
+                M03 = value.X;
+                M13 = value.Y;
+                M23 = value.Z;
+            }
+        }
 
         /// <summary>
         /// 
@@ -136,7 +202,7 @@ namespace Raster.Math
             M23 = value;
         }
 
-        public Matrix3x4(Matrix2x2 other)
+        public Matrix3x4(in Matrix2x2 other)
         {
             M00 = other.M00;
             M01 = other.M01;
@@ -154,7 +220,7 @@ namespace Raster.Math
             M23 = 0.0f;
         }
 
-        public Matrix3x4(Matrix2x3 other)
+        public Matrix3x4(in Matrix2x3 other)
         {
             M00 = other.M00;
             M01 = other.M01;
@@ -172,7 +238,7 @@ namespace Raster.Math
             M23 = 0.0f;
         }
 
-        public Matrix3x4(Matrix2x4 other)
+        public Matrix3x4(in Matrix2x4 other)
         {
             M00 = other.M00;
             M01 = other.M01;
@@ -190,7 +256,7 @@ namespace Raster.Math
             M23 = 0.0f;
         }
 
-        public Matrix3x4(Matrix3x2 other)
+        public Matrix3x4(in Matrix3x2 other)
         {
             M00 = other.M00;
             M01 = other.M01;
@@ -208,7 +274,7 @@ namespace Raster.Math
             M23 = 0.0f;
         }
 
-        public Matrix3x4(Matrix3x3 other)
+        public Matrix3x4(in Matrix3x3 other)
         {
             M00 = other.M00;
             M01 = other.M01;
@@ -226,7 +292,7 @@ namespace Raster.Math
             M23 = 0.0f;
         }
 
-        public Matrix3x4(Matrix3x4 other)
+        public Matrix3x4(in Matrix3x4 other)
         {
             M00 = other.M00;
             M01 = other.M01;

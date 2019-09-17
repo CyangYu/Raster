@@ -78,37 +78,103 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Row0     => new Vector3(M00, M01, M02);
+        public Vector3 Row0
+        {
+            get { return new Vector3(M00, M01, M02); }
+            set
+            {
+                M00 = value.X;
+                M01 = value.Y;
+                M02 = value.Z;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Row1     => new Vector3(M10, M11, M12);
+        public Vector3 Row1
+        {
+            get { return new Vector3(M10, M11, M12); }
+            set
+            {
+                M10 = value.X;
+                M11 = value.Y;
+                M12 = value.Z;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Row2     => new Vector3(M20, M21, M22);
+        public Vector3 Row2
+        {
+            get { return new Vector3(M20, M21, M22); }
+            set
+            {
+                M20 = value.X;
+                M21 = value.Y;
+                M22 = value.Z;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Row3     => new Vector3(M30, M31, M32);
+        public Vector3 Row3
+        {
+            get { return new Vector3(M30, M31, M32); }
+            set
+            {
+                M30 = value.X;
+                M31 = value.Y;
+                M32 = value.Z;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Column0  => new Vector4(M00, M10, M20, M30);
+        public Vector4 Column0
+        {
+            get { return new Vector4(M00, M10, M20, M30); }
+            set
+            {
+                M00 = value.X;
+                M10 = value.Y;
+                M20 = value.Z;
+                M30 = value.W;
+            }
+        }
         
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Column1  => new Vector4(M01, M11, M21, M31);
+        public Vector4 Column1
+        {
+            get { return new Vector4(M01, M11, M21, M31); }
+            set
+            {
+                M01 = value.X;
+                M11 = value.Y;
+                M21 = value.Z;
+                M31 = value.W;
+            }
+        }
         
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Column2  => new Vector4(M02, M12, M22, M32);
+        public Vector4 Column2
+        {
+            get { return new Vector4(M02, M12, M22, M32); }
+            set
+            {
+                M02 = value.X;
+                M12 = value.Y;
+                M22 = value.Z;
+                M32 = value.W;
+            }
+        }
 
         /// <summary>
         /// 

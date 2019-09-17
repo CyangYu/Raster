@@ -59,32 +59,84 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Row0 => new Vector4(M00, M01, M02, M03);
+        public Vector4 Row0
+        {
+            get { return new Vector4(M00, M01, M02, M03); }
+            set
+            {
+                M00 = value.X;
+                M01 = value.Y;
+                M02 = value.Z;
+                M03 = value.W;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector4 Row1 => new Vector4(M10, M11, M12, M13);
+        public Vector4 Row1
+        {
+            get { return new Vector4(M10, M11, M12, M13); }
+            set
+            {
+                M10 = value.X;
+                M11 = value.Y;
+                M12 = value.Z;
+                M13 = value.W;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Column0 => new Vector2(M00, M10);
+        public Vector2 Column0
+        {
+            get { return new Vector2(M00, M10); }
+            set
+            {
+                M00 = value.X;
+                M10 = value.Y;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Column1 => new Vector2(M01, M11);
+        public Vector2 Column1
+        {
+            get { return new Vector2(M01, M11); }
+            set
+            {
+                M01 = value.X;
+                M11 = value.Y;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Column2 => new Vector2(M02, M12);
+        public Vector2 Column2
+        {
+            get { return new Vector2(M02, M12); }
+            set
+            {
+                M02 = value.X;
+                M12 = value.Y;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Column3 => new Vector2(M03, M13);
+        public Vector2 Column3
+        {
+            get { return new Vector2(M03, M13); }
+            set
+            {
+                M03 = value.X;
+                M13 = value.Y;
+            }
+        }
 
         /// <summary>
         /// 

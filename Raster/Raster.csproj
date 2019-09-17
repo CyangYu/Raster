@@ -91,6 +91,7 @@
     <Compile Include="Source\Math\Matrix4x2.cs" />
     <Compile Include="Source\Math\Matrix4x3.cs" />
     <Compile Include="Source\Math\Matrix4x4.cs" />
+    <Compile Include="Source\Math\Noise\Common.cs" />
     <Compile Include="Source\Math\Quaternion.cs" />
     <Compile Include="Source\Math\Vector2.cs" />
     <Compile Include="Source\Math\Vector3.cs" />
@@ -105,6 +106,8 @@
     <Compile Include="Source\Render\Light\PointLight.cs" />
     <Compile Include="Test\TestMatrix4x4.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Source\Math\Type\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -121,10 +121,10 @@ namespace Raster.Math.Geometry
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(in Ray left, in Ray right)
         {
-            return (left.origin.R == right.origin.R &&
+            return (left.origin.X == right.origin.X &&
                     left.origin.Y == right.origin.Y &&
                     left.origin.Z == right.origin.Z &&
-                    left.direction.R == right.direction.R &&
+                    left.direction.X == right.direction.X &&
                     left.direction.Y == right.direction.Y &&
                     left.direction.Z == right.direction.Z);
         }
@@ -137,10 +137,10 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public static bool operator !=(in Ray left, in Ray right)
         {
-            return (left.origin.R != right.origin.R ||
+            return (left.origin.X != right.origin.X ||
                     left.origin.Y != right.origin.Y ||
                     left.origin.Z != right.origin.Z ||
-                    left.direction.R != right.direction.R ||
+                    left.direction.X != right.direction.X ||
                     left.direction.Y != right.direction.Y ||
                     left.direction.Z != right.direction.Z);
         }

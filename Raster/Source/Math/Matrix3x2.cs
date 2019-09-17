@@ -55,38 +55,73 @@ namespace Raster.Math
         public Vector2 Row0
         {
             get { return new Vector2(M00, M01); }
-            set { M00 = value.X; M01 = value.Y; }
+            set
+            {
+                M00 = value.X;
+                M01 = value.Y;
+            }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Row1 => new Vector2(M10, M11);
+        public Vector2 Row1
+        {
+            get { return new Vector2(M10, M11); }
+            set
+            {
+                M10 = value.X;
+                M11 = value.Y;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Row2 => new Vector2(M20, M21);
+        public Vector2 Row2
+        {
+            get { return new Vector2(M20, M21); }
+            set
+            {
+                M20 = value.X;
+                M21 = value.Y;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Column0 => new Vector3(M00, M10, M20);
+        public Vector3 Column0
+        {
+            get { return new Vector3(M00, M10, M20); }
+            set
+            {
+                M00 = value.X;
+                M10 = value.Y;
+                M20 = value.Z;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Column1 => new Vector3(M01, M11, M21);
+        public Vector3 Column1
+        {
+            get { return new Vector3(M01, M11, M21); }
+            set
+            {
+                M01 = value.X;
+                M11 = value.Y;
+                M21 = value.Z;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
         public float Determinant
         {
-            get
-            {
-                return 0.0f;
-            }
+            get { return 0.0f; }
         }
 
         #endregion Public Instance Properties

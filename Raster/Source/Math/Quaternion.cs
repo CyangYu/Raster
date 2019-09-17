@@ -54,23 +54,38 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public Quaternion Conjugated => new Quaternion(-X, -Y, -Z, W);
+        public Quaternion Conjugated
+        {
+            get
+            {
+                return new Quaternion(-X, -Y, -Z, W);
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public bool IsIdentity => 
-            X == 0.0f && Y == 0.0f && Z == 0.0f && W == 1.0f;
+        public bool IsIdentity
+        {
+            get { return X == 0.0f && Y == 0.0f && Z == 0.0f && W == 1.0f; }
+        }
+            
 
         /// <summary>
         /// 
         /// </summary>
-        public float Length => MathF.Sqrt(X * X + Y * Y + Z * Z + W * W);
+        public float Length
+        {
+            get { return MathF.Sqrt(X * X + Y * Y + Z * Z + W * W); }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public float LengthSquared => X * X + Y * Y + Z * Z + W * W;
+        public float LengthSquared
+        {
+            get { return X * X + Y * Y + Z * Z + W * W; }
+        }
 
         #endregion Public Instance Properties
 
@@ -91,6 +106,21 @@ namespace Raster.Math
             Y = y;
             Z = z;
 			W = w;
+        }
+
+        public Quaternion(in Matrix3x3 mat)
+        {
+            Vector3 u = mat.Column0;
+            Vector3 v = mat.Column1;
+            Vector3 w = mat.Column2;
+
+            uint u_sign = (MathF.AsUInt(u.X) & 0x80000000);
+            float t = v.Y;
+
+            X = 0.0f;
+            Y = 0.0f;
+            Z = 0.0f;
+            W = 0.0f;
         }
 
         #endregion Constructor
@@ -172,12 +202,10 @@ namespace Raster.Math
         /// <param name="value2"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Dot(in Quaternion value1, in Quaternion value2)
+        public static Quaternion Concatenate(in Quaternion value1, in Quaternion value2)
         {
-            return value1.X * value2.X +
-                   value1.Y * value2.Y +
-                   value1.Z * value2.Z +
-                   value1.W * value1.W;
+            Concatenate(value1, value2, out Quaternion result);
+            return result;
         }
 
         /// <summary>
@@ -187,12 +215,13 @@ namespace Raster.Math
         /// <param name="value2"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Quaternion Concatenate(in Quaternion value1, in Quaternion value2)
+        public static float Dot(in Quaternion value1, in Quaternion value2)
         {
-            Concatenate(value1, value2, out Quaternion result);
-            return result;
+            return value1.X * value2.X +
+                   value1.Y * value2.Y +
+                   value1.Z * value2.Z +
+                   value1.W * value1.W;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -218,6 +247,11 @@ namespace Raster.Math
             return result;
         }
 
+        public static Quaternion FromToRotation(in Vector3 from, in Vector3 to)
+        {
+
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -230,8 +264,6 @@ namespace Raster.Math
             return result;
         }
 
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="value1"></param>
@@ -352,6 +384,11 @@ namespace Raster.Math
             result.Y = sy * cp * cr - cy * sp * sr;
             result.Z = cy * cp * sr - sy * cp * cr;
             result.W = crcy * cp + srsy * sp;
+        }
+
+        public static void FromToRotation(in Vector3 from, in Vector3 to, out Quaternion result)
+        {
+            
         }
 
         /// <summary>
@@ -542,7 +579,7 @@ namespace Raster.Math
             }
 
             float inv = MathHelper.FastSqrtInverse(2.0f * d);
-            Vector3 axis = Vector3.Cross(v0, v1);
+            //Vector3 axis = Vector3.Cross(v0, v1);
         }
 
         /// <summary>
@@ -767,8 +804,11 @@ namespace Raster.Math
         /// <param name="q1"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(in Quaternion left, in Quaternion right) => 
-            left.X == right.X && left.Y == right.Y && left.Z == right.Z && left.W == right.W;
+        public static bool operator ==(in Quaternion left, in Quaternion right)
+        {
+            return left.X == right.X && left.Y == right.Y && 
+                   left.Z == right.Z && left.W == right.W;
+        }
 
         /// <summary>
         /// 
@@ -776,8 +816,11 @@ namespace Raster.Math
         /// <param name="q1"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(in Quaternion left, in Quaternion right) =>
-			left.X != right.X || left.Y != right.Y || left.Z != right.Z || left.W != right.W ;
+        public static bool operator !=(in Quaternion left, in Quaternion right)
+        {
+            return left.X != right.X || left.Y != right.Y || 
+                   left.Z != right.Z || left.W != right.W;
+        }
 
         #endregion Operator Overload                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
     }

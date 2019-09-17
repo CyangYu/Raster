@@ -32,87 +32,125 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 Zero     = new Vector3( 0.0f,  0.0f,  0.0f);
+        public static readonly Vector3 Zero = new Vector3(0.0f, 0.0f, 0.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 Unit     = new Vector3( 1.0f,  1.0f,  1.0f);
+        public static readonly Vector3 Unit = new Vector3(1.0f, 1.0f, 1.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 UnitX    = new Vector3( 1.0f,  0.0f,  0.0f);
+        public static readonly Vector3 UnitX = new Vector3(1.0f, 0.0f, 0.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 UnitY    = new Vector3( 0.0f,  1.0f,  0.0f);
+        public static readonly Vector3 UnitY = new Vector3(0.0f, 1.0f, 0.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 UnitZ    = new Vector3( 0.0f,  0.0f,  1.0f);
+        public static readonly Vector3 UnitZ = new Vector3(0.0f, 0.0f, 1.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 NegUnit  = new Vector3(-1.0f, -1.0f, -1.0f);
+        public static readonly Vector3 NegUnit = new Vector3(-1.0f, -1.0f, -1.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 NegUnitX = new Vector3(-1.0f,  0.0f,  0.0f);
+        public static readonly Vector3 NegUnitX = new Vector3(-1.0f, 0.0f, 0.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 NegUnitY = new Vector3( 0.0f, -1.0f,  0.0f);
+        public static readonly Vector3 NegUnitY = new Vector3(0.0f, -1.0f, 0.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 NegUnitZ = new Vector3( 0.0f,  0.0f, -1.0f);
+        public static readonly Vector3 NegUnitZ = new Vector3(0.0f, 0.0f, -1.0f);
         #endregion Public Static Fields
 
         #region Public Instance Properties
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 XYZ => new Vector3(X, Y, Z);
+        public Vector3 XYZ
+        {
+            get { return new Vector3(X, Y, Z); }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 XZY => new Vector3(X, Z, Y);
+        public Vector3 XZY
+        {
+            get { return new Vector3(X, Z, Y); }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 YXZ => new Vector3(Y, X, Z);
+        public Vector3 YXZ
+        {
+            get { return new Vector3(Y, X, Z); }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 YZX => new Vector3(Y, Z, X);
+        public Vector3 YZX
+        {
+            get { return new Vector3(Y, Z, X); }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 ZXY => new Vector3(Z, X, Y);
+        public Vector3 ZXY
+        {
+            get { return new Vector3(Z, X, Y); }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 ZYX => new Vector3(Z, Y, X);
+        public Vector3 ZYX
+        {
+            get { return new Vector3(Z, Y, X); }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public float Length => MathF.Sqrt(X * X + Y * Y + Z * Z);
+        public float Length
+        {
+            get { return MathF.Sqrt(X * X + Y * Y + Z * Z); }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public float LengthSquared => X * X + Y * Y + Z * Z;
+        public float LengthSquared
+        {
+            get { return X * X + Y * Y + Z * Z; }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 MidPoint => new Vector3(X / 2.0f, Y / 2.0f, Z / 2.0f);
+        public Vector3 MidPoint
+        {
+            get { return new Vector3(X / 2.0f, Y / 2.0f, Z / 2.0f); }
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Normalized
+        {
+            get
+            {
+                Normalize(in this, out Vector3 result);
+                return result;
+            }
+        }
         #endregion Public Instance Properties
 
         #region Constructor
@@ -976,8 +1014,11 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 operator +(in Vector3 left, in Vector3 right) =>
-            new Vector3(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+        public static Vector3 operator +(in Vector3 left, in Vector3 right)
+        {
+            return new Vector3(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+        }
+            
 
         /// <summary>
         /// 
@@ -985,8 +1026,10 @@ namespace Raster.Math
         /// <param name="value"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 operator -(in Vector3 value) =>
-            new Vector3(-value.X, -value.Y, -value.Z);
+        public static Vector3 operator -(in Vector3 value)
+        {
+            return new Vector3(-value.X, -value.Y, -value.Z);
+        }
 
         /// <summary>
         /// 
@@ -995,8 +1038,10 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 operator -(in Vector3 left, in Vector3 right) =>
-            new Vector3(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+        public static Vector3 operator -(in Vector3 left, in Vector3 right)
+        {
+            return new Vector3(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+        }
 
         /// <summary>
         /// 
@@ -1005,8 +1050,10 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 operator *(float left, in Vector3 right) =>
-            new Vector3(left * right.X, left * right.Y, left * right.Z);
+        public static Vector3 operator *(float left, in Vector3 right)
+        {
+            return new Vector3(left * right.X, left * right.Y, left * right.Z);
+        }
 
         /// <summary>
         /// 
@@ -1015,8 +1062,10 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 operator *(in Vector3 left, float right) =>
-            new Vector3(left.X * right, left.Y * right, left.Z * right);
+        public static Vector3 operator *(in Vector3 left, float right)
+        {
+            return new Vector3(left.X * right, left.Y * right, left.Z * right);
+        }
 
         /// <summary>
         /// 
@@ -1025,8 +1074,10 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 operator *(in Vector3 left, in Vector3 right) =>
-            new Vector3(left.X * right.X, left.Y * right.Y, left.Z * right.Z);
+        public static Vector3 operator *(in Vector3 left, in Vector3 right)
+        {
+            return new Vector3(left.X * right.X, left.Y * right.Y, left.Z * right.Z);
+        }
 
         /// <summary>
         /// 
@@ -1035,8 +1086,10 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 operator /(in Vector3 left, float right) =>
-            new Vector3(left.X / right, left.Y / right, left.Z / right);
+        public static Vector3 operator /(in Vector3 left, float right)
+        {
+            return new Vector3(left.X / right, left.Y / right, left.Z / right);
+        }
 
         /// <summary>
         /// 
@@ -1045,8 +1098,10 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 operator /(in Vector3 left, in Vector3 right) =>
-            new Vector3(left.X / right.X, left.Y / right.Y, left.Z / right.Z);
+        public static Vector3 operator /(in Vector3 left, in Vector3 right)
+        {
+            return new Vector3(left.X / right.X, left.Y / right.Y, left.Z / right.Z);
+        }
 
         /// <summary>
         /// 
@@ -1054,8 +1109,11 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(in Vector3 left, in Vector3 right) =>
-             left.X == right.X && left.Y == right.Y && left.Z == right.Z;
+        public static bool operator ==(in Vector3 left, in Vector3 right)
+        {
+            return left.X == right.X && left.Y == right.Y && 
+                   left.Z == right.Z;
+        }
 
         /// <summary>
         /// 
@@ -1064,8 +1122,11 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool operator !=(in Vector3 left, in Vector3 right) =>
-            left.X != right.X || left.Y != right.Y || left.Z != right.Z;
+        public static bool operator !=(in Vector3 left, in Vector3 right)
+        {
+            return left.X != right.X || left.Y != right.Y ||
+                   left.Z != right.Z;
+        }
 
         #endregion Operator Overload   
     }

@@ -62,43 +62,85 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Row0 => new Vector2(M00, M01);
+        public Vector2 Row0
+        {
+            get { return new Vector2(M00, M01); }
+            set
+            {
+                M00 = value.X;
+                M01 = value.Y;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Row1 => new Vector2(M10, M11);
+        public Vector2 Row1
+        {
+            get { return new Vector2(M10, M11); }
+            set
+            {
+                M10 = value.X;
+                M11 = value.Y;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Row2 => new Vector2(M20, M21);
+        public Vector2 Row2
+        {
+            get { return new Vector2(M20, M21); }
+            set
+            {
+                M20 = value.X;
+                M21 = value.Y;
+            }
+        }
 
         // <summary>
         /// 
         /// </summary>
-        public Vector2 Row3 => new Vector2(M30, M31);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector4 Column0 => new Vector4(M00, M10, M20, M30);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector4 Column1 => new Vector4(M01, M11, M21, M31);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public float Determinant
+        public Vector2 Row3
         {
-            get
+            get { return new Vector2(M30, M31); }
+            set
             {
-                return 0.0f;
+                M30 = value.X;
+                M31 = value.Y;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 Column0
+        {
+            get { return new Vector4(M00, M10, M20, M30); }
+            set
+            {
+                M00 = value.X;
+                M10 = value.Y;
+                M20 = value.Z;
+                M30 = value.W;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector4 Column1
+        {
+            get { return new Vector4(M01, M11, M21, M31); }
+            set
+            {
+                M01 = value.X;
+                M11 = value.Y;
+                M21 = value.Z;
+                M31 = value.W;
+            }
+        }
+
         #endregion Public Instance Properties
 
         #region Constructor

@@ -23,12 +23,18 @@ namespace Raster.Math.Geometry
         /// <summary>
         /// 
         /// </summary>
-        public float Diameter => 2.0f * Radius;
+        public float Diameter
+        {
+            get { return 2.0f * Radius; }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public float Volume => (4.0f * MathF.PI * Radius * Radius * Radius) / 3.0f;
+        public float Volume
+        {
+            get { return (4.0f * MathF.PI * Radius * Radius * Radius) / 3.0f; }
+        }
 
         #endregion Public Instance Properties
 

@@ -370,18 +370,23 @@ namespace Raster.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(in EulerAngles left, in EulerAngles right) =>
-            left.Pitch == right.Pitch && left.Roll == right.Roll && left.Yaw == right.Yaw;
-        
+        public static bool operator ==(in EulerAngles left, in EulerAngles right)
+        {
+            return left.Pitch == right.Pitch && left.Roll == right.Roll &&
+                   left.Yaw == right.Yaw;
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(in EulerAngles left, in EulerAngles right) =>
-           left.Pitch != right.Pitch || left.Roll != right.Roll || left.Yaw != right.Yaw;
-
+        public static bool operator !=(in EulerAngles left, in EulerAngles right)
+        {
+            return left.Pitch != right.Pitch || left.Roll != right.Roll || 
+                   left.Yaw != right.Yaw;
+        }
         #endregion Operator Overload
     }
 }

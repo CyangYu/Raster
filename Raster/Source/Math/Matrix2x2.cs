@@ -21,7 +21,7 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        
+
         public float M10;
         /// <summary>
         /// 
@@ -33,13 +33,13 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Matrix2x2 Zero       = new Matrix2x2(0.0f, 0.0f,
-                                                                    0.0f, 0.0f);
+        public static readonly Matrix2x2 Zero = new Matrix2x2(0.0f, 0.0f,
+                                                              0.0f, 0.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Matrix2x2 Identity   = new Matrix2x2(1.0f, 0.0f,
-                                                                    0.0f, 1.0f);
+        public static readonly Matrix2x2 Identity = new Matrix2x2(1.0f, 0.0f,
+                                                                  0.0f, 1.0f);
 
         #endregion Public Static Fields
 
@@ -47,22 +47,58 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Row0     => new Vector2(M00, M01);
+        public Vector2 Row0
+        {
+            get { return new Vector2(M00, M01); }
+
+            set
+            {
+                M00 = value.X;
+                M01 = value.Y;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Row1     => new Vector2(M10, M11);
+        public Vector2 Row1
+        {
+            get { return new Vector2(M10, M11); }
+
+            set
+            {
+                M10 = value.X;
+                M11 = value.Y;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Column0  => new Vector2(M00, M10);
+        public Vector2 Column0
+        {
+            get { return new Vector2(M00, M10); }
+
+            set
+            {
+                M00 = value.X;
+                M10 = value.Y;
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public Vector2 Column1  => new Vector2(M01, M11);
+        public Vector2 Column1
+        {
+            get { return new Vector2(M01, M11); }
+
+            set
+            {
+                M01 = value.X;
+                M11 = value.Y;
+            }
+        }
 
         /// <summary>
         /// 
