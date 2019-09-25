@@ -804,8 +804,10 @@ namespace Raster.Math
         /// </summary>
         /// <param name="axis"></param>
         /// <param name="angle"></param> 
-        public void Rotate(in Vector3 axis, float angle) =>
+        public void Rotate(in Vector3 axis, float angle)
+        {
             Rotate(axis.X, axis.Y, axis.Z, angle);
+        }
 
         /// <summary>
         /// 
@@ -839,7 +841,10 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="scale"></param>
-        public void Scale(in Vector3 scale) => Scale(scale.X, scale.Y, scale.Z);
+        public void Scale(in Vector3 scale)
+        {
+            Scale(scale.X, scale.Y, scale.Z);
+        }
 
         /// <summary>
         /// 
@@ -863,7 +868,21 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="translate"></param>
-        public void Translate(in Vector3 translate) => Translate(translate.X, translate.Y, translate.Z);
+        public void Translate(in Vector3 translate)
+        {
+            Translate(translate.X, translate.Y, translate.Z);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="rotation"></param>
+        /// <param name="scale"></param>
+        public void SetPositionAndRotation(in Vector3 position, in Quaternion rotation, in Vector3 scale)
+        {
+
+        }
 
         /// <summary>
         /// 
@@ -975,9 +994,11 @@ namespace Raster.Math
         /// <param name="eye"></param>
         /// <param name="center"></param>
         /// <param name="up"></param>
-        public void LookAt(in Vector3 eye, in Vector3 center, in Vector3 up) =>
+        public void LookAt(in Vector3 eye, in Vector3 center, in Vector3 up)
+        {
             LookAt(eye.X, eye.Y, eye.Z, center.X, center.Y, center.Z, up.X, up.Y, up.Z);
-
+        }
+            
         /// <summary>
         /// 
         /// </summary>
@@ -1225,9 +1246,18 @@ namespace Raster.Math
         /// <param name="rect"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>  
-        public void Viewport(RectangleF rect, float zNear, float zFar) =>
+        public void Viewport(RectangleF rect, float zNear, float zFar)
+        {
             Viewport(rect.Left, rect.Right, rect.Width, rect.Height, zNear, zFar);
-
+        }
+            
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectPos"></param>
+        /// <param name="cameraPos"></param>
+        /// <param name="cameraUp"></param>
+        /// <param name="cameraForward"></param>
         public void BillboardMatrix(in Vector3 objectPos, in Vector3 cameraPos, in Vector3 cameraUp, in Vector3 cameraForward)
         {
             float zAxisR = objectPos.X - cameraPos.X;
@@ -1288,9 +1318,8 @@ namespace Raster.Math
             M31 = objectPos.Y;
             M32 = objectPos.Z;
             M33 = 1.0f;
-
-
         }
+
         /// <summary>
         /// 
         /// </summary>

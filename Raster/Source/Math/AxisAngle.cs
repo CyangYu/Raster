@@ -37,20 +37,16 @@ namespace Raster.Math
 
         public AxisAngle(in Vector3 axis, float angle)
         {
-            Axis.X = axis.X;
-            Axis.Y = axis.Y;
-            Axis.Z = axis.Z;
+            Axis = axis.Normalized;
             Angle  = angle;
-
-            Axis.Normalize();
         }
 
         public AxisAngle(float x, float y, float z, float angle)
         {
-            Axis = new Vector3(x, y, z);
+            Axis = new Vector3(x, y, z).Normalized;
             Angle = angle;
-            Axis.Normalize();
         }
+        #endregion Constructor
 
         #region Public Instance Methods
         /// <summary>
@@ -93,21 +89,16 @@ namespace Raster.Math
         /// <param name="other"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(AxisAngle other) => this == other;
-
+        public bool Equals(AxisAngle other)
+        {
+            return this.Axis.X == other.Axis.X &&
+                   this.Axis.Y == other.Axis.Y &&
+                   this.Axis.Z == other.Axis.Z &&
+                   this.Angle == other.Angle;
+        }
         #endregion Public Instance Methods
 
         #region Public Static Methods
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="eulerAngles"></param>
-        /// <param name="axisAngle"></param>
-        public static void FromEulerAngles(in EulerAngles eulerAngles, out AxisAngle axisAngle)
-        {
-
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -208,6 +199,7 @@ namespace Raster.Math
             }
 
         }
+        #endregion Public Static Methods
 
         #region Operator Overload
         /// <summary>

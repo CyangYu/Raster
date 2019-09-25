@@ -25,6 +25,7 @@ namespace Raster.Math.Geometry
         /// Specifies the surface normal of the other object at the point of intersection.
         /// </summary>
         public Vector3 NormalB;
+        #endregion Public Instance Fields
 
         #region Constructor
         public HitInfo(HitResult result, in Vector3 point, in Vector3 normalA, in Vector3 normalB)

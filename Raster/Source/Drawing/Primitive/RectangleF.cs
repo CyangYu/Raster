@@ -88,7 +88,11 @@ namespace Raster.Drawing.Primitive
         public PointF TopLeft
         {
             get { return new PointF(X, Y); }
-            set { X = value.X; Y = value.Y; }
+            set
+            {
+                X = value.X;
+                Y = value.Y;
+            }
         }
 
         /// <summary>
@@ -97,7 +101,11 @@ namespace Raster.Drawing.Primitive
         public PointF TopRight
         {
             get { return new PointF(X + Width, Y); }
-            set { Width = value.X - X; Y = value.Y; }
+            set
+            {
+                Width = value.X - X;
+                Y = value.Y;
+            }
         }
 
         /// <summary>
@@ -199,7 +207,11 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(RectangleF other) => this == other;
+        public bool Equals(RectangleF other)
+        {
+            return this.X == other.X && this.Y == other.Y &&
+                   this.Width == other.Width && this.Height == other.Height;
+        }
 
         /// <summary>
         /// 
@@ -221,7 +233,7 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         /// <param name="pt"></param>
         /// <returns></returns>
-        public bool Contain(in Point pt) => Contain(pt.X, pt.Y);
+        public bool Contain(in Point pt) { return Contain(pt.X, pt.Y); }
         /// <summary>
         /// 
         /// </summary>
@@ -248,8 +260,7 @@ namespace Raster.Drawing.Primitive
         /// 
         /// </summary>
         /// <param name="size"></param>
-        public void Inflate(in SizeF size) => 
-            Inflate(size.Width, size.Height);
+        public void Inflate(in SizeF size) { Inflate(size.Width, size.Height); }
         
         /// <summary>
         /// 
@@ -268,7 +279,7 @@ namespace Raster.Drawing.Primitive
         /// 
         /// </summary>
         /// <param name="pos"></param>
-        public void MoveTo(in PointF pos) => MoveTo(pos.X, pos.Y);
+        public void MoveTo(in PointF pos) { MoveTo(pos.X, pos.Y); }
 
         /// <summary>
         /// 
@@ -285,7 +296,7 @@ namespace Raster.Drawing.Primitive
         /// 
         /// </summary>
         /// <param name="pos"></param>
-        public void Offset(in PointF pos) => Offset(pos.X, pos.Y);
+        public void Offset(in PointF pos) { Offset(pos.X, pos.Y); }
 
         /// <summary>
         /// 
@@ -309,9 +320,11 @@ namespace Raster.Drawing.Primitive
         /// <param name="right"></param>
         /// <param name="bottom"></param>
         /// <returns></returns>
-        public static RectangleF FromLTRB(float left, float top, float right, float bottom) =>
-            new RectangleF(left, top, right - left, bottom - top);
-
+        public static RectangleF FromLTRB(float left, float top, float right, float bottom)
+        {
+            return new RectangleF(left, top, right - left, bottom - top);
+        }
+            
         /// <summary>
         /// 
         /// </summary>

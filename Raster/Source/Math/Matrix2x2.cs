@@ -295,9 +295,21 @@ namespace Raster.Math
         /// </summary>
         /// <param name="matrix"></param>
         /// <param name="result"></param>
-        public static bool Inverse(in Matrix2x2 matrix, out Matrix2x2 result)
+        public static void Inverse(in Matrix2x2 matrix, out Matrix2x2 result)
         {
+            float det = matrix.Determinant;
 
+            if (det == 0.0f)
+            {
+                result = Matrix2x2.Identity;
+            }
+
+            float invDet = 1.0f / det;
+
+            result.M00 =  matrix.M11 * invDet;
+            result.M01 = -matrix.M01 * invDet;
+            result.M10 = -matrix.M10 * invDet;
+            result.M11 =  matrix.M00 * invDet;
         }
 
         /// <summary>

@@ -42,11 +42,11 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Quaternion Zero      = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f); 
+        public static readonly Quaternion Zero = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Quaternion Identity  = new Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
+        public static readonly Quaternion Identity = new Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
 
         #endregion Public Static Fields
 
@@ -56,10 +56,7 @@ namespace Raster.Math
         /// </summary>
         public Quaternion Conjugated
         {
-            get
-            {
-                return new Quaternion(-X, -Y, -Z, W);
-            }
+            get { return new Quaternion(-X, -Y, -Z, W); }
         }
 
         /// <summary>
@@ -69,7 +66,7 @@ namespace Raster.Math
         {
             get { return X == 0.0f && Y == 0.0f && Z == 0.0f && W == 1.0f; }
         }
-            
+
 
         /// <summary>
         /// 
@@ -91,21 +88,21 @@ namespace Raster.Math
 
         #region Constructor
         public Quaternion(in Quaternion other)
-			: this(other.X, other.Y, other.Z, other.W)
-		{
-		}
-		
-		public Quaternion(in Vector4 vec4)
-			: this(vec4.X, vec4.Y, vec4.Z, vec4.W)
-		{
-		}
-		
+            : this(other.X, other.Y, other.Z, other.W)
+        {
+        }
+
+        public Quaternion(in Vector4 vec4)
+            : this(vec4.X, vec4.Y, vec4.Z, vec4.W)
+        {
+        }
+
         public Quaternion(float x, float y, float z, float w)
         {
             X = x;
             Y = y;
             Z = z;
-			W = w;
+            W = w;
         }
 
         public Quaternion(in Matrix3x3 mat)
@@ -156,20 +153,23 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() =>
-            string.Format("Quaternion: X = {0}, Y = [1}, Z = {2}, W = {3} ", X, Y, Z, W);
+        public override string ToString()
+        {
+            return string.Format("Quaternion: X = {0}, Y = {1}, Z = {2}, W = {3}", X, Y, Z, W);
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(Quaternion other) => this == other;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Conjugate() => W = -W;
+        public bool Equals(Quaternion other)
+        {
+            return this.X == other.X &&
+                   this.Y == other.Y &&
+                   this.Z == other.Z &&
+                   this.W == other.W;
+        }
 
         /// <summary>
         /// 
@@ -241,15 +241,76 @@ namespace Raster.Math
         /// <param name="yaw"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Quaternion FromEulerAngles(in EulerAngles eulerAngles, float yaw)
+        public static Quaternion FromEulerAngles(in EulerAngles eulerAngles, MathF.RotationOrder order)
         {
-            FromEulerAngles(eulerAngles, out Quaternion result);
+            FromEulerAngles(eulerAngles, order, out Quaternion result);
             return result;
         }
 
-        public static Quaternion FromToRotation(in Vector3 from, in Vector3 to)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Quaternion FromEulerAnglesXYZ(in EulerAngles eulerAngles)
         {
+            FromEulerAnglesXYZ(in eulerAngles, out Quaternion result);
+            return result;
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Quaternion FromEulerAnglesXZY(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesXZY(in eulerAngles, out Quaternion result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Quaternion FromEulerAnglesYXZ(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesYXZ(in eulerAngles, out Quaternion result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Quaternion FromEulerAnglesYZX(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesYZX(in eulerAngles, out Quaternion result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Quaternion FromEulerAnglesZXY(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesZXY(in eulerAngles, out Quaternion result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Quaternion FromEulerAnglesZYX(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesZYX(in eulerAngles, out Quaternion result);
+            return result;
         }
 
         /// <summary>
@@ -261,6 +322,18 @@ namespace Raster.Math
         public static Quaternion FromRotationMatrix(in Matrix3x3 matrix)
         {
             FromRotationMatrix(matrix, out Quaternion result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        public static Quaternion FromToRotation(in Vector3 from, in Vector3 to)
+        {
+            FromToRotation(in from, in to, out Quaternion result);
             return result;
         }
 
@@ -342,26 +415,46 @@ namespace Raster.Math
             result.W = c;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xAxis"></param>
-        /// <param name="yAxis"></param>
-        /// <param name="zAxis"></param>
-        /// <param name="result"></param>
-        public static void FromAxes(in Vector3 xAxis, in Vector3 yAxis, in Vector3 zAxis, out Quaternion result)
+        public static void FromEulerAngles(in EulerAngles eulerAngles, MathF.RotationOrder order, out Quaternion result)
         {
-            
+            switch (order)
+            {
+                case MathF.RotationOrder.XYZ:
+                    FromEulerAnglesXYZ(in eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.XZY:
+                    FromEulerAnglesXYZ(in eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.YXZ:
+                    FromEulerAnglesXYZ(in eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.YZX:
+                    FromEulerAnglesXYZ(in eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.ZXY:
+                    FromEulerAnglesXYZ(in eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.ZYX:
+                    FromEulerAnglesXYZ(in eulerAngles, out result);
+                    break;
+
+                default:
+                    FromEulerAnglesZXY(in eulerAngles, out result);
+                    break;
+            }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pitch"></param>
-        /// <param name="roll"></param>
-        /// <param name="yaw"></param>
-        /// <returns></returns>
-        public static void FromEulerAngles(in EulerAngles eulerAngles, out Quaternion result)
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesXYZ(in EulerAngles eulerAngles, out Quaternion result)
         {
             float sr, cr, sp, cp, sy, cy;
 
@@ -369,26 +462,153 @@ namespace Raster.Math
             sp = MathF.Sin(halfPitch);
             cp = MathF.Cos(halfPitch);
 
+            float halfYaw = 0.5f * eulerAngles.Yaw;
+            sy = MathF.Sin(halfYaw);
+            cy = MathF.Cos(halfYaw);
+
             float halfRoll = 0.5f * eulerAngles.Roll;
             sr = MathF.Sin(halfRoll);
             cr = MathF.Cos(halfRoll);
+
+            result.X = sp * cy * cr - sy * sr * cp;
+            result.Y = sy * cp * cr + sp * sr * cy;
+            result.Z = sr * cp * cy - sp * sy * sr;
+            result.W = cp * cy * cr + sy * sr * sp;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesXZY(in EulerAngles eulerAngles, out Quaternion result)
+        {
+            float sr, cr, sp, cp, sy, cy;
+
+            float halfPitch = 0.5f * eulerAngles.Pitch;
+            sp = MathF.Sin(halfPitch);
+            cp = MathF.Cos(halfPitch);
 
             float halfYaw = 0.5f * eulerAngles.Yaw;
             sy = MathF.Sin(halfYaw);
             cy = MathF.Cos(halfYaw);
 
-            float crcy = cr * cy;
-            float srsy = sr * sy;
+            float halfRoll = 0.5f * eulerAngles.Roll;
+            sr = MathF.Sin(halfRoll);
+            cr = MathF.Cos(halfRoll);
 
-            result.X = crcy * sp + srsy * cp;
-            result.Y = sy * cp * cr - cy * sp * sr;
-            result.Z = cy * cp * sr - sy * cp * cr;
-            result.W = crcy * cp + srsy * sp;
+            result.X = sp * cy * cr + sy * sr * cp;
+            result.Y = sy * cp * cr + sp * sr * cy;
+            result.Z = sr * cp * cy - sp * sy * cr;
+            result.W = cp * cy * cr - sy * sr * sp;
         }
 
-        public static void FromToRotation(in Vector3 from, in Vector3 to, out Quaternion result)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesYXZ(in EulerAngles eulerAngles, out Quaternion result)
         {
-            
+            float sr, cr, sp, cp, sy, cy;
+
+            float halfPitch = 0.5f * eulerAngles.Pitch;
+            sp = MathF.Sin(halfPitch);
+            cp = MathF.Cos(halfPitch);
+
+            float halfYaw = 0.5f * eulerAngles.Yaw;
+            sy = MathF.Sin(halfYaw);
+            cy = MathF.Cos(halfYaw);
+
+            float halfRoll = 0.5f * eulerAngles.Roll;
+            sr = MathF.Sin(halfRoll);
+            cr = MathF.Cos(halfRoll);
+
+            result.X = sp * cy * cr - sy * sr * cp;
+            result.Y = sy * cp * cr + sp * sr * cy;
+            result.Z = sr * cp * cy + sp * sy * cr;
+            result.W = cp * cy * cr - sy * sr * sp;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesYZX(in EulerAngles eulerAngles, out Quaternion result)
+        {
+            float sr, cr, sp, cp, sy, cy;
+
+            float halfPitch = 0.5f * eulerAngles.Pitch;
+            sp = MathF.Sin(halfPitch);
+            cp = MathF.Cos(halfPitch);
+
+            float halfYaw = 0.5f * eulerAngles.Yaw;
+            sy = MathF.Sin(halfYaw);
+            cy = MathF.Cos(halfYaw);
+
+            float halfRoll = 0.5f * eulerAngles.Roll;
+            sr = MathF.Sin(halfRoll);
+            cr = MathF.Cos(halfRoll);
+
+            result.X = sp * cy * cr - sy * sr * cp;
+            result.Y = sy * cp * cr - sp * sr * cy;
+            result.Z = sr * cp * cy + sp * sy * cr;
+            result.W = cp * cy * cr + sy * sr * sp;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="result"></param>
+        public static void FromEulerAnglesZXY(in EulerAngles eulerAngles, out Quaternion result)
+        {
+            float sr, cr, sp, cp, sy, cy;
+
+            float halfPitch = 0.5f * eulerAngles.Pitch;
+            sp = MathF.Sin(halfPitch);
+            cp = MathF.Cos(halfPitch);
+
+            float halfYaw = 0.5f * eulerAngles.Yaw;
+            sy = MathF.Sin(halfYaw);
+            cy = MathF.Cos(halfYaw);
+
+            float halfRoll = 0.5f * eulerAngles.Roll;
+            sr = MathF.Sin(halfRoll);
+            cr = MathF.Cos(halfRoll);
+
+            result.X = sp * cy * cr + sy * sr * cp;
+            result.Y = sy * cp * cr - sp * sr * cy;
+            result.Z = sr * cp * cy - sp * sy * cr;
+            result.W = cp * cy * cr + sy * sr * sp;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="result"></param>
+        public static void FromEulerAnglesZYX(in EulerAngles eulerAngles, out Quaternion result)
+        {
+            float sr, cr, sp, cp, sy, cy;
+
+            float halfPitch = 0.5f * eulerAngles.Pitch;
+            sp = MathF.Sin(halfPitch);
+            cp = MathF.Cos(halfPitch);
+
+            float halfYaw = 0.5f * eulerAngles.Yaw;
+            sy = MathF.Sin(halfYaw);
+            cy = MathF.Cos(halfYaw);
+
+            float halfRoll = 0.5f * eulerAngles.Roll;
+            sr = MathF.Sin(halfRoll);
+            cr = MathF.Cos(halfRoll);
+
+            result.X = sp * cy * cr + sy * sr * cp;
+            result.Y = sy * cp * cr - sp * sr * cy;
+            result.Z = sr * cp * cy + sp * sy * cr;
+            result.W = cp * cy * cr - sy * sr * sp;
         }
 
         /// <summary>
@@ -439,6 +659,47 @@ namespace Raster.Math
                     result.W = (matrix.M01 - matrix.M10) * invS;
                 }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="result"></param>
+        public static void FromToRotation(in Vector3 from, in Vector3 to, out Quaternion result)
+        {
+            Vector3.Normalize(from, out Vector3 v0);
+            Vector3.Normalize(to, out Vector3 v1);
+
+            float d = Vector3.Dot(v0, v1) + 1.0f;
+            if (MathHelper.IsZero(d))
+            {
+                Vector3.Cross(Vector3.UnitX, v0, out Vector3 axis);
+                if (MathHelper.IsZero(axis.LengthSquared))
+                {
+                    Vector3.Cross(Vector3.UnitY, v0, out axis);
+                }
+
+                axis.Normalize();
+                result.X = axis.X;
+                result.Y = axis.Y;
+                result.Z = axis.Z;
+                result.W = 0.0f;
+
+                return;
+            }
+
+            float sqrt = MathHelper.FastSqrtInverse(2.0f * d);
+            float invSqrt = 1.0f / sqrt;
+            Vector3 rotationAxis = Vector3.Cross(v0, v1);
+
+            result.X = rotationAxis.X * invSqrt;
+            result.Y = rotationAxis.Y * invSqrt;
+            result.Z = rotationAxis.Z * invSqrt;
+            result.W = sqrt * 0.5f;
+
+            result.Normalize();
         }
 
         /// <summary>
@@ -547,39 +808,6 @@ namespace Raster.Math
             {
                 result = Quaternion.Zero;
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <param name="result"></param>
-        public static void RotationTo(in Vector3 from, in Vector3 to, out Quaternion result)
-        {
-            Vector3.Normalize(from, out Vector3 v0);
-            Vector3.Normalize(to, out Vector3 v1);
-
-            float d = Vector3.Dot(v0, v1) + 1.0f;
-            if (MathHelper.IsZero(d))
-            {
-                Vector3.Cross(Vector3.UnitX, v0, out Vector3 axis);
-                if (MathHelper.IsZero(axis.LengthSquared))
-                {
-                    Vector3.Cross(Vector3.UnitY, v0, out axis);
-                }
-
-                axis.Normalize();
-                result.X = axis.X;
-                result.Y = axis.Y;
-                result.Z = axis.Z;
-                result.W = 0.0f;
-
-                return;
-            }
-
-            float inv = MathHelper.FastSqrtInverse(2.0f * d);
-            //Vector3 axis = Vector3.Cross(v0, v1);
         }
 
         /// <summary>
@@ -741,17 +969,21 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Quaternion operator +(in Quaternion left, in Quaternion right) =>
-            new Quaternion(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
-
+        public static Quaternion operator +(in Quaternion left, in Quaternion right)
+        {
+            return new Quaternion(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+        }
+            
         /// <summary>
         /// 
         /// </summary>
         /// <param name="quaternion"></param>
         /// <returns></returns>
-        public static Quaternion operator -(in Quaternion quaternion) =>
-            new Quaternion(-quaternion.X, -quaternion.Y, -quaternion.Z, -quaternion.W);
-
+        public static Quaternion operator -(in Quaternion quaternion)
+        {
+            return new Quaternion(-quaternion.X, -quaternion.Y, -quaternion.Z, -quaternion.W);
+        }
+           
         /// <summary>
         /// 
         /// </summary>
@@ -759,9 +991,11 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Quaternion operator -(in Quaternion left, in Quaternion right) =>
-            new Quaternion(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
-
+        public static Quaternion operator -(in Quaternion left, in Quaternion right)
+        {
+            return new Quaternion(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+        }
+            
         /// <summary>
         /// 
         /// </summary>
@@ -769,8 +1003,10 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Quaternion operator *(in Quaternion left, float right) =>
-            new Quaternion(left.X * right, left.Y * right, left.Z * right, left.W * right);
+        public static Quaternion operator *(in Quaternion left, float right)
+        {
+            return new Quaternion(left.X * right, left.Y * right, left.Z * right, left.W * right);
+        }
 
         /// <summary>
         /// 

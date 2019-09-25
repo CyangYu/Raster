@@ -10,12 +10,10 @@ namespace Raster.Math.Geometry
     public struct Polygon : IEquatable<Polygon>
     {
         #region Public Instance Methods
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        public bool Equals(Polygon other) => true;
-
+        public bool Equals(Polygon polygon)
+        {
+            return true;
+        }
         #endregion Public Instance Methods
     }
+}

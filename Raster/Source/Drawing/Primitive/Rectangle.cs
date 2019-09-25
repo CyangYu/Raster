@@ -15,7 +15,7 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        public int R;
+        public int X;
         /// <summary>
         /// 
         /// </summary>
@@ -43,8 +43,8 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         public int Left
         {
-            get { return R; }
-            set { R = value; }
+            get { return X; }
+            set { X = value; }
         }
 
         /// <summary>
@@ -61,8 +61,8 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         public int Right
         {
-            get { return unchecked(R + Width); }
-            set { Width = value - R; }
+            get { return unchecked(X + Width); }
+            set { Width = value - X; }
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         public Point Center
         {
-            get { return new Point(R + (Width >> 1), Y + (Height >> 1)); }
+            get { return new Point(X + (Width >> 1), Y + (Height >> 1)); }
         }
 
         /// <summary>
@@ -87,8 +87,12 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         public Point TopLeft
         {
-            get { return new Point(R, Y); }
-            set { R = value.R; Y = value.Y; }
+            get { return new Point(X, Y); }
+            set
+            {
+                X = value.X;
+                Y = value.Y;
+            }
         }
 
         /// <summary>
@@ -96,8 +100,12 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         public Point TopRight
         {
-            get { return new Point(R + Width, Y); }
-            set { Y = value.Y; Width = value.R - R; }
+            get { return new Point(X + Width, Y); }
+            set
+            {
+                Y = value.Y;
+                Width = value.X - X;
+            }
         }
 
         /// <summary>
@@ -105,8 +113,12 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         public Point BottomLeft
         {
-            get { return new Point(R, Y + Height); }
-            set { R = value.R; Height = value.Y - Y; }
+            get { return new Point(X, Y + Height); }
+            set
+            {
+                X = value.X;
+                Height = value.Y - Y;
+            }
         }
 
         /// <summary>
@@ -114,8 +126,12 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         public Point BottomRight
         {
-            get { return new Point(R + Width, Y + Height); }
-            set { Width = value.R - R; Height = value.Y - Y; }
+            get { return new Point(X + Width, Y + Height); }
+            set
+            {
+                Width = value.X - X;
+                Height = value.Y - Y;
+            }
         }
 
         /// <summary>
@@ -123,8 +139,12 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         public Point Location
         {
-            get { return new Point(R, Y); }
-            set { R = value.R; Y = value.Y; }
+            get { return new Point(X, Y); }
+            set
+            {
+                X = value.X;
+                Y = value.Y;
+            }
         }
 
         /// <summary>
@@ -133,25 +153,29 @@ namespace Raster.Drawing.Primitive
         public Size Size
         {
             get { return new Size(Width, Height); }
-            set { Width = value.Width; Height = value.Height; }
+            set
+            {
+                Width = value.Width;
+                Height = value.Height;
+            }
         }
 
         #endregion Public Instance Properties
 
         #region Constructor
         public Rectangle(in Rectangle other)
-            : this(other.R, other.Y, other.Width, other.Height)
+            : this(other.X, other.Y, other.Width, other.Height)
         {
         }
 
         public Rectangle(in Point location, in Size size)
-            : this(location.R, location.Y, size.Width, size.Height)
+            : this(location.X, location.Y, size.Width, size.Height)
         {
         }
 
         public Rectangle(int x, int y, int width, int height)
         {
-            R = x;
+            X = x;
             Y = y;
             Width = width;
             Height = height;
@@ -176,27 +200,34 @@ namespace Raster.Drawing.Primitive
 
         public override int GetHashCode()
         {
-            return R.GetHashCode() ^ Y.GetHashCode() ^ Width.GetHashCode() ^ Height.GetHashCode();
+            return X.GetHashCode() ^ Y.GetHashCode() ^ Width.GetHashCode() ^ Height.GetHashCode();
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() =>
-            string.Format("Rectange R = {0}, Y = {1}, Width = {2}, Height = {3}",
-                          R, Y, Width, Height);
+        public override string ToString()
+        {
+            return string.Format("Rectange X  = {0}, Y = {1}, Width = {2}, Height = {3}",
+                          X, Y, Width, Height);
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(Rectangle other) => this == other;
+        public bool Equals(Rectangle other)
+        {
+            return this.X == other.X && this.Y == other.Y &&
+                   this.Width == other.Width && this.Height == other.Height;
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        public bool IsEmpty() => R <= 0 && Y <= 0;
+        public bool IsEmpty() { return X <= 0 && Y <= 0; }
 
         /// <summary>
         /// 
@@ -204,41 +235,46 @@ namespace Raster.Drawing.Primitive
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public bool Contain(int x, int y) => 
-            R <= x && R + Width >= x && Y <= y && Y + Height >= y;
+        public bool Contain(int x, int y)
+        {
+            return X <= x && X + Width >= x && Y <= y && Y + Height >= y;
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pt"></param>
         /// <returns></returns>
-        public bool Contain(in Point pt) => Contain(pt.R, pt.Y);
+        public bool Contain(in Point pt) { return Contain(pt.X, pt.Y); }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="rect"></param>
         /// <returns></returns>
-        public bool Contain(in Rectangle other) =>
-            (R <= other.R) && (other.R + other.Width <= R + Width) &&
-            (Y <= other.Y) && (other.Y + other.Height <= Y + Height);
+        public bool Contain(in Rectangle other)
+        {
+            return (X <= other.X) && (other.X + other.Width <= X + Width) &&
+                   (Y <= other.Y) && (other.Y + other.Height <= Y + Height);
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool IntersectWith(in Rectangle other) =>
-            (other.R < R + Width) && (R < other.R + other.Width) &&
-            (other.Y < Y + Height) && (Y < other.Y + other.Height);
+        public bool IntersectWith(in Rectangle other)
+        {
+            return (other.X < X + Width) && (X < other.X + other.Width) &&
+                   (other.Y < Y + Height) && (Y < other.Y + other.Height);
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="size"></param>
-        public void Inflate(in Size size) => 
-            Inflate(size.Width, size.Height);
-
+        public void Inflate(in Size size) { Inflate(size.Width, size.Height); }
+            
         /// <summary>
         /// 
         /// </summary>
@@ -248,7 +284,7 @@ namespace Raster.Drawing.Primitive
         {
             unchecked
             {
-                R       -= width;
+                X       -= width;
                 Y       -= height;
 
                 Width   += width << 1;
@@ -260,24 +296,7 @@ namespace Raster.Drawing.Primitive
         /// 
         /// </summary>
         /// <param name="pos"></param>
-        public void MoveTo(in Point pos) => MoveTo(pos.R, pos.Y);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void MoveTo(int x, int y)
-        {
-            R = x;
-            Y = y;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pos"></param>
-        public void Offset(in Point pos) => Offset(pos.R, pos.Y);
+        public void Offset(in Point pos) { Offset(pos.X, pos.Y); }
         
         /// <summary>
         /// 
@@ -288,7 +307,7 @@ namespace Raster.Drawing.Primitive
         {
             unchecked
             {
-                R += x;
+                X  += x;
                 Y += y;
             }
         }
@@ -339,14 +358,14 @@ namespace Raster.Drawing.Primitive
         /// <param name="result"></param>
         public static void Intersect(in Rectangle value1, in Rectangle value2, out Rectangle result)
         {
-            int left    = SysMath.Max(value1.R, value2.R);
+            int left    = SysMath.Max(value1.X, value2.X);
             int top     = SysMath.Max(value1.Y, value1.Y);
-            int right   = SysMath.Min(value1.R + value1.Width, value2.R + value2.Width);
+            int right   = SysMath.Min(value1.X + value1.Width, value2.X + value2.Width);
             int bottom  = SysMath.Min(value1.Y + value1.Height, value2.Y + value2.Height);
 
             if (right >= left && bottom >= top)
             {
-                result.R        = left;
+                result.X        = left;
                 result.Y        = top;
                 result.Width    = right - left;
                 result.Height   = bottom - top;
@@ -365,12 +384,12 @@ namespace Raster.Drawing.Primitive
         /// <param name="result"></param>
         public static void Union(in Rectangle value1, in Rectangle value2, out Rectangle result)
         {
-            int left    = SysMath.Min(value1.R, value2.R);
+            int left    = SysMath.Min(value1.X, value2.X);
             int top     = SysMath.Min(value1.Y, value2.Y);
-            int right   = SysMath.Max(value1.R + value1.Width, value2.R + value2.Width);
+            int right   = SysMath.Max(value1.X + value1.Width, value2.X + value2.Width);
             int bottom  = SysMath.Max(value1.Y + value1.Height, value2.Y + value2.Height);
 
-            result.R        = left;
+            result.X        = left;
             result.Y        = top;
             result.Width    = right - left;
             result.Height   = bottom - top;
@@ -384,16 +403,22 @@ namespace Raster.Drawing.Primitive
         /// 
         ///     </para>
         /// </summary>
-        public static bool operator ==(in Rectangle left, in Rectangle right) =>
-            left.R == right.R && left.Y == right.Y && left.Width == right.Width && left.Height == right.Height;
+        public static bool operator ==(in Rectangle left, in Rectangle right)
+        {
+            return left.X == right.X && left.Y == right.Y &&
+                   left.Width == right.Width && left.Height == right.Height;
+        }
 
         /// <summary>
         /// <para>
         /// 
         /// </para>
         /// </summary>
-        public static bool operator !=(in Rectangle left, in Rectangle right) =>
-          left.R != right.R || left.Y != right.Y || left.Width != right.Width || left.Height != right.Height;
+        public static bool operator !=(in Rectangle left, in Rectangle right)
+        {
+            return left.X != right.X || left.Y != right.Y ||
+                   left.Width != right.Width || left.Height != right.Height;
+        }
 
         #endregion Operator Overload
     }

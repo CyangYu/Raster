@@ -7,7 +7,7 @@ namespace Raster.Math.Geometry
     /// Axis-Aligned Bounding Box
     /// </summary>
     [Serializable]
-    public struct AABB : IEquatable<AABB>, IHitable
+    public struct AABB : IEquatable<AABB>
     {
         #region Public Fields
         /// <summary>

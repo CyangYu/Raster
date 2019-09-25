@@ -261,8 +261,7 @@ namespace Raster.Drawing.Primitive
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Rgba operator +(in Rgba left, in Rgba right)
         {
-            Rgba result;
-            Add(left, right, out Quaternion result);
+            Add(left, right, out Rgba result);
             return result;
         }
         
@@ -275,8 +274,7 @@ namespace Raster.Drawing.Primitive
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Rgba operator -(in Rgba left, in Rgba right)
         {
-            Rgba result;
-            Subtract(left, right, out Quaternion result);
+            Subtract(left, right, out Rgba result);
             return result;
         }
 
@@ -289,8 +287,7 @@ namespace Raster.Drawing.Primitive
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Rgba operator *(int left, in Rgba right)
         {
-            Rgba result;
-            Multiply(right, left, out Quaternion result);
+            Multiply(right, left, out Rgba result);
             return result;
         }
 
@@ -303,8 +300,7 @@ namespace Raster.Drawing.Primitive
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Rgba operator *(in Rgba left, int right)
         {
-            Rgba result;
-            Multiply(left, right, out Quaternion result);
+            Multiply(left, right, out Rgba result);
             return result;
         }
 
@@ -317,8 +313,7 @@ namespace Raster.Drawing.Primitive
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Rgba operator *(in Rgba left, in Rgba right)
         {
-            Rgba result;
-            Multiply(left, right, out Quaternion result);
+            Multiply(left, right, out Rgba result);
             return result;
         }
 

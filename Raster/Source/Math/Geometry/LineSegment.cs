@@ -7,7 +7,7 @@ namespace Raster.Math.Geometry
     /// 
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
-    public struct LineSegment : IEquatable<LineSegment>, IHitable
+    public struct LineSegment : IEquatable<LineSegment>
     {
         #region Public Instance Methods
         /// <summary>

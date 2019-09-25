@@ -21,5 +21,6 @@ namespace Raster.Render
         {
 
         }
+        #endregion Constructor
     }
 }

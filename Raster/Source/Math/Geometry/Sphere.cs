@@ -6,7 +6,7 @@ namespace Raster.Math.Geometry
     /// <summary>
     /// 
     /// </summary>
-    public struct Sphere : IEquatable<Sphere>, IHitable
+    public struct Sphere : IEquatable<Sphere>
     {
         #region Public Instance Fields
         /// <summary>
@@ -93,18 +93,6 @@ namespace Raster.Math.Geometry
         /// <param name="other"></param>
         /// <returns></returns>
         public bool Equals(Sphere other) => this == other;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ray"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Intersect(in Ray ray)
-        {
-            float distance = 0.0f;
-            return Collision.RayIntersectSphere(ray, this, out distance);
-        }
 
         #endregion Public Instance Methods
 

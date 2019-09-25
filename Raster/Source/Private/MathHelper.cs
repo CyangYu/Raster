@@ -112,8 +112,11 @@ namespace Raster.Math
         /// <param name="n"></param>
         /// <param name="k"></param>
         /// <returns></returns>
-        public static long BinomialCoefficient(int n, int k) =>
-            Factorial(n) / Factorial(k) * Factorial(n - k);
+        public static long BinomialCoefficient(int n, int k)
+        {
+            return Factorial(n) / Factorial(k) * Factorial(n - k);
+        }
+            
 
         /// <summary>
         /// 

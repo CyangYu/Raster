@@ -7,7 +7,7 @@ namespace Raster.Math.Geometry
     /// 
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
-    public struct Triangle : IEquatable<Triangle>, IHitable
+    public struct Triangle : IEquatable<Triangle>
     {
         #region Public Instance Fields
         /// <summary>

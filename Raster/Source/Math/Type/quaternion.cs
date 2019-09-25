@@ -467,7 +467,7 @@ namespace Raster.Math
         {
             float4 x = q.value;
             float len = math.dot(x, x);
-            return quaternion(math.select(Mathematics.quaternion.identity.value, x * math.rsqrt(len), len > FLT_MIN_NORMAL));
+            return quaternion(math.select(Math.quaternion.identity.value, x * math.rsqrt(len), len > FLT_MIN_NORMAL));
         }
 
         /// <summary>

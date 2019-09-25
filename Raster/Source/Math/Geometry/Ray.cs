@@ -8,7 +8,7 @@ namespace Raster.Math.Geometry
     /// 
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
-    public struct Ray : IEquatable<Ray>, IHitable
+    public struct Ray : IEquatable<Ray>
     {
         #region Public Fields
         /// <summary>

@@ -431,7 +431,7 @@ namespace Raster.Math
         public static float Sqrt(float x)
         {
             float invsqrt = MathHelper.FastSqrtInverse(x);
-            return invsqrt == 0.0f ? float.NaN : 1.0f / invsqrt;
+            return invsqrt == 0.0f ? float.PositiveInfinity : 1.0f / invsqrt;
         }
 
         #endregion Public Static Methods

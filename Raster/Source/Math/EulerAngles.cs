@@ -20,11 +20,11 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public float Roll;
+        public float Yaw;
         /// <summary>
         /// 
         /// </summary>
-        public float Yaw;
+        public float Roll;
 		#endregion Public Fields
 		
 		#region Constructor
@@ -34,15 +34,15 @@ namespace Raster.Math
         }
 		
 		public EulerAngles(in EulerAngles euler)
-			: this(euler.Pitch, euler.Roll, euler.Yaw)
+			: this(euler.Pitch, euler.Yaw, euler.Roll)
 		{
 		}
 		
-        public EulerAngles(float pitch, float roll, float yaw)
+        public EulerAngles(float pitch, float yaw, float roll)
         {
             Pitch = pitch;
+            Yaw = yaw;
             Roll  = roll;
-            Yaw   = yaw;
         }
 
         #endregion Constructor
@@ -77,29 +77,24 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() =>
-            string.Format("EulerAngles: Pitch = {0}, Roll = {1}, Yaw = {2}", Pitch, Roll, Yaw);
-
+        public override string ToString()
+        {
+            return string.Format("EulerAngles: Pitch = {0}, Roll = {1}, Yaw = {2}", Pitch, Roll, Yaw);
+        }
+            
         /// <summary>
         /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(EulerAngles other) => this == other;
-
-        #endregion Public Instance Methods
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="axisAngle"></param>
-        /// <returns></returns>
-        public static EulerAngles FromAxisAngle(in AxisAngle axis)
+        public bool Equals(EulerAngles other)
         {
-            FromAxisAngle(axis, out EulerAngles result);
-            return result;
+            return this.Pitch == other.Pitch && this.Yaw == other.Yaw &&
+                   this.Roll == other.Roll;
         }
 
+        #endregion Public Instance Methods
         /// <summary>
         /// 
         /// </summary>
@@ -107,7 +102,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static EulerAngles FromQuaternion(in Quaternion quaternion)
         {
-            FromQuaternion(quaternion.X, quaternion.Y, quaternion.Z, quaternion.W, out EulerAngles result);
+            FromQuaternion(in quaternion, out EulerAngles result);
             return result;
         }
 
@@ -125,39 +120,24 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        /// <param name="angle"></param>
-        /// <param name="euler"></param>
-        public static void FromAxisAngle(in AxisAngle axis, out EulerAngles result)
-        {
-            result.Pitch = 0.0f;
-            result.Roll = 0.0f;
-            result.Yaw = 0.0f;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="w"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="z"></param>
         /// <returns></returns>
-        public static void FromQuaternion(float x, float y, float z, float w, out EulerAngles result)
+        public static void FromQuaternion(in Quaternion quaternion, out EulerAngles result)
         {
-            float xx = x * x;
-            float xy = x * y;
-            float xz = x * z;
-            float xw = x * w;
-            float yy = y * y;
-            float yz = y * z;
-            float yw = y * w;
-            float zz = z * z;
-            float zw = z * w;
+            float xx = quaternion.X * quaternion.X;
+            float xy = quaternion.X * quaternion.Y;
+            float xz = quaternion.X * quaternion.Z;
+            float xw = quaternion.X * quaternion.W;
+            float yy = quaternion.Y * quaternion.Y;
+            float yz = quaternion.Y * quaternion.Z;
+            float yw = quaternion.Y * quaternion.W;
+            float zz = quaternion.Z * quaternion.Z;
+            float zw = quaternion.Z * quaternion.W;
 
-            float lenSqr = xx + yy + zz + w * w;
+            float lenSqr = xx + yy + zz + quaternion.W * quaternion.W;
             if (!MathHelper.IsOne(lenSqr) && !MathHelper.IsZero(lenSqr))
             {
                 xx /= lenSqr;

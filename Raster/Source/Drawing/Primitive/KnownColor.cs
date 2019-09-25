@@ -148,7 +148,7 @@ namespace Raster.Drawing.Primitive
 		/// <summary>
 		/// DarkSlateGray 	
 		/// </summary>
-		public static readonly Rgba DarkSlateGray 			= new Rgba(0x2F, 0x, 0x, 0xFF);
+		public static readonly Rgba DarkSlateGray 			= new Rgba(0x2F, 0x4F, 0x4F, 0xFF);
 		/// <summary>
 		/// DarkTurquoise 	
 		/// </summary>

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raster", "Raster\Raster.csproj", "{EF2D78D7-5BD9-4A6D-8828-AF7662BE8142}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raster.Tests", "Tests\Raster.Tests\Raster.Tests.csproj", "{5FC0859B-7559-42E0-94FD-C76F7419FCAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{EF2D78D7-5BD9-4A6D-8828-AF7662BE8142}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF2D78D7-5BD9-4A6D-8828-AF7662BE8142}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF2D78D7-5BD9-4A6D-8828-AF7662BE8142}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC0859B-7559-42E0-94FD-C76F7419FCAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC0859B-7559-42E0-94FD-C76F7419FCAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC0859B-7559-42E0-94FD-C76F7419FCAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC0859B-7559-42E0-94FD-C76F7419FCAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
