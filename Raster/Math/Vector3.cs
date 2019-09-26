@@ -32,90 +32,42 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 Zero = new Vector3(0.0f, 0.0f, 0.0f);
+        public static readonly Vector3 Zero     = new Vector3( 0.0f,  0.0f,  0.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 Unit = new Vector3(1.0f, 1.0f, 1.0f);
+        public static readonly Vector3 One      = new Vector3( 1.0f,  1.0f,  1.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 UnitX = new Vector3(1.0f, 0.0f, 0.0f);
+        public static readonly Vector3 Right    = new Vector3( 1.0f,  0.0f,  0.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 UnitY = new Vector3(0.0f, 1.0f, 0.0f);
+        public static readonly Vector3 Up       = new Vector3( 0.0f,  1.0f,  0.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 UnitZ = new Vector3(0.0f, 0.0f, 1.0f);
+        public static readonly Vector3 Forward  = new Vector3( 0.0f,  0.0f,  1.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 NegUnit = new Vector3(-1.0f, -1.0f, -1.0f);
+        public static readonly Vector3 Left     = new Vector3(-1.0f,  0.0f,  0.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 NegUnitX = new Vector3(-1.0f, 0.0f, 0.0f);
+        public static readonly Vector3 Down     = new Vector3( 0.0f, -1.0f,  0.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 NegUnitY = new Vector3(0.0f, -1.0f, 0.0f);
+        public static readonly Vector3 Back     = new Vector3( 0.0f,  0.0f, -1.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector3 NegUnitZ = new Vector3(0.0f, 0.0f, -1.0f);
+        public static readonly Vector3 NegOne   = new Vector3(-1.0f, -1.0f, -1.0f);
         #endregion Public Static Fields
 
         #region Public Instance Properties
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector3 XYZ
-        {
-            get { return new Vector3(X, Y, Z); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector3 XZY
-        {
-            get { return new Vector3(X, Z, Y); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector3 YXZ
-        {
-            get { return new Vector3(Y, X, Z); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector3 YZX
-        {
-            get { return new Vector3(Y, Z, X); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector3 ZXY
-        {
-            get { return new Vector3(Z, X, Y); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector3 ZYX
-        {
-            get { return new Vector3(Z, Y, X); }
-        }
-
         /// <summary>
         /// 
         /// </summary>

@@ -31,46 +31,30 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector2 Unit     = new Vector2( 1.0f,  1.0f);
+        public static readonly Vector2 One      = new Vector2( 1.0f,  1.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector2 UnitX    = new Vector2( 1.0f,  0.0f);
+        public static readonly Vector2 Left     = new Vector2( 1.0f,  0.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector2 UnitY    = new Vector2( 0.0f,  1.0f);
+        public static readonly Vector2 Up       = new Vector2( 0.0f,  1.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector2 NegUnit  = new Vector2(-1.0f, -1.0f);
+        public static readonly Vector2 Right    = new Vector2(-1.0f,  0.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector2 NegUnitX = new Vector2(-1.0f,  0.0f);
+        public static readonly Vector2 Down     = new Vector2( 0.0f, -1.0f);
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector2 NegUnitY = new Vector2(0.0f,  -1.0f);
+        public static readonly Vector2 NegOne   = new Vector2( 0.0f,  0.0f);
         #endregion Public Static Fields
 
         #region Public Instance Properties
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector2 XY
-        {
-            get { return new Vector2(X, Y); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector2 YX
-        {
-            get { return new Vector2(Y, X); }
-        }
-
         /// <summary>
         /// 
         /// </summary>

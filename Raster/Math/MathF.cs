@@ -146,6 +146,14 @@ namespace Raster.Math
         /// 
         /// </summary>
         public const float Epsilon = 0.0000001192092896f;
+        /// <summary>
+        /// 
+        /// </summary>
+        public const float Deg2Rad = PI * 2F / 360.0F;
+        /// <summary>
+        /// 
+        /// </summary>
+        public const float Rad2Deg = 1.0F / Deg2Rad;
         #endregion Public Static Fields
 
         #region Public Static Methods

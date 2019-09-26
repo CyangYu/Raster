@@ -174,6 +174,27 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="xAxis"></param>
+        /// <param name="yAxis"></param>
+        /// <param name="zAxis"></param>
+        public void GetAxes(out Vector3 xAxis, out Vector3 yAxis, out Vector3 zAxis)
+        {
+            Matrix3x3.FromQuaternion(this, out Matrix3x3 rot3x3);
+
+            xAxis.X = rot3x3.M00;
+            xAxis.Y = rot3x3.M10;
+            xAxis.Z = rot3x3.M20;
+            yAxis.X = rot3x3.M01;
+            yAxis.Y = rot3x3.M11;
+            yAxis.Z = rot3x3.M21;
+            zAxis.X = rot3x3.M02;
+            zAxis.Y = rot3x3.M12;
+            zAxis.Z = rot3x3.M22;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void Normalize()
         {
             float lenSqr = X * X + Y * Y + Z * Z + W * W;
@@ -337,6 +358,20 @@ namespace Raster.Math
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private const float kEpsilon = 0.000001F;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dot"></param>
+        /// <returns></returns>
+        private static bool IsEqualUsingDot(float dot)
+        {
+            return dot > 1.0F - kEpsilon;
+        }
         /// 
         /// </summary>
         /// <param name="value1"></param>
@@ -360,6 +395,20 @@ namespace Raster.Math
         {
             Normalize(value, out Quaternion result);
             return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        public static float RotationAngle(in Quaternion a, in Quaternion b)
+        {
+            float dot = Dot(a, b);
+            return IsEqualUsingDot(dot) 
+                ? 0.0F 
+                : MathF.Acos(MathF.Min(MathF.Abs(dot), 1.0F)) * 2.0F * MathF.Rad2Deg;
         }
 
         /// <summary>
@@ -395,6 +444,16 @@ namespace Raster.Math
             result.Y = value2.Y * value1.W + value1.Y * value2.W + cy;
             result.Z = value2.Z * value1.W + value1.Z * value2.W + cz;
             result.W = value2.W * value1.W - dot;
+        }
+
+        public static void FromAxes(in Vector3 xAxis, in Vector3 yAxis, in Vector3 zAxis, out Quaternion result)
+        {
+            Matrix3x3 rot3x3 = new Matrix3x3(
+                xAxis.X, yAxis.X, zAxis.X,
+                xAxis.Y, yAxis.Y, zAxis.Y,
+                xAxis.Z, yAxis.Z, zAxis.Z);
+
+            FromRotationMatrix(rot3x3, out result);
         }
 
         /// <summary>
@@ -675,10 +734,10 @@ namespace Raster.Math
             float d = Vector3.Dot(v0, v1) + 1.0f;
             if (MathHelper.IsZero(d))
             {
-                Vector3.Cross(Vector3.UnitX, v0, out Vector3 axis);
+                Vector3.Cross(Vector3.Up, v0, out Vector3 axis);
                 if (MathHelper.IsZero(axis.LengthSquared))
                 {
-                    Vector3.Cross(Vector3.UnitY, v0, out axis);
+                    Vector3.Cross(Vector3.Up, v0, out axis);
                 }
 
                 axis.Normalize();
@@ -740,6 +799,22 @@ namespace Raster.Math
             result.Y *= invNorm;
             result.Z *= invNorm;
             result.W *= invNorm;
+        }
+
+        public void LookRotation(in Vector3 forward, in Vector3 upward, out Quaternion result)
+        {
+            Vector3 zAxis = forward.Normalized;
+            Vector3.Cross(upward, zAxis, out Vector3 xAxis);
+
+            if (MathHelper.IsZero(xAxis.LengthSquared))
+            {
+                FromToRotation(Vector3.Forward, zAxis, out result);
+            }
+
+            xAxis.Normalize();
+            Vector3.Cross(zAxis, xAxis, out Vector3 yAxis);
+
+            FromAxes(xAxis, yAxis, zAxis, out result);
         }
 
         /// <summary>
@@ -842,9 +917,9 @@ namespace Raster.Math
             else
             {
                 float omega = MathF.Acos(cosOmega);
-                float invSinOmega = 1.0f / MathF.Sin(omega);
+                float invSinOmega = 1.0F / MathF.Sin(omega);
 
-                s1 = MathF.Sin((1.0f - t) * omega) *invSinOmega;
+                s1 = MathF.Sin((1.0F - t) * omega) *invSinOmega;
                 s2 = (flip)
                     ? -MathF.Sin(t * omega) * invSinOmega
                     : MathF.Sin(t * omega) * invSinOmega;

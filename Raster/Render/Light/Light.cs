@@ -7,7 +7,7 @@ namespace Raster.Render.Light
     /// <summary>
     /// 
     /// </summary>
-    public struct Light
+    public class Light
     {
         #region Public Fields
         /// <summary>
