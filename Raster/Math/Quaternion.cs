@@ -446,6 +446,13 @@ namespace Raster.Math
             result.W = value2.W * value1.W - dot;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xAxis"></param>
+        /// <param name="yAxis"></param>
+        /// <param name="zAxis"></param>
+        /// <param name="result"></param>
         public static void FromAxes(in Vector3 xAxis, in Vector3 yAxis, in Vector3 zAxis, out Quaternion result)
         {
             Matrix3x3 rot3x3 = new Matrix3x3(
@@ -669,12 +676,12 @@ namespace Raster.Math
             result.Z = sr * cp * cy + sp * sy * cr;
             result.W = cp * cy * cr - sy * sr * sp;
         }
-
+        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="matrix"></param>
-        /// <returns></returns>
+        /// <param name="result"></param>
         public static void FromRotationMatrix(in Matrix3x3 matrix, out Quaternion result)
         {
             float trace = matrix.M00 + matrix.M11 + matrix.M22;
@@ -713,7 +720,7 @@ namespace Raster.Math
                     float s = MathF.Sqrt(1.0f + matrix.M22 - matrix.M00 - matrix.M11);
                     float invS = 0.5f / s;
                     result.X = (matrix.M20 + matrix.M02) * invS;
-                    result.Y = (matrix.M21 + matrix.M02) * invS;
+                    result.Y = (matrix.M21 + matrix.M12) * invS;
                     result.Z = 0.5f * s;
                     result.W = (matrix.M01 - matrix.M10) * invS;
                 }
@@ -801,7 +808,7 @@ namespace Raster.Math
             result.W *= invNorm;
         }
 
-        public void LookRotation(in Vector3 forward, in Vector3 upward, out Quaternion result)
+        public static void LookRotation(in Vector3 forward, in Vector3 upward, out Quaternion result)
         {
             Vector3 zAxis = forward.Normalized;
             Vector3.Cross(upward, zAxis, out Vector3 xAxis);

@@ -38,7 +38,7 @@ namespace Raster.Drawing.Primitive
 
         public SizeF(float width, float height)
         {
-            Width  = width;
+            Width = width;
             Height = height;
         }
 
@@ -64,28 +64,39 @@ namespace Raster.Drawing.Primitive
         /// 
         /// </summary>
         /// <returns></returns>
-        public override int GetHashCode() =>
-            HashHelpers.Combine(Width.GetHashCode(), Height.GetHashCode());
+        public override int GetHashCode()
+        {
+            return HashHelpers.Combine(Width.GetHashCode(), Height.GetHashCode());
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() =>
-            string.Format("SizeF: Width = {0}, Height = {1}", Width, Height);
+        public override string ToString()
+        {
+            return string.Format("SizeF: Width = {0}, Height = {1}", Width, Height);
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(SizeF other) => this == other;
+        public bool Equals(SizeF other)
+        {
+            return this.Width == other.Width &&
+                   this.Height == other.Height;
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public bool IsEmpty() => Width == 0.0f && Height == 0.0f;
+        public bool IsEmpty()
+        {
+            return Width == 0.0f && Height == 0.0f;
+        }
 
         #endregion Public Instance Method
 
@@ -96,8 +107,10 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static SizeF operator +(in SizeF left, in SizeF right) =>
-            new SizeF(left.Width + right.Width, left.Height + right.Height);
+        public static SizeF operator +(in SizeF left, in SizeF right)
+        {
+            return new SizeF(left.Width + right.Width, left.Height + right.Height);
+        }
 
         /// <summary>
         /// 
@@ -105,8 +118,10 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static SizeF operator -(in SizeF left, in SizeF right) =>
-            new SizeF(left.Width - right.Width, left.Height - right.Height);
+        public static SizeF operator -(in SizeF left, in SizeF right)
+        {
+            return new SizeF(left.Width - right.Width, left.Height - right.Height);
+        }
 
         /// <summary>
         /// 
@@ -114,8 +129,10 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static SizeF operator *(in SizeF left, float right) =>
-             new SizeF(left.Width * right, left.Height * right);
+        public static SizeF operator *(in SizeF left, float right)
+        {
+            return new SizeF(left.Width * right, left.Height * right);
+        }
 
         /// <summary>
         /// 
@@ -123,8 +140,10 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(in SizeF left, in SizeF right) =>
-            left.Width == right.Width && left.Height == right.Height;
+        public static bool operator ==(in SizeF left, in SizeF right)
+        {
+            return left.Width == right.Width && left.Height == right.Height;
+        }
 
         /// <summary>
         /// 
@@ -132,8 +151,10 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(in SizeF left, in SizeF right) =>
-            left.Width != right.Width || left.Height != right.Height;
+        public static bool operator !=(in SizeF left, in SizeF right)
+        {
+            return left.Width != right.Width || left.Height != right.Height;
+        }
 
         #endregion Operator Overload     
     }

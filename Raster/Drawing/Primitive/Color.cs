@@ -68,127 +68,6 @@ namespace Raster.Drawing.Primitive
             get { return a; }
             set { a = MathF.Clamp(0.0f, 1.0f, value); }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color RGBA => new Color(r, g, b, a);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color RGAB => new Color(r, g, a, b);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color RBGA => new Color(r, b, g, a);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color RBAG => new Color(r, b, a, g);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color RAGB => new Color(r, a, g, b);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color RABG => new Color(r, a, b, g);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color GRBA => new Color(g, r, b, a);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color GRAB => new Color(g, r, a, b);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color GBRA => new Color(g, b, r, a);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color GBAR => new Color(g, b, a, r);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color GARB => new Color(g, a, r, b);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color GABR => new Color(g, a, b, r);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color BRGA => new Color(b, r, g, a);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color BRAG => new Color(b, r, a, g);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color BGRA => new Color(b, r, g, a);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color BGAR => new Color(b, g, a, r);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color BARG => new Color(b, a, r, g);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color BAGR => new Color(b, a, g, r);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color ARGB => new Color(a, r, g, b);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color ARBG => new Color(a, r, b, g);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color AGRB => new Color(a, g, r, b);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color AGBR => new Color(a, g, b, r);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color ABRG => new Color(a, b, r, g);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Color ABGR => new Color(a, b, g, r);
-
         #endregion Public Instance Properties
 
         #region Constructor
@@ -238,15 +117,21 @@ namespace Raster.Drawing.Primitive
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() =>
-            string.Format("Color: Red = {0}, Green = {1}, Blue = {2}, Alpha = {3}", R, G, B, A);
+        public override string ToString()
+        {
+            return string.Format("Color: Red = {0}, Green = {1}, Blue = {2}, Alpha = {3}", R, G, B, A);
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(Color other) => this == other;
+        public bool Equals(Color other)
+        {
+            return this.r == other.r && this.g == other.g &&
+                   this.b == other.b && this.a == other.a;
+        }
 
         /// <summary>
         /// 
@@ -256,7 +141,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="right"></param>
         /// <param name="left"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void SetColor(float r, float g, float b, float a)
+        public void Set(float r, float g, float b, float a)
         {
             this.r = MathF.Clamp(r, 0.0f, 1.0f);
             this.g = MathF.Clamp(g, 0.0f, 1.0f);
@@ -426,8 +311,11 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(in Color left, in Color right) =>
-            left.r == right.r && left.g == right.g && left.b == right.b && left.a == right.a;
+        public static bool operator ==(in Color left, in Color right)
+        {
+            return left.r == right.r && left.g == right.g &&
+                   left.b == right.b && left.a == right.a;
+        }
 
         /// <summary>
         /// 
@@ -435,8 +323,11 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(in Color left, in Color right) =>
-           left.r != right.r || left.g != right.g || left.b != right.b || left.a != right.a;
+        public static bool operator !=(in Color left, in Color right)
+        {
+            return left.r != right.r || left.g != right.g ||
+                   left.b != right.b || left.a != right.a;
+        }
 
         #endregion Operator Overload
     }

@@ -149,11 +149,11 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public const float Deg2Rad = PI * 2F / 360.0F;
+        public const float Deg2Rad = PI / 180.0f;
         /// <summary>
         /// 
         /// </summary>
-        public const float Rad2Deg = 1.0F / Deg2Rad;
+        public const float Rad2Deg = 180.0f / PI;
         #endregion Public Static Fields
 
         #region Public Static Methods

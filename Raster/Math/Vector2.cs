@@ -190,13 +190,13 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <returns></returns>
-        public Vector3 ToVector3() => new Vector3(X, Y, 1.0f);
+        public Vector3 ToVector3() { return new Vector3(X, Y, 1.0f); }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public Vector4 ToVector4() => new Vector4(X, Y, 1.0f, 1.0f);
+        public Vector4 ToVector4() { return new Vector4(X, Y, 1.0f, 1.0f); }
 
         /// <summary>
         /// 

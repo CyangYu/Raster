@@ -225,8 +225,10 @@ namespace Raster.Drawing.Primitive
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public bool Contain(float x, float y) =>
-            X <= x && X + Width >= x && Y <= y && Y + Height <= y;
+        public bool Contain(float x, float y)
+        {
+            return X <= x && X + Width >= x && Y <= y && Y + Height <= y;
+        }
 
         /// <summary>
         /// 
@@ -273,23 +275,6 @@ namespace Raster.Drawing.Primitive
             Y       -= y;
             Width   += 2.0f * x;
             Height  += 2.0f * y;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pos"></param>
-        public void MoveTo(in PointF pos) { MoveTo(pos.X, pos.Y); }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void MoveTo(float x, float y)
-        {
-            X = x;
-            Y = y;
         }
 
         /// <summary>

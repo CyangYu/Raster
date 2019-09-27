@@ -225,7 +225,7 @@ namespace Raster.Math
         /// <param name="num"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsZero(float num) => MathF.Abs(num) < ZeroTolerance;
+        public static bool IsZero(float num) { return MathF.Abs(num) < ZeroTolerance; }
 
         /// <summary>
         /// 
@@ -233,7 +233,7 @@ namespace Raster.Math
         /// <param name="num"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsOne(float num) => IsZero(num - 1.0f);
+        public static bool IsOne(float num) { return IsZero(num - 1.0f); }
 
         /// <summary>
         /// 

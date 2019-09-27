@@ -195,7 +195,7 @@ namespace Raster.Math
             }
             else
             {
-                axis.Axis = Vector3.UnitX;
+                axis.Axis = Vector3.Right;
             }
 
         }

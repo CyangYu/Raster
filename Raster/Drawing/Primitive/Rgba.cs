@@ -131,15 +131,23 @@ namespace Raster.Drawing.Primitive
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() =>
-            string.Format("Rgba: R = {0}, G = {1}, B = {2}, A = {3}", r, g, b, a);
+        public override string ToString()
+        {
+            return string.Format("Rgba: R = {0}, G = {1}, B = {2}, A = {3}", r, g, b, a);
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(Rgba other) => this == other;
+        public bool Equals(Rgba other)
+        {
+            return this.r == other.r &&
+                   this.g == other.g &&
+                   this.b == other.b &&
+                   this.a == other.a;
+        }
 
         /// <summary>
         /// 
@@ -323,8 +331,11 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(in Rgba left, in Rgba right) =>
-            left.r == right.r && left.g == right.g && left.b == right.b && left.a == right.a;
+        public static bool operator ==(in Rgba left, in Rgba right)
+        {
+            return left.r == right.r && left.g == right.g &&
+                   left.b == right.b && left.a == right.a;
+        }
 
         /// <summary>
         /// 
@@ -332,8 +343,11 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(in Rgba left, in Rgba right) =>
-            left.r != right.r || left.g != right.g || left.b != right.b || left.a != right.a;
+        public static bool operator !=(in Rgba left, in Rgba right)
+        {
+            return left.r != right.r || left.g != right.g ||
+                   left.b != right.b || left.a != right.a;
+        }
 
         #endregion Operator Overload
     }

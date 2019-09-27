@@ -308,7 +308,7 @@ namespace Raster.Drawing.Primitive
             unchecked
             {
                 X  += x;
-                Y += y;
+                Y  += y;
             }
         }
 

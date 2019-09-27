@@ -205,7 +205,7 @@ namespace Raster.Math
             Matrix4x4 tempMatrix = new Matrix4x4(0.0f);
             Matrix4x4.Multiply(projection, view, out tempMatrix);
 
-            return Vector3.Unit;
+            return Vector3.One;
         }
 
         /// <summary>
@@ -219,7 +219,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector3 Unproject(Matrix4x4 model, Matrix4x4 view, Matrix4x4 projection, Rectangle rect)
         {
-            return Vector3.Unit;
+            return Vector3.One;
         }
 
         /// <summary>
@@ -227,14 +227,14 @@ namespace Raster.Math
         /// </summary>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector2 ToVector2() => new Vector2(X, Y);
+        public Vector2 ToVector2() { return new Vector2(X, Y); }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector4 ToVector4() => new Vector4(X, Y, Z, 1.0f);
+        public Vector4 ToVector4() { return new Vector4(X, Y, Z, 1.0f); }
 
         /// <summary>
         /// 
