@@ -668,6 +668,33 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="other"></param>
+        public void CopyFrom(in Matrix4x4 other)
+        {
+            this.M00 = other.M00;
+            this.M01 = other.M01;
+            this.M02 = other.M02;
+            this.M03 = other.M03;
+
+            this.M10 = other.M10;
+            this.M11 = other.M11;
+            this.M12 = other.M12;
+            this.M13 = other.M13;
+
+            this.M20 = other.M20;
+            this.M21 = other.M21;
+            this.M22 = other.M22;
+            this.M23 = other.M23;
+
+            this.M30 = other.M30;
+            this.M31 = other.M31;
+            this.M32 = other.M32;
+            this.M33 = other.M32;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="angle"></param>
         
         public void RotateX(float angle)
@@ -764,38 +791,9 @@ namespace Raster.Math
                 RotateZ(angle);
             else
             {
-                float cos = MathF.Cos(angle);
-                float sin = MathF.Sin(angle);
-
-                float c0 = 1.0f - cos;
-                float x2 = x * x;
-                float y2 = y * y;
-                float z2 = z * z;
-
-                float xy = x * y;
-                float xz = x * z;
-                float yz = y * z;
-
-                float xs = x * sin;
-                float ys = y * sin;
-                float zs = z * sin;
-
-                M00 = cos + c0 * x2;
-                M10 = c0 * xy - zs;
-                M20 = c0 * xz + ys;
-
-                M01 = c0 * xy + zs;
-                M11 = cos + c0 * y2;
-                M21 = c0 * yz - xs;
-
-                M02 = c0 * xz - ys;
-                M12 = c0 * yz + xs;
-                M22 = cos + c0 * z2;
-
-                M03 = 0.0f;
-                M13 = 0.0f;
-                M23 = 0.0f;
-                M33 = 1.0f;
+                FromAxisAngle(new AxisAngle(x, y, z, angle), out Matrix4x4 rotate);
+                Multiply(rotate, this, out Matrix4x4 temp);
+                this.CopyFrom(temp);
             }
         }
 
@@ -1430,17 +1428,6 @@ namespace Raster.Math
         /// 
         /// </summary>
         /// <param name="matrix"></param>
-        /// <returns></returns>
-        public static Matrix4x4 Inverse(in Matrix4x4 matrix)
-        {
-            Inverse(matrix, out Matrix4x4 result);
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="matrix"></param>
         /// <param name="rotation"></param>
         /// <returns></returns>
         public static Matrix4x4 Transform(in Matrix4x4 matrix, in Quaternion rotation)
@@ -1458,6 +1445,303 @@ namespace Raster.Math
         {
             Transpose(matrix, out Matrix4x4 result);
             return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="axisAngle"></param>
+        /// <param name="result"></param>
+        public static void FromAxisAngle(in AxisAngle axis, out Matrix4x4 result)
+        {
+            float cos = MathF.Cos(axis.Angle);
+            float sin = MathF.Sin(axis.Angle);
+
+            float c0 = 1.0f - cos;
+            float x2 = axis.Axis.X * axis.Axis.X;
+            float y2 = axis.Axis.Y * axis.Axis.Y;
+            float z2 = axis.Axis.Z * axis.Axis.Z;
+
+            float xy = axis.Axis.X * axis.Axis.Y;
+            float xz = axis.Axis.X * axis.Axis.Z;
+            float yz = axis.Axis.Y * axis.Axis.Z;
+
+            float xs = axis.Axis.X * sin;
+            float ys = axis.Axis.Y * sin;
+            float zs = axis.Axis.Z * sin;
+
+            result.M00 = cos + c0 * x2;
+            result.M10 = c0 * xy - zs;
+            result.M20 = c0 * xz + ys;
+            result.M30 = 0.0f;
+
+            result.M01 = c0 * xy + zs;
+            result.M11 = cos + c0 * y2;
+            result.M21 = c0 * yz - xs;
+            result.M31 = 0.0f;
+
+            result.M02 = c0 * xz - ys;
+            result.M12 = c0 * yz + xs;
+            result.M22 = cos + c0 * z2;
+            result.M32 = 0.0f;
+
+            result.M03 = 0.0f;
+            result.M13 = 0.0f;
+            result.M23 = 0.0f;
+            result.M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="euler"></param>
+        /// <param name="result"></param>
+        public static void FromEulerAnglesXYZ(in EulerAngles euler, out Matrix4x4 result)
+        {
+            float cp = MathF.Cos(euler.Pitch);
+            float sp = MathF.Sin(euler.Pitch);
+            float cy = MathF.Cos(euler.Yaw);
+            float sy = MathF.Sin(euler.Yaw);
+            float cr = MathF.Cos(euler.Roll);
+            float sr = MathF.Sin(euler.Roll);
+
+            result.M00 = cy * cr;
+            result.M01 = -cy * sr;
+            result.M02 = sy;
+            result.M03 = 0.0f;
+
+            result.M10 = cr * sp * sy + cp * sr;
+            result.M11 = cp * cr - sp * sy * sr;
+            result.M12 = -cy * sp;
+            result.M13 = 0.0f;
+
+            result.M20 = -cp * cr * sy + sp * sr;
+            result.M21 = cr * sp + cp * sy * sr;
+            result.M22 = cp * cy;
+            result.M23 = 0.0f;
+
+            result.M30 = 0.0f;
+            result.M31 = 0.0f;
+            result.M32 = 0.0f;
+            result.M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="euler"></param>
+        /// <param name="result"></param>
+        public static void FromEulerAnglesXZY(in EulerAngles euler, out Matrix4x4 result)
+        {
+            float cp = MathF.Cos(euler.Pitch);
+            float sp = MathF.Sin(euler.Pitch);
+            float cy = MathF.Cos(euler.Yaw);
+            float sy = MathF.Sin(euler.Yaw);
+            float cr = MathF.Cos(euler.Roll);
+            float sr = MathF.Sin(euler.Roll);
+
+            result.M00 = cy * cr;
+            result.M01 = -sr;
+            result.M02 = cr * sy;
+            result.M03 = 0.0f;
+
+            result.M10 = sp * sy + cp * cy * sr;
+            result.M11 = cp * cr;
+            result.M12 = cy * sp + cp * sy * sr;
+            result.M13 = 0.0f;
+
+            result.M20 = cp * sy + cy * sp * sr;
+            result.M21 = -cr * sp;
+            result.M22 = cp * cy - sp * sy * sr;
+            result.M23 = 0.0f;
+
+            result.M30 = 0.0f;
+            result.M31 = 0.0f;
+            result.M32 = 0.0f;
+            result.M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="euler"></param>
+        /// <param name="result"></param>
+        public static void FromEulerAnglesYXZ(in EulerAngles euler, out Matrix4x4 result)
+        {
+            float cp = MathF.Cos(euler.Pitch);
+            float sp = MathF.Sin(euler.Pitch);
+            float cy = MathF.Cos(euler.Yaw);
+            float sy = MathF.Sin(euler.Yaw);
+            float cr = MathF.Cos(euler.Roll);
+            float sr = MathF.Sin(euler.Roll);
+
+            result.M00 = cy * cr + sp * sy * sr;
+            result.M01 = cp * sp * sy - cy * sr;
+            result.M02 = cp * sy;
+            result.M03 = 0.0f;
+
+            result.M10 = cp * sr;
+            result.M11 = cp * cr;
+            result.M12 = -sp;
+            result.M13 = 0.0f;
+
+            result.M20 = -cr * sy + cy * sp * sr;
+            result.M21 = cy * cr * sp + sy * sr;
+            result.M22 = cp * cy;
+            result.M23 = 0.0f;
+
+            result.M30 = 0.0f;
+            result.M31 = 0.0f;
+            result.M32 = 0.0f;
+            result.M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="euler"></param>
+        /// <param name="result"></param>
+        public static void FromEulerAnglesYZX(in EulerAngles euler, out Matrix4x4 result)
+        {
+            float cp = MathF.Cos(euler.Pitch);
+            float sp = MathF.Sin(euler.Pitch);
+            float cy = MathF.Cos(euler.Yaw);
+            float sy = MathF.Sin(euler.Yaw);
+            float cr = MathF.Cos(euler.Roll);
+            float sr = MathF.Sin(euler.Roll);
+
+            result.M00 = cy * cr;
+            result.M01 = sp * sy - cp * cy * sr;
+            result.M02 = cp * sy + cy * sp * sr;
+            result.M03 = 0.0f;
+
+            result.M10 = sr;
+            result.M11 = cp * cr;
+            result.M12 = -cr * sp;
+            result.M13 = 0.0f;
+
+            result.M20 = -cp * sy;
+            result.M21 = cy * sp + cp * sy * sr;
+            result.M22 = cp * cy - sp * sy * sr;
+            result.M23 = 0.0f;
+
+            result.M30 = 0.0f;
+            result.M31 = 0.0f;
+            result.M32 = 0.0f;
+            result.M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="euler"></param>
+        /// <param name="result"></param>
+        public static void FromEulerAnglesZXY(in EulerAngles euler, out Matrix4x4 result)
+        {
+            float cp = MathF.Cos(euler.Pitch);
+            float sp = MathF.Sin(euler.Pitch);
+            float cy = MathF.Cos(euler.Yaw);
+            float sy = MathF.Sin(euler.Yaw);
+            float cr = MathF.Cos(euler.Roll);
+            float sr = MathF.Sin(euler.Roll);
+
+            result.M00 = cy * cr - sp * sy * sr;
+            result.M01 = -cp * sr;
+            result.M02 = cr * sy + cy * sp * sr;
+            result.M03 = 0.0f;
+
+            result.M10 = cp * sp * sy + cy * sr;
+            result.M11 = cp * cr;
+            result.M12 = -cy * cr * sp + sy * sr;
+            result.M13 = 0.0f;
+
+            result.M20 = -cp * sy;
+            result.M21 = sp;
+            result.M22 = cp * cy;
+            result.M23 = 0.0f;
+
+            result.M30 = 0.0f;
+            result.M31 = 0.0f;
+            result.M32 = 0.0f;
+            result.M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="euler"></param>
+        /// <param name="result"></param>
+        public static void FromEulerAnglesZYX(in EulerAngles euler, out Matrix4x4 result)
+        {
+            float cp = MathF.Cos(euler.Pitch);
+            float sp = MathF.Sin(euler.Pitch);
+            float cy = MathF.Cos(euler.Yaw);
+            float sy = MathF.Sin(euler.Yaw);
+            float cr = MathF.Cos(euler.Roll);
+            float sr = MathF.Sin(euler.Roll);
+
+            result.M00 = cy * cr;
+            result.M01 = cr * sp * sy - cp * sr;
+            result.M02 = cp * cr * sy + sp * sr;
+            result.M03 = 0.0f;
+
+            result.M10 = cy * cr;
+            result.M11 = cp * cr + sp * sy * sr;
+            result.M12 = -cr * sp + cp * sy * sr;
+            result.M13 = 0.0f;
+
+            result.M20 = -sy;
+            result.M21 = cy * sp;
+            result.M22 = cp * cy;
+            result.M23 = 0.0f;
+
+            result.M30 = 0.0f;
+            result.M31 = 0.0f;
+            result.M32 = 0.0f;
+            result.M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="quaternion"></param>
+        /// <param name="result"></param>
+        public static void FromQuaternion(in Quaternion quaternion, out Matrix4x4 result)
+        {
+            // Compute rotation matrix
+            float x2 = quaternion.X + quaternion.Y;
+            float y2 = quaternion.Y + quaternion.Y;
+            float z2 = quaternion.Z + quaternion.Z;
+
+            float wx2 = quaternion.W * x2;
+            float wy2 = quaternion.W * y2;
+            float wz2 = quaternion.W * z2;
+            float xx2 = quaternion.X * x2;
+            float xy2 = quaternion.X * y2;
+            float xz2 = quaternion.X * z2;
+            float yy2 = quaternion.Y * y2;
+            float yz2 = quaternion.Y * z2;
+            float zz2 = quaternion.Z * z2;
+
+            result.M00 = 1.0f - yy2 - zz2;
+            result.M10 = xy2 - wz2;
+            result.M20 = xz2 + wy2;
+            result.M30 = 0.0f;
+
+            result.M01 = xy2 + wz2;
+            result.M11 = 1.0f - xx2 - zz2;
+            result.M21 = yz2 - wx2;
+            result.M31 = 0.0f;
+
+            result.M02 = xz2 - wy2;
+            result.M12 = yz2 + wx2;
+            result.M22 = 1.0f - xx2 - yy2;
+            result.M32 = 0.0f;
+
+            result.M03 = 0.0f;
+            result.M13 = 0.0f;
+            result.M23 = 0.0f;
+            result.M33 = 1.0f;
         }
 
         /// <summary>
@@ -1539,44 +1823,57 @@ namespace Raster.Math
         /// <param name="result"></param>
         public static void Transform(in Matrix4x4 matrix, in Quaternion rotation, out Matrix4x4 result)
         {
-            // Compute Rotation Matrix
-            Matrix3x3.FromQuaternion(rotation, out Matrix3x3 rotMat);
+            // Compute rotation matrix.
+            float x2 = rotation.X + rotation.X;
+            float y2 = rotation.Y + rotation.Y;
+            float z2 = rotation.Z + rotation.Z;
 
-            // First Row
-            result.M00 = matrix.M00 * rotMat.M00 + matrix.M01 * rotMat.M10 + 
-                         matrix.M02 * rotMat.M20;
-            result.M01 = matrix.M00 * rotMat.M01 + matrix.M01 * rotMat.M11 + 
-                         matrix.M02 * rotMat.M21;
-            result.M02 = matrix.M00 * rotMat.M02 + matrix.M01 * rotMat.M12 + 
-                         matrix.M03 * rotMat.M22;
+            float wx2 = rotation.W * x2;
+            float wy2 = rotation.W * y2;
+            float wz2 = rotation.W * z2;
+            float xx2 = rotation.X * x2;
+            float xy2 = rotation.X * y2;
+            float xz2 = rotation.X * z2;
+            float yy2 = rotation.Y * y2;
+            float yz2 = rotation.Y * z2;
+            float zz2 = rotation.Z * z2;
+
+            float q11 = 1.0f - yy2 - zz2;
+            float q21 = xy2 - wz2;
+            float q31 = xz2 + wy2;
+
+            float q12 = xy2 + wz2;
+            float q22 = 1.0f - xx2 - zz2;
+            float q32 = yz2 - wx2;
+
+            float q13 = xz2 - wy2;
+            float q23 = yz2 + wx2;
+            float q33 = 1.0f - xx2 - yy2;
+
+            // First row
+            result.M00 = matrix.M00 * q11 + matrix.M01 * q21 + matrix.M02 * q31;
+            result.M01 = matrix.M00 * q12 + matrix.M01 * q22 + matrix.M02 * q32;
+            result.M02 = matrix.M00 * q13 + matrix.M01 * q23 + matrix.M02 * q33;
             result.M03 = matrix.M03;
 
-            // Second Row
-            result.M10 = matrix.M10 * rotMat.M00 + matrix.M11 * rotMat.M10 + 
-                         matrix.M12 * rotMat.M20;
-            result.M11 = matrix.M10 * rotMat.M01 + matrix.M11 * rotMat.M11 + 
-                         matrix.M12 * rotMat.M21;
-            result.M12 = matrix.M10 * rotMat.M02 + matrix.M11 * rotMat.M12 + 
-                         matrix.M12 * rotMat.M22;
+            // Second row
+            result.M10 = matrix.M10 * q11 + matrix.M11 * q21 + matrix.M12 * q31;
+            result.M11 = matrix.M10 * q12 + matrix.M11 * q22 + matrix.M12 * q32;
+            result.M12 = matrix.M10 * q13 + matrix.M11 * q23 + matrix.M12 * q33;
             result.M13 = matrix.M13;
 
-            // Third Row
-            result.M20 = matrix.M20 * rotMat.M00 + matrix.M21 * rotMat.M10 + 
-                         matrix.M22 * rotMat.M20;
-            result.M21 = matrix.M20 * rotMat.M01 + matrix.M21 * rotMat.M11 + 
-                         matrix.M22 * rotMat.M21;
-            result.M22 = matrix.M20 * rotMat.M02 + matrix.M21 * rotMat.M12 + 
-                         matrix.M22 * rotMat.M22;
+            // Third row
+            result.M20 = matrix.M20 * q11 + matrix.M21 * q21 + matrix.M22 * q31;
+            result.M21 = matrix.M20 * q12 + matrix.M21 * q22 + matrix.M22 * q32;
+            result.M22 = matrix.M20 * q13 + matrix.M21 * q23 + matrix.M22 * q33;
             result.M23 = matrix.M23;
 
             // Fourth row
-            result.M30 = matrix.M30 * rotMat.M00 + matrix.M31 * rotMat.M10 + 
-                         matrix.M32 * rotMat.M20;
-            result.M31 = matrix.M30 * rotMat.M01 + matrix.M31 * rotMat.M11 + 
-                         matrix.M32 * rotMat.M21;
-            result.M32 = matrix.M30 * rotMat.M02 + matrix.M31 * rotMat.M12 + 
-                         matrix.M32 * rotMat.M22;
+            result.M30 = matrix.M30 * q11 + matrix.M31 * q21 + matrix.M32 * q31;
+            result.M31 = matrix.M30 * q12 + matrix.M31 * q22 + matrix.M32 * q32;
+            result.M32 = matrix.M30 * q13 + matrix.M31 * q23 + matrix.M32 * q33;
             result.M33 = matrix.M33;
+
         }
 
         /// <summary>

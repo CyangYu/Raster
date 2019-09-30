@@ -538,15 +538,15 @@ namespace Raster.Math
             float sr = MathF.Sin(euler.Roll);
 
             result.M00 = cy * cr;
-            result.M01 = cr * sp * sy - cp * sr;
-            result.M02 = cp * cr * sy + sp * sr;
+            result.M01 = -cy * sr;
+            result.M02 = sy;
 
-            result.M10 = cy * sr;
-            result.M11 = cp * cr + sp * sy * sr;
-            result.M12 = cp * sy * sr - cr * sp;
+            result.M10 = cr * sp * sy + cp * sr;
+            result.M11 = cp * cr - sp * sy * sr;
+            result.M12 = -cy * sp;
 
-            result.M20 = -sy;
-            result.M21 = cy * sp;
+            result.M20 = -cp * cr * sy + sp * sr;
+            result.M21 = cr * sp + cp * sy * sr;
             result.M22 = cp * cy;
         }
 
@@ -565,15 +565,15 @@ namespace Raster.Math
             float sr = MathF.Sin(euler.Roll);
 
             result.M00 = cy * cr;
-            result.M01 = sp * sy - cp * cy * cr;
-            result.M02 = cp * sy + cy * sp * sr;
+            result.M01 = -sr;
+            result.M02 = cr * sy;
 
-            result.M10 = sr;
+            result.M10 = sp * sy + cp * cy * sr;
             result.M11 = cp * cr;
-            result.M12 = -cr * sp; 
+            result.M12 = cy * sp + cp * sy * sr;
 
-            result.M20 = -cr * sy;
-            result.M21 = cy * sp + cp * sy * sr; 
+            result.M20 = cp * sy + cy * sp * sr;
+            result.M21 = -cr * sp;
             result.M22 = cp * cy - sp * sy * sr;
         }
 
@@ -591,16 +591,16 @@ namespace Raster.Math
             float cr = MathF.Cos(euler.Roll);
             float sr = MathF.Sin(euler.Roll);
 
-            result.M00 = cy * cr - sp * sy * sr;
-            result.M01 = -cp * sp;
-            result.M02 = cr * sy + cy * sp * sr;
+            result.M00 = cy * cr + sp * sy * sr;
+            result.M01 = cp * sp * sy - cy * sr;
+            result.M02 = cp * sy;
 
-            result.M10 = cr * sp * sy + cy * sr;
+            result.M10 = cp * sr;
             result.M11 = cp * cr;
-            result.M12 = sy * sr - cy * cr * sp;
+            result.M12 = -sp;
 
-            result.M20 = -cp * sy;
-            result.M21 = sp; 
+            result.M20 = -cr * sy + cy * sp * sr;
+            result.M21 = cy * cr * sp + sy * sr;
             result.M22 = cp * cy;
         }
 
@@ -619,16 +619,16 @@ namespace Raster.Math
             float sr = MathF.Sin(euler.Roll);
 
             result.M00 = cy * cr;
-            result.M01 = -sr;
-            result.M02 = cr * sy;
+            result.M01 = sp * sy - cp * cy * sr;
+            result.M02 = cp * sy + cy * sp * sr;
 
-            result.M10 = sp * sy + cp * cy * sr;
+            result.M10 = sr;
             result.M11 = cp * cr;
-            result.M12 = cp * sy * sr - cy * sp;
+            result.M12 = -cr * sp;
 
-            result.M20 = cy * sp * sr - cp * sy;
-            result.M21 = cr * sp;
-            result.M22 = cp * cy + sp * sy * sr;
+            result.M20 = -cp * sy;
+            result.M21 = cy * sp + cp * sy * sr;
+            result.M22 = cp * cy - sp * sy * sr;
         }
 
         /// <summary>
@@ -645,16 +645,16 @@ namespace Raster.Math
             float cr = MathF.Cos(euler.Roll);
             float sr = MathF.Sin(euler.Roll);
 
-            result.M00 = cy * cr + sp * sy * sr;
-            result.M01 = cr * sp * sy - cy * sr;
-            result.M02 = cp * sy;
+            result.M00 = cy * cr - sp * sy * sr;
+            result.M01 = -cp * sr;
+            result.M02 = cr * sy + cy * sp * sr;
 
-            result.M10 = cp * sr;
+            result.M10 = cp * sp * sy + cy * sr;
             result.M11 = cp * cr;
-            result.M12 = -sp;
+            result.M12 = -cy * cr * sp + sy * sr;
 
-            result.M20 = cy * sp * sr - cr * sy;
-            result.M21 = cy * cr * sp + sy * sr;
+            result.M20 = -cp * sy;
+            result.M21 = sp;
             result.M22 = cp * cy;
         }
 
@@ -673,15 +673,15 @@ namespace Raster.Math
             float sr = MathF.Sin(euler.Roll);
 
             result.M00 = cy * cr;
-            result.M01 = -cy * sr;
-            result.M02 = sy;
+            result.M01 = cr * sp * sy - cp * sr;
+            result.M02 = cp * cr * sy + sp * sr;
 
-            result.M10 = cr * sp * sy + cp * sr;
-            result.M11 = cp * cr - sp * sy * sr;
-            result.M12 = -cy * sp;
+            result.M10 = cy * cr;
+            result.M11 = cp * cr + sp * sy * sr;
+            result.M12 = -cr * sp + cp * sy * sr;
 
-            result.M20 = sp * sr - cp * cr * sy;
-            result.M21 = cr * sp + cp * sy * sr;
+            result.M20 = -sy;
+            result.M21 = cy * sp;
             result.M22 = cp * cy;
         }
 

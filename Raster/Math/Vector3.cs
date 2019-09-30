@@ -194,37 +194,6 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="model"></param>
-        /// <param name="view"></param>
-        /// <param name="projection"></param>
-        /// <param name="rect"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector3 Project(Matrix4x4 model, Matrix4x4 view, Matrix4x4 projection, Rectangle rect)
-        {
-            Matrix4x4 tempMatrix = new Matrix4x4(0.0f);
-            Matrix4x4.Multiply(projection, view, out tempMatrix);
-
-            return Vector3.One;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="model"></param>
-        /// <param name="view"></param>
-        /// <param name="projection"></param>
-        /// <param name="rect"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector3 Unproject(Matrix4x4 model, Matrix4x4 view, Matrix4x4 projection, Rectangle rect)
-        {
-            return Vector3.One;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector2 ToVector2() { return new Vector2(X, Y); }
@@ -532,6 +501,93 @@ namespace Raster.Math
         {
             Transform(position, rotation, out Vector3 result);
             return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="view"></param>
+        /// <param name="projection"></param>
+        /// <param name="rect"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Project(in Vector3 position,
+                                   in Matrix4x4 model, in Matrix4x4 view, in Matrix4x4 projection,
+                                   in RectangleF viewport,
+                                   out Vector3 result)
+        {
+            Vector4 temp0 = new Vector4(position, 1.0f);
+
+            Matrix4x4.Multiply(model, temp0, out Vector4 temp1);
+            Matrix4x4.Multiply(view, temp1, out temp0);
+            Matrix4x4.Multiply(projection, temp0, out temp1);
+
+            if (MathHelper.IsZero(temp1.W))
+            {
+                result = Vector3.Zero;
+                return false;
+            }
+
+            temp1.X /= temp1.W;
+            temp1.Y /= temp1.W;
+            temp1.Z /= temp1.W;
+
+            temp1.X = temp1.X * 0.5f + 0.5f;
+            temp1.Y = temp1.Y * 0.5f + 0.5f;
+            temp1.Z = temp1.Z * 0.5f + 0.5f;
+
+            temp1.X = temp1.X * viewport.Width + viewport.X;
+            temp1.Y = temp1.Y * viewport.Height * viewport.Y;
+
+            result.X = temp1.X;
+            result.Y = temp1.Y;
+            result.Z = temp1.Z;
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="view"></param>
+        /// <param name="projection"></param>
+        /// <param name="rect"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Unproject(in Vector3 position,
+                                     in Matrix4x4 model, in Matrix4x4 view, in Matrix4x4 projection,
+                                     in RectangleF viewport,
+                                     out Vector3 result)
+        {
+            Matrix4x4.Multiply(model, view, out Matrix4x4 temp0);
+            Matrix4x4.Multiply(temp0, projection, out Matrix4x4 temp1);
+
+            if (Matrix4x4.Inverse(temp1, out temp0) == false)
+            {
+                result = Vector3.Zero;
+                return false;
+            }
+
+            result = Vector3.One;
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v0"></param>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <param name="result"></param>
+        public static void CalculateTriangleNormal(in Vector3 v0, in Vector3 v1, in Vector3 v2,
+                                                   out Vector3 result)
+        {
+            Vector3 edge0 = v1 - v0;
+            Vector3 edge1 = v2 - v0;
+
+            Vector3.Cross(edge0, edge1, out Vector3 temp);
+            Vector3.Normalize(temp, out result);
         }
 
         /// <summary>
