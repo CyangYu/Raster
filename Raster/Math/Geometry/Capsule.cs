@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace Raster.Source.Math.Geometry
+namespace Raster.Math.Geometry
 {
     /// <summary>
     /// 

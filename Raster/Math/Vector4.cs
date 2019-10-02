@@ -47,6 +47,19 @@ namespace Raster.Math
         #endregion Public Static Fields
 
         #region Public Instance Properties
+        #region Public Instance Properties
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsInfinity
+        {
+            get
+            {
+                return float.IsInfinity(X) && float.IsInfinity(Y) &&
+                       float.IsInfinity(Z) && float.IsInfinity(W);
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -142,7 +155,9 @@ namespace Raster.Math
         }
 
         public override string ToString()
-            => string.Format("Vector4: X = {0}, Y = [1}, Z = {2} W = {3}", X, Y, Z, W);
+        {
+            return string.Format("Vector4: X = {0}, Y = {1}, Z = {2} W = {3}", X, Y, Z, W);
+        }
 
         /// <summary>
         /// 

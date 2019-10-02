@@ -58,6 +58,14 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        public bool IsInfinity
+        {
+            get { return float.IsInfinity(X) && float.IsInfinity(Y); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float Length
         {
             get { return MathF.Sqrt(X * X + Y * Y); }

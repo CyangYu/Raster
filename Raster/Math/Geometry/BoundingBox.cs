@@ -7,7 +7,7 @@ namespace Raster.Math.Geometry
     /// Axis-Aligned Bounding Box
     /// </summary>
     [Serializable]
-    public struct AABB : IEquatable<AABB>
+    public struct BoundingBox : IEquatable<BoundingBox>
     {
         #region Public Fields
         /// <summary>
@@ -21,18 +21,18 @@ namespace Raster.Math.Geometry
         #endregion Public Fields
 
         #region Constructor
-        public AABB(in AABB other)
+        public BoundingBox(in BoundingBox other)
             : this(other.Minimum, other.Maximum)
         {
         }
 
-        public AABB(in Vector3 minimum, in Vector3 maximum)
+        public BoundingBox(in Vector3 minimum, in Vector3 maximum)
         {
             Minimum = minimum;
             Maximum = maximum;
         }
 		
-		public AABB(float xMin, float yMin, float zMin, float xMax, float yMax, float zMax)
+		public BoundingBox(float xMin, float yMin, float zMin, float xMax, float yMax, float zMax)
 		{
 			Minimum = new Vector3(xMin, yMin, zMin);
 			Maximum = new Vector3(xMax, yMax, zMax);
@@ -47,9 +47,9 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            if (obj is AABB)
+            if (obj is BoundingBox)
             {
-                return Equals((AABB)obj);
+                return Equals((BoundingBox)obj);
             }
 
             return false;
@@ -79,7 +79,10 @@ namespace Raster.Math.Geometry
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(AABB other) => this == other;
+        public bool Equals(in BoundingBox other)
+        {
+            return true;
+        }
 
         #endregion Public Instance Methods
 
@@ -90,7 +93,7 @@ namespace Raster.Math.Geometry
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(in AABB left, in AABB right)
+        public static bool operator ==(in BoundingBox left, in BoundingBox right)
         {
             return left.Minimum.X == right.Minimum.X && left.Minimum.Y == right.Minimum.Y &&
                    left.Minimum.Z == right.Minimum.Z &&
@@ -104,7 +107,7 @@ namespace Raster.Math.Geometry
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(in AABB left, in AABB right)
+        public static bool operator !=(in BoundingBox left, in BoundingBox right)
         {
             return left.Minimum.X != right.Minimum.X || left.Minimum.Y != right.Minimum.Y ||
                    left.Minimum.Z != right.Minimum.Z ||

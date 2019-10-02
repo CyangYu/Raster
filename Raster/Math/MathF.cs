@@ -384,6 +384,12 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Sin(float radian) { return (float)System.Math.Sin((double)radian); }
 
+        public static void SinCos(float radian, out float s, out float c)
+        {
+            s = Sin(radian);
+            c = Cos(radian);
+        }
+
         /// <summary>
         /// 
         /// </summary>

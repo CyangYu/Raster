@@ -71,6 +71,18 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        public bool IsInfinity
+        {
+            get
+            {
+                return float.IsInfinity(X) && float.IsInfinity(Y) &&
+                       float.IsInfinity(Z);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float Length
         {
             get { return MathF.Sqrt(X * X + Y * Y + Z * Z); }
@@ -158,8 +170,10 @@ namespace Raster.Math
         }
 
 
-        public override string ToString() =>
-            string.Format("Vector3: X = {0}, Y = [1}, Z = {2}", X, Y, Z);
+        public override string ToString()
+        {
+            return string.Format("Vector3: X = {0}, Y = {1}, Z = {2}", X, Y, Z);
+        }
 
         /// <summary>
         /// 

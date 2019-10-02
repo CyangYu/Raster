@@ -12,25 +12,21 @@ namespace Raster.Tests
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            EulerAngles eulerAngles = new EulerAngles(MathF.DegToRad(270.0f), 0.0f, 0.0f);
-            Quaternion quaternion = Quaternion.FromEulerAnglesZYX(eulerAngles);
+            EulerAngles eulerAngles = new EulerAngles(90.0f * MathF.Deg2Rad, 0.0f, 0.0f);
+            Quaternion.FromEulerAnglesZXY(eulerAngles, out Quaternion rotation);
 
-            Matrix3x3 rot3x3 = new Matrix3x3(0.98757f, 0.0f, -0.49379f,
-                                             0.0f,      0.0f,  1.0f,
-                                             0.0f,     -1.0f,  0.0f);
+            Vector3 translation = new Vector3(10.0f, 10.0f, 10.0f);
+            Vector3 scale = new Vector3(0.5f, 1.0f, 1.5f);
 
+            Matrix4x4 matrix = new Matrix4x4(translation, rotation, scale);
+            matrix.ExtractTranslationAndRotation(out translation, out rotation, out scale);
 
-            float len0 = rot3x3.Column0.Length;
-            rot3x3.M00 /= len0;
+            EulerAngles.FromQuaternion(in rotation, out eulerAngles);
+            eulerAngles.RadianToDegree();
 
-            float len2 = rot3x3.Column2.Length;
-            rot3x3.M02 /= len2;
-            rot3x3.M22 /= len2;
-
-            EulerAngles.FromRotationMatrixToZXY(rot3x3, out eulerAngles);
-
+            Console.WriteLine(translation);
             Console.WriteLine(eulerAngles);
-            Console.WriteLine(quaternion);
+            Console.WriteLine(scale);
 
             stopwatch.Stop();
         }

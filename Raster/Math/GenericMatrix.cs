@@ -46,14 +46,16 @@ namespace Raster.Math
         public GenericMatrix(int r, int c)
         {
             if (r <= 0 || c <= 0)
+            {
                 return;
+            }
 
-            row     = r;
-            column  = c;
-            matrix  = new T[r * c];
+            row = r;
+            column = c;
+            matrix = new T[r * c];
         }
-   
+
+
         #endregion Constructor
-        
     }
 }

@@ -349,6 +349,18 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Quaternion FromRotationMatrix(in Matrix4x4 matrix)
+        {
+            FromRotationMatrix(matrix, out Quaternion result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
         /// <returns></returns>
@@ -695,6 +707,56 @@ namespace Raster.Math
                 result.Y = (matrix.M20 - matrix.M02) * s;
                 result.Z = (matrix.M01 - matrix.M10) * s;
             } 
+            else
+            {
+                if (matrix.M00 >= matrix.M11 && matrix.M00 >= matrix.M22)
+                {
+                    float s = MathF.Sqrt(1.0f + matrix.M00 - matrix.M11 - matrix.M22);
+                    float invS = 0.5f / s;
+                    result.X = 0.5f * s;
+                    result.Y = (matrix.M01 + matrix.M10) * invS;
+                    result.Z = (matrix.M02 + matrix.M20) * invS;
+                    result.W = (matrix.M12 - matrix.M21) * invS;
+                }
+                else if (matrix.M11 > matrix.M22)
+                {
+                    float s = MathF.Sqrt(1.0f + matrix.M11 - matrix.M00 - matrix.M22);
+                    float invS = 0.5f / s;
+                    result.X = (matrix.M10 + matrix.M01) * invS;
+                    result.Y = 0.5f * s;
+                    result.Z = (matrix.M21 + matrix.M12) * invS;
+                    result.W = (matrix.M20 - matrix.M02) * invS;
+                }
+                else
+                {
+                    float s = MathF.Sqrt(1.0f + matrix.M22 - matrix.M00 - matrix.M11);
+                    float invS = 0.5f / s;
+                    result.X = (matrix.M20 + matrix.M02) * invS;
+                    result.Y = (matrix.M21 + matrix.M12) * invS;
+                    result.Z = 0.5f * s;
+                    result.W = (matrix.M01 - matrix.M10) * invS;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        public static void FromRotationMatrix(in Matrix4x4 matrix, out Quaternion result)
+        {
+            float trace = matrix.M00 + matrix.M11 + matrix.M22;
+
+            if (trace > 0.0f)
+            {
+                float s = MathF.Sqrt(trace + 1.0f);
+                result.W = s * 0.5f;
+                s = 0.5f / s;
+                result.X = (matrix.M12 - matrix.M21) * s;
+                result.Y = (matrix.M20 - matrix.M02) * s;
+                result.Z = (matrix.M01 - matrix.M10) * s;
+            }
             else
             {
                 if (matrix.M00 >= matrix.M11 && matrix.M00 >= matrix.M22)

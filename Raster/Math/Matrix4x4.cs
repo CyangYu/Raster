@@ -243,6 +243,10 @@ namespace Raster.Math
         #endregion Public Instance Properties
 
         #region Constructor
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public Matrix4x4(float value)
         {
             M00 = value;
@@ -266,6 +270,10 @@ namespace Raster.Math
             M33 = value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public Matrix4x4(Matrix2x2 other)
         {
             M00 = other.M00;
@@ -289,6 +297,10 @@ namespace Raster.Math
             M33 = 0.0f;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public Matrix4x4(Matrix2x3 other)
         {
             M00 = other.M00;
@@ -312,6 +324,10 @@ namespace Raster.Math
             M33 = 0.0f;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public Matrix4x4(Matrix2x4 other)
         {
             M00 = other.M00;
@@ -335,6 +351,10 @@ namespace Raster.Math
             M33 = 0.0f;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public Matrix4x4(Matrix3x2 other)
         {
             M00 = other.M00;
@@ -358,6 +378,10 @@ namespace Raster.Math
             M33 = 0.0f;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public Matrix4x4(Matrix3x3 other)
         {
             M00 = other.M00;
@@ -381,6 +405,10 @@ namespace Raster.Math
             M33 = 0.0f;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public Matrix4x4(Matrix3x4 other)
         {
             M00 = other.M00;
@@ -404,6 +432,10 @@ namespace Raster.Math
             M33 = 0.0f;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public Matrix4x4(in Matrix4x2 other)
         {
             M00 = other.M00;
@@ -427,6 +459,10 @@ namespace Raster.Math
             M33 = 0.0f;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public Matrix4x4(in Matrix4x3 other)
         {
             M00 = other.M00;
@@ -450,6 +486,10 @@ namespace Raster.Math
             M33 = 0.0f;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public Matrix4x4(in Matrix4x4 other)
         {
             M00 = other.M00;
@@ -473,6 +513,25 @@ namespace Raster.Math
             M33 = other.M33;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="m00"></param>
+        /// <param name="m01"></param>
+        /// <param name="m02"></param>
+        /// <param name="m03"></param>
+        /// <param name="m10"></param>
+        /// <param name="m11"></param>
+        /// <param name="m12"></param>
+        /// <param name="m13"></param>
+        /// <param name="m20"></param>
+        /// <param name="m21"></param>
+        /// <param name="m22"></param>
+        /// <param name="m23"></param>
+        /// <param name="m30"></param>
+        /// <param name="m31"></param>
+        /// <param name="m32"></param>
+        /// <param name="m33"></param>
         public Matrix4x4(float m00, float m01, float m02, float m03,
                          float m10, float m11, float m12, float m13,
                          float m20, float m21, float m22, float m23,
@@ -497,6 +556,49 @@ namespace Raster.Math
             M31 = m31;
             M32 = m32;
             M33 = m33;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="rotation"></param>
+        /// <param name="scale"></param>
+        public Matrix4x4(in Vector3 translation, in Quaternion rotation, in Vector3 scale)
+        {
+            float x2 = rotation.X + rotation.X;
+            float y2 = rotation.Y + rotation.Y;
+            float z2 = rotation.Z + rotation.Z;
+
+            float wx2 = rotation.W * x2;
+            float wy2 = rotation.W * y2;
+            float wz2 = rotation.W * z2;
+            float xx2 = rotation.X * x2;
+            float xy2 = rotation.X * y2;
+            float xz2 = rotation.X * z2;
+            float yy2 = rotation.Y * y2;
+            float yz2 = rotation.Y * z2;
+            float zz2 = rotation.Z * z2;
+
+            M00 = (1.0f - yy2 - zz2) * scale.X;
+            M10 = (xy2 - wz2) * scale.Y;
+            M20 = (xz2 + wy2) * scale.Z;
+            M30 = translation.X;
+
+            M01 = (xy2 + wz2) * scale.X;
+            M11 = (1.0f - xx2 - zz2) * scale.Y;
+            M21 = (yz2 - wx2) * scale.Z;
+            M31 = translation.Y;
+
+            M02 = (xz2 - wy2) * scale.X;
+            M12 = (yz2 + wx2) * scale.Y;
+            M22 = (1.0f - xx2 - yy2) * scale.Z;
+            M32 = translation.Z;
+
+            M03 = 0.0f;
+            M13 = 0.0f;
+            M23 = 0.0f;
+            M33 = 1.0f;
         }
 
         #endregion Constructor
@@ -847,6 +949,57 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="yFactor"></param>
+        /// <param name="zFactor"></param>
+        public void ShearX(float yFactor, float zFactor)
+        {
+            // [  1  y  z  0  ]
+            // [  0  1  0  0  ]
+            // [  0  0  1  0  ]
+            // [  0  0  0  1  ]
+            M00 += yFactor * M10 + zFactor * M20;
+            M01 += yFactor * M11 + zFactor * M21;
+            M02 += yFactor * M12 + zFactor * M22;
+            M03 += yFactor * M13 + zFactor * M23;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xFactor"></param>
+        /// <param name="zFactor"></param>
+        public void ShearY(float xFactor, float zFactor)
+        {
+            // [  1  0  0  0  ]
+            // [  x  1  z  0  ]
+            // [  0  0  1  0  ]
+            // [  0  0  0  1  ]
+            M10 += xFactor * M00 + zFactor * M20;
+            M11 += xFactor * M01 + zFactor * M21;
+            M12 += xFactor * M02 + zFactor * M22;
+            M13 += xFactor * M03 + zFactor * M23;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xFactor"></param>
+        /// <param name="yFactor"></param>
+        public void ShearZ(float xFactor, float yFactor)
+        {
+            // [  1  0  0  0  ]
+            // [  0  1  0  0  ]
+            // [  x  y  1  0  ]
+            // [  0  0  0  1  ]
+            M20 += xFactor * M00 + yFactor * M10;
+            M21 += xFactor * M01 + yFactor * M11;
+            M22 += xFactor * M02 + yFactor * M12;
+            M23 += xFactor * M03 + yFactor * M13;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="dz"></param>
@@ -877,9 +1030,79 @@ namespace Raster.Math
         /// <param name="position"></param>
         /// <param name="rotation"></param>
         /// <param name="scale"></param>
-        public void SetPositionAndRotation(in Vector3 position, in Quaternion rotation, in Vector3 scale)
+        public void SetTranslationAndRotation(in Vector3 translation, in Quaternion rotation, in Vector3 scale)
         {
+            float x2 = rotation.X + rotation.X;
+            float y2 = rotation.Y + rotation.Y;
+            float z2 = rotation.Z + rotation.Z;
 
+            float wx2 = rotation.W * x2;
+            float wy2 = rotation.W * y2;
+            float wz2 = rotation.W * z2;
+            float xx2 = rotation.X * x2;
+            float xy2 = rotation.X * y2;
+            float xz2 = rotation.X * z2;
+            float yy2 = rotation.Y * y2;
+            float yz2 = rotation.Y * z2;
+            float zz2 = rotation.Z * z2;
+
+            M00 = (1.0f - yy2 - zz2) * scale.X;
+            M10 = (xy2 - wz2) * scale.Y;
+            M20 = (xz2 + wy2) * scale.Z;
+            M30 = translation.X;
+            
+            M01 = (xy2 + wz2) * scale.X;
+            M11 = (1.0f - xx2 - zz2) * scale.Y;
+            M21 = (yz2 - wx2) * scale.Z;
+            M31 = translation.Y;
+            
+            M02 = (xz2 - wy2) * scale.X;
+            M12 = (yz2 + wx2) * scale.Y;
+            M22 = (1.0f - xx2 - yy2) * scale.Z;
+            M32 = translation.Z;
+
+            M03 = 0.0f;
+            M13 = 0.0f;
+            M23 = 0.0f;
+            M33 = 1.0f;
+        }
+
+        public void ExtractTranslationAndRotation(out Vector3 translation, out Quaternion rotation, out Vector3 scale)
+        {
+            translation.X = M30;
+            translation.Y = M31;
+            translation.Z = M32;
+
+            scale.X = MathF.Sqrt(M00 * M00 + M01 * M01 + M02 * M02);
+            scale.Y = MathF.Sqrt(M10 * M10 + M11 * M11 + M12 * M12);
+            scale.Z = MathF.Sqrt(M20 * M20 + M21 * M21 + M22 * M22);
+            
+            if (scale.X < MathHelper.ZeroTolerance || scale.Y < MathHelper.ZeroTolerance ||
+                scale.Z < MathHelper.ZeroTolerance)
+            {
+                rotation = Quaternion.Identity;
+                return;
+            }
+
+            float invScaleX = 1.0f / scale.X;
+            float invScaleY = 1.0f / scale.Y;
+            float invScaleZ = 1.0f / scale.Z;
+
+            Matrix3x3 rot3x3;
+
+            rot3x3.M00 = M00 * invScaleX;
+            rot3x3.M01 = M01 * invScaleX;
+            rot3x3.M02 = M02 * invScaleX;
+
+            rot3x3.M10 = M10 * invScaleY;
+            rot3x3.M11 = M11 * invScaleY;
+            rot3x3.M12 = M12 * invScaleY;
+
+            rot3x3.M20 = M20 * invScaleZ;
+            rot3x3.M21 = M21 * invScaleZ;
+            rot3x3.M22 = M22 * invScaleZ;
+
+            Quaternion.FromRotationMatrix(rot3x3, out rotation);
         }
 
         /// <summary>
@@ -1709,7 +1932,7 @@ namespace Raster.Math
         public static void FromQuaternion(in Quaternion quaternion, out Matrix4x4 result)
         {
             // Compute rotation matrix
-            float x2 = quaternion.X + quaternion.Y;
+            float x2 = quaternion.X + quaternion.X;
             float y2 = quaternion.Y + quaternion.Y;
             float z2 = quaternion.Z + quaternion.Z;
 

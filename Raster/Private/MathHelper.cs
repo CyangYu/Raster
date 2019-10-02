@@ -194,8 +194,10 @@ namespace Raster.Math
         /// <param name="sigmaX"></param>
         /// <param name="sigmaY"></param>
         /// <returns></returns>
-        public static float Gaussian(float amplitude, float x, float y, float centerX, float centerY, float sigmaX, float sigmaY) =>
-            (float)Gaussian((float)amplitude, (float)x, (float)y, (float)centerX, (float)centerY, (float)sigmaX, (float)sigmaY);
+        public static float Gaussian(float amplitude, float x, float y, float centerX, float centerY, float sigmaX, float sigmaY)
+        {
+            return (float)Gaussian((float)amplitude, (float)x, (float)y, (float)centerX, (float)centerY, (float)sigmaX, (float)sigmaY);
+        }
 
         /// <summary>
         /// 
@@ -267,16 +269,20 @@ namespace Raster.Math
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static int NextPowerOfTwo(int n) => 
-            (int)NextPowerOfTwo((uint)n);
+        public static int NextPowerOfTwo(int n)
+        {
+            return (int)NextPowerOfTwo((uint)n);
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static long NextPowerOfTwo(long n) =>
-            (long)NextPowerOfTwo((ulong)n);
+        public static long NextPowerOfTwo(long n)
+        {
+            return (long)NextPowerOfTwo((ulong)n);
+        }
 
         /// <summary>
         /// 
@@ -326,8 +332,10 @@ namespace Raster.Math
         /// <param name="n"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double NextPowerOfTwo(double n) =>
-            (double)SysMath.Pow(2.0, SysMath.Ceiling(SysMath.Log(n, 2.0)));
+        public static double NextPowerOfTwo(double n)
+        {
+            return (double)SysMath.Pow(2.0, SysMath.Ceiling(SysMath.Log(n, 2.0)));
+        }
 
         /// <summary>
         /// 
@@ -335,7 +343,10 @@ namespace Raster.Math
         /// <param name="num"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Square(float num) => (float)(num * num);
+        public static float Square(float num)
+        {
+            return (float)(num * num);
+        }
 
         /// <summary>
         /// 
