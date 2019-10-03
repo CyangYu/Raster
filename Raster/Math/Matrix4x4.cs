@@ -240,6 +240,18 @@ namespace Raster.Math
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public Matrix4x4 Inverted
+        {
+            get
+            {
+                Matrix4x4.Inverse(this, out Matrix4x4 result);
+                return result;
+            }
+        }
+
         #endregion Public Instance Properties
 
         #region Constructor

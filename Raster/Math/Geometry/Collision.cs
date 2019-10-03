@@ -7,7 +7,7 @@ namespace Raster.Math.Geometry
     /// <summary>
     /// 
     /// </summary>
-    public static class CollisionHelper
+    public static class Collision
     {
         /// <summary>
         /// 
@@ -382,9 +382,137 @@ namespace Raster.Math.Geometry
         /// <param name="plane"></param>
         /// <param name="point"></param>
         /// <returns></returns>
-        public static bool RayIntersectsPlane(in Ray ray, in Plane plane, out Vector3 point)
+        public static bool RayIntersectsPlane(in Ray ray, in Plane plane, out float distance, out Vector3 point)
         {
-            if (!RayIntersectsPlane(ray, plane, out float distance))
+            if (!RayIntersectsPlane(ray, plane, out distance))
+            {
+                point = Vector3.Zero;
+                return false;
+            }
+
+            point = ray.Origin + (ray.Direction * distance);
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="box"></param>
+        /// <param name="distance"></param>
+        /// <returns></returns>
+        public static bool RayIntersectsBox(in Ray ray, in BoundingBox box, out float distance)
+        {
+            distance = 0.0f;
+            float tmax = float.MaxValue;
+
+            if (MathHelper.IsZero(ray.Direction.X))
+            {
+                if (ray.Origin.X < box.Minimum.X || ray.Origin.X > box.Maximum.X)
+                {
+                    distance = 0.0f;
+                    return false;
+                }
+            }
+            else
+            {
+                float inverse = 1.0f / ray.Direction.X;
+                float t1 = (box.Minimum.X - ray.Origin.X) * inverse;
+                float t2 = (box.Maximum.X - ray.Origin.X) * inverse;
+
+                if (t1 > t2)
+                {
+                    float temp = t1;
+                    t1 = t2;
+                    t2 = temp;
+                }
+
+                distance = MathF.Max(t1, distance);
+                tmax = MathF.Min(t2, tmax);
+
+                if (distance > tmax)
+                {
+                    distance = 0.0f;
+                    return false;
+                }
+            }
+
+            if (MathHelper.IsZero(ray.Direction.Y))
+            {
+                if (ray.Origin.Y < box.Minimum.Y || ray.Origin.Y > box.Maximum.Y)
+                {
+                    distance = 0.0f;
+                    return false;
+                }
+            }
+            else
+            {
+                float inverse = 1.0f / ray.Direction.Y;
+                float t1 = (box.Minimum.Y - ray.Origin.Y) * inverse;
+                float t2 = (box.Maximum.Y - ray.Origin.Y) * inverse;
+
+                if (t1 > t2)
+                {
+                    float temp = t1;
+                    t1 = t2;
+                    t2 = temp;
+                }
+
+                distance = MathF.Max(t1, distance);
+                tmax = MathF.Max(t2, tmax);
+
+                if (distance > tmax)
+                {
+                    distance = 0.0f;
+                    return false;
+                }
+            }
+
+            if (MathHelper.IsZero(ray.Direction.Z))
+            {
+                if (ray.Origin.Z < box.Minimum.Z || ray.Origin.Z > box.Maximum.Z)
+                {
+                    distance = 0.0f;
+                    return false;
+                }
+            }
+            else
+            {
+                float inverse = 1.0f / ray.Direction.Z;
+                float t1 = (box.Minimum.Z - ray.Origin.Z) * inverse;
+                float t2 = (box.Maximum.Z - ray.Origin.Z) * inverse;
+
+                if (t1 > t2)
+                {
+                    float temp = t1;
+                    t1 = t2;
+                    t2 = temp;
+                }
+
+                distance = MathF.Max(t1, distance);
+                tmax = MathF.Min(t2, tmax);
+
+                if (distance > tmax)
+                {
+                    distance = 0.0f;
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="box"></param>
+        /// <param name="distance"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public static bool RayIntersectsBox(in Ray ray, in BoundingBox box, out float distance, out Vector3 point)
+        {
+            if (!RayIntersectsBox(ray, box, out distance))
             {
                 point = Vector3.Zero;
                 return false;
@@ -437,9 +565,101 @@ namespace Raster.Math.Geometry
         /// <param name="sphere"></param>
         /// <param name="result"></param>
         /// <returns></returns>
-        public static bool RayIntersectsSphere(in Ray ray, in Sphere sphere, out Vector3 point)
+        public static bool RayIntersectsSphere(in Ray ray, in Sphere sphere, out float distance, out Vector3 point)
         {
-            if (!RayIntersectsSphere(ray, sphere, out float distance))
+            if (!RayIntersectsSphere(ray, sphere, out distance))
+            {
+                point = Vector3.Zero;
+                return false;
+            }
+
+            point = ray.Origin + (ray.Direction * distance);
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="triange"></param>
+        /// <param name="distance"></param>
+        /// <returns></returns>
+        public static bool RayIntersectsTriangle(in Ray ray, in Triangle triange, out float distance)
+        {
+            Vector3.Subtract(triange.Vertex1, triange.Vertex0, out Vector3 edge0);
+            Vector3.Subtract(triange.Vertex2, triange.Vertex0, out Vector3 edge1);
+
+            Vector3 directionCrossEdge2;
+            directionCrossEdge2.X = (ray.Direction.Y * edge1.Z) - (ray.Direction.Z * edge1.Y);
+            directionCrossEdge2.Y = (ray.Direction.Z * edge1.X) - (ray.Direction.X * edge1.Z);
+            directionCrossEdge2.Z = (ray.Direction.X * edge1.Y) - (ray.Direction.Y * edge1.X);
+
+            float determinant = (edge0.X * directionCrossEdge2.X) + (edge0.Y * directionCrossEdge2.Y) +
+                (edge0.Z * directionCrossEdge2.Z);
+
+            if (MathHelper.IsZero(determinant))
+            {
+                distance = 0.0f;
+                return false;
+            }
+
+            float inverseDeterminant = 1.0f / determinant;
+
+            Vector3 distanceVector;
+            distanceVector.X = ray.Origin.X - triange.Vertex0.X;
+            distanceVector.Y = ray.Origin.Y - triange.Vertex0.Y;
+            distanceVector.Z = ray.Origin.Z - triange.Vertex0.Z;
+
+            float triangleU = (distanceVector.X * directionCrossEdge2.X) + (distanceVector.Y * directionCrossEdge2.Y) +
+                              (distanceVector.Z * directionCrossEdge2.Z);
+            triangleU *= inverseDeterminant;
+
+            if (triangleU < 0.0f || triangleU > 1.0f)
+            {
+                distance = 0.0f;
+                return false;
+            }
+
+            Vector3 distanceCrossEdge1;
+            distanceCrossEdge1.X = (distanceVector.Y * edge0.Z) - (distanceVector.Z * edge0.Y);
+            distanceCrossEdge1.Y = (distanceVector.Z * edge0.X) - (distanceVector.X * edge0.Z);
+            distanceCrossEdge1.Z = (distanceVector.X * edge0.Y) - (distanceVector.Y * edge0.X);
+
+            float triangleV = (ray.Direction.X * distanceCrossEdge1.X) + (ray.Direction.Y * distanceCrossEdge1.Y) +
+                              (ray.Direction.Z * distanceCrossEdge1.Z);
+            triangleV *= inverseDeterminant;
+
+            if (triangleV < 0.0f || triangleU + triangleV > 1.0f)
+            {
+                distance = 0.0f;
+                return false;
+            }
+
+            float rayDistance = (edge1.X * distanceCrossEdge1.X) + (edge1.Y * distanceCrossEdge1.Y) +
+                                (edge1.Z * distanceCrossEdge1.Z);
+            rayDistance *= inverseDeterminant;
+
+            if (rayDistance < 0.0f)
+            {
+                distance = 0.0f;
+                return false;
+            }
+
+            distance = rayDistance;
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="triangle"></param>
+        /// <param name="distance"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public static bool RayIntersectsTriangle(in Ray ray, in Triangle triangle, out float distance, out Vector3 point)
+        {
+            if (!RayIntersectsTriangle(ray, triangle, out distance))
             {
                 point = Vector3.Zero;
                 return false;

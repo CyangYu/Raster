@@ -28,24 +28,71 @@ namespace Raster.Math.Geometry
         public static readonly Plane Zero = new Plane(0.0f, 0.0f, 0.0f, 0.0f);
 
         #endregion Public Instance Properties
-        
+
         #region Constructor
-        public Plane(Vector4 vec4)
-            : this(vec4.X, vec4.Y, vec4.Z, vec4.W)
-        {
-        }
-
-        public Plane(Vector3 normal, float d)
-            : this(normal.X, normal.Y, normal.Z, d)
-        {
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="d"></param>
         public Plane(float x, float y, float z, float d)
         {
             Normal.X = x;
             Normal.Y = y;
             Normal.Z = z;
             Distance = d;
+
+            Normal.Normalize();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vec4"></param>
+        public Plane(Vector4 vec4)
+            : this(vec4.X, vec4.Y, vec4.Z, vec4.W)
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="normal"></param>
+        /// <param name="d"></param>
+        public Plane(Vector3 normal, float d)
+            : this(normal.X, normal.Y, normal.Z, d)
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point0"></param>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
+        public Plane(in Vector3 point0, in Vector3 point1, in Vector3 point2)
+        {
+            float x0 = point1.X - point0.X;
+            float y0 = point1.Y - point0.Y;
+            float z0 = point1.Z - point0.Z;
+
+            float x1 = point2.X - point0.X;
+            float y1 = point2.Y - point0.Y;
+            float z1 = point2.Z - point0.Z;
+
+            float yz = (y0 * z1) - (z0 * y1);
+            float xz = (z0 * x1) - (x0 * z1);
+            float xy = (x0 * y1) - (y0 * x1);
+
+            float invPyth = MathHelper.FastSqrtInverse((yz * yz) + (xz * xz) + (xy * xy));
+
+            Normal.X = yz * invPyth;
+            Normal.Y = xz * invPyth;
+            Normal.Z = xy * invPyth;
+
+            Distance = -((Normal.X * point0.X) + (Normal.Y * point0.Y) + (Normal.Z * point0.Z));
         }
 
         #endregion Constructor
@@ -94,6 +141,134 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Plane other) => this == other;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <returns></returns>
+        public bool Intersects(in Ray ray)
+        {
+            return Collision.RayIntersectsPlane(ray, this, out float distance);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="distance"></param>
+        /// <returns></returns>
+        public bool Intersects(in Ray ray, out float distance)
+        {
+            return Collision.RayIntersectsPlane(ray, this, out distance);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public bool Intersects(in Ray ray, out Vector3 point)
+        {
+            return Collision.RayIntersectsPlane(ray, this, out point);
+        }
+
+        public bool Intersects(in Plane plane)
+        {
+            return Collision.PlaneIntersectsPlane(this, plane);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="result"></param>
+        public void Reflection(out Matrix4x4 result)
+        {
+            float x = this.Normal.X;
+            float y = this.Normal.Y;
+            float z = this.Normal.Z;
+            float x2 = -2.0f * x;
+            float y2 = -2.0f * y;
+            float z2 = -2.0f * z;
+
+            result.M00 = (x2 * x) + 1.0f;
+            result.M01 = y2 * x;
+            result.M02 = z2 * x;
+            result.M03 = 0.0f;
+
+            result.M10 = x2 * y;
+            result.M11 = (y2 * y) + 1.0f;
+            result.M12 = z2 * y;
+            result.M13 = 0.0f;
+
+            result.M20 = x2 * z;
+            result.M21 = y2 * z;
+            result.M22 = (z2 * z) + 1.0f;
+            result.M23 = 0.0f;
+
+            result.M30 = x2 * this.Distance;
+            result.M31 = y2 * this.Distance;
+            result.M32 = z2 * this.Distance;
+            result.M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Matrix4x4 Reflection()
+        {
+            Reflection(out Matrix4x4 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lightDirection"></param>
+        /// <param name="result"></param>
+        public void Shadow(in Vector4 lightDirection, out Matrix4x4 result)
+        {
+            float dot = (this.Normal.X * lightDirection.X) + (this.Normal.Y * lightDirection.Y) +
+                        (this.Normal.Z * lightDirection.Z) + (this.Distance * lightDirection.W);
+
+            float x = -this.Normal.X;
+            float y = -this.Normal.Y;
+            float z = -this.Normal.Z;
+            float d = -this.Distance;
+
+            result.M00 = (x * lightDirection.X) + dot;
+            result.M10 = y * lightDirection.X;
+            result.M20 = z * lightDirection.X;
+            result.M30 = d * lightDirection.X;
+
+            result.M01 = x * lightDirection.Y;
+            result.M11 = (y * lightDirection.Y) + dot;
+            result.M21 = z * lightDirection.Y;
+            result.M31 = d * lightDirection.Y;
+
+            result.M02 = x * lightDirection.Z;
+            result.M12 = y * lightDirection.Z;
+            result.M22 = (z * lightDirection.Z) + dot;
+            result.M32 = d * lightDirection.Z;
+
+            result.M03 = x * lightDirection.W;
+            result.M13 = y * lightDirection.W;
+            result.M23 = z * lightDirection.W;
+            result.M33 = (d * lightDirection.W) + dot;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lightDirection"></param>
+        /// <returns></returns>
+        public Matrix4x4 Shadow(in Vector4 lightDirection)
+        {
+            Shadow(lightDirection, out Matrix4x4 result);
+            return result;
+        }
 
         #endregion Public Instance Methods
 
@@ -166,6 +341,18 @@ namespace Raster.Math.Geometry
         public static Plane Normalize(in Plane value)
         {
             Normalize(value, out Plane result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lightDirection"></param>
+        /// <param name="plane"></param>
+        /// <returns></returns>
+        public static Matrix3x3 Shadow(in Vector4 lightDirection, in Plane plane)
+        {
+            Shadow(lightDirection, plane, out Matrix3x3 result);
             return result;
         }
 
@@ -258,6 +445,35 @@ namespace Raster.Math.Geometry
             result.Normal.Y = value.Normal.Y * lenInv;
             result.Normal.Z = value.Normal.Z * lenInv;
             result.Distance = value.Distance * lenInv;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lightDirection"></param>
+        /// <param name="plane"></param>
+        /// <param name="result"></param>
+        public static void Shadow(in Vector4 lightDirection, in Plane plane, out Matrix3x3 result)
+        {
+            float dot = (plane.Normal.X * lightDirection.X) + (plane.Normal.Y * lightDirection.Y) +
+                        (plane.Normal.Z * lightDirection.Z) + (plane.Distance * lightDirection.W);
+
+            float x = -plane.Normal.X;
+            float y = -plane.Normal.Y;
+            float z = -plane.Normal.Z;
+            float d = -plane.Distance;
+
+            result.M00 = (x * lightDirection.X) + dot;
+            result.M10 = y * lightDirection.X;
+            result.M20 = z * lightDirection.X;
+
+            result.M01 = x * lightDirection.Y;
+            result.M11 = (y * lightDirection.Y) + dot;
+            result.M21 = z * lightDirection.Y;
+
+            result.M02 = x * lightDirection.Z;
+            result.M12 = y * lightDirection.Z;
+            result.M22 = (z * lightDirection.Z) + dot;
         }
 
         /// <summary>

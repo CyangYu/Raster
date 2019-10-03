@@ -24,6 +24,33 @@ namespace Raster.Math.Geometry
         public Vector3 Vertex2;
         #endregion Public Instance Fields
 
+        #region Public Instance Properties
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Edge0
+        {
+            get
+            {
+                Vector3.Subtract(Vertex1, Vertex0, out Vector3 edge0);
+                return edge0;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Edge1
+        {
+            get
+            {
+                Vector3.Subtract(Vertex2, Vertex0, out Vector3 edge1);
+                return edge1;
+            }
+        }
+
+        #endregion Public Instance Properties
+
         #region Public Instance Methods
         /// <summary>
         /// 

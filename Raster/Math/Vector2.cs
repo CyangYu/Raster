@@ -319,8 +319,10 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Cross(in Vector2 left, in Vector2 right) =>
-            left.X * right.Y - left.Y * right.X;
+        public static float Cross(in Vector2 left, in Vector2 right)
+        {
+            return left.X * right.Y - left.Y * right.X;
+        }
 
         /// <summary>
         /// 
@@ -357,8 +359,10 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Dot(in Vector2 left, in Vector2 right) =>
-            left.X * right.X + left.Y * right.Y;
+        public static float Dot(in Vector2 left, in Vector2 right)
+        {
+            return left.X * right.X + left.Y * right.Y;
+        }
 
         /// <summary>
         /// 
@@ -898,8 +902,8 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Subtract(in Vector2 left, in Vector2 right, out Vector2 result)
         {
-            result.X = left.X + right.X;
-            result.Y = left.Y + right.Y;
+            result.X = left.X - right.X;
+            result.Y = left.Y - right.Y;
         }
 
         /// <summary>

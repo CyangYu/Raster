@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Raster.Drawing.Primitive;
 
 namespace Raster.Math.Geometry
 {
@@ -144,7 +145,7 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public float Distance(in Vector3 point)
         {
-
+            
         }
 
         /// <summary>
@@ -391,27 +392,27 @@ namespace Raster.Math.Geometry
         {
 
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="triangle"></param>
+        /// <param name="box"></param>
         /// <returns></returns>
-        public bool Intersects(in Triangle triangle)
+        public bool Intersects(in BoundingBox box)
         {
-
+            return Collision.RayIntersectsBox(this, box, out float distance);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="triangle"></param>
-        /// <param name="d"></param>
+        /// <param name="box"></param>
+        /// <param name="distance"></param>
         /// <param name="point"></param>
         /// <returns></returns>
-        public bool Intersects(in Triangle triangle, out float d, out Vector3 point)
+        public bool Intersects(in BoundingBox box, out float distance, out Vector3 point)
         {
-
+            return Collision.RayIntersectsBox(this, box, out distance, out point);
         }
 
         /// <summary>
@@ -421,7 +422,7 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public bool Intersects(in Plane plane)
         {
-
+            return Collision.RayIntersectsPlane(this, plane, out float distance);
         }
 
         /// <summary>
@@ -430,9 +431,30 @@ namespace Raster.Math.Geometry
         /// <param name="plane"></param>
         /// <param name="d"></param>
         /// <returns></returns>
-        public bool Intersects(in Plane plane, out float d)
+        public bool Intersects(in Plane plane, out float distance, out Vector3 point)
         {
+            return Collision.RayIntersectsPlane(this, plane, out distance, out point);
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <returns></returns>
+        public bool Intersects(in Ray ray)
+        {
+            return Collision.RayIntersectsRay(this, ray, out Vector3 point);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public bool Intersects(in Ray ray, out Vector3 point)
+        {
+            return Collision.RayIntersectsRay(this, ray, out point);
         }
 
         /// <summary>
@@ -442,7 +464,7 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public bool Intersects(in Sphere sphere)
         {
-
+            return Collision.RayIntersectsSphere(this, sphere, out float distance);
         }
 
         /// <summary>
@@ -452,19 +474,31 @@ namespace Raster.Math.Geometry
         /// <param name="d"></param>
         /// <param name="point"></param>
         /// <returns></returns>
-        public bool Intersects(in Sphere sphere, out float d, out Vector3 point)
+        public bool Intersects(in Sphere sphere, out float distance, out Vector3 point)
         {
-
+            return Collision.RayIntersectsSphere(this, sphere, out distance, out point);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="box"></param>
+        /// <param name="triangle"></param>
         /// <returns></returns>
-        public bool Intersects(in BoundingBox box)
+        public bool Intersects(in Triangle triangle)
         {
+            return Collision.RayIntersectsTriangle(this, triangle, out float distance);
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="triangle"></param>
+        /// <param name="d"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public bool Intersects(in Triangle triangle, out float distance, out Vector3 point)
+        {
+            return Collision.RayIntersectsTriangle(this, triangle, out distance, out point);
         }
 
         /// <summary>
@@ -534,6 +568,51 @@ namespace Raster.Math.Geometry
         #endregion Public Instance Methods
 
         #region Public Static Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="worldViewProjection"></param>
+        /// <param name="viewport"></param>
+        /// <returns></returns>
+        public static Ray GetPickRay(int x, int y,
+                                     in Matrix4x4 worldViewProjection,
+                                     in Viewport viewport)
+        {
+            GetPickRay(x, y, worldViewProjection, viewport, out Ray result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="worldViewProjection"></param>
+        /// <param name="viewport"></param>
+        /// <param name="result"></param>
+        public static void GetPickRay(int x, int y,
+                                      in Matrix4x4 worldViewProjection,
+                                      in Viewport viewport,
+                                      out Ray result)
+        {
+            Vector3 nearPoint = new Vector3(x, y, 0.0f);
+            Vector3 farPoint = new Vector3(x, y, 1.0f);
+
+            Matrix4x4.Inverse(worldViewProjection, out Matrix4x4 invertedWorldViewProjection);
+
+            Vector3.Unproject(nearPoint, invertedWorldViewProjection, viewport, out nearPoint);
+            Vector3.Unproject(farPoint, invertedWorldViewProjection, viewport, out farPoint);
+
+            Vector3.Subtract(farPoint, nearPoint, out result.Direction);
+            result.Direction.Normalize();
+
+            result.Origin.X = nearPoint.X;
+            result.Origin.Y = nearPoint.Y;
+            result.Origin.Z = nearPoint.Z;
+        }
+
         /// <summary>
         /// 
         /// </summary>

@@ -440,6 +440,39 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="model"></param>
+        /// <param name="view"></param>
+        /// <param name="projection"></param>
+        /// <param name="rect"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Project(in Vector3 position,
+                                      in Matrix4x4 model, in Matrix4x4 view, in Matrix4x4 projection,
+                                      in Viewport viewport)
+        {
+            Matrix4x4.Multiply(model, view, out Matrix4x4 temp);
+            Matrix4x4.Multiply(temp, projection, out Matrix4x4 worldViewProjection);
+
+            Project(position, worldViewProjection, viewport, out Vector3 result);
+            return result;
+        }
+
+        public static Vector3 Unproject(in Vector3 position,
+                                        in Matrix4x4 model, in Matrix4x4 view, in Matrix4x4 projection,
+                                        in Viewport viewport)
+        {
+            Matrix4x4.Multiply(model, view, out Matrix4x4 temp);
+            Matrix4x4.Multiply(temp, projection, out Matrix4x4 worldViewProjection);
+
+            Matrix4x4.Inverse(worldViewProjection, out temp);
+            Unproject(position, temp, viewport, out Vector3 result);
+
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="vec3"></param>
         /// <param name="normal"></param>
         /// <returns></returns>
@@ -494,6 +527,18 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="coordinate"></param>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static Vector3 TransformCoordinate(in Vector3 coordinate, in Matrix4x4 matrix)
+        {
+            TransformCoordinate(coordinate, matrix, out Vector3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="position"></param>
         /// <param name="matrix"></param>
         /// <returns></returns>
@@ -515,76 +560,6 @@ namespace Raster.Math
         {
             Transform(position, rotation, out Vector3 result);
             return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="model"></param>
-        /// <param name="view"></param>
-        /// <param name="projection"></param>
-        /// <param name="rect"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Project(in Vector3 position,
-                                   in Matrix4x4 model, in Matrix4x4 view, in Matrix4x4 projection,
-                                   in RectangleF viewport,
-                                   out Vector3 result)
-        {
-            Vector4 temp0 = new Vector4(position, 1.0f);
-
-            Matrix4x4.Multiply(model, temp0, out Vector4 temp1);
-            Matrix4x4.Multiply(view, temp1, out temp0);
-            Matrix4x4.Multiply(projection, temp0, out temp1);
-
-            if (MathHelper.IsZero(temp1.W))
-            {
-                result = Vector3.Zero;
-                return false;
-            }
-
-            temp1.X /= temp1.W;
-            temp1.Y /= temp1.W;
-            temp1.Z /= temp1.W;
-
-            temp1.X = temp1.X * 0.5f + 0.5f;
-            temp1.Y = temp1.Y * 0.5f + 0.5f;
-            temp1.Z = temp1.Z * 0.5f + 0.5f;
-
-            temp1.X = temp1.X * viewport.Width + viewport.X;
-            temp1.Y = temp1.Y * viewport.Height * viewport.Y;
-
-            result.X = temp1.X;
-            result.Y = temp1.Y;
-            result.Z = temp1.Z;
-            return true;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="model"></param>
-        /// <param name="view"></param>
-        /// <param name="projection"></param>
-        /// <param name="rect"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Unproject(in Vector3 position,
-                                     in Matrix4x4 model, in Matrix4x4 view, in Matrix4x4 projection,
-                                     in RectangleF viewport,
-                                     out Vector3 result)
-        {
-            Matrix4x4.Multiply(model, view, out Matrix4x4 temp0);
-            Matrix4x4.Multiply(temp0, projection, out Matrix4x4 temp1);
-
-            if (Matrix4x4.Inverse(temp1, out temp0) == false)
-            {
-                result = Vector3.Zero;
-                return false;
-            }
-
-            result = Vector3.One;
-            return true;
         }
 
         /// <summary>
@@ -819,6 +794,42 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="position"></param>
+        /// <param name="worldViewProjection"></param>
+        /// <param name="viewport"></param>
+        /// <param name="result"></param>
+        public static void Project(in Vector3 position, in Matrix4x4 worldViewProjection, in Viewport viewport, out Vector3 result)
+        {
+            TransformCoordinate(position, worldViewProjection, out result);
+            result.X = ((result.X + 1.0f) * 0.5f * viewport.Width) + viewport.X;
+            result.Y = ((1.0f - result.Y) * 0.5f * viewport.Height) + viewport.Y;
+            result.Z = (result.Z * (viewport.MaxDepth - viewport.MinDepth)) + viewport.MinDepth;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="view"></param>
+        /// <param name="projection"></param>
+        /// <param name="rect"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Unproject(in Vector3 position,
+                                     in Matrix4x4 invertedWorldViewProjection,
+                                     in Viewport viewport,
+                                     out Vector3 result)
+        {
+            result.X = (((position.X - viewport.X) / viewport.Width) * 2.0f) - 1.0f;
+            result.Y = -((((position.Y - viewport.Y) / viewport.Height) * 2.0f) - 1.0f);
+            result.Z = (position.Z - viewport.MinDepth) / (viewport.MaxDepth - viewport.MinDepth);
+
+            TransformCoordinate(position, invertedWorldViewProjection, out result);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="vec3"></param>
         /// <param name="perp"></param>
         /// <returns></returns>
@@ -925,6 +936,25 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="coordinate"></param>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        public static void TransformCoordinate(in Vector3 coordinate, in Matrix4x4 matrix, out Vector3 result)
+        {
+            Vector4 vector;
+            vector.X = coordinate.X * matrix.M00 + coordinate.Y * matrix.M10 + coordinate.Z * matrix.M30;
+            vector.Y = coordinate.X * matrix.M01 + coordinate.Y * matrix.M11 + coordinate.Z * matrix.M21;
+            vector.Z = coordinate.X * matrix.M02 + coordinate.Y * matrix.M12 + coordinate.Z * matrix.M22;
+            vector.W = 1.0f / (coordinate.X * matrix.M03 + coordinate.Y * matrix.M13 + coordinate.Z * matrix.M23 + matrix.M33);
+
+            result.X = vector.X * vector.W;
+            result.Y = vector.Y * vector.W;
+            result.Z = vector.Z * vector.W;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="normal"></param>
         /// <param name="matrix"></param>
         /// <param name="result"></param>
@@ -993,9 +1023,9 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Subtract(in Vector3 left, in Vector3 right, out Vector3 result)
         {
-            result.X = left.X + right.X;
-            result.Y = left.Y + right.Y;
-            result.Z = left.Z + right.Z;
+            result.X = left.X - right.X;
+            result.Y = left.Y - right.Y;
+            result.Z = left.Z - right.Z;
         }
 
         /// <summary>

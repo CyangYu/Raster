@@ -94,6 +94,52 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public bool Equals(Sphere other) => this == other;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <returns></returns>
+        public bool Intersects(in Ray ray)
+        {
+            return Collision.RayIntersectsSphere(ray, this, out float distance);
+        }
+
+        public bool Intersects(in Ray ray, out float distance)
+        {
+            return Collision.RayIntersectsSphere(ray, this, out distance);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public bool Intersects(in Ray ray, out float distance, out Vector3 point)
+        {
+            return Collision.RayIntersectsSphere(ray, this, out distance, out point);
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="triangle"></param>
+        /// <returns></returns>
+        public bool Intersects(in Triangle triangle)
+        {
+            return Collision.SphereIntersectsTriangle(this, triangle);
+        }
+
+        /// <summary>
+        /// o87997
+        /// </summary>
+        /// <param name="sphere"></param>
+        /// <returns></returns>
+        public bool Intersects(in Sphere sphere)
+        {
+            return Collision.SphereIntersectSphere(this, sphere);
+        }
+
         #endregion Public Instance Methods
 
         #region Operator Overload
