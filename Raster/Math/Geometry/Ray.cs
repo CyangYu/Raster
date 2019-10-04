@@ -59,8 +59,8 @@ namespace Raster.Math.Geometry
         /// </summary>
         /// <param name="ine"></param>
         public Ray(in Line line)
+            : this(line.Origin, line.Direction)
         {
-
         }
 
         /// <summary>
@@ -68,8 +68,8 @@ namespace Raster.Math.Geometry
         /// </summary>
         /// <param name="segment"></param>
         public Ray(in LineSegment segment)
+            : this(segment.Start, segment.Direction)
         {
-
         }
 
         #endregion Constructor
@@ -105,7 +105,7 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Ray: Origin X = {0}, Y = {1}, Z = {2}, Direction: X = {3}, Y = {4}, Z = {5} ",
+            return string.Format("Ray: Origin = {{X = {0}, Y = {1}, Z = {2}}; Direction = {{X = {3}, Y = {4}, Z = {5}}",
                                  Origin.X, Origin.Y, Origin.Z, Direction.X, Direction.Y, Direction.Z);
         }
 
@@ -118,12 +118,8 @@ namespace Raster.Math.Geometry
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Ray other)
         {
-            return this.Origin.X == other.Origin.X && 
-                   this.Origin.Y == other.Origin.Y &&
-                   this.Origin.Z == other.Origin.Z && 
-                   this.Direction.X == other.Direction.X &&
-                   this.Direction.Y == other.Direction.Y && 
-                   this.Direction.Z == other.Direction.Z;
+            return this.Origin == other.Origin &&
+                   this.Direction == other.Direction;
         }
 
         /// <summary>
@@ -132,150 +128,10 @@ namespace Raster.Math.Geometry
         /// <param name="delta></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector3 PointAt(float delta)
+        public Vector3 PointAt(float distance)
         {
-            PointAt(this, delta, out Vector3 result);
+            PointAt(this, distance, out Vector3 result);
             return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="point"></param>
-        /// <returns></returns>
-        public float Distance(in Vector3 point)
-        {
-            
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="point"></param>
-        /// <param name="d"></param>
-        /// <returns></returns>
-        public float Distance(in Vector3 point, out float d)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ray"></param>
-        /// <returns></returns>
-        public float Distance(in Ray ray)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ray"></param>
-        /// <param name="d"></param>
-        /// <returns></returns>
-        public float Distance(in Ray ray, out float d)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ray"></param>
-        /// <param name="d0"></param>
-        /// <param name="d1"></param>
-        /// <returns></returns>
-        public float Distance(in Ray ray, out float d0, float d1)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="line"></param>
-        /// <returns></returns>
-        public float Distance(in Line line)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="line"></param>
-        /// <param name="d"></param>
-        /// <returns></returns>
-        public float Distance(in Line line, out float d)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="line"></param>
-        /// <param name="d0"></param>
-        /// <param name="d1"></param>
-        /// <returns></returns>
-        public float Distance(in Line line, out float d0, out float d1)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="segment"></param>
-        /// <returns></returns>
-        public float Distance(in LineSegment segment)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="segment"></param>
-        /// <param name="d"></param>
-        /// <returns></returns>
-        public float Distance(in LineSegment segment, out float d)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="segment"></param>
-        /// <param name="d0"></param>
-        /// <param name="d1"></param>
-        /// <returns></returns>
-        public float Distance(in LineSegment segment, out float d0, out float d1)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sphere"></param>
-        /// <returns></returns>
-        public float Distance(in Sphere sphere)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="capsule"></param>
-        /// <returns></returns>
-        public float Distance(in Capsule capsule)
-        {
-
         }
 
         /// <summary>
@@ -285,7 +141,8 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public Vector3 ClosetPoint(in Vector3 point)
         {
-
+            Collision.ClosetPointPointRay(point, this, out float distance, out Vector3 result);
+            return result;
         }
 
         /// <summary>
@@ -294,25 +151,21 @@ namespace Raster.Math.Geometry
         /// <param name="point"></param>
         /// <param name="d"></param>
         /// <returns></returns>
-        public Vector3 ClosetPoint(in Vector3 point, out float d)
+        public Vector3 ClosetPoint(in Vector3 point, out float distance)
         {
-
-        }
-
-        public Vector3 ClosetPoint(in Ray ray)
-        {
-
+            Collision.ClosetPointPointRay(point, this, out distance, out Vector3 result);
+            return result;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="ray"></param>
-        /// <param name="d"></param>
         /// <returns></returns>
-        public Vector3 CloseetPoint(in Ray ray, out float d)
+        public Vector3 ClosetPoint(in Ray ray)
         {
-
+            Collision.ClosetPointRayRay(this, ray, out float distance0, out float distance1, out Vector3 result);
+            return result;
         }
 
         /// <summary>
@@ -322,9 +175,10 @@ namespace Raster.Math.Geometry
         /// <param name="d0"></param>
         /// <param name="d1"></param>
         /// <returns></returns>
-        public Vector3 ClosetPoint(in Ray ray, out float d0, out float d1)
+        public Vector3 ClosetPoint(in Ray ray, out float distance0, out float distance1)
         {
-
+            Collision.ClosetPointRayRay(this, ray, out distance0, out distance1, out Vector3 result);
+            return result;
         }
 
         /// <summary>
@@ -334,18 +188,8 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public Vector3 ClosetPoint(in Line line)
         {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="line"></param>
-        /// <param name="d"></param>
-        /// <returns></returns>
-        public Vector3 CloseetPoint(in Line line, out float d)
-        {
-
+            Collision.ClosetPointRayLine(this, line, out float distance0, out float distance1, out Vector3 result);
+            return result;
         }
 
         /// <summary>
@@ -355,9 +199,10 @@ namespace Raster.Math.Geometry
         /// <param name="d0"></param>
         /// <param name="d1"></param>
         /// <returns></returns>
-        public Vector3 ClosetPoint(in Line line, out float d0, out float d1)
+        public Vector3 ClosetPoint(in Line line, out float distance0, out float distance1)
         {
-
+            Collision.ClosetPointRayLine(this, line, out distance0, out distance1, out Vector3 result);
+            return result;
         }
 
         /// <summary>
@@ -367,18 +212,8 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public Vector3 ClosetPoint(in LineSegment segment)
         {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="segment"></param>
-        /// <param name="d"></param>
-        /// <returns></returns>
-        public Vector3 CloseetPoint(in LineSegment segment, out float d)
-        {
-
+            Collision.ClosetPointRayLineSegment(this, segment, out float distance0, out float distance1, out Vector3 result);
+            return result;
         }
 
         /// <summary>
@@ -388,9 +223,118 @@ namespace Raster.Math.Geometry
         /// <param name="d0"></param>
         /// <param name="d1"></param>
         /// <returns></returns>
-        public Vector3 ClosetPoint(in LineSegment segment, out float d0, out float d1)
+        public Vector3 ClosetPoint(in LineSegment segment, out float distance0, out float distance1)
         {
+            Collision.ClosetPointRayLineSegment(this, segment, out distance0, out distance1, out Vector3 result);
+            return result;
+        }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="capsule"></param>
+        /// <returns></returns>
+        public float Distance(in Capsule capsule)
+        {
+            return Collision.DistanceRayCapsule(this, capsule);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public float Distance(in Vector3 point)
+        {
+            return Collision.DistanceRayPoint(this, point, out float distance);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="distance"></param>
+        /// <returns></returns>
+        public float Distance(in Vector3 point, out float distance)
+        {
+            return Collision.DistanceRayPoint(this, point, out distance);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        public float Distance(in Line line)
+        {
+            return Collision.DistanceRayLine(this, line, out float distance0, out float distance1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="distance0"></param>
+        /// <param name="distance1"></param>
+        /// <returns></returns>
+        public float Distance(in Line line, out float distance0, out float distance1)
+        {
+            return Collision.DistanceRayLine(this, line, out distance0, out distance1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="segment"></param>
+        /// <returns></returns>
+        public float Distance(in LineSegment segment)
+        {
+            return Collision.DistanceRayLineSegment(this, segment, out float distance0, out float distance1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="segment"></param>
+        /// <param name="distance0"></param>
+        /// <param name="distance1"></param>
+        /// <returns></returns>
+        public float Distance(in LineSegment segment, out float distance0, out float distance1)
+        {
+            return Collision.DistanceRayLineSegment(this, segment, out distance0, out distance1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <returns></returns>
+        public float Distance(in Ray ray)
+        {
+            return Collision.DistanceRayRay(this, ray, out float distance0, out float distance1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="d0"></param>
+        /// <param name="d1"></param>
+        /// <returns></returns>
+        public float Distance(in Ray ray, out float distance0, float distance1)
+        {
+            return Collision.DistanceRayRay(this, ray, out distance0, out distance1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sphere"></param>
+        /// <returns></returns>
+        public float Distance(in Sphere sphere)
+        {
+            return Collision.DistanceRaySphere(this, sphere);
         }
 
         /// <summary>
@@ -413,6 +357,70 @@ namespace Raster.Math.Geometry
         public bool Intersects(in BoundingBox box, out float distance, out Vector3 point)
         {
             return Collision.RayIntersectsBox(this, box, out distance, out point);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="box"></param>
+        /// <param name="near"></param>
+        /// <param name="far"></param>
+        /// <returns></returns>
+        public bool Intersects(in BoundingBox box, out float near, out float far)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="capsule"></param>
+        /// <returns></returns>
+        public bool Intersects(in Capsule capsule)
+        {
+            return Collision.RayIntersectsCapsule(this, capsule);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cirle"></param>
+        /// <returns></returns>
+        public bool Intersects(in Circle cirle)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="frustum"></param>
+        /// <returns></returns>
+        public bool Intersects(in Frustum frustum)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="box"></param>
+        /// <returns></returns>
+        public bool Intersects(in OrientedBox box)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="box"></param>
+        /// <param name="near"></param>
+        /// <param name="far"></param>
+        /// <returns></returns>
+        public bool Intersects(in OrientedBox box, out float near, out float far)
+        {
+
         }
 
         /// <summary>
@@ -501,70 +509,6 @@ namespace Raster.Math.Geometry
             return Collision.RayIntersectsTriangle(this, triangle, out distance, out point);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="box"></param>
-        /// <param name="near"></param>
-        /// <param name="far"></param>
-        /// <returns></returns>
-        public bool Intersects(in BoundingBox box, out float near, out float far)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="box"></param>
-        /// <returns></returns>
-        public bool Intersects(in OrientedBox box)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="box"></param>
-        /// <param name="near"></param>
-        /// <param name="far"></param>
-        /// <returns></returns>
-        public bool Intersects(in OrientedBox box, out float near, out float far)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="capsule"></param>
-        /// <returns></returns>
-        public bool Intersects(in Capsule capsule)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="frustum"></param>
-        /// <returns></returns>
-        public bool Intersects(in Frustum frustum)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cirle"></param>
-        /// <returns></returns>
-        public bool Intersects(in Circle cirle)
-        {
-
-        }
-
         #endregion Public Instance Methods
 
         #region Public Static Methods
@@ -616,14 +560,14 @@ namespace Raster.Math.Geometry
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="time"></param>
+        /// <param name="distance"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void PointAt(in Ray ray, float delta, out Vector3 result)
+        public static void PointAt(in Ray ray, float distance, out Vector3 result)
         {
-            result.X = ray.Origin.X + delta * ray.Direction.X;
-            result.Y = ray.Origin.Y + delta * ray.Direction.Y;
-            result.Z = ray.Origin.Z + delta * ray.Direction.Z;
+            result.X = ray.Origin.X + distance * ray.Direction.X;
+            result.Y = ray.Origin.Y + distance * ray.Direction.Y;
+            result.Z = ray.Origin.Z + distance * ray.Direction.Z;
         }
 
         #endregion Public Static Methods
@@ -638,12 +582,8 @@ namespace Raster.Math.Geometry
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(in Ray left, in Ray right)
         {
-            return (left.Origin.X == right.Origin.X &&
-                    left.Origin.Y == right.Origin.Y &&
-                    left.Origin.Z == right.Origin.Z &&
-                    left.Direction.X == right.Direction.X &&
-                    left.Direction.Y == right.Direction.Y &&
-                    left.Direction.Z == right.Direction.Z);
+            return left.Origin == right.Origin &&
+                   left.Direction == right.Direction;
         }
 
         /// <summary>
@@ -654,12 +594,8 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public static bool operator !=(in Ray left, in Ray right)
         {
-            return (left.Origin.X != right.Origin.X ||
-                    left.Origin.Y != right.Origin.Y ||
-                    left.Origin.Z != right.Origin.Z ||
-                    left.Direction.X != right.Direction.X ||
-                    left.Direction.Y != right.Direction.Y ||
-                    left.Direction.Z != right.Direction.Z);
+            return left.Origin != right.Origin ||
+                   left.Direction != right.Direction; 
         }
 
         #endregion Operator Overload

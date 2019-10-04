@@ -9,6 +9,122 @@ namespace Raster.Math.Geometry
     /// </summary>
     public static class Collision
     {
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="line0"></param>
+        /// <param name="line1"></param>
+        /// <param name="distance0"></param>
+        /// <param name="distance1"></param>
+        public static void ClosetPointLineLine(in Line line0, in Line line1, out float distance0, out float distance1)
+        {
+            Vector3.Subtract(line1.Origin, line0.Origin, out Vector3 sub);
+
+            float dot0 = Vector3.Dot(sub, line1.Direction);
+            float dot1 = Vector3.Dot(line1.Direction, line0.Direction);
+            float dot2 = Vector3.Dot(line1.Direction, line1.Direction);
+            float dot3 = Vector3.Dot(sub, line0.Direction);
+            float dot4 = Vector3.Dot(line0.Direction, line0.Direction);
+
+            float denominator = dot4 * dot2 - dot1 * dot1;
+            if (!MathHelper.IsZero(denominator))
+            {
+                distance0 = (dot0 * dot1 - dot3 * dot2) / denominator;
+            }
+            else
+            {
+                distance0 = 0.0f;
+            }
+
+            distance1 = (dot0 + distance0 * dot1) / dot2;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="box"></param>
+        /// <param name="point"></param>
+        /// <param name="result"></param>
+        public static void ClosetPointPointBox(in Vector3 point, in BoundingBox box, out Vector3 result)
+        {
+            Vector3.Max(point, box.Minimum, out Vector3 temp);
+            Vector3.Min(temp, box.Maximum, out result);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="segment"></param>
+        /// <param name="distance"></param>
+        /// <param name="result"></param>
+        public static void ClosetPointPointLineSegment(in Vector3 point, in LineSegment segment, out float distance, out Vector3 result)
+        {
+            Vector3 direction = segment.End - segment.Start;
+            distance = Vector3.Dot(point - segment.Start, direction) / direction.LengthSquared;
+
+            distance = MathF.Clamp(distance, 0.0f, 1.0f);
+            result = segment.Start + distance * direction;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="line"></param>
+        /// <param name="distance"></param>
+        /// <param name="result"></param>
+        public static void ClosetPointPointLine(in Vector3 point, in Line line, out float distance, out Vector3 result)
+        {
+            Vector3.Subtract(point, line.Origin, out Vector3 sub);
+            distance = Vector3.Dot(sub, line.Direction);
+
+            result = line.Origin + distance * line.Direction;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="plane"></param>
+        /// <param name="point"></param>
+        /// <param name="result"></param>
+        public static void ClosetPointPointPlane(in Vector3 point, in Plane plane, out Vector3 result)
+        {
+            float dot = Vector3.Dot(plane.Normal, point);
+            float t = dot - plane.Distance;
+
+            result = point - (t * plane.Normal);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="ray"></param>
+        /// <param name="distance0"></param>
+        /// <param name="result"></param>
+        public static void ClosetPointPointRay(in Vector3 point, in Ray ray, out float distance, out Vector3 result)
+        {
+            distance = MathF.Max(Vector3.Dot(point - ray.Origin, ray.Direction), 0.0f);
+            Ray.PointAt(ray, distance, out result);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sphere"></param>
+        /// <param name="point"></param>
+        /// <param name="result"></param>
+        public static void ClosetPointPointSphere(in Sphere sphere, in Vector3 point, out Vector3 result)
+        {
+            Vector3.Subtract(point, sphere.Center, out result);
+            result.Normalize();
+
+            result.Multiply(sphere.Radius);
+            result.Add(sphere.Center);
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -83,42 +199,141 @@ namespace Raster.Math.Geometry
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="plane"></param>
-        /// <param name="point"></param>
+        /// <param name="ray"></param>
+        /// <param name="line"></param>
+        /// <param name="distance0"></param>
+        /// <param name="distance1"></param>
         /// <param name="result"></param>
-        public static void ClosetPointPlanePoint(in Plane plane, in Vector3 point, out Vector3 result)
+        public static void ClosetPointRayLine(in Ray ray, in Line line, out float distance0, out float distance1, out Vector3 result)
         {
-            float dot = Vector3.Dot(plane.Normal, point);
-            float t = dot - plane.Distance;
+            Line line0 = new Line(ray);
+            ClosetPointLineLine(line, line0, out distance0, out distance1);
 
-            result = point - (t * plane.Normal);
+            if (distance0 < 0.0f)
+            {
+                distance0 = 0.0f;
+                ClosetPointPointLine(ray.Origin, line, out distance1, out result);
+
+                result = ray.Origin;
+            }
+
+            Ray.PointAt(ray, distance0, out result);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="box"></param>
-        /// <param name="point"></param>
+        /// <param name="ray"></param>
+        /// <param name="segment"></param>
+        /// <param name="distance0"></param>
+        /// <param name="distance1"></param>
         /// <param name="result"></param>
-        public static void ClosetPointBoxPoint(in BoundingBox box, in Vector3 point, out Vector3 result)
+        public static void ClosetPointRayLineSegment(in Ray ray, in LineSegment segment, out float distance0, out float distance1, out Vector3 result)
         {
-            Vector3.Max(point, box.Minimum, out Vector3 temp);
-            Vector3.Min(temp, box.Maximum, out result);
+            Line line0 = new Line(ray);
+            Line line1 = new Line(segment);
+
+            ClosetPointLineLine(line0, line1, out distance0, out distance1);
+            if (distance0 < 0.0f)
+            {
+                distance0 = 0.0f;
+                if (distance1 > 0.0f && distance1 <= 1.0f)
+                {
+                    ClosetPointPointLineSegment(ray.Origin, segment, out distance0, out result);
+                    result = ray.Origin;
+                    return;
+                }
+
+                float temp = 0.0f;
+                if (distance1 < 0.0f)
+                {
+                    result = segment.Start;
+                    temp = 0.0f;
+                }
+                else
+                {
+                    result = segment.End;
+                    temp = 1.0f;
+                }
+
+                ClosetPointPointRay(result, ray, out distance0, out Vector3 point0);
+                ClosetPointPointLineSegment(ray.Origin, segment, out distance1, out Vector3 point1);
+
+                if (Vector3.DistanceSquared(point0, result) <= Vector3.DistanceSquared(point1, ray.Origin))
+                {
+                    distance1 = temp;
+                    result = point0;
+                }
+                else
+                {
+                    distance0 = 0.0f;
+                    result = ray.Origin;
+                }
+            }
+            else if (distance1 < 0.0f)
+            {
+                distance1 = 0.0f;
+                ClosetPointPointRay(segment.Start, ray, out distance0, out result);
+            }
+            else if (distance1 > 1.0f)
+            {
+                distance1 = 1.0f;
+                ClosetPointPointRay(segment.End, ray, out distance0, out result);
+            }
+            else
+            {
+                result = ray.Origin + distance0 * ray.Direction;
+            }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sphere"></param>
-        /// <param name="point"></param>
+        /// <param name="ray0"></param>
+        /// <param name="ray1"></param>
+        /// <param name="distance0"></param>
+        /// <param name="distance1"></param>
         /// <param name="result"></param>
-        public static void ClosetPointSpherePoint(in Sphere sphere, in Vector3 point, out Vector3 result)
+        public static void ClosetPointRayRay(in Ray ray0, in Ray ray1, out float distance0, out float distance1, out Vector3 result)
         {
-            Vector3.Subtract(point, sphere.Center, out result);
-            result.Normalize();
+            Line line0 = new Line(ray0);
+            Line line1 = new Line(ray1);
 
-            result.Multiply(sphere.Radius);
-            result.Add(sphere.Center);
+            ClosetPointLineLine(line0, line1, out distance0, out distance1);
+            if (distance0 < 0.0f && distance1 < 0.0f)
+            {
+                ClosetPointPointRay(ray1.Origin, ray0, out distance0, out Vector3 point0);
+                ClosetPointPointRay(ray0.Origin, ray1, out distance1, out Vector3 point1);
+
+                if (Vector3.DistanceSquared(point0, ray1.Origin) <= Vector3.DistanceSquared(point1, ray0.Origin))
+                {
+                    distance1 = 0.0f;
+                    result = point0;
+                }
+                else
+                {
+                    distance0 = 0.0f;
+                    result = ray0.Origin;
+                }
+            }
+            else if (distance0 < 0.0f)
+            {
+                distance0 = 0.0f;
+                ClosetPointPointRay(ray0.Origin, ray1, out distance1, out result);
+                distance1 = MathF.Max(0.0f, distance1);
+
+                result = ray0.Origin;
+            }
+            else if (distance1 < 0.0f)
+            {
+                ClosetPointPointRay(ray1.Origin, ray0, out distance0, out result);
+                distance0 = MathF.Max(0.0f, distance0);
+                distance1 = 0.0f;
+            }
+            else
+            {
+                result = ray0.Origin + distance0 * ray0.Direction;
+            }
         }
 
         /// <summary>
@@ -134,52 +349,6 @@ namespace Raster.Math.Geometry
 
             result.Multiply(sphere0.Radius);
             result.Add(sphere0.Center);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="plane"></param>
-        /// <param name="point"></param>
-        /// <returns></returns>
-        public static float DistancePlanePoint(in Plane plane, in Vector3 point)
-        {
-            float dot = Vector3.Dot(plane.Normal, point);
-            return dot - plane.Distance;
-        }
-
-        public static float DistanceBoxPoint(in BoundingBox box, ref Vector3 point)
-        {
-            float distance = 0.0f;
-
-            if (point.X < box.Minimum.X)
-            {
-                distance += (box.Minimum.X - point.X) * (box.Minimum.X - point.X);
-            }
-            if (point.X > box.Maximum.X)
-            {
-                distance += (point.X - box.Maximum.X) * (point.X - box.Maximum.X);
-            }
-
-            if (point.Y < box.Minimum.Y)
-            {
-                distance += (box.Minimum.Y - point.Y) * (box.Minimum.Y - point.Y);
-            }
-            if (point.X > box.Maximum.X)
-            {
-                distance += (point.Y - box.Maximum.Y) * (point.Y - box.Maximum.Y);
-            }
-
-            if (point.Z < box.Minimum.Z)
-            {
-                distance += (box.Minimum.Z - point.Z) * (box.Minimum.Z - point.Z);
-            }
-            if (point.Z > box.Maximum.Z)
-            {
-                distance += (point.Z - box.Maximum.Z) * (point.Z - box.Maximum.Z);
-            }
-
-            return MathF.Sqrt(distance);
         }
 
         /// <summary>
@@ -232,6 +401,143 @@ namespace Raster.Math.Geometry
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="box"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public static float DistanceBoxPoint(in BoundingBox box, ref Vector3 point)
+        {
+            float distance = 0.0f;
+
+            if (point.X < box.Minimum.X)
+            {
+                distance += (box.Minimum.X - point.X) * (box.Minimum.X - point.X);
+            }
+            if (point.X > box.Maximum.X)
+            {
+                distance += (point.X - box.Maximum.X) * (point.X - box.Maximum.X);
+            }
+
+            if (point.Y < box.Minimum.Y)
+            {
+                distance += (box.Minimum.Y - point.Y) * (box.Minimum.Y - point.Y);
+            }
+            if (point.X > box.Maximum.X)
+            {
+                distance += (point.Y - box.Maximum.Y) * (point.Y - box.Maximum.Y);
+            }
+
+            if (point.Z < box.Minimum.Z)
+            {
+                distance += (box.Minimum.Z - point.Z) * (box.Minimum.Z - point.Z);
+            }
+            if (point.Z > box.Maximum.Z)
+            {
+                distance += (point.Z - box.Maximum.Z) * (point.Z - box.Maximum.Z);
+            }
+
+            return MathF.Sqrt(distance);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="plane"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public static float DistancePlanePoint(in Plane plane, in Vector3 point)
+        {
+            float dot = Vector3.Dot(plane.Normal, point);
+            return dot - plane.Distance;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="capsule"></param>
+        /// <returns></returns>
+        public static float DistanceRayCapsule(in Ray ray, in Capsule capsule)
+        {
+            float distance = DistanceRayLineSegment(ray, capsule.Segment, out float distance0, out float distance1);
+            return MathF.Max(0.0f, distance - capsule.Radius);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="line"></param>
+        /// <param name="distance0"></param>
+        /// <param name="distance1"></param>
+        /// <returns></returns>
+        public static float DistanceRayLine(in Ray ray, in Line line, out float distance0, out float distance1)
+        {
+            ClosetPointRayLine(ray, line, out distance0, out distance1, out Vector3 point0);
+            Line.PointAt(line, distance1, out Vector3 point1);
+
+            return Vector3.Distance(point0, point1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="segment"></param>
+        /// <param name="distance0"></param>
+        /// <param name="distance1"></param>
+        /// <returns></returns>
+        public static float DistanceRayLineSegment(in Ray ray, in LineSegment segment, out float distance0, out float distance1)
+        {
+            ClosetPointRayLineSegment(ray, segment, out distance0, out distance1, out Vector3 point0);
+            LineSegment.PointAt(segment, distance1, out Vector3 point1);
+
+            return Vector3.Distance(point0, point1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="point"></param>
+        /// <param name="distance"></param>
+        /// <returns></returns>
+        public static float DistanceRayPoint(in Ray ray, in Vector3 point, out float distance)
+        {
+            ClosetPointPointRay(point, ray, out distance, out Vector3 result);
+            return Vector3.Distance(result, point);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray0"></param>
+        /// <param name="ray1"></param>
+        /// <param name="distance0"></param>
+        /// <param name="distance1"></param>
+        /// <returns></returns>
+        public static float DistanceRayRay(in Ray ray0, in Ray ray1, out float distance0, out float distance1)
+        {
+            ClosetPointRayRay(ray0, ray1, out distance0, out distance1, out Vector3 point0);
+            Ray.PointAt(ray0, distance1, out Vector3 point1);
+
+            return Vector3.Distance(point0, point1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="sphere"></param>
+        /// <returns></returns>
+        public static float DistanceRaySphere(in Ray ray, in Sphere sphere)
+        {
+            float distance = DistanceRayPoint(ray, sphere.Center, out float distance0);
+            return MathF.Max(0.0f, distance - sphere.Radius);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="sphere"></param>
         /// <param name="point"></param>
         /// <returns></returns>
@@ -255,6 +561,18 @@ namespace Raster.Math.Geometry
             distance -= sphere0.Radius + sphere1.Radius;
 
             return MathF.Max(distance, 0.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="capsule"></param>
+        /// <returns></returns>
+        public static bool RayIntersectsCapsule(in Ray ray, in Capsule capsule)
+        {
+            float distance = DistanceRayLineSegment(ray, capsule.Segment, out float distance0, out float distance1);
+            return distance <= capsule.Radius;
         }
 
         /// <summary>
@@ -390,7 +708,7 @@ namespace Raster.Math.Geometry
                 return false;
             }
 
-            point = ray.Origin + (ray.Direction * distance);
+            Ray.PointAt(ray, distance, out point);
             return true;
         }
 
@@ -518,7 +836,7 @@ namespace Raster.Math.Geometry
                 return false;
             }
 
-            point = ray.Origin + (ray.Direction * distance);
+            Ray.PointAt(ray, distance, out point);
             return true;
         }
 
@@ -573,7 +891,7 @@ namespace Raster.Math.Geometry
                 return false;
             }
 
-            point = ray.Origin + (ray.Direction * distance);
+            Ray.PointAt(ray, distance, out point);
             return true;
         }
 
@@ -665,7 +983,7 @@ namespace Raster.Math.Geometry
                 return false;
             }
 
-            point = ray.Origin + (ray.Direction * distance);
+            Ray.PointAt(ray, distance, out point);
             return true;
         }
 
@@ -754,8 +1072,5 @@ namespace Raster.Math.Geometry
             float dot = Vector3.Dot(result, result);
             return dot <= sphere.Radius * sphere.Radius;
         }
-
-
-
     }
 }

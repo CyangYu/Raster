@@ -9,6 +9,10 @@ namespace Raster.Math.Geometry
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public struct OrientedBox : IEquatable<OrientedBox>
     {
+        #region Public Instance Fields
+        
+        #endregion Public Instance Fields
+
         #region Public Instance Methods
         /// <summary>
         /// 
@@ -38,15 +42,20 @@ namespace Raster.Math.Geometry
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() =>
-            string.Format("OrientedBox: ");
+        public override string ToString()
+        {
+            return string.Format("OrientedBox: ");
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(OrientedBox other) => true;
+        public bool Equals(OrientedBox other)
+        {
+            return true;
+        }
 
         #endregion Public Instance Methods
     }
