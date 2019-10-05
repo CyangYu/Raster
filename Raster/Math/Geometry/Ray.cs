@@ -368,7 +368,9 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public bool Intersects(in BoundingBox box, out float near, out float far)
         {
-
+            near = 0.0f;
+            far = 1.0f;
+            return false;
         }
 
         /// <summary>
@@ -388,7 +390,7 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public bool Intersects(in Circle cirle)
         {
-
+            return false;
         }
 
         /// <summary>
@@ -398,7 +400,7 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public bool Intersects(in Frustum frustum)
         {
-
+            return false;
         }
 
         /// <summary>
@@ -408,7 +410,7 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public bool Intersects(in OrientedBox box)
         {
-
+            return false;
         }
 
         /// <summary>
@@ -420,7 +422,9 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public bool Intersects(in OrientedBox box, out float near, out float far)
         {
-
+            near = 0.0f;
+            far = 1.0f;
+            return false;
         }
 
         /// <summary>

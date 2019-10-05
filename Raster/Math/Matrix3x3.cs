@@ -528,14 +528,14 @@ namespace Raster.Math
         /// </summary>
         /// <param name="euler"></param>
         /// <param name="result"></param>
-        public static void FromEulerAnglesXYZ(in EulerAngles euler, out Matrix3x3 result)
+        public static void FromEulerAnglesXYZ(in EulerAngles eulerAngles, out Matrix3x3 result)
         {
-            float cp = MathF.Cos(euler.Pitch);
-            float sp = MathF.Sin(euler.Pitch);
-            float cy = MathF.Cos(euler.Yaw);
-            float sy = MathF.Sin(euler.Yaw);
-            float cr = MathF.Cos(euler.Roll);
-            float sr = MathF.Sin(euler.Roll);
+            float cp = MathF.Cos(eulerAngles.Pitch);
+            float sp = MathF.Sin(eulerAngles.Pitch);
+            float cy = MathF.Cos(eulerAngles.Yaw);
+            float sy = MathF.Sin(eulerAngles.Yaw);
+            float cr = MathF.Cos(eulerAngles.Roll);
+            float sr = MathF.Sin(eulerAngles.Roll);
 
             result.M00 = cy * cr;
             result.M01 = -cy * sr;
@@ -555,14 +555,14 @@ namespace Raster.Math
         /// </summary>
         /// <param name="euler"></param>
         /// <param name="result"></param>
-        public static void FromEulerAnglesXZY(in EulerAngles euler, out Matrix3x3 result)
+        public static void FromEulerAnglesXZY(in EulerAngles eulerAngles, out Matrix3x3 result)
         {
-            float cp = MathF.Cos(euler.Pitch);
-            float sp = MathF.Sin(euler.Pitch);
-            float cy = MathF.Cos(euler.Yaw);
-            float sy = MathF.Sin(euler.Yaw);
-            float cr = MathF.Cos(euler.Roll);
-            float sr = MathF.Sin(euler.Roll);
+            float cp = MathF.Cos(eulerAngles.Pitch);
+            float sp = MathF.Sin(eulerAngles.Pitch);
+            float cy = MathF.Cos(eulerAngles.Yaw);
+            float sy = MathF.Sin(eulerAngles.Yaw);
+            float cr = MathF.Cos(eulerAngles.Roll);
+            float sr = MathF.Sin(eulerAngles.Roll);
 
             result.M00 = cy * cr;
             result.M01 = -sr;
@@ -582,14 +582,14 @@ namespace Raster.Math
         /// </summary>
         /// <param name="euler"></param>
         /// <param name="result"></param>
-        public static void FromEulerAnglesYXZ(in EulerAngles euler, out Matrix3x3 result)
+        public static void FromEulerAnglesYXZ(in EulerAngles eulerAngles, out Matrix3x3 result)
         {
-            float cp = MathF.Cos(euler.Pitch);
-            float sp = MathF.Sin(euler.Pitch);
-            float cy = MathF.Cos(euler.Yaw);
-            float sy = MathF.Sin(euler.Yaw);
-            float cr = MathF.Cos(euler.Roll);
-            float sr = MathF.Sin(euler.Roll);
+            float cp = MathF.Cos(eulerAngles.Pitch);
+            float sp = MathF.Sin(eulerAngles.Pitch);
+            float cy = MathF.Cos(eulerAngles.Yaw);
+            float sy = MathF.Sin(eulerAngles.Yaw);
+            float cr = MathF.Cos(eulerAngles.Roll);
+            float sr = MathF.Sin(eulerAngles.Roll);
 
             result.M00 = cy * cr + sp * sy * sr;
             result.M01 = cp * sp * sy - cy * sr;
@@ -609,14 +609,14 @@ namespace Raster.Math
         /// </summary>
         /// <param name="euler"></param>
         /// <param name="result"></param>
-        public static void FromEulerAnglesYZX(in EulerAngles euler, out Matrix3x3 result)
+        public static void FromEulerAnglesYZX(in EulerAngles eulerAngles, out Matrix3x3 result)
         {
-            float cp = MathF.Cos(euler.Pitch);
-            float sp = MathF.Sin(euler.Pitch);
-            float cy = MathF.Cos(euler.Yaw);
-            float sy = MathF.Sin(euler.Yaw);
-            float cr = MathF.Cos(euler.Roll);
-            float sr = MathF.Sin(euler.Roll);
+            float cp = MathF.Cos(eulerAngles.Pitch);
+            float sp = MathF.Sin(eulerAngles.Pitch);
+            float cy = MathF.Cos(eulerAngles.Yaw);
+            float sy = MathF.Sin(eulerAngles.Yaw);
+            float cr = MathF.Cos(eulerAngles.Roll);
+            float sr = MathF.Sin(eulerAngles.Roll);
 
             result.M00 = cy * cr;
             result.M01 = sp * sy - cp * cy * sr;
@@ -636,14 +636,14 @@ namespace Raster.Math
         /// </summary>
         /// <param name="euler"></param>
         /// <param name="result"></param>
-        public static void FromEulerAnglesZXY(in EulerAngles euler, out Matrix3x3 result)
+        public static void FromEulerAnglesZXY(in EulerAngles eulerAngles, out Matrix3x3 result)
         {
-            float cp = MathF.Cos(euler.Pitch);
-            float sp = MathF.Sin(euler.Pitch);
-            float cy = MathF.Cos(euler.Yaw);
-            float sy = MathF.Sin(euler.Yaw);
-            float cr = MathF.Cos(euler.Roll);
-            float sr = MathF.Sin(euler.Roll);
+            float cp = MathF.Cos(eulerAngles.Pitch);
+            float sp = MathF.Sin(eulerAngles.Pitch);
+            float cy = MathF.Cos(eulerAngles.Yaw);
+            float sy = MathF.Sin(eulerAngles.Yaw);
+            float cr = MathF.Cos(eulerAngles.Roll);
+            float sr = MathF.Sin(eulerAngles.Roll);
 
             result.M00 = cy * cr - sp * sy * sr;
             result.M01 = -cp * sr;
@@ -663,14 +663,14 @@ namespace Raster.Math
         /// </summary>
         /// <param name="euler"></param>
         /// <param name="result"></param>
-        public static void FromEulerAnglesZYX(in EulerAngles euler, out Matrix3x3 result)
+        public static void FromEulerAnglesZYX(in EulerAngles eulerAngles, out Matrix3x3 result)
         {
-            float cp = MathF.Cos(euler.Pitch);
-            float sp = MathF.Sin(euler.Pitch);
-            float cy = MathF.Cos(euler.Yaw);
-            float sy = MathF.Sin(euler.Yaw);
-            float cr = MathF.Cos(euler.Roll);
-            float sr = MathF.Sin(euler.Roll);
+            float cp = MathF.Cos(eulerAngles.Pitch);
+            float sp = MathF.Sin(eulerAngles.Pitch);
+            float cy = MathF.Cos(eulerAngles.Yaw);
+            float sy = MathF.Sin(eulerAngles.Yaw);
+            float cr = MathF.Cos(eulerAngles.Roll);
+            float sr = MathF.Sin(eulerAngles.Roll);
 
             result.M00 = cy * cr;
             result.M01 = cr * sp * sy - cp * sr;
@@ -683,6 +683,169 @@ namespace Raster.Math
             result.M20 = -sy;
             result.M21 = cy * sp;
             result.M22 = cp * cy;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesXYX(in EulerAngles eulerAngles, out Matrix3x3 result)
+        {
+            float cp = MathF.Cos(eulerAngles.Pitch);
+            float sp = MathF.Sin(eulerAngles.Pitch);
+            float cy = MathF.Cos(eulerAngles.Yaw);
+            float sy = MathF.Sin(eulerAngles.Yaw);
+            float cr = MathF.Cos(eulerAngles.Roll);
+            float sr = MathF.Sin(eulerAngles.Roll);
+
+            result.M00 = cy;
+            result.M01 = sy * sr;
+            result.M02 = sy * cr;
+
+            result.M10 = sy * sp;
+            result.M11 = cp * cr - cy * sp * sr;
+            result.M12 = -cy * cr * sp - cp * sr;
+
+            result.M20 = -sy * cp;
+            result.M21 = cr * sp + cy * cp * sr;
+            result.M22 = cy * cp * cr - sp * sr;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesXZX(in EulerAngles eulerAngles, out Matrix3x3 result)
+        {
+            float cp = MathF.Cos(eulerAngles.Pitch);
+            float sp = MathF.Sin(eulerAngles.Pitch);
+            float cy = MathF.Cos(eulerAngles.Yaw);
+            float sy = MathF.Sin(eulerAngles.Yaw);
+            float cr = MathF.Cos(eulerAngles.Roll);
+            float sr = MathF.Sin(eulerAngles.Roll);
+
+            result.M00 = cr;
+            result.M01 = -sr * cy;
+            result.M02 = sr * sy;
+
+            result.M10 = sr * cp;
+            result.M11 = cr * cp * cy - sp * sy;
+            result.M12 = -cy * sp - cr * cp * sy;
+
+            result.M20 = sr * sp;
+            result.M21 = cr * cy * sp + cp * sy;
+            result.M22 = cp * cy - cr * sp * sy;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesYXY(in EulerAngles eulerAngles, out Matrix3x3 result)
+        {
+            float cp = MathF.Cos(eulerAngles.Pitch);
+            float sp = MathF.Sin(eulerAngles.Pitch);
+            float cy = MathF.Cos(eulerAngles.Yaw);
+            float sy = MathF.Sin(eulerAngles.Yaw);
+            float cr = MathF.Cos(eulerAngles.Roll);
+            float sr = MathF.Sin(eulerAngles.Roll);
+
+            result.M00 = cy * cr - cp * sy * sr;
+            result.M01 = sp * sy;
+            result.M02 = cp * cr * sp + cy * sr;
+
+            result.M10 = sp * sr;
+            result.M11 = cp;
+            result.M12 = -sp * cr;
+
+            result.M20 = -cr * sr - cp * cy * sr;
+            result.M21 = sp * cy;
+            result.M22 = cp * cy * cr - sy * sr;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesYZY(in EulerAngles eulerAngles, out Matrix3x3 result)
+        {
+            float cp = MathF.Cos(eulerAngles.Pitch);
+            float sp = MathF.Sin(eulerAngles.Pitch);
+            float cy = MathF.Cos(eulerAngles.Yaw);
+            float sy = MathF.Sin(eulerAngles.Yaw);
+            float cr = MathF.Cos(eulerAngles.Roll);
+            float sr = MathF.Sin(eulerAngles.Roll);
+
+            result.M00 = cr * cy * cp - sy * sp;
+            result.M01 = -sr * cy;
+            result.M02 = cp * sy + cr * cy * sp;
+
+            result.M10 = sr * cp;
+            result.M11 = cr;
+            result.M12 = sr * sp;
+
+            result.M20 = -cr * cp * sy - cy * sp;
+            result.M21 = sr * sy;
+            result.M22 = cy * cp - cr * sy * sp;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesZXZ(in EulerAngles eulerAngles, out Matrix3x3 result)
+        {
+            // yaw = z1;
+            float cp = MathF.Cos(eulerAngles.Pitch);
+            float sp = MathF.Sin(eulerAngles.Pitch);
+            float cy = MathF.Cos(eulerAngles.Yaw);
+            float sy = MathF.Sin(eulerAngles.Yaw);
+            float cr = MathF.Cos(eulerAngles.Roll);
+            float sr = MathF.Sin(eulerAngles.Roll);
+
+            result.M00 = cr * cy - cp * sr * sy;
+            result.M01 = -cp * cy * sr - cr * sy;
+            result.M02 = sp * sr;
+
+            result.M10 = cy * sr + cp * cr * sy;
+            result.M11 = cp * cr * cy - sr * sy;
+            result.M12 = -sp * cr;
+
+            result.M20 = sp * sy;
+            result.M21 = sp * cy;
+            result.M22 = cp;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesZYZ(in EulerAngles eulerAngles, out Matrix3x3 result)
+        {
+            float cp = MathF.Cos(eulerAngles.Pitch);
+            float sp = MathF.Sin(eulerAngles.Pitch);
+            float cy = MathF.Cos(eulerAngles.Yaw);
+            float sy = MathF.Sin(eulerAngles.Yaw);
+            float cr = MathF.Cos(eulerAngles.Roll);
+            float sr = MathF.Sin(eulerAngles.Roll);
+
+            result.M00 = cy * cr * cp - sr * sp;
+            result.M01 = -cp * sr - cy * cr * sp;
+            result.M02 = sy * cr;
+
+            result.M10 = cy * cp * sr;
+            result.M11 = cr * cp - cy * sr * sp;
+            result.M12 = sy * sr;
+
+            result.M20 = -sy * cp;
+            result.M21 = sy * sp;
+            result.M22 = cy;
         }
 
         /// <summary>

@@ -692,6 +692,66 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesXYX(in EulerAngles eulerAngles, out Quaternion quaternion)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesXZY(in EulerAngles eulerAngles, out Quaternion quaternion)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesYXY(in EulerAngles eulerAngles, out Quaternion quaternion)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesYZY(in EulerAngles eulerAngles, out Quaternion quaternion)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesZXZ(in EulerAngles eulerAngles, out Quaternion quaternion)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="quaternion"></param>
+        public static void FromEulerAnglesZYZ(in EulerAngles eulerAngles, out Quaternion quaternion)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="matrix"></param>
         /// <param name="result"></param>
         public static void FromRotationMatrix(in Matrix3x3 matrix, out Quaternion result)

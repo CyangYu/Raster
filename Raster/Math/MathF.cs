@@ -40,7 +40,31 @@ namespace Raster.Math
             /// </summary>
             ZYX,
             /// <summary>
-            /// W
+            /// 
+            /// </summary>
+            XYX,
+            /// <summary>
+            /// 
+            /// </summary>
+            XZX,
+            /// <summary>
+            /// 
+            /// </summary>
+            YXY,
+            /// <summary>
+            /// 
+            /// </summary>
+            YZY,
+            /// <summary>
+            /// 
+            /// </summary>
+            ZXZ,
+            /// <summary>
+            /// 
+            /// </summary>
+            ZYZ,
+            /// <summary>
+            /// 
             /// </summary>
             Default = ZXY
         };
