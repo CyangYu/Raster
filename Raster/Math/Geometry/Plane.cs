@@ -61,9 +61,20 @@ namespace Raster.Math.Geometry
         /// </summary>
         /// <param name="normal"></param>
         /// <param name="d"></param>
-        public Plane(Vector3 normal, float d)
+        public Plane(in Vector3 normal, float d)
             : this(normal.X, normal.Y, normal.Z, d)
         {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="normal"></param>
+        public Plane(in Vector3 point, in Vector3 normal)
+        {
+            Normal = normal;
+            Distance = Vector3.Dot(point, normal);
         }
 
         /// <summary>
@@ -171,7 +182,7 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public bool Intersects(in Ray ray, out Vector3 point)
         {
-            return Collision.RayIntersectsPlane(ray, this, out point);
+            return Collision.RayIntersectsPlane(ray, this, out float distance, out point);
         }
 
         public bool Intersects(in Plane plane)
@@ -273,6 +284,16 @@ namespace Raster.Math.Geometry
         #endregion Public Instance Methods
 
         #region Public Static Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="plane"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public static float SignedDistance(in Plane plane, in Vector3 point)
+        {
+            return Vector3.Dot(plane.Normal, point) - plane.Distance;
+        }
 
         /// <summary>
         /// 

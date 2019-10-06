@@ -70,6 +70,15 @@ namespace Raster.Math.Geometry
                    this.Radius == other.Radius;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Plane ContainingPlane()
+        {
+            return new Plane(Center, Normal);
+        }
+
         #endregion Public Instance Methods
     }
 }

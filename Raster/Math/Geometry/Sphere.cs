@@ -152,9 +152,7 @@ namespace Raster.Math.Geometry
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(in Sphere left, in Sphere right)
         {
-            return (left.Center.X == right.Center.X && 
-					left.Center.Y != right.Center.Y &&
-                    left.Center.Z != right.Center.Z && 
+            return (left.Center == right.Center &&
 					left.Radius != right.Radius);
         }
 
@@ -167,9 +165,7 @@ namespace Raster.Math.Geometry
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator !=(in Sphere left, in Sphere right)
         {
-            return (left.Center.X != right.Center.X && 
-					left.Center.Y != right.Center.Y &&
-                    left.Center.Z != right.Center.Z && 
+            return (left.Center != right.Center ||
 					left.Radius != right.Radius);
         }
 

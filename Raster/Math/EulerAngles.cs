@@ -195,6 +195,204 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToXYX(in Matrix3x3 matrix)
+        {
+            FromRotationMatrixToXYX(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToXZX(in Matrix3x3 matrix)
+        {
+            FromRotationMatrixToXZX(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToYXY(in Matrix3x3 matrix)
+        {
+            FromRotationMatrixToYXY(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToYZY(in Matrix3x3 matrix)
+        {
+            FromRotationMatrixToYZY(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToZXZ(in Matrix3x3 matrix)
+        {
+            FromRotationMatrixToZXZ(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToZYZ(in Matrix3x3 matrix)
+        {
+            FromRotationMatrixToZYZ(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToXYZ(in Matrix4x4 matrix)
+        {
+            FromRotationMatrixToXYZ(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToXZY(in Matrix4x4 matrix)
+        {
+            FromRotationMatrixToXZY(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToYXZ(in Matrix4x4 matrix)
+        {
+            FromRotationMatrixToYXZ(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToYZX(in Matrix4x4 matrix)
+        {
+            FromRotationMatrixToYZX(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToZXY(in Matrix4x4 matrix)
+        {
+            FromRotationMatrixToZXY(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToZYX(in Matrix4x4 matrix)
+        {
+            FromRotationMatrixToZYX(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToXYX(in Matrix4x4 matrix)
+        {
+            FromRotationMatrixToXYX(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToXZX(in Matrix4x4 matrix)
+        {
+            FromRotationMatrixToXZX(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToYXY(in Matrix4x4 matrix)
+        {
+            FromRotationMatrixToYXY(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToYZY(in Matrix4x4 matrix)
+        {
+            FromRotationMatrixToYZY(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToZXZ(in Matrix4x4 matrix)
+        {
+            FromRotationMatrixToZXZ(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixToZYZ(in Matrix4x4 matrix)
+        {
+            FromRotationMatrixToZYZ(matrix, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="w"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>

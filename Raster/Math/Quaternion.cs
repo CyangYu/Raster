@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Raster.Private;
+using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Raster.Private;
 
 namespace Raster.Math
 {
@@ -337,6 +337,73 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Quaternion FromEulerAnglesXYX(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesXYX(in eulerAngles, out Quaternion result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Quaternion FromEulerAnglesXZX(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesXZX(in eulerAngles, out Quaternion result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Quaternion FromEulerAnglesYXY(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesYXY(in eulerAngles, out Quaternion result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Quaternion FromEulerAnglesYZY(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesYZY(in eulerAngles, out Quaternion result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Quaternion FromEulerAnglesZXZ(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesZXZ(in eulerAngles, out Quaternion result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Quaternion FromEulerAnglesZYZ(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesZYZ(in eulerAngles, out Quaternion result);
+            return result;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="matrix"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -421,6 +488,39 @@ namespace Raster.Math
             return IsEqualUsingDot(dot) 
                 ? 0.0F 
                 : MathF.Acos(MathF.Min(MathF.Abs(dot), 1.0F)) * 2.0F * MathF.Rad2Deg;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radian"></param>
+        /// <returns></returns>
+        public static Quaternion RotateX(float radian)
+        {
+            RotateX(radian, out Quaternion result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radian"></param>
+        /// <returns></returns>
+        public static Quaternion RotateY(float radian)
+        {
+            RotateY(radian, out Quaternion result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radian"></param>
+        /// <returns></returns>
+        public static Quaternion RotateZ(float radian)
+        {
+            RotateZ(radian, out Quaternion result);
+            return result;
         }
 
         /// <summary>
@@ -519,6 +619,30 @@ namespace Raster.Math
 
                 case MathF.RotationOrder.ZYX:
                     FromEulerAnglesXYZ(in eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.XYX:
+                    FromEulerAnglesXYX(in eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.XZX:
+                    FromEulerAnglesXZX(in eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.YXY:
+                    FromEulerAnglesYXY(in eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.YZY:
+                    FromEulerAnglesYZY(in eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.ZXZ:
+                    FromEulerAnglesZXZ(in eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.ZYZ:
+                    FromEulerAnglesZYZ(in eulerAngles, out result);
                     break;
 
                 default:
@@ -694,9 +818,26 @@ namespace Raster.Math
         /// </summary>
         /// <param name="eulerAngles"></param>
         /// <param name="quaternion"></param>
-        public static void FromEulerAnglesXYX(in EulerAngles eulerAngles, out Quaternion quaternion)
+        public static void FromEulerAnglesXYX(in EulerAngles eulerAngles, out Quaternion result)
         {
+            float sr, cr, sp, cp, sy, cy;
 
+            float halfPitch = 0.5f * eulerAngles.Pitch;
+            sp = MathF.Sin(halfPitch);
+            cp = MathF.Cos(halfPitch);
+
+            float halfYaw = 0.5f * eulerAngles.Yaw;
+            sy = MathF.Sin(halfYaw);
+            cy = MathF.Cos(halfYaw);
+
+            float halfRoll = 0.5f * eulerAngles.Roll;
+            sr = MathF.Sin(halfRoll);
+            cr = MathF.Cos(halfRoll);
+
+            result.X = sp * cy * cr + sy * sr * cp;
+            result.Y = sy * cp * cr - sp * sr * cy;
+            result.Z = sr * cp * cy + sp * sy * cr;
+            result.W = cp * cy * cr - sy * sr * sp;
         }
 
         /// <summary>
@@ -704,9 +845,26 @@ namespace Raster.Math
         /// </summary>
         /// <param name="eulerAngles"></param>
         /// <param name="quaternion"></param>
-        public static void FromEulerAnglesXZY(in EulerAngles eulerAngles, out Quaternion quaternion)
+        public static void FromEulerAnglesXZX(in EulerAngles eulerAngles, out Quaternion result)
         {
+            float sr, cr, sp, cp, sy, cy;
 
+            float halfPitch = 0.5f * eulerAngles.Pitch;
+            sp = MathF.Sin(halfPitch);
+            cp = MathF.Cos(halfPitch);
+
+            float halfYaw = 0.5f * eulerAngles.Yaw;
+            sy = MathF.Sin(halfYaw);
+            cy = MathF.Cos(halfYaw);
+
+            float halfRoll = 0.5f * eulerAngles.Roll;
+            sr = MathF.Sin(halfRoll);
+            cr = MathF.Cos(halfRoll);
+
+            result.X = sp * cy * cr + sy * sr * cp;
+            result.Y = sy * cp * cr - sp * sr * cy;
+            result.Z = sr * cp * cy + sp * sy * cr;
+            result.W = cp * cy * cr - sy * sr * sp;
         }
 
         /// <summary>
@@ -714,9 +872,26 @@ namespace Raster.Math
         /// </summary>
         /// <param name="eulerAngles"></param>
         /// <param name="quaternion"></param>
-        public static void FromEulerAnglesYXY(in EulerAngles eulerAngles, out Quaternion quaternion)
+        public static void FromEulerAnglesYXY(in EulerAngles eulerAngles, out Quaternion result)
         {
+            float sr, cr, sp, cp, sy, cy;
 
+            float halfPitch = 0.5f * eulerAngles.Pitch;
+            sp = MathF.Sin(halfPitch);
+            cp = MathF.Cos(halfPitch);
+
+            float halfYaw = 0.5f * eulerAngles.Yaw;
+            sy = MathF.Sin(halfYaw);
+            cy = MathF.Cos(halfYaw);
+
+            float halfRoll = 0.5f * eulerAngles.Roll;
+            sr = MathF.Sin(halfRoll);
+            cr = MathF.Cos(halfRoll);
+
+            result.X = sp * cy * cr + sy * sr * cp;
+            result.Y = sy * cp * cr - sp * sr * cy;
+            result.Z = sr * cp * cy + sp * sy * cr;
+            result.W = cp * cy * cr - sy * sr * sp;
         }
 
         /// <summary>
@@ -724,9 +899,26 @@ namespace Raster.Math
         /// </summary>
         /// <param name="eulerAngles"></param>
         /// <param name="quaternion"></param>
-        public static void FromEulerAnglesYZY(in EulerAngles eulerAngles, out Quaternion quaternion)
+        public static void FromEulerAnglesYZY(in EulerAngles eulerAngles, out Quaternion result)
         {
+            float sr, cr, sp, cp, sy, cy;
 
+            float halfPitch = 0.5f * eulerAngles.Pitch;
+            sp = MathF.Sin(halfPitch);
+            cp = MathF.Cos(halfPitch);
+
+            float halfYaw = 0.5f * eulerAngles.Yaw;
+            sy = MathF.Sin(halfYaw);
+            cy = MathF.Cos(halfYaw);
+
+            float halfRoll = 0.5f * eulerAngles.Roll;
+            sr = MathF.Sin(halfRoll);
+            cr = MathF.Cos(halfRoll);
+
+            result.X = sp * cy * cr + sy * sr * cp;
+            result.Y = sy * cp * cr - sp * sr * cy;
+            result.Z = sr * cp * cy + sp * sy * cr;
+            result.W = cp * cy * cr - sy * sr * sp;
         }
 
         /// <summary>
@@ -734,9 +926,26 @@ namespace Raster.Math
         /// </summary>
         /// <param name="eulerAngles"></param>
         /// <param name="quaternion"></param>
-        public static void FromEulerAnglesZXZ(in EulerAngles eulerAngles, out Quaternion quaternion)
+        public static void FromEulerAnglesZXZ(in EulerAngles eulerAngles, out Quaternion result)
         {
+            float sr, cr, sp, cp, sy, cy;
 
+            float halfPitch = 0.5f * eulerAngles.Pitch;
+            sp = MathF.Sin(halfPitch);
+            cp = MathF.Cos(halfPitch);
+
+            float halfYaw = 0.5f * eulerAngles.Yaw;
+            sy = MathF.Sin(halfYaw);
+            cy = MathF.Cos(halfYaw);
+
+            float halfRoll = 0.5f * eulerAngles.Roll;
+            sr = MathF.Sin(halfRoll);
+            cr = MathF.Cos(halfRoll);
+
+            result.X = sp * cy * cr + sy * sr * cp;
+            result.Y = sy * cp * cr - sp * sr * cy;
+            result.Z = sr * cp * cy + sp * sy * cr;
+            result.W = cp * cy * cr - sy * sr * sp;
         }
 
         /// <summary>
@@ -744,9 +953,26 @@ namespace Raster.Math
         /// </summary>
         /// <param name="eulerAngles"></param>
         /// <param name="quaternion"></param>
-        public static void FromEulerAnglesZYZ(in EulerAngles eulerAngles, out Quaternion quaternion)
+        public static void FromEulerAnglesZYZ(in EulerAngles eulerAngles, out Quaternion result)
         {
+            float sr, cr, sp, cp, sy, cy;
 
+            float halfPitch = 0.5f * eulerAngles.Pitch;
+            sp = MathF.Sin(halfPitch);
+            cp = MathF.Cos(halfPitch);
+
+            float halfYaw = 0.5f * eulerAngles.Yaw;
+            sy = MathF.Sin(halfYaw);
+            cy = MathF.Cos(halfYaw);
+
+            float halfRoll = 0.5f * eulerAngles.Roll;
+            sr = MathF.Sin(halfRoll);
+            cr = MathF.Cos(halfRoll);
+
+            result.X = sp * cy * cr + sy * sr * cp;
+            result.Y = sy * cp * cr - sp * sr * cy;
+            result.Z = sr * cp * cy + sp * sy * cr;
+            result.W = cp * cy * cr - sy * sr * sp;
         }
 
         /// <summary>
@@ -1017,6 +1243,51 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="radian"></param>
+        public static void RotateX(float radian, out Quaternion result)
+        {
+            float s = MathF.Sin(radian * 0.5f);
+            float c = MathF.Cos(radian * 0.5f);
+
+            result.X = s;
+            result.Y = 0.0f;
+            result.Z = 0.0f;
+            result.W = c;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radian"></param>
+        public static void RotateY(float radian, out Quaternion result)
+        {
+            float s = MathF.Sin(radian * 0.5f);
+            float c = MathF.Cos(radian * 0.5f);
+
+            result.X = 0.0f;
+            result.Y = s;
+            result.Z = 0.0f;
+            result.W = c;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radian"></param>
+        public static void RotateZ(float radian, out Quaternion result)
+        {
+            float s = MathF.Sin(radian * 0.5f);
+            float c = MathF.Cos(radian * 0.5f);
+
+            result.X = 0.0f;
+            result.Y = 0.0f;
+            result.Z = s;
+            result.W = c;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="value1"></param>
         /// <param name="value2"></param>
         /// <param name="factor"></param>
@@ -1115,7 +1386,7 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Multiply(in Quaternion value1, in Quaternion value2, out Quaternion result)
         {
-            float cx = value1.X * value2.Z - value1.Z * value2.Y;
+            float cx = value1.Y * value2.Z - value1.Z * value2.Y;
             float cy = value1.Z * value2.X - value1.X * value2.Z;
             float cz = value1.X * value2.Y - value1.Y * value2.X;
 

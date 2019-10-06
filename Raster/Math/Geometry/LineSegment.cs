@@ -92,7 +92,9 @@ namespace Raster.Math.Geometry
         /// <param name="result"></param>
         public static void PointAt(in LineSegment segment, float distance, out Vector3 result)
         {
-            Vector3.Lerp(segment.Start, segment.End, distance, out result);
+            result.X = segment.Start.X + (segment.End.X - segment.Start.X) * distance;
+            result.Y = segment.Start.Y + (segment.End.Y - segment.Start.Y) * distance;
+            result.Z = segment.Start.Z + (segment.End.Z - segment.Start.Z) * distance;
         }
 
         #endregion Public Static Methods

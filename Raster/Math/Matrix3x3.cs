@@ -479,6 +479,172 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="axisAngle"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromAxisAngle(in AxisAngle axisAngle)
+        {
+            FromAxisAngle(axisAngle, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromEulerAngles(in EulerAngles eulerAngles, MathF.RotationOrder order)
+        {
+            FromEulerAngles(eulerAngles, order, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromEulerAnglesXYZ(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesXYZ(eulerAngles, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromEulerAnglesXZY(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesXZY(eulerAngles, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromEulerAnglesYXZ(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesYXZ(eulerAngles, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromEulerAnglesYZX(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesYXZ(eulerAngles, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromEulerAnglesZXY(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesZXY(eulerAngles, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromEulerAnglesZYX(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesZYX(eulerAngles, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromEulerAnglesXYX(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesXYX(eulerAngles, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromEulerAnglesXZX(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesXZX(eulerAngles, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromEulerAnglesYXY(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesYXY(eulerAngles, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromEulerAnglesYZY(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesYXY(eulerAngles, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromEulerAnglesZXZ(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesZXZ(eulerAngles, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromEulerAnglesZYZ(in EulerAngles eulerAngles)
+        {
+            FromEulerAnglesZYZ(eulerAngles, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="quaternion"></param>
+        /// <returns></returns>
+        public static Matrix3x3 FromQuaternion(in Quaternion quaternion)
+        {
+            FromQuaternion(in quaternion, out Matrix3x3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="matrix"></param>
         /// <returns></returns>
         public static Matrix3x3 Transpose(in Matrix3x3 matrix)
@@ -490,25 +656,89 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="eulerAngles"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public static void FromEulerAngles(in EulerAngles eulerAngles, MathF.RotationOrder order, out Matrix3x3 result)
+        {
+            switch (order)
+            {
+                case MathF.RotationOrder.XYZ:
+                    FromEulerAnglesXYZ(eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.XZY:
+                    FromEulerAnglesXZY(eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.YXZ:
+                    FromEulerAnglesYXZ(eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.YZX:
+                    FromEulerAnglesYZX(eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.ZXY:
+                    FromEulerAnglesZXY(eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.ZYX:
+                    FromEulerAnglesZYX(eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.XYX:
+                    FromEulerAnglesXYX(eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.XZX:
+                    FromEulerAnglesXZX(eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.YXY:
+                    FromEulerAnglesYXY(eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.YZY:
+                    FromEulerAnglesYZY(eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.ZXZ:
+                    FromEulerAnglesZXZ(eulerAngles, out result);
+                    break;
+
+                case MathF.RotationOrder.ZYZ:
+                    FromEulerAnglesZYZ(eulerAngles, out result);
+                    break;
+
+                default:
+                    FromEulerAnglesZXY(eulerAngles, out result);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="axisAngle"></param>
         /// <param name="result"></param>
-        public static void FromAxisAngle(in AxisAngle axis, out Matrix3x3 result)
+        public static void FromAxisAngle(in AxisAngle axisAngle, out Matrix3x3 result)
         {
-            float cos = MathF.Cos(axis.Angle);
-            float sin = MathF.Sin(axis.Angle);
+            float cos = MathF.Cos(axisAngle.Angle);
+            float sin = MathF.Sin(axisAngle.Angle);
 
             float c0 = 1.0f - cos;
-            float x2 = axis.Axis.X * axis.Axis.X;
-            float y2 = axis.Axis.Y * axis.Axis.Y;
-            float z2 = axis.Axis.Z * axis.Axis.Z;
+            float x2 = axisAngle.Axis.X * axisAngle.Axis.X;
+            float y2 = axisAngle.Axis.Y * axisAngle.Axis.Y;
+            float z2 = axisAngle.Axis.Z * axisAngle.Axis.Z;
 
-            float xy = axis.Axis.X * axis.Axis.Y;
-            float xz = axis.Axis.X * axis.Axis.Z;
-            float yz = axis.Axis.Y * axis.Axis.Z;
+            float xy = axisAngle.Axis.X * axisAngle.Axis.Y;
+            float xz = axisAngle.Axis.X * axisAngle.Axis.Z;
+            float yz = axisAngle.Axis.Y * axisAngle.Axis.Z;
 
-            float xs = axis.Axis.X * sin;
-            float ys = axis.Axis.Y * sin;
-            float zs = axis.Axis.Z * sin;
+            float xs = axisAngle.Axis.X * sin;
+            float ys = axisAngle.Axis.Y * sin;
+            float zs = axisAngle.Axis.Z * sin;
 
             result.M00 = cos + c0 * x2;
             result.M10 = c0 * xy - zs;
