@@ -1045,6 +1045,28 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Vector4 operator +(float left, in Vector4 right)
+        {
+            return new Vector4(left + right.X, left + right.Y, left + right.Z, left + right.W);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Vector4 operator +(in Vector4 left, float right)
+        {
+            return new Vector4(left.X + right, left.Y + right, left.Z + right, left.W + right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

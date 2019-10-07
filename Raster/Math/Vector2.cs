@@ -1013,6 +1013,28 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Vector2 operator +(float left, in Vector2 right)
+        {
+            return new Vector2(left + right.X, left + right.Y);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Vector2 operator +(in Vector2 left, float right)
+        {
+            return new Vector2(left.X + right, left.Y + right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -106,6 +106,15 @@ namespace Raster.Math.Geometry
             }
         }
 
+        public Vector3 Edge2
+        {
+            get
+            {
+                Vector3.Subtract(Vertex2, Vertex1, out Vector3 edge2);
+                return edge2;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -120,6 +129,7 @@ namespace Raster.Math.Geometry
                 return distance0 + distance1 + distance2;
             }
         }
+
         #endregion Public Instance Properties
 
         #region Public Instance Methods
@@ -172,6 +182,19 @@ namespace Raster.Math.Geometry
             return (vertex0.X - vertex1.X) * (vertex1.Y - vertex2.Y) -
                    (vertex1.X - vertex2.X) * (vertex0.Y - vertex1.Y);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vertex0"></param>
+        /// <param name="vertex1"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public static float InsideEdge(in Vector3 vertex0, in Vector3 vertex1, in Vector3 point)
+        {
+            return (point.X - vertex0.X) * (vertex1.Y - vertex0.Y) - 
+                   (point.Y - vertex0.Y) * (vertex1.X - vertex0.X);
+        } 
 
         /// <summary>
         /// 
@@ -249,6 +272,22 @@ namespace Raster.Math.Geometry
             result.X = u * triangle.Vertex0.X + v * triangle.Vertex1.X + w * triangle.Vertex2.X;
             result.Y = u * triangle.Vertex0.Y + v * triangle.Vertex1.Y + w * triangle.Vertex2.Y;
             result.Z = u * triangle.Vertex0.Z + v * triangle.Vertex1.Z + w * triangle.Vertex2.Z;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="vertex0"></param>
+        /// <param name="vertex1"></param>
+        /// <param name="vertex2"></param>
+        public static float SignedArea(in Vector3 point, in Vector3 vertex0, in Vector3 vertex1, in Vector3 vertex2)
+        {
+            Vector3.Cross(vertex1 - point, vertex2 - point, out Vector3 v0);
+            Vector3.Cross(vertex1 - vertex0, vertex2 - vertex0, out Vector3 v1);
+
+            v1.Normalize();
+            return Vector3.Dot(v0, v1);
         }
 
         #endregion Public Static Methods

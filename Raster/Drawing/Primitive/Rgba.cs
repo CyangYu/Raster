@@ -38,7 +38,7 @@ namespace Raster.Drawing.Primitive
         public byte R
         {
             get { return r; }
-            set { }
+            set { r = value; }
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Raster.Drawing.Primitive
         public byte G
         {
             get { return g; }
-            set { }
+            set { g = value; }
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Raster.Drawing.Primitive
         public byte B
         {
             get { return b; }
-            set { }
+            set { b = value; }
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Raster.Drawing.Primitive
         public byte A
         {
             get { return a; }
-            set { }
+            set { a = value; }
         }
 
         #endregion Public Instance Properties
