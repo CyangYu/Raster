@@ -1098,6 +1098,28 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Vector3 operator -(float left, in Vector3 right)
+        {
+            return new Vector3(left - right.X, left - right.Y, left - right.Z);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Vector3 operator -(in Vector3 left, float right)
+        {
+            return new Vector3(left.X - right, left.Y - right, left.Z - right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="right"></param>
         /// <param name="right"></param>
         /// <returns></returns>

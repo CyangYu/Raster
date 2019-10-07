@@ -79,7 +79,7 @@ namespace Raster.Math.Geometry
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(in BoundingBox other)
+        public bool Equals(BoundingBox other)
         {
             return true;
         }
@@ -95,10 +95,8 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public static bool operator ==(in BoundingBox left, in BoundingBox right)
         {
-            return left.Minimum.X == right.Minimum.X && left.Minimum.Y == right.Minimum.Y &&
-                   left.Minimum.Z == right.Minimum.Z &&
-                   left.Maximum.X == right.Maximum.X && left.Maximum.Y == right.Maximum.Y &&
-                   left.Maximum.Z == right.Maximum.Z;
+            return left.Minimum == right.Minimum &&
+                   left.Maximum == right.Maximum;
         }
 
         /// <summary>
@@ -109,10 +107,8 @@ namespace Raster.Math.Geometry
         /// <returns></returns>
         public static bool operator !=(in BoundingBox left, in BoundingBox right)
         {
-            return left.Minimum.X != right.Minimum.X || left.Minimum.Y != right.Minimum.Y ||
-                   left.Minimum.Z != right.Minimum.Z ||
-                   left.Maximum.X != right.Maximum.X || left.Maximum.Y != right.Maximum.Y ||
-                   left.Maximum.Z != right.Maximum.Z;
+            return left.Minimum != right.Minimum ||
+                   left.Maximum != right.Maximum;
         }
 
         #endregion Operator Overload

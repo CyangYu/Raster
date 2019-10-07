@@ -900,10 +900,62 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Add(float left, in Vector2 right, out Vector2 result)
+        {
+            result.X = left + right.X;
+            result.Y = left + right.Y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Add(in Vector2 left, float right, out Vector2 result)
+        {
+            result.X = left.X + right;
+            result.Y = left.Y + right;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Subtract(in Vector2 left, in Vector2 right, out Vector2 result)
         {
             result.X = left.X - right.X;
             result.Y = left.Y - right.Y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Subtract(float left, in Vector2 right, out Vector2 result)
+        {
+            result.X = left - right.X;
+            result.Y = left - right.Y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Subtract(in Vector2 left, float right, out Vector2 result)
+        {
+            result.X = left.X - right;
+            result.Y = left.Y - right;
         }
 
         /// <summary>
@@ -978,6 +1030,28 @@ namespace Raster.Math
         public static Vector2 operator -(in Vector2 left, in Vector2 right)
         {
             return new Vector2(left.X - right.X, left.Y - right.Y);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Vector2 operator -(float left, in Vector2 right)
+        {
+            return new Vector2(left - right.X, left - right.Y);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static Vector2 operator -(in Vector2 left, float right)
+        {
+            return new Vector2(left.X - right, left.Y - right);
         }
 
         /// <summary>

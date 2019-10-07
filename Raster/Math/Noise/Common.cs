@@ -1,7 +1,7 @@
 ﻿using System;
 using Raster.Math;
 
-namespace Raster.Source.Math.Noise
+namespace Raster.Math.Noise
 {
     public static partial class Noise
     {

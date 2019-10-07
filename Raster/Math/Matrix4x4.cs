@@ -1244,7 +1244,7 @@ namespace Raster.Math
             float halfWidth = width * 0.5f;
             float halfHeight = height * 0.5f;
 
-            OrthoOffCenterRH(-halfWidth, halfWidth, -halfHeight, halfHeight, zNear, zFar);
+            OrthoOffCenter(-halfWidth, halfWidth, -halfHeight, halfHeight, zNear, zFar);
         }
 
         /// <summary>
