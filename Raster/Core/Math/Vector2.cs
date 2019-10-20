@@ -51,7 +51,7 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public static readonly Vector2 NegOne   = new Vector2( 0.0f,  0.0f);
+        public static readonly Vector2 NegOne   = new Vector2(-1.0f, -1.0f);
         #endregion Public Static Fields
 
         #region Public Instance Properties
