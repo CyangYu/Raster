@@ -1344,6 +1344,7 @@ namespace Raster.Math
         /// <param name="radian"></param>
         /// <param name="s"></param>
         /// <param name="c"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SinCos(float radian, out float s, out float c) 
         {
             s = Sin(radian);
@@ -1394,6 +1395,7 @@ namespace Raster.Math
         /// <param name="edge1"></param>
         /// <param name="x"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 SmoothSetp(in Vector2 edge0, in Vector2 edge1, in Vector2 x)
         {
             Vector2 t = Stature((x - edge0) / (edge1 - edge0));
@@ -1407,6 +1409,7 @@ namespace Raster.Math
         /// <param name="edge1"></param>
         /// <param name="x"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 SmoothSetp(in Vector3 edge0, in Vector3 edge1, in Vector3 x)
         {
             Vector3 t = Stature((x - edge0) / (edge1 - edge0));
@@ -1418,6 +1421,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Stature(float x) { return Clamp(x, 0.0f, 1.0f); }
 
         /// <summary>
@@ -1425,6 +1429,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Stature(double x) { return Clamp(x, 0.0, 1.0); }
 
         /// <summary>
@@ -1439,6 +1444,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Stature(in Vector3 x) { return Clamp(x, new Vector3(0.0f), new Vector3(1.0f)); }
 
         /// <summary>
@@ -1446,8 +1452,8 @@ namespace Raster.Math
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Stature(in Vector4 x) { return Clamp(x, new Vector4(0.0f), new Vector4(1.0f)); }
-
 
         /// <summary>
         /// 
@@ -1462,6 +1468,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Tan(double x) { return System.Math.Tan(x); }
 
         /// <summary>
@@ -1469,6 +1476,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Tan(in Vector2 x) { return new Vector2(Tan(x.X), Tan(x.Y)); }
 
         /// <summary>
@@ -1520,6 +1528,7 @@ namespace Raster.Math
         /// <param name="b"></param>
         /// <param name="x"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float UnLerp(float a, float b, float x) { return (x - a) / (b - a); }
 
         /// <summary>
@@ -1529,6 +1538,7 @@ namespace Raster.Math
         /// <param name="b"></param>
         /// <param name="x"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double UnLerp(double a, double b, double x) { return (x - a) / (b - a); }
 
         /// <summary>
@@ -1538,6 +1548,7 @@ namespace Raster.Math
         /// <param name="y"></param>
         /// <param name="s"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 UnLerp(in Vector2 a, in Vector2 b, in Vector2 x) { return (x - a) / (b - a); }
 
         /// <summary>
@@ -1547,6 +1558,7 @@ namespace Raster.Math
         /// <param name="y"></param>
         /// <param name="s"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 UnLerp(in Vector3 a, in Vector3 b, in Vector3 x) { return (x - a) / (b - a); }
 
         /// <summary>
@@ -1560,7 +1572,7 @@ namespace Raster.Math
 
         #endregion Public Static Methods
 
-        #region 
+        #region Union Defintion
         [StructLayout(LayoutKind.Explicit)]
         internal struct IntFloatUnion
         {
@@ -1578,6 +1590,6 @@ namespace Raster.Math
             [FieldOffset(0)]
             public double DoubleValue;
         }
-        #endregion
+        #endregion Union Definition
     }
 }

@@ -28,6 +28,17 @@ namespace Raster.Math
         public float Z;
         #endregion Public Fields
 
+        #region Constant Fields
+        /// <summary>
+        /// 
+        /// </summary>
+        public const float kEpsilon = 0.00001f;
+        /// <summary>
+        /// 
+        /// </summary>
+        public const float kEpsilonNormalSqrt = 1e-15f;
+        #endregion Constant Fields
+
         #region Public Static Fields
         /// <summary>
         /// 
@@ -181,8 +192,10 @@ namespace Raster.Math
         /// <param name="other"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(Vector3 other) =>
-             X == other.X && Y == other.Y && Z == other.Z;
+        public bool Equals(Vector3 other)
+        {
+            return X == other.X && Y == other.Y && Z == other.Z;
+        }
 
         /// <summary>
         /// 
@@ -384,6 +397,20 @@ namespace Raster.Math
         public static Vector3 Lerp(in Vector3 begin, in Vector3 end, float factor)
         {
             Lerp(begin, end, factor, out Vector3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        /// <param name="factor"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 LerpUnclamped(in Vector3 begin, in Vector3 end, float factor)
+        {
+            LerpUnclamped(begin, end, factor, out Vector3 result);
             return result;
         }
 
@@ -663,11 +690,27 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Lerp(in Vector3 begin, in Vector3 end, float factor, out Vector3 result)
         {
+            float t = MathF.Clamp(factor, 0.0f, 1.0f);
+            result.X = begin.X + (end.X - begin.X) * t;
+            result.Y = begin.Y + (end.Y - begin.Y) * t;
+            result.Z = begin.Z + (end.Z - begin.Z) * t;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        /// <param name="factor"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void LerpUnclamped(in Vector3 begin, in Vector3 end, float factor, out Vector3 result)
+        {
             result.X = begin.X + (end.X - begin.X) * factor;
             result.Y = begin.Y + (end.Y - begin.Y) * factor;
             result.Z = begin.Z + (end.Z - begin.Z) * factor;
         }
-                        
+
         /// <summary>
         /// 
         /// </summary>
@@ -1206,8 +1249,12 @@ namespace Raster.Math
         /// <returns></returns>
         public static bool operator ==(in Vector3 left, in Vector3 right)
         {
-            return left.X == right.X && left.Y == right.Y && 
-                   left.Z == right.Z;
+            float diff_x = left.X - right.X;
+            float diff_y = left.Y - right.Y;
+            float diff_z = left.Z - right.Z;
+
+            float sqrLength = diff_x * diff_x + diff_y * diff_y + diff_z * diff_z;
+            return sqrLength < kEpsilon * kEpsilon;
         }
 
         /// <summary>

@@ -23,6 +23,17 @@ namespace Raster.Math
         public float Y;
         #endregion Public Fields
 
+        #region Constant Fields
+        /// <summary>
+        /// 
+        /// </summary>
+        public const float kEpsilon = 0.00001f;
+        /// <summary>
+        /// 
+        /// </summary>
+        public const float kEpsilonNormalSqrt = 1e-15f;
+        #endregion Constant Fields
+
         #region Public Static Fields
         /// <summary>
         /// 
@@ -52,6 +63,14 @@ namespace Raster.Math
         /// 
         /// </summary>
         public static readonly Vector2 NegOne   = new Vector2(-1.0f, -1.0f);
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly Vector2 PositiveInfinity = new Vector2(float.PositiveInfinity, float.PositiveInfinity);
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly Vector2 NegativeInfinity = new Vector2(float.NegativeInfinity, float.NegativeInfinity);
         #endregion Public Static Fields
 
         #region Public Instance Properties
@@ -159,7 +178,10 @@ namespace Raster.Math
         /// <param name="other"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(Vector2 other) => this == other;
+        public bool Equals(Vector2 other)
+        {
+            return X == other.X && Y == other.Y;
+        }
 
         /// <summary>
         /// 
@@ -279,23 +301,34 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float AngleBetween(in Vector2 left, in Vector2 right)
+        public static float AngleBetween(in Vector2 from, in Vector2 to)
         {
-            float dot = left.X * right.X + left.Y * right.Y;
-            float lenProduct = left.Length * right.Length;
-
-            if (MathHelper.IsZero(lenProduct))
+            float denominator = MathF.Sqrt(from.LengthSquared * to.LengthSquared);
+            if (denominator < kEpsilonNormalSqrt)
             {
-                lenProduct = MathHelper.ZeroTolerance;
+                return 0.0f;
             }
 
-            float cos = dot / lenProduct;
-            cos = MathF.Clamp(cos, -1.0f, 1.0f);
-            return MathF.Acos(cos);
+            float dot = MathF.Clamp(Dot(from, to) / denominator, -1.0f, 1.0f);
+            return MathF.Acos(dot);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float SignedAngle(in Vector2 from, in Vector2 to)
+        {
+            float unsigned_angle = AngleBetween(from, to);
+            float sign = MathF.Sign(from.X * to.Y - from.Y * to.X);
+            return unsigned_angle * sign;
         }
 
         /// <summary>
@@ -309,6 +342,19 @@ namespace Raster.Math
         public static Vector2 Clamp(in Vector2 value, in Vector2 min, in Vector2 max)
         {
             Clamp(value, min, max, out Vector2 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="maxLength"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 ClampMagnitude(in Vector2 vector, float maxLength)
+        {
+            ClampMagnitude(vector, maxLength, out Vector2 result);
             return result;
         }
 
@@ -425,6 +471,20 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="current"></param>
+        /// <param name="target"></param>
+        /// <param name="maxDistanceDelta"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 MoveTowards(in Vector2 current, in Vector2 target, float maxDistanceDelta)
+        {
+            MoveTowards(current, target, maxDistanceDelta, out Vector2 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -485,6 +545,30 @@ namespace Raster.Math
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="current"></param>
+        /// <param name="target"></param>
+        /// <param name="currentVelocity"></param>
+        /// <param name="smoothTime"></param>
+        /// <param name="maxSpeed"></param>
+        /// <param name="deltaTime"></param>
+        /// <returns></returns>
+        public static Vector2 SmoothDamp(in Vector2 current, in Vector2 target, ref Vector2 currentVelocity,
+                                         float smoothTime, float maxSpeed, float deltaTime)
+        {
+            SmoothDamp(current, target, ref currentVelocity, smoothTime, maxSpeed, deltaTime, out Vector2 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        /// <param name="factor"></param>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 SmoothStep(in Vector2 begin, in Vector2 end, float factor)
         {
@@ -577,6 +661,33 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="maxLength"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ClampMagnitude(in Vector2 vector, float maxLength, out Vector2 result)
+        {
+            float lenSqr = vector.LengthSquared;
+            if (lenSqr > maxLength * maxLength)
+            {
+                float len = MathF.Sqrt(lenSqr);
+
+                float normalized_x = vector.X / len;
+                float normalized_y = vector.Y / len;
+
+                result.X = normalized_x * maxLength;
+                result.Y = normalized_y * maxLength;
+
+                return;
+            }
+
+            result.X = vector.X;
+            result.Y = vector.Y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="value1"></param>
         /// <param name="tangent1"></param>
         /// <param name="value2"></param>
@@ -631,6 +742,33 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        /// <param name="factor"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void LerpUnclamped(in Vector2 begin, in Vector2 end, float factor, out Vector2 result)
+        {
+            result.X = begin.X + (end.X - begin.X) * factor;
+            result.Y = begin.Y + (end.Y - begin.Y) * factor;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Max(in Vector2 value1, in Vector2 value2, out Vector2 result)
+        {
+            result.X = (value1.X > value2.X) ? value1.X : value2.X;
+            result.Y = (value1.Y > value2.Y) ? value1.Y : value2.Y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="value1"></param>
         /// <param name="value2"></param>
         /// <param name="result"></param>
@@ -645,14 +783,29 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value1"></param>
-        /// <param name="value2"></param>
+        /// <param name="current"></param>
+        /// <param name="target"></param>
+        /// <param name="maxDistanceDelta"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Max(in Vector2 value1, in Vector2 value2, out Vector2 result)
+        public static void MoveTowards(in Vector2 current, in Vector2 target, float maxDistanceDelta, out Vector2 result)
         {
-            result.X = (value1.X > value2.X) ? value1.X : value2.X;
-            result.Y = (value1.Y > value2.Y) ? value1.Y : value2.Y;
+            float toVector_x = target.X - current.X;
+            float toVector_y = target.Y - current.Y;
+
+            float sqrDistance = toVector_x * toVector_x + toVector_y * toVector_y;
+
+            if (sqrDistance == 0.0f || (maxDistanceDelta >= 0.0f && sqrDistance <= maxDistanceDelta))
+            {
+                result.X = target.X;
+                result.Y = target.Y;
+                return;
+            }
+
+            float distance = MathF.Sqrt(sqrDistance);
+
+            result.X = current.X + toVector_x / distance * maxDistanceDelta;
+            result.Y = current.Y + toVector_y / distance * maxDistanceDelta;
         }
 
         /// <summary>
@@ -787,6 +940,74 @@ namespace Raster.Math
                 result.X = eta * vec2.X - (eta * dot + sqrtk) * normal.X;
                 result.Y = eta * vec2.Y - (eta * dot + sqrtk) * normal.Y;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="current"></param>
+        /// <param name="target"></param>
+        /// <param name="currentVelocity"></param>
+        /// <param name="smoothTime"></param>
+        /// <param name="maxSpeed"></param>
+        /// <param name="deltaTime"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SmoothDamp(in Vector2 current, in Vector2 target, ref Vector2 currentVelocity, 
+                                      float smoothTime, float maxSpeed, float deltaTime, 
+                                      out Vector2 result)
+        {
+            smoothTime = MathF.Max(0.0001f, smoothTime);
+            float omega = 2.0f / smoothTime;
+
+            float x = omega / deltaTime;
+            float exp = 1.0f / (1.0f + x + 0.48f * x * x + 0.235f * x * x * x);
+
+            float change_x = current.X - target.X;
+            float change_y = current.Y - target.Y;
+            Vector2 originalTo = target;
+
+            float maxChange = maxSpeed * smoothTime;
+
+            float maxChangeSqr = maxChange * maxChange;
+            float sqrDistance = change_x * change_x + change_y * change_y;
+
+            if (sqrDistance > maxChangeSqr)
+            {
+                float distsnce = MathF.Sqrt(sqrDistance);
+                change_x = change_x / distsnce * maxChange;
+                change_y = change_y / distsnce * maxChange;
+            }
+
+            Vector2 targetVec;
+            targetVec.X = current.X - change_x;
+            targetVec.Y = current.Y - change_y;
+
+            float temp_x = (currentVelocity.X + omega * change_x) * deltaTime;
+            float temp_y = (currentVelocity.Y + omega * change_y) * deltaTime;
+
+            currentVelocity.X = (currentVelocity.X - omega * temp_x) * exp;
+            currentVelocity.Y = (currentVelocity.Y - omega * temp_y) * exp;
+
+            float output_x = targetVec.X + (change_x + temp_x) * exp;
+            float output_y = targetVec.Y + (change_y + temp_y) * exp;
+
+            // Prevent overshooting
+            float origMinusCurrent_x = originalTo.X - current.X;
+            float origMinusCurrent_y = originalTo.Y - current.Y;
+            float outMinusOrig_x = output_x - originalTo.X;
+            float outMinusOrig_y = output_y - originalTo.Y;
+
+            if (origMinusCurrent_x * outMinusOrig_x + origMinusCurrent_y * outMinusOrig_y > 0)
+            {
+                output_x = originalTo.X;
+                output_y = originalTo.Y;
+
+                currentVelocity.X = (output_x - originalTo.X) / deltaTime;
+                currentVelocity.Y = (output_y - originalTo.Y) / deltaTime;
+            }
+
+            result.X = output_x;
+            result.Y = output_y;
         }
 
         /// <summary>
@@ -1132,7 +1353,27 @@ namespace Raster.Math
         {
             return new Vector2(left.X / right.X, left.Y / right.Y);
         }
-            
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator Vector3(in Vector2 v)
+        {
+            return new Vector3(v.X, v.Y, 0.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator Vector4(in Vector2 v)
+        {
+            return new Vector4(v.X, v.Y, 0.0f, 0.0f);
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -1141,7 +1382,9 @@ namespace Raster.Math
         /// <returns></returns>
         public static bool operator ==(in Vector2 left, in Vector2 right)
         {
-            return left.X == right.X && left.Y == right.Y;
+            float diff_x = left.X - right.X;
+            float diff_y = left.Y - right.Y;
+            return (diff_x * diff_x + diff_y * diff_y) < (kEpsilon * kEpsilon);
         }
             
 
@@ -1153,7 +1396,7 @@ namespace Raster.Math
         /// <returns></returns>
         public static bool operator !=(in Vector2 left, in Vector2 right)
         {
-            return left.X != right.X || left.Y != right.Y;
+            return !(left == right);
         }
             
         #endregion Operator Overload

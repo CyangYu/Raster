@@ -1218,7 +1218,7 @@ namespace Raster.Math
             M30 = -(sideR * eyeR + sideY * eyeY + sideZ * eyeZ);
             M31 = -(uR * eyeR + uY * eyeY + uZ * eyeZ);
             M32 = (forwardR * eyeR + forwardY * eyeY + forwardZ * eyeZ);
-            M33 = 0.0f;
+            M33 = 1.0f;
         }
 
         /// <summary>
