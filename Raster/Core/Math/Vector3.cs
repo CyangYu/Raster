@@ -311,23 +311,34 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float AngleBetween(in Vector3 left, in Vector3 right)
+        public static float AngleBetween(in Vector3 from, in Vector3 to)
         {
-            float dot = left.X * right.X + left.Y * right.Y + left.Z * right.Z;
-            float lenProduct = left.Length * right.Length;
-            
-            if (MathHelper.IsZero(lenProduct))
+            float denominator = MathF.Sqrt(from.LengthSquared * to.LengthSquared);
+            if (denominator < kEpsilonNormalSqrt)
             {
-                lenProduct = MathHelper.ZeroTolerance;
+                return 0.0f;
             }
 
-            float cos = dot / lenProduct;
-            cos = MathF.Clamp(cos, -1.0f, 1.0f);
-            return MathF.Acos(cos);
+            float dot = MathF.Clamp(Dot(from, to) / denominator, -1.0f, 1.0f);
+            return MathF.Acos(dot);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float SignedAngle(in Vector3 from, in Vector3 to)
+        {
+            float unsigned_angle = AngleBetween(from, to);
+            float sign = MathF.Sign(from.X * to.Y - from.Y * to.X);
+            return unsigned_angle * sign;
         }
 
         /// <summary>
@@ -365,8 +376,10 @@ namespace Raster.Math
         /// <param name="right"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Dot(in Vector3 left, in Vector3 right) =>
-            left.X * right.X + left.Y * right.Y + left.Z * right.Z;
+        public static float Dot(in Vector3 left, in Vector3 right)
+        {
+            return left.X * right.X + left.Y * right.Y + left.Z * right.Z;
+        }
 
         /// <summary>
         /// 
@@ -461,6 +474,32 @@ namespace Raster.Math
         public static Vector3 Normalize(in Vector3 value)
         {
             Normalize(value, out Vector3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="normal"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Project(in Vector3 vector, in Vector3 normal)
+        {
+            Project(vector, normal, out Vector3 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="normal"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 ProjectOnPlane(in Vector3 vector, in Vector3 planeNormal)
+        {
+            Project(vector, planeNormal, out Vector3 result);
             return result;
         }
 
@@ -624,6 +663,35 @@ namespace Raster.Math
 
             result.Z = (min.Z > value.Z) ? min.Z : value.Z;
             result.Z = (max.Z < value.Z) ? max.Z : value.Z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="maxLength"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ClampMagnitude(in Vector3 vector, float maxLength, out Vector3 result)
+        {
+            float lenSqr = vector.LengthSquared;
+            if (lenSqr > maxLength * maxLength)
+            {
+                float len = MathF.Sqrt(lenSqr);
+
+                float normalized_x = vector.X / len;
+                float normalized_y = vector.Y / len;
+                float normalized_z = vector.Z / len;
+
+                result.X = normalized_x * maxLength;
+                result.Y = normalized_y * maxLength;
+                result.Z = normalized_z * maxLength;
+                return;
+            }
+
+            result.X = vector.X;
+            result.Y = vector.Y;
+            result.Z = vector.Z;
         }
 
         /// <summary>
@@ -832,6 +900,60 @@ namespace Raster.Math
             result.M21 = left.Z * right.Y;
             result.M22 = left.Z * right.Z;
             result.M23 = left.Z * right.W;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="normal"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Project(in Vector3 vector, in Vector3 normal, out Vector3 result)
+        {
+            float sqrLength = Dot(normal, normal);
+            if (sqrLength < MathF.Epsilon)
+            {
+                result.X = 0.0f;
+                result.Y = 0.0f;
+                result.Z = 0.0f;
+            }
+            else
+            {
+                float dot = Dot(vector, normal);
+                float invSqrLength = 1.0f / sqrLength;
+
+                result.X = normal.X * dot * invSqrLength;
+                result.Y = normal.Y * dot * invSqrLength;
+                result.Z = normal.Z * dot * invSqrLength;
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="planeNormal"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ProjectOnPlane(in Vector3 vector, in Vector3 planeNormal, out Vector3 result)
+        {
+            float sqrLength = Dot(planeNormal, planeNormal);
+            if (sqrLength < MathF.Epsilon)
+            {
+                result.X = vector.X;
+                result.Y = vector.Y;
+                result.Z = vector.Z;
+            }
+            else
+            {
+                float dot = Dot(vector, planeNormal);
+                float invSqrLength = 1.0f / sqrLength;
+
+                result.X = vector.X - planeNormal.X * dot * invSqrLength;
+                result.Y = vector.Y - planeNormal.Y * dot * invSqrLength;
+                result.Z = vector.Z - planeNormal.Z * dot * invSqrLength;
+            }
         }
 
         /// <summary>

@@ -169,7 +169,7 @@ namespace Raster.Math
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Vector2: X = {0}, Y = [1}", X, Y);
+            return string.Format("Vector2: X = {0}, Y = {1}", X, Y);
         }
 
         /// <summary>
@@ -439,6 +439,20 @@ namespace Raster.Math
         public static Vector2 Lerp(in Vector2 begin, in Vector2 end, float factor)
         {
             Lerp(begin, end, factor, out Vector2 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        /// <param name="factor"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 LerpUnclamped(in Vector2 begin, in Vector2 end, float factor)
+        {
+            LerpUnclamped(begin, end, factor, out Vector2 result);
             return result;
         }
 
@@ -735,8 +749,9 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Lerp(in Vector2 begin, in Vector2 end, float factor, out Vector2 result)
         {
-            result.X = begin.X + (end.X - begin.X) * factor;
-            result.Y = begin.Y + (end.Y - begin.Y) * factor;
+            float t = MathF.Clamp(factor, 0.0f, 1.0f);
+            result.X = begin.X + (end.X - begin.X) * t;
+            result.Y = begin.Y + (end.Y - begin.Y) * t;
         }
 
         /// <summary>
