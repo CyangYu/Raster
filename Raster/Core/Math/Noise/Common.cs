@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Raster.Math;
 
 namespace Raster.Math.Noise
@@ -11,6 +12,27 @@ namespace Raster.Math.Noise
         /// <param name="x"></param>
         /// <returns></returns>
         public static float Mod289(float x) { return x - MathF.Floor(x * (1.0f / 289.0f)) * 289.0f; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static Vector2 Mod289(in Vector2 x) { return x - MathF.Floor(x * (1.0f / 289.0f)) * 289.0f; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static Vector3 Mod289(in Vector3 x) { return x - MathF.Floor(x * (1.0f / 289.0f)) * 289.0f; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static Vector4 Mod289(in Vector4 x) { return x - MathF.Floor(x * (1.0f / 289.0f)) * 289.0f; }
 
         /// <summary>
         /// 

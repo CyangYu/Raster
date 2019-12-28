@@ -8,7 +8,7 @@ namespace Raster.Math
     /// <summary>
     /// 
     /// </summary>
-    public static partial class MathF
+    public static class MathF
     {
         /// <summary>
         /// 
@@ -297,7 +297,7 @@ namespace Raster.Math
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        public static bool IsInf(float x) { return Abs(x) == float.PositiveInfinity; }
+        public static bool IsInf(float x) { return float.IsInfinity(Abs(x)); }
 
         /// <summary>
         /// 
@@ -312,18 +312,18 @@ namespace Raster.Math
         /// <param name="x"></param>
         /// <returns></returns>
         public static int Abs(int x) { return Max(-x, x); }
-        
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
         public static long Abs(long x) { return Max(-x, x); }
-        
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="radian"></param>
+        /// <param name="x"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Abs(float x) { return Max(-x, x); }
@@ -439,13 +439,46 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Acos(in Vector4 x) { return new Vector4(Acos(x.X), Acos(x.Y), Acos(x.Z), Acos(x.W)); }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Atan(float x) { return (float)System.Math.Atan((double)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Atan(double x) { return System.Math.Atan(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Atan(in Vector2 x) { return new Vector2(Atan(x.X), Atan(x.Y)); }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Atan(float x) { return (float)System.Math.Atan((double)x); }
+        public static Vector3 Atan(in Vector3 x) { return new Vector3(Atan(x.X), Atan(x.Y), Atan(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Atan(in Vector4 x) { return new Vector4(Atan(x.X), Atan(x.Y), Atan(x.Z), Atan(x.W)); }
 
         /// <summary>
         /// 
@@ -459,10 +492,968 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="num"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Celling(float num) { return (float)System.Math.Ceiling((double)num); }
+        public static double Atan2(double x, double y) { return System.Math.Atan2(x, y); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Atan2(in Vector2 x, in Vector2 y) { return new Vector2(Atan2(x.X, y.X), Atan2(x.Y, y.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Atan2(in Vector3 x, in Vector3 y) { return new Vector3(Atan2(x.X, y.X), Atan2(x.Y, y.Y), Atan2(x.Z, y.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Atan2(in Vector4 x, in Vector4 y) { return new Vector4(Atan2(x.X, y.X), Atan2(x.Y, y.Y), Atan2(x.Z, y.Z), Atan2(x.W, y.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Sin(float x) { return (float)System.Math.Sin((double)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Sin(double x) { return System.Math.Sin(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Sin(in Vector2 x) { return new Vector2(Sin(x.X), Sin(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Sin(in Vector3 x) { return new Vector3(Sin(x.X), Sin(x.Y), Sin(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Sin(in Vector4 x) { return new Vector4(Sin(x.X), Sin(x.Y), Sin(x.Z), Sin(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Cos(float x) { return (float)System.Math.Cos((double)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Cos(double x) { return System.Math.Cos(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Cos(in Vector2 x) { return new Vector2(Cos(x.X), Cos(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Cos(in Vector3 x) { return new Vector3(Cos(x.X), Cos(x.Y), Cos(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Cos(in Vector4 x) { return new Vector4(Cos(x.X), Cos(x.Y), Cos(x.Z), Cos(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Tan(float x) { return (float)System.Math.Tan((double)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Tan(double x) { return System.Math.Tan(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Tan(in Vector2 x) { return new Vector2(Tan(x.X), Tan(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static Vector3 Tan(in Vector3 x) { return new Vector3(Tan(x.X), Tan(x.Y), Tan(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static Vector4 Tan(in Vector4 x) { return new Vector4(Tan(x.X), Tan(x.Y), Tan(x.Y), Tan(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Sinh(float x) { return (float)System.Math.Sinh((double)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Sinh(double x) { return System.Math.Sinh(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Sinh(in Vector2 x) { return new Vector2(Sinh(x.X), Sinh(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Sinh(in Vector3 x) { return new Vector3(Sinh(x.X), Sinh(x.Y), Sinh(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Sinh(in Vector4 x) { return new Vector4(Sinh(x.X), Sinh(x.Y), Sinh(x.Z), Sinh(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Cosh(float x) { return (float)System.Math.Cosh((double)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Cosh(double x) { return System.Math.Cosh(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Cosh(in Vector2 x) { return new Vector2(Cosh(x.X), Cosh(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Cosh(in Vector3 x) { return new Vector3(Cosh(x.X), Cosh(x.Y), Cosh(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Cosh(in Vector4 x) { return new Vector4(Cosh(x.X), Cosh(x.Y), Cosh(x.Z), Cosh(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Tanh(float x) { return (float)System.Math.Tanh((double)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Tanh(double x) { return System.Math.Tanh(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Tanh(in Vector2 x) { return new Vector2(Tanh(x.X), Tanh(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static Vector3 Tanh(in Vector3 x) { return new Vector3(Tanh(x.X), Tanh(x.Y), Tanh(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static Vector4 Tanh(in Vector4 x) { return new Vector4(Tanh(x.X), Tanh(x.Y), Tanh(x.Y), Tanh(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="s"></param>
+        /// <param name="c"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SinCos(float x, out float s, out float c) { s = Sin(x); c = Cos(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="s"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SinCos(double x, out double s, out double c) { s = Sin(x); c = Sin(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SinCos(in Vector2 x, out Vector2 s, out Vector2 c) { s = Sin(x); c = Cos(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SinCos(in Vector3 x, out Vector3 s, out Vector3 c) { s = Sin(x); c = Cos(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SinCos(in Vector4 x, out Vector4 s, out Vector4 c) { s = Sin(x); c = Cos(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Exp(float x) { return (float)System.Math.Exp((double)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Exp(double x) { return System.Math.Exp(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Exp(in Vector2 x) { return new Vector2(Exp(x.X), Exp(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Exp(in Vector3 x) { return new Vector3(Exp(x.X), Exp(x.Y), Exp(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Exp(in Vector4 x) { return new Vector4(Exp(x.X), Exp(x.Y), Exp(x.Z), Exp(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Exp2(float x) { return (float)System.Math.Exp((float)x * 0.69314718f); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Exp2(double x) { return System.Math.Exp(x * 0.693147180559945309); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Exp2(in Vector2 x) { return new Vector2(Exp2(x.X), Exp2(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Exp2(in Vector3 x) { return new Vector3(Exp2(x.X), Exp2(x.Y), Exp2(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Exp2(in Vector4 x) { return new Vector4(Exp2(x.X), Exp2(x.Y), Exp2(x.Z), Exp2(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Exp10(float x) { return (float)System.Math.Exp((float)x * 2.30258509f); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Exp10(double x) { return System.Math.Exp(x * 2.302585092994045684); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Exp10(in Vector2 x) { return new Vector2(Exp10(x.X), Exp10(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Exp10(in Vector3 x) { return new Vector3(Exp10(x.X), Exp10(x.Y), Exp10(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Exp10(in Vector4 x) { return new Vector4(Exp10(x.X), Exp10(x.Y), Exp10(x.Z), Exp10(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Log(float x) { return (float)System.Math.Log((double)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Log(double x) { return System.Math.Log(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Log(in Vector2 x) { return new Vector2(Log(x.X), Log(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Log(in Vector3 x) { return new Vector3(Log(x.X), Log(x.Y), Log(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Log(in Vector4 x) { return new Vector4(Log(x.X), Log(x.Y), Log(x.Z), Log(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Log2(float x) { return (float)System.Math.Log((double)x, 2.0); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Log2(double x) { return System.Math.Log(x, 2.0); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Log2(in Vector2 x) { return new Vector2(Log2(x.X), Log2(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Log2(in Vector3 x) { return new Vector3(Log2(x.X), Log2(x.Y), Log2(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Log2(in Vector4 x) { return new Vector4(Log2(x.X), Log2(x.Y), Log2(x.Z), Log2(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Log10(float x) { return (float)System.Math.Log10((double)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Log10(double x) { return System.Math.Log10(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Log10(in Vector2 x) { return new Vector2(Log10(x.X), Log10(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Log10(in Vector3 x) { return new Vector3(Log10(x.X), Log10(x.Y), Log10(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Log10(in Vector4 x) { return new Vector4(Log10(x.X), Log10(x.Y), Log10(x.Z), Log10(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float FMod(float x, float y) { return x % y; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double FMod(double x, double y) { return x % y; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 FMod(in Vector2 x, in Vector2 y) { return new Vector2(x.X % y.X, x.Y % y.Y); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 FMod(in Vector3 x, in Vector3 y) { return new Vector3(x.X % y.X, x.Y % y.Y, x.Z % y.Z); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 FMod(in Vector4 x, in Vector4 y) { return new Vector4(x.X % y.X, x.Y % y.Y, x.Z % y.Z, x.W % y.W); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float ModF(float x, out float i) { i = Truncate(x); return x - i; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double ModF(double x, out double i) { i = Truncate(x); return x - i; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 ModF(in Vector2 x, out Vector2 i) { i = Truncate(x); return x - i; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 ModF(in Vector3 x, out Vector3 i) { i = Truncate(x); return x - i; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 ModF(in Vector4 x, out Vector4 i) { i = Truncate(x); return x - i; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Ceil(float x) { return (float)System.Math.Ceiling((double)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Ceil(double x) { return System.Math.Ceiling(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Ceil(in Vector2 x) { return new Vector2(Ceil(x.X), Ceil(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Ceil(in Vector3 x) { return new Vector3(Ceil(x.X), Ceil(x.Y), Ceil(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Ceil(in Vector4 x) { return new Vector4(Ceil(x.X), Ceil(x.Y), Ceil(x.Z), Ceil(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Floor(float x) { return (float)System.Math.Floor((double)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Floor(double x) { return System.Math.Floor(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Floor(in Vector2 x) { return new Vector2(Floor(x.X), Floor(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Floor(in Vector3 x) { return new Vector3(Floor(x.X), Floor(x.Y), Floor(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Floor(in Vector4 x) { return new Vector4(Floor(x.X), Floor(x.Y), Floor(x.Z), Floor(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Pow(float x, float y) { return (float)System.Math.Pow((double)x, (double)y); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Pow(double x, double y) { return System.Math.Pow(x, y); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Pow(in Vector2 x, in Vector2 y) { return new Vector2(Pow(x.X, y.X), Pow(x.Y, y.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Pow(in Vector3 x, in Vector3 y) { return new Vector3(Pow(x.X, y.X), Pow(x.Y, y.Y), Pow(x.Z, y.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Pow(in Vector4 x, in Vector4 y) { return new Vector4(Pow(x.X, y.X), Pow(x.Y, y.Y), Pow(x.Z, y.Z), Pow(x.W, y.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Round(float x) { return (float)System.Math.Round((double)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Round(in Vector2 x) { return new Vector2(Round(x.X), Round(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Round(in Vector3 x) { return new Vector3(Round(x.X), Round(x.Y), Round(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Round(in Vector4 x) { return new Vector4(Round(x.X), Round(x.Y), Round(x.Z), Round(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radian"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Sign(float radian) { return (float)System.Math.Sign((double)radian); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Sign(double x) { return System.Math.Sign(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Sign(in Vector2 x) { return new Vector2(Sign(x.X), Sign(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Sign(in Vector3 x) { return new Vector3(Sign(x.X), Sign(x.Y), Sign(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Sign(in Vector4 x) { return new Vector4(Sign(x.X), Sign(x.Y), Sign(x.Z), Sign(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Sqrt(float x)
+        {
+            float invsqrt = MathHelper.FastSqrtInverse(x);
+            return (invsqrt - 0.0f < Epsilon) ? float.PositiveInfinity : 1.0f / invsqrt;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Sqrt(double x) { return System.Math.Sqrt(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Sqrt(in Vector2 x) { return new Vector2(Sqrt(x.X), Sqrt(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Sqrt(in Vector3 x) { return new Vector3(Sqrt(x.X), Sqrt(x.Y), Sqrt(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Sqrt(in Vector4 x) { return new Vector4(Sqrt(x.X), Sqrt(x.Y), Sqrt(x.Z), Sqrt(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float RSqrt(float x) { return MathHelper.FastSqrtInverse(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double RSqrt(double x) { return 1.0 / System.Math.Sqrt(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 RSqrt(in Vector2 x) { return new Vector2(RSqrt(x.X), RSqrt(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 RSqrt(in Vector3 x) { return new Vector3(RSqrt(x.X), RSqrt(x.Y), RSqrt(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 RSqrt(in Vector4 x) { return new Vector4(RSqrt(x.X), RSqrt(x.Y), RSqrt(x.Z), RSqrt(x.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Truncate(float x) { return (float)System.Math.Truncate((double)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Truncate(double x) { return System.Math.Truncate(x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Truncate(in Vector2 x) { return new Vector2(Truncate(x.X), Truncate(x.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Truncate(in Vector3 x) { return new Vector3(Truncate(x.X), Truncate(x.Y), Truncate(x.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Truncate(in Vector4 x) { return new Vector4(Truncate(x.X), Truncate(x.Y), Truncate(x.Z), Truncate(x.W)); }
 
         /// <summary>
         /// 
@@ -501,7 +1492,7 @@ namespace Raster.Math
         /// <param name="max"></param>
         /// <returns></returns>
         public static ulong Clamp(ulong value, ulong min, ulong max) { return Max(Min(max, value), min); }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -555,22 +1546,6 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="radian"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Cos(float x) { return (float)System.Math.Cos((double)x); }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="radian"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Cosh(float radian) { return (float)System.Math.Cosh((double)radian); }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
@@ -583,7 +1558,7 @@ namespace Raster.Math
         /// <param name="y"></param>
         /// <returns></returns>
         public static Vector3 Cross(in Vector3 x, in Vector3 y) { return new Vector3(x.Y * y.Z - y.Y * x.Z, x.X * y.Z - y.X * x.Z, x.X * y.Y - y.X * x.Y); }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -607,7 +1582,7 @@ namespace Raster.Math
         /// <param name="y"></param>
         /// <returns></returns>
         public static double Distance(double x, double y) { return Abs(y - x); }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -615,7 +1590,7 @@ namespace Raster.Math
         /// <param name="y"></param>
         /// <returns></returns>
         public static float Distance(in Vector2 x, in Vector2 y) { return Length(y - x); }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -715,35 +1690,10 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="num"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Exp(float num) { return (float)System.Math.Exp((double)num); }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="num"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Exp2(float num) { return Pow(2.0f, num); }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="num"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Floor(float num) { return (float)System.Math.Floor((double)num); }
-
-       
- /// <summary>
-        /// 
-        /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
         public static float Length(float x) { return Abs(x); }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -875,18 +1825,51 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="num"></param>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="x"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Log(float num) { return (float)System.Math.Log((double)num); }
+        public static float UnLerp(float a, float b, float x) { return (x - a) / (b - a); }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="radian"></param>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="x"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Log10(float radian) { return (float)System.Math.Log10((double)radian); }
+        public static double UnLerp(double a, double b, double x) { return (x - a) / (b - a); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 UnLerp(in Vector2 a, in Vector2 b, in Vector2 x) { return (x - a) / (b - a); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 UnLerp(in Vector3 a, in Vector3 b, in Vector3 x) { return (x - a) / (b - a); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static Vector4 UnLerp(in Vector4 a, in Vector4 b, in Vector4 x) { return (x - a) / (b - a); }
 
         /// <summary>
         /// 
@@ -977,8 +1960,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Max(float x, float y) { return float.IsNaN(y) || x > y ? x : y; }
@@ -994,24 +1977,24 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         /// <returns></returns>
         public static Vector2 Max(in Vector2 x, in Vector2 y) { return new Vector2(Max(x.X, y.X), Max(x.Y, y.Y)); }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         /// <returns></returns>
         public static Vector3 Max(in Vector3 x, in Vector3 y) { return new Vector3(Max(x.X, y.X), Max(x.Y, y.Y), Max(x.Z, y.Z)); }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         /// <returns></returns>
         public static Vector4 Max(in Vector4 x, in Vector4 y) { return new Vector4(Max(x.X, y.X), Max(x.Y, y.Y), Max(x.Z, y.Z), Max(x.W, y.W)); }
 
@@ -1050,8 +2033,8 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Min(float x, float y) { return float.IsNaN(y) || x < y ? x : y; }
@@ -1067,24 +2050,24 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         /// <returns></returns>
         public static Vector2 Min(in Vector2 x, in Vector2 y) { return new Vector2(Min(x.X, y.X), Min(x.Y, y.Y)); }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         /// <returns></returns>
         public static Vector3 Min(in Vector3 x, in Vector3 y) { return new Vector3(Min(x.X, y.X), Min(x.Y, y.Y), Min(x.Z, y.Z)); }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         /// <returns></returns>
         public static Vector4 Min(in Vector4 x, in Vector4 y) { return new Vector4(Min(x.X, y.X), Min(x.Y, y.Y), Min(x.Z, y.Z), Min(x.W, y.W)); }
 
@@ -1092,8 +2075,9 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="a"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Mix(float x, float y, float a) { return x * (1 - a) + y * a; }
@@ -1107,14 +2091,6 @@ namespace Raster.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Mod(float x, float y) { return y * Floor(x / y); }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Pow(float x, float y) { return (float)System.Math.Pow((double)x, (double)y); }
 
         /// <summary>
         /// 
@@ -1237,132 +2213,6 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="num"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Round(float num) { return (float)System.Math.Round((double)num); }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="c"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int Select(int a, int b, bool c) { return c ? b : a; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="c"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint Select(uint a, uint b, bool c) { return c ? b : a; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="c"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static long Select(long a, long b, bool c) { return c ? b : a; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="c"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Select(float a, float b, bool c) { return c ? b : a; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="c"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Select(in Vector2 a, in Vector2 b, bool c) { return c ? b : a; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="c"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Select(in Vector3 a, in Vector3 b, bool c) { return c ? b : a; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="c"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Select(in Vector4 a, in Vector4 b, bool c) { return c ? b : a; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="c"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ulong Select(ulong a, ulong b, bool c) { return c ? b : a; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="radian"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Sign(float radian) { return (float)System.Math.Sign((double)radian); }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="radian"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Sin(float radian) { return (float)System.Math.Sin((double)radian); }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="radian"></param>
-        /// <param name="s"></param>
-        /// <param name="c"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SinCos(float radian, out float s, out float c) 
-        {
-            s = Sin(radian);
-            c = Cos(radian);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="radian"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Sinh(float radian) { return (float)System.Math.Sinh((double)radian); }
-
-        
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="edge0"></param>
         /// <param name="edge1"></param>
         /// <param name="x"></param>
@@ -1458,10 +2308,10 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="radian"></param>
+        /// <param name="x"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Tan(float x) { return (float)System.Math.Tan((double)x); }
+        public static bool All(in Vector2 x) { return x.X != 0.0f && x.Y != 0.0f; }
 
         /// <summary>
         /// 
@@ -1469,7 +2319,7 @@ namespace Raster.Math
         /// <param name="x"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double Tan(double x) { return System.Math.Tan(x); }
+        public static bool All(in Vector3 x) { return x.X != 0.0f && x.Y != 0.0f && x.Z != 0.0f; }
 
         /// <summary>
         /// 
@@ -1477,37 +2327,7 @@ namespace Raster.Math
         /// <param name="x"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Tan(in Vector2 x) { return new Vector2(Tan(x.X), Tan(x.Y)); }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <returns></returns>
-        public static Vector3 Tan(in Vector3 x) { return new Vector3(Tan(x.X), Tan(x.Y), Tan(x.Z)); }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <returns></returns>
-        public static Vector4 Tan(in Vector4 x) { return new Vector4(Tan(x.X), Tan(x.Y), Tan(x.Y), Tan(x.Z)); }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="radian"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Tanh(float radian) { return (float)System.Math.Tanh((double)radian); }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="num"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Truncate(float num) { return (float)System.Math.Truncate((double)num); }
+        public static bool All(in Vector4 x) { return x.X != 0.0f && x.Y != 0.0f && x.Z != 0.0f && x.W != 0.0f; }
 
         /// <summary>
         /// 
@@ -1515,61 +2335,222 @@ namespace Raster.Math
         /// <param name="x"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Sqrt(float x)
+        public static bool Any(in Vector2 x) { return x.X != 0.0f || x.Y != 0.0f; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Any(in Vector3 x) { return x.X != 0.0f || x.Y != 0.0f || x.Z != 0.0f; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Any(in Vector4 x) { return x.X != 0.0f || x.Y != 0.0f || x.Z != 0.0f || x.W != 0.0f; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Select(int a, int b, bool c) { return c ? b : a; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint Select(uint a, uint b, bool c) { return c ? b : a; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long Select(long a, long b, bool c) { return c ? b : a; }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ulong Select(ulong a, ulong b, bool c) { return c ? b : a; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Select(float a, float b, bool c) { return c ? b : a; }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Select(double a, double b, bool c) { return c ? b : a; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Select(in Vector2 a, in Vector2 b, bool c) { return c ? b : a; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Select(in Vector3 a, in Vector3 b, bool c) { return c ? b : a; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Select(in Vector4 a, in Vector4 b, bool c) { return c ? b : a; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Step(float x, float y) { return Select(0.0f, 1.0f, x >= y); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Step(double x, double y) { return Select(0.0, 1.0, x >= y); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int CountBits(int x) { return CountBits((int)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int CountBits(uint x)
         {
-            float invsqrt = MathHelper.FastSqrtInverse(x);
-            return invsqrt == 0.0f ? float.PositiveInfinity : 1.0f / invsqrt;
+            x = x - ((x >> 1) & 0x55555555);
+            x = (x & 0x33333333) + ((x >> 2) & 0x33333333);
+            return (int)((((x + (x >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
         /// <param name="x"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float UnLerp(float a, float b, float x) { return (x - a) / (b - a); }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="x"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double UnLerp(double a, double b, double x) { return (x - a) / (b - a); }
+        public static int CountBits(long x) { return CountBits((ulong)x); }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="s"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 UnLerp(in Vector2 a, in Vector2 b, in Vector2 x) { return (x - a) / (b - a); }
+        public static int CountBits(ulong x)
+        {
+            x = x - ((x >> 1) & 0x5555555555555555);
+            x = (x & 0x3333333333333333) + ((x >> 2) & 0x3333333333333333);
+            return (int)((((x + (x >> 4)) & 0x0F0F0F0F0F0F0F0F) * 0x0101010101010101) >> 56);
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="s"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 UnLerp(in Vector3 a, in Vector3 b, in Vector3 x) { return (x - a) / (b - a); }
+        public static int ReverseBits(int x) { return (int)RevseresBits((uint)x); }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="s"></param>
         /// <returns></returns>
-        public static Vector4 UnLerp(in Vector4 a, in Vector4 b, in Vector4 x) { return (x - a) / (b - a); }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint ReverseBits(uint x)
+        {
+            x = ((x >> 1) & 0x55555555) | ((x & 0x55555555) << 1);
+            x = ((x >> 2) & 0x33333333) | ((x & 0x33333333) << 2);
+            x = ((x >> 4) & 0x0F0F0F0F) | ((x & 0x0F0F0F0F) << 4);
+            x = ((x >> 8) & 0x00FF00FF) | ((x & 0x00FF00FF) << 8);
+            return (x >> 16) | (x << 16);
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long ReverseBits(long x) { return (long)RevseresBits((ulong)x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ulong RevseresBits(ulong x)
+        {
+            x = ((x >> 1) & 0x5555555555555555ul) | ((x & 0x5555555555555555ul) << 1);
+            x = ((x >> 2) & 0x3333333333333333ul) | ((x & 0x3333333333333333ul) << 2);
+            x = ((x >> 4) & 0x0F0F0F0F0F0F0F0Ful) | ((x & 0x0F0F0F0F0F0F0F0Ful) << 4);
+            x = ((x >> 8) & 0x00FF00FF00FF00FFul) | ((x & 0x00FF00FF00FF00FFul) << 8);
+            x = ((x >> 16) & 0x0000FFFF0000FFFFul) | ((x & 0x0000FFFF0000FFFFul) << 16);
+            return (x >> 32) | (x << 32);
+        }
         #endregion Public Static Methods
 
         #region Union Defintion
