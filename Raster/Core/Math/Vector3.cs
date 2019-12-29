@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using Raster.Drawing.Primitive;
 using Raster.Private;
 
-namespace Raster.Math
+namespace Raster.Core.Math
 {
     /// <summary>
     /// 

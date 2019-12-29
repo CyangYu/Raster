@@ -2,7 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable 0660, 0661
-namespace Raster.Math.Simd
+namespace Raster.Core.Math.Simd
 {
     [System.Serializable]
     public partial struct bool2x3 : System.IEquatable<bool2x3>
@@ -84,7 +84,7 @@ namespace Raster.Math.Simd
 
         /// <summary>
         /// Returns the result of a componentwise not operation on a bool2x3 matrix.
-/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator ! (bool2x3 val) { return new bool2x3 (!val.c0, !val.c1, !val.c2); }
 

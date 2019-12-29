@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 
 #pragma warning disable 0660, 0661
-namespace Raster.Math.Simd
+namespace Raster.Core.Math.Simd
 {
     [DebuggerTypeProxy(typeof(bool2.DebuggerProxy))]
     [System.Serializable]

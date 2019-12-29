@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 
 namespace Raster.Tests
 {
-    using Raster.Math;
-    using Raster.Math.Geometry;
+    using Raster.Core.Math;
+    using Raster.Core.Math.Geometry;
     using Raster.Drawing.Primitive;
     class Program
     {

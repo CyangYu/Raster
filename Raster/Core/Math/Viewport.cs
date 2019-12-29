@@ -1,7 +1,7 @@
 ﻿using System;
 using Raster.Drawing.Primitive;
 
-namespace Raster.Math
+namespace Raster.Core.Math
 {
     /// <summary>
     /// 

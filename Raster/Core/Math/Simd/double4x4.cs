@@ -2,7 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable 0660, 0661
-namespace Raster.Math.Simd
+namespace Raster.Core.Math.Simd
 {
     [System.Serializable]
     public partial struct double4x4 : System.IEquatable<double4x4>, IFormattable

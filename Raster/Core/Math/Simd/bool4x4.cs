@@ -2,7 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable 0660, 0661
-namespace Raster.Math.Simd
+namespace Raster.Core.Math.Simd
 {
     [System.Serializable]
     public partial struct bool4x4 : System.IEquatable<bool4x4>
@@ -90,7 +90,7 @@ namespace Raster.Math.Simd
 
         /// <summary>
         /// Returns the result of a componentwise not operation on a bool4x4 matrix.
-/t/t/// </summary>
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4x4 operator ! (bool4x4 val) { return new bool4x4 (!val.c0, !val.c1, !val.c2, !val.c3); }
 

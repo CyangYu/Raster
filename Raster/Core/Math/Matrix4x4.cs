@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using Raster.Drawing.Primitive;
-using Raster.Math.Geometry;
+using Raster.Core.Math.Geometry;
 
-namespace Raster.Math
+namespace Raster.Core.Math
 {
     /// <summary>
     /// 

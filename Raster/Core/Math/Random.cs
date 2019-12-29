@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Raster.Math
+namespace Raster.Core.Math
 {
     /// <summary>
     /// 
