@@ -1,5 +1,5 @@
 ﻿using System;
-using Raster.Math;
+using Raster.Core.Math;
 
 namespace Raster.Render
 {

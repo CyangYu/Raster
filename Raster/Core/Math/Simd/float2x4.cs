@@ -2,8 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable 0660, 0661
-
-namespace Raster.Math.Simd
+namespace Raster.Core.Math.Simd
 {
     [System.Serializable]
     public partial struct float2x4 : System.IEquatable<float2x4>, IFormattable
@@ -29,7 +28,6 @@ namespace Raster.Math.Simd
             this.c2 = c2;
             this.c3 = c3;
         }
-
         /// <summary>
         /// Constructs a float2x4 matrix from 8 float values given in row-major order.
         /// </summary>
@@ -42,7 +40,6 @@ namespace Raster.Math.Simd
             this.c2 = new float2(m02, m12);
             this.c3 = new float2(m03, m13);
         }
-
         /// <summary>
         /// Constructs a float2x4 matrix from a single float value by assigning it to every component.
         /// </summary>
@@ -54,7 +51,6 @@ namespace Raster.Math.Simd
             this.c2 = v;
             this.c3 = v;
         }
-
         /// <summary>
         /// Constructs a float2x4 matrix from a single bool value by converting it to float and assigning it to every component.
         /// </summary>
@@ -66,7 +62,6 @@ namespace Raster.Math.Simd
             this.c2 = math.select(new float2(0.0f), new float2(1.0f), v);
             this.c3 = math.select(new float2(0.0f), new float2(1.0f), v);
         }
-
         /// <summary>
         /// Constructs a float2x4 matrix from a bool2x4 matrix by componentwise conversion.
         /// </summary>
@@ -78,7 +73,6 @@ namespace Raster.Math.Simd
             this.c2 = math.select(new float2(0.0f), new float2(1.0f), v.c2);
             this.c3 = math.select(new float2(0.0f), new float2(1.0f), v.c3);
         }
-
         /// <summary>
         /// Constructs a float2x4 matrix from a single int value by converting it to float and assigning it to every component.
         /// </summary>
@@ -90,7 +84,6 @@ namespace Raster.Math.Simd
             this.c2 = v;
             this.c3 = v;
         }
-
         /// <summary>
         /// Constructs a float2x4 matrix from a int2x4 matrix by componentwise conversion.
         /// </summary>
@@ -102,7 +95,6 @@ namespace Raster.Math.Simd
             this.c2 = v.c2;
             this.c3 = v.c3;
         }
-
         /// <summary>
         /// Constructs a float2x4 matrix from a single uint value by converting it to float and assigning it to every component.
         /// </summary>
@@ -114,7 +106,6 @@ namespace Raster.Math.Simd
             this.c2 = v;
             this.c3 = v;
         }
-
         /// <summary>
         /// Constructs a float2x4 matrix from a uint2x4 matrix by componentwise conversion.
         /// </summary>
@@ -126,7 +117,6 @@ namespace Raster.Math.Simd
             this.c2 = v.c2;
             this.c3 = v.c3;
         }
-
         /// <summary>
         /// Constructs a float2x4 matrix from a single double value by converting it to float and assigning it to every component.
         /// </summary>
@@ -138,7 +128,6 @@ namespace Raster.Math.Simd
             this.c2 = (float2)v;
             this.c3 = (float2)v;
         }
-
         /// <summary>
         /// Constructs a float2x4 matrix from a double2x4 matrix by componentwise conversion.
         /// </summary>
@@ -151,298 +140,251 @@ namespace Raster.Math.Simd
             this.c3 = (float2)v.c3;
         }
 
-
         /// <summary>
         /// Implicitly converts a single float value to a float2x4 matrix by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float2x4(float v) { return new float2x4(v); }
-
         /// <summary>
         /// Explicitly converts a single bool value to a float2x4 matrix by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float2x4(bool v) { return new float2x4(v); }
-
         /// <summary>
         /// Explicitly converts a bool2x4 matrix to a float2x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float2x4(bool2x4 v) { return new float2x4(v); }
-
         /// <summary>
         /// Implicitly converts a single int value to a float2x4 matrix by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float2x4(int v) { return new float2x4(v); }
-
         /// <summary>
         /// Implicitly converts a int2x4 matrix to a float2x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float2x4(int2x4 v) { return new float2x4(v); }
-
         /// <summary>
         /// Implicitly converts a single uint value to a float2x4 matrix by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float2x4(uint v) { return new float2x4(v); }
-
         /// <summary>
         /// Implicitly converts a uint2x4 matrix to a float2x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float2x4(uint2x4 v) { return new float2x4(v); }
-
         /// <summary>
         /// Explicitly converts a single double value to a float2x4 matrix by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float2x4(double v) { return new float2x4(v); }
-
         /// <summary>
         /// Explicitly converts a double2x4 matrix to a float2x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float2x4(double2x4 v) { return new float2x4(v); }
 
-
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on two float2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator * (float2x4 lhs, float2x4 rhs) { return new float2x4 (lhs.c0 * rhs.c0, lhs.c1 * rhs.c1, lhs.c2 * rhs.c2, lhs.c3 * rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a float2x4 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator * (float2x4 lhs, float rhs) { return new float2x4 (lhs.c0 * rhs, lhs.c1 * rhs, lhs.c2 * rhs, lhs.c3 * rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a float value and a float2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator * (float lhs, float2x4 rhs) { return new float2x4 (lhs * rhs.c0, lhs * rhs.c1, lhs * rhs.c2, lhs * rhs.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise addition operation on two float2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator + (float2x4 lhs, float2x4 rhs) { return new float2x4 (lhs.c0 + rhs.c0, lhs.c1 + rhs.c1, lhs.c2 + rhs.c2, lhs.c3 + rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise addition operation on a float2x4 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator + (float2x4 lhs, float rhs) { return new float2x4 (lhs.c0 + rhs, lhs.c1 + rhs, lhs.c2 + rhs, lhs.c3 + rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise addition operation on a float value and a float2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator + (float lhs, float2x4 rhs) { return new float2x4 (lhs + rhs.c0, lhs + rhs.c1, lhs + rhs.c2, lhs + rhs.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on two float2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator - (float2x4 lhs, float2x4 rhs) { return new float2x4 (lhs.c0 - rhs.c0, lhs.c1 - rhs.c1, lhs.c2 - rhs.c2, lhs.c3 - rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a float2x4 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator - (float2x4 lhs, float rhs) { return new float2x4 (lhs.c0 - rhs, lhs.c1 - rhs, lhs.c2 - rhs, lhs.c3 - rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a float value and a float2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator - (float lhs, float2x4 rhs) { return new float2x4 (lhs - rhs.c0, lhs - rhs.c1, lhs - rhs.c2, lhs - rhs.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise division operation on two float2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator / (float2x4 lhs, float2x4 rhs) { return new float2x4 (lhs.c0 / rhs.c0, lhs.c1 / rhs.c1, lhs.c2 / rhs.c2, lhs.c3 / rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise division operation on a float2x4 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator / (float2x4 lhs, float rhs) { return new float2x4 (lhs.c0 / rhs, lhs.c1 / rhs, lhs.c2 / rhs, lhs.c3 / rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise division operation on a float value and a float2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator / (float lhs, float2x4 rhs) { return new float2x4 (lhs / rhs.c0, lhs / rhs.c1, lhs / rhs.c2, lhs / rhs.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise modulus operation on two float2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator % (float2x4 lhs, float2x4 rhs) { return new float2x4 (lhs.c0 % rhs.c0, lhs.c1 % rhs.c1, lhs.c2 % rhs.c2, lhs.c3 % rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a float2x4 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator % (float2x4 lhs, float rhs) { return new float2x4 (lhs.c0 % rhs, lhs.c1 % rhs, lhs.c2 % rhs, lhs.c3 % rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a float value and a float2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator % (float lhs, float2x4 rhs) { return new float2x4 (lhs % rhs.c0, lhs % rhs.c1, lhs % rhs.c2, lhs % rhs.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise increment operation on a float2x4 matrix.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator ++ (float2x4 val) { return new float2x4 (++val.c0, ++val.c1, ++val.c2, ++val.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise decrement operation on a float2x4 matrix.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator -- (float2x4 val) { return new float2x4 (--val.c0, --val.c1, --val.c2, --val.c3); }
-
 
         /// <summary>
         /// Returns the result of a componentwise less than operation on two float2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator < (float2x4 lhs, float2x4 rhs) { return new bool2x4 (lhs.c0 < rhs.c0, lhs.c1 < rhs.c1, lhs.c2 < rhs.c2, lhs.c3 < rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise less than operation on a float2x4 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator < (float2x4 lhs, float rhs) { return new bool2x4 (lhs.c0 < rhs, lhs.c1 < rhs, lhs.c2 < rhs, lhs.c3 < rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise less than operation on a float value and a float2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator < (float lhs, float2x4 rhs) { return new bool2x4 (lhs < rhs.c0, lhs < rhs.c1, lhs < rhs.c2, lhs < rhs.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on two float2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator <= (float2x4 lhs, float2x4 rhs) { return new bool2x4 (lhs.c0 <= rhs.c0, lhs.c1 <= rhs.c1, lhs.c2 <= rhs.c2, lhs.c3 <= rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a float2x4 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator <= (float2x4 lhs, float rhs) { return new bool2x4 (lhs.c0 <= rhs, lhs.c1 <= rhs, lhs.c2 <= rhs, lhs.c3 <= rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a float value and a float2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator <= (float lhs, float2x4 rhs) { return new bool2x4 (lhs <= rhs.c0, lhs <= rhs.c1, lhs <= rhs.c2, lhs <= rhs.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise greater than operation on two float2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator > (float2x4 lhs, float2x4 rhs) { return new bool2x4 (lhs.c0 > rhs.c0, lhs.c1 > rhs.c1, lhs.c2 > rhs.c2, lhs.c3 > rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a float2x4 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator > (float2x4 lhs, float rhs) { return new bool2x4 (lhs.c0 > rhs, lhs.c1 > rhs, lhs.c2 > rhs, lhs.c3 > rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a float value and a float2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator > (float lhs, float2x4 rhs) { return new bool2x4 (lhs > rhs.c0, lhs > rhs.c1, lhs > rhs.c2, lhs > rhs.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on two float2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator >= (float2x4 lhs, float2x4 rhs) { return new bool2x4 (lhs.c0 >= rhs.c0, lhs.c1 >= rhs.c1, lhs.c2 >= rhs.c2, lhs.c3 >= rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a float2x4 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator >= (float2x4 lhs, float rhs) { return new bool2x4 (lhs.c0 >= rhs, lhs.c1 >= rhs, lhs.c2 >= rhs, lhs.c3 >= rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a float value and a float2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator >= (float lhs, float2x4 rhs) { return new bool2x4 (lhs >= rhs.c0, lhs >= rhs.c1, lhs >= rhs.c2, lhs >= rhs.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise unary minus operation on a float2x4 matrix.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator - (float2x4 val) { return new float2x4 (-val.c0, -val.c1, -val.c2, -val.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise unary plus operation on a float2x4 matrix.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 operator + (float2x4 val) { return new float2x4 (+val.c0, +val.c1, +val.c2, +val.c3); }
-
 
         /// <summary>
         /// Returns the result of a componentwise equality operation on two float2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator == (float2x4 lhs, float2x4 rhs) { return new bool2x4 (lhs.c0 == rhs.c0, lhs.c1 == rhs.c1, lhs.c2 == rhs.c2, lhs.c3 == rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on a float2x4 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator == (float2x4 lhs, float rhs) { return new bool2x4 (lhs.c0 == rhs, lhs.c1 == rhs, lhs.c2 == rhs, lhs.c3 == rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on a float value and a float2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator == (float lhs, float2x4 rhs) { return new bool2x4 (lhs == rhs.c0, lhs == rhs.c1, lhs == rhs.c2, lhs == rhs.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on two float2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator != (float2x4 lhs, float2x4 rhs) { return new bool2x4 (lhs.c0 != rhs.c0, lhs.c1 != rhs.c1, lhs.c2 != rhs.c2, lhs.c3 != rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a float2x4 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator != (float2x4 lhs, float rhs) { return new bool2x4 (lhs.c0 != rhs, lhs.c1 != rhs, lhs.c2 != rhs, lhs.c3 != rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a float value and a float2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator != (float lhs, float2x4 rhs) { return new bool2x4 (lhs != rhs.c0, lhs != rhs.c1, lhs != rhs.c2, lhs != rhs.c3); }
-
 
 
         /// <summary>
@@ -465,18 +407,15 @@ namespace Raster.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(float2x4 rhs) { return c0.Equals(rhs.c0) && c1.Equals(rhs.c1) && c2.Equals(rhs.c2) && c3.Equals(rhs.c3); }
-
         /// <summary>
         /// Returns true if the float2x4 is equal to a given float2x4, false otherwise.
         /// </summary>
         public override bool Equals(object o) { return Equals((float2x4)o); }
 
-
         /// <summary>
         /// Returns a hash code for the float2x4.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() { return (int)math.hash(this); }
-
 
         /// <summary>
         /// Returns a string representation of the float2x4.
@@ -486,7 +425,6 @@ namespace Raster.Math.Simd
         {
             return string.Format("float2x4({0}f, {1}f, {2}f, {3}f,  {4}f, {5}f, {6}f, {7}f)", c0.x, c1.x, c2.x, c3.x, c0.y, c1.y, c2.y, c3.y);
         }
-
         /// <summary>
         /// Returns a string representation of the float2x4 using a specified format and culture-specific format information.
         /// </summary>
@@ -495,9 +433,7 @@ namespace Raster.Math.Simd
         {
             return string.Format("float2x4({0}f, {1}f, {2}f, {3}f,  {4}f, {5}f, {6}f, {7}f)", c0.x.ToString(format, formatProvider), c1.x.ToString(format, formatProvider), c2.x.ToString(format, formatProvider), c3.x.ToString(format, formatProvider), c0.y.ToString(format, formatProvider), c1.y.ToString(format, formatProvider), c2.y.ToString(format, formatProvider), c3.y.ToString(format, formatProvider));
         }
-
     }
-
     public static partial class math
     {
         /// <summary>
@@ -505,7 +441,6 @@ namespace Raster.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 float2x4(float2 c0, float2 c1, float2 c2, float2 c3) { return new float2x4(c0, c1, c2, c3); }
-
         /// <summary>
         /// Returns a float2x4 matrix constructed from from 8 float values given in row-major order.
         /// </summary>
@@ -516,61 +451,51 @@ namespace Raster.Math.Simd
             return new float2x4(m00, m01, m02, m03,
                                 m10, m11, m12, m13);
         }
-
         /// <summary>
         /// Returns a float2x4 matrix constructed from a single float value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 float2x4(float v) { return new float2x4(v); }
-
         /// <summary>
         /// Returns a float2x4 matrix constructed from a single bool value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 float2x4(bool v) { return new float2x4(v); }
-
         /// <summary>
         /// Return a float2x4 matrix constructed from a bool2x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 float2x4(bool2x4 v) { return new float2x4(v); }
-
         /// <summary>
         /// Returns a float2x4 matrix constructed from a single int value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 float2x4(int v) { return new float2x4(v); }
-
         /// <summary>
         /// Return a float2x4 matrix constructed from a int2x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 float2x4(int2x4 v) { return new float2x4(v); }
-
         /// <summary>
         /// Returns a float2x4 matrix constructed from a single uint value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 float2x4(uint v) { return new float2x4(v); }
-
         /// <summary>
         /// Return a float2x4 matrix constructed from a uint2x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 float2x4(uint2x4 v) { return new float2x4(v); }
-
         /// <summary>
         /// Returns a float2x4 matrix constructed from a single double value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 float2x4(double v) { return new float2x4(v); }
-
         /// <summary>
         /// Return a float2x4 matrix constructed from a double2x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x4 float2x4(double2x4 v) { return new float2x4(v); }
-
         /// <summary>
         /// Return the float4x2 transpose of a float2x4 matrix.
         /// </summary>
@@ -583,7 +508,6 @@ namespace Raster.Math.Simd
                 v.c2.x, v.c2.y,
                 v.c3.x, v.c3.y);
         }
-
         /// <summary>Returns a uint hash code of a float2x4 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(float2x4 v)
@@ -593,7 +517,6 @@ namespace Raster.Math.Simd
                         asuint(v.c2) * uint2(0x9F090439u, 0x5E9F85C9u) + 
                         asuint(v.c3) * uint2(0x8C4CA03Fu, 0xB8D969EDu)) + 0xAC5DB57Bu;
         }
-
         /// <summary>
         /// Returns a uint2 vector hash code of a float2x4 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -607,6 +530,5 @@ namespace Raster.Math.Simd
                     asuint(v.c2) * uint2(0x8E055BE5u, 0x6E624EB7u) + 
                     asuint(v.c3) * uint2(0x7383ED49u, 0xDD49C23Bu)) + 0xEBD0D005u;
         }
-
     }
 }

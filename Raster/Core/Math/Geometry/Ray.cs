@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Raster.Drawing.Primitive;
 
-namespace Raster.Math.Geometry
+namespace Raster.Core.Math.Geometry
 {
     /// <summary>
     /// 

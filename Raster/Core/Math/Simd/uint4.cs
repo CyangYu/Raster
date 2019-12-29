@@ -3,8 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Diagnostics;
 
 #pragma warning disable 0660, 0661
-
-namespace Raster.Math.Simd
+namespace Raster.Core.Math.Simd
 {
     [DebuggerTypeProxy(typeof(uint4.DebuggerProxy))]
     [System.Serializable]
@@ -31,7 +30,6 @@ namespace Raster.Math.Simd
             this.z = z;
             this.w = w;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from two uint values and a uint2 vector.
         /// </summary>
@@ -43,7 +41,6 @@ namespace Raster.Math.Simd
             this.z = zw.x;
             this.w = zw.y;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from a uint value, a uint2 vector and a uint value.
         /// </summary>
@@ -55,7 +52,6 @@ namespace Raster.Math.Simd
             this.z = yz.y;
             this.w = w;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from a uint value and a uint3 vector.
         /// </summary>
@@ -67,7 +63,6 @@ namespace Raster.Math.Simd
             this.z = yzw.y;
             this.w = yzw.z;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from a uint2 vector and two uint values.
         /// </summary>
@@ -79,7 +74,6 @@ namespace Raster.Math.Simd
             this.z = z;
             this.w = w;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from two uint2 vectors.
         /// </summary>
@@ -91,7 +85,6 @@ namespace Raster.Math.Simd
             this.z = zw.x;
             this.w = zw.y;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from a uint3 vector and a uint value.
         /// </summary>
@@ -103,7 +96,6 @@ namespace Raster.Math.Simd
             this.z = xyz.z;
             this.w = w;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from a uint4 vector.
         /// </summary>
@@ -115,7 +107,6 @@ namespace Raster.Math.Simd
             this.z = xyzw.z;
             this.w = xyzw.w;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from a single uint value by assigning it to every component.
         /// </summary>
@@ -127,7 +118,6 @@ namespace Raster.Math.Simd
             this.z = v;
             this.w = v;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from a single bool value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -139,7 +129,6 @@ namespace Raster.Math.Simd
             this.z = v ? 1u : 0u;
             this.w = v ? 1u : 0u;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from a bool4 vector by componentwise conversion.
         /// </summary>
@@ -151,7 +140,6 @@ namespace Raster.Math.Simd
             this.z = v.z ? 1u : 0u;
             this.w = v.w ? 1u : 0u;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from a single int value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -163,7 +151,6 @@ namespace Raster.Math.Simd
             this.z = (uint)v;
             this.w = (uint)v;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from a int4 vector by componentwise conversion.
         /// </summary>
@@ -175,7 +162,6 @@ namespace Raster.Math.Simd
             this.z = (uint)v.z;
             this.w = (uint)v.w;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from a single float value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -187,7 +173,6 @@ namespace Raster.Math.Simd
             this.z = (uint)v;
             this.w = (uint)v;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from a float4 vector by componentwise conversion.
         /// </summary>
@@ -199,7 +184,6 @@ namespace Raster.Math.Simd
             this.z = (uint)v.z;
             this.w = (uint)v.w;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from a single double value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -211,7 +195,6 @@ namespace Raster.Math.Simd
             this.z = (uint)v;
             this.w = (uint)v;
         }
-
         /// <summary>
         /// Constructs a uint4 vector from a double4 vector by componentwise conversion.
         /// </summary>
@@ -224,373 +207,313 @@ namespace Raster.Math.Simd
             this.w = (uint)v.w;
         }
 
-
         /// <summary>
         /// Implicitly converts a single uint value to a uint4 vector by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator uint4(uint v) { return new uint4(v); }
-
         /// <summary>
         /// Explicitly converts a single bool value to a uint4 vector by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint4(bool v) { return new uint4(v); }
-
         /// <summary>
         /// Explicitly converts a bool4 vector to a uint4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint4(bool4 v) { return new uint4(v); }
-
         /// <summary>
         /// Explicitly converts a single int value to a uint4 vector by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint4(int v) { return new uint4(v); }
-
         /// <summary>
         /// Explicitly converts a int4 vector to a uint4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint4(int4 v) { return new uint4(v); }
-
         /// <summary>
         /// Explicitly converts a single float value to a uint4 vector by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint4(float v) { return new uint4(v); }
-
         /// <summary>
         /// Explicitly converts a float4 vector to a uint4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint4(float4 v) { return new uint4(v); }
-
         /// <summary>
         /// Explicitly converts a single double value to a uint4 vector by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint4(double v) { return new uint4(v); }
-
         /// <summary>
         /// Explicitly converts a double4 vector to a uint4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint4(double4 v) { return new uint4(v); }
 
-
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on two uint4 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator * (uint4 lhs, uint4 rhs) { return new uint4 (lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z, lhs.w * rhs.w); }
-
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a uint4 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator * (uint4 lhs, uint rhs) { return new uint4 (lhs.x * rhs, lhs.y * rhs, lhs.z * rhs, lhs.w * rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a uint value and a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator * (uint lhs, uint4 rhs) { return new uint4 (lhs * rhs.x, lhs * rhs.y, lhs * rhs.z, lhs * rhs.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise addition operation on two uint4 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator + (uint4 lhs, uint4 rhs) { return new uint4 (lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z, lhs.w + rhs.w); }
-
         /// <summary>
         /// Returns the result of a componentwise addition operation on a uint4 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator + (uint4 lhs, uint rhs) { return new uint4 (lhs.x + rhs, lhs.y + rhs, lhs.z + rhs, lhs.w + rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise addition operation on a uint value and a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator + (uint lhs, uint4 rhs) { return new uint4 (lhs + rhs.x, lhs + rhs.y, lhs + rhs.z, lhs + rhs.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on two uint4 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator - (uint4 lhs, uint4 rhs) { return new uint4 (lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z, lhs.w - rhs.w); }
-
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a uint4 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator - (uint4 lhs, uint rhs) { return new uint4 (lhs.x - rhs, lhs.y - rhs, lhs.z - rhs, lhs.w - rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a uint value and a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator - (uint lhs, uint4 rhs) { return new uint4 (lhs - rhs.x, lhs - rhs.y, lhs - rhs.z, lhs - rhs.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise division operation on two uint4 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator / (uint4 lhs, uint4 rhs) { return new uint4 (lhs.x / rhs.x, lhs.y / rhs.y, lhs.z / rhs.z, lhs.w / rhs.w); }
-
         /// <summary>
         /// Returns the result of a componentwise division operation on a uint4 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator / (uint4 lhs, uint rhs) { return new uint4 (lhs.x / rhs, lhs.y / rhs, lhs.z / rhs, lhs.w / rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise division operation on a uint value and a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator / (uint lhs, uint4 rhs) { return new uint4 (lhs / rhs.x, lhs / rhs.y, lhs / rhs.z, lhs / rhs.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise modulus operation on two uint4 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator % (uint4 lhs, uint4 rhs) { return new uint4 (lhs.x % rhs.x, lhs.y % rhs.y, lhs.z % rhs.z, lhs.w % rhs.w); }
-
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a uint4 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator % (uint4 lhs, uint rhs) { return new uint4 (lhs.x % rhs, lhs.y % rhs, lhs.z % rhs, lhs.w % rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a uint value and a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator % (uint lhs, uint4 rhs) { return new uint4 (lhs % rhs.x, lhs % rhs.y, lhs % rhs.z, lhs % rhs.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise increment operation on a uint4 vector.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator ++ (uint4 val) { return new uint4 (++val.x, ++val.y, ++val.z, ++val.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise decrement operation on a uint4 vector.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator -- (uint4 val) { return new uint4 (--val.x, --val.y, --val.z, --val.w); }
-
 
         /// <summary>
         /// Returns the result of a componentwise less than operation on two uint4 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator < (uint4 lhs, uint4 rhs) { return new bool4 (lhs.x < rhs.x, lhs.y < rhs.y, lhs.z < rhs.z, lhs.w < rhs.w); }
-
         /// <summary>
         /// Returns the result of a componentwise less than operation on a uint4 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator < (uint4 lhs, uint rhs) { return new bool4 (lhs.x < rhs, lhs.y < rhs, lhs.z < rhs, lhs.w < rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise less than operation on a uint value and a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator < (uint lhs, uint4 rhs) { return new bool4 (lhs < rhs.x, lhs < rhs.y, lhs < rhs.z, lhs < rhs.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on two uint4 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator <= (uint4 lhs, uint4 rhs) { return new bool4 (lhs.x <= rhs.x, lhs.y <= rhs.y, lhs.z <= rhs.z, lhs.w <= rhs.w); }
-
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a uint4 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator <= (uint4 lhs, uint rhs) { return new bool4 (lhs.x <= rhs, lhs.y <= rhs, lhs.z <= rhs, lhs.w <= rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a uint value and a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator <= (uint lhs, uint4 rhs) { return new bool4 (lhs <= rhs.x, lhs <= rhs.y, lhs <= rhs.z, lhs <= rhs.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise greater than operation on two uint4 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator > (uint4 lhs, uint4 rhs) { return new bool4 (lhs.x > rhs.x, lhs.y > rhs.y, lhs.z > rhs.z, lhs.w > rhs.w); }
-
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a uint4 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator > (uint4 lhs, uint rhs) { return new bool4 (lhs.x > rhs, lhs.y > rhs, lhs.z > rhs, lhs.w > rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a uint value and a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator > (uint lhs, uint4 rhs) { return new bool4 (lhs > rhs.x, lhs > rhs.y, lhs > rhs.z, lhs > rhs.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on two uint4 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator >= (uint4 lhs, uint4 rhs) { return new bool4 (lhs.x >= rhs.x, lhs.y >= rhs.y, lhs.z >= rhs.z, lhs.w >= rhs.w); }
-
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a uint4 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator >= (uint4 lhs, uint rhs) { return new bool4 (lhs.x >= rhs, lhs.y >= rhs, lhs.z >= rhs, lhs.w >= rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a uint value and a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator >= (uint lhs, uint4 rhs) { return new bool4 (lhs >= rhs.x, lhs >= rhs.y, lhs >= rhs.z, lhs >= rhs.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise unary minus operation on a uint4 vector.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator - (uint4 val) { return new uint4 ((uint)-val.x, (uint)-val.y, (uint)-val.z, (uint)-val.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise unary plus operation on a uint4 vector.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator + (uint4 val) { return new uint4 (+val.x, +val.y, +val.z, +val.w); }
-
 
         /// <summary>Returns the result of a componentwise left shift operation on a uint4 vector by a number of bits specified by a single int.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator << (uint4 x, int n) { return new uint4 (x.x << n, x.y << n, x.z << n, x.w << n); }
-
         /// <summary>Returns the result of a componentwise right shift operation on a uint4 vector by a number of bits specified by a single int.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator >> (uint4 x, int n) { return new uint4 (x.x >> n, x.y >> n, x.z >> n, x.w >> n); }
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on two uint4 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator == (uint4 lhs, uint4 rhs) { return new bool4 (lhs.x == rhs.x, lhs.y == rhs.y, lhs.z == rhs.z, lhs.w == rhs.w); }
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on a uint4 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator == (uint4 lhs, uint rhs) { return new bool4 (lhs.x == rhs, lhs.y == rhs, lhs.z == rhs, lhs.w == rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on a uint value and a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator == (uint lhs, uint4 rhs) { return new bool4 (lhs == rhs.x, lhs == rhs.y, lhs == rhs.z, lhs == rhs.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on two uint4 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator != (uint4 lhs, uint4 rhs) { return new bool4 (lhs.x != rhs.x, lhs.y != rhs.y, lhs.z != rhs.z, lhs.w != rhs.w); }
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a uint4 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator != (uint4 lhs, uint rhs) { return new bool4 (lhs.x != rhs, lhs.y != rhs, lhs.z != rhs, lhs.w != rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a uint value and a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator != (uint lhs, uint4 rhs) { return new bool4 (lhs != rhs.x, lhs != rhs.y, lhs != rhs.z, lhs != rhs.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise bitwise not operation on a uint4 vector.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator ~ (uint4 val) { return new uint4 (~val.x, ~val.y, ~val.z, ~val.w); }
-
 
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on two uint4 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator & (uint4 lhs, uint4 rhs) { return new uint4 (lhs.x & rhs.x, lhs.y & rhs.y, lhs.z & rhs.z, lhs.w & rhs.w); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a uint4 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator & (uint4 lhs, uint rhs) { return new uint4 (lhs.x & rhs, lhs.y & rhs, lhs.z & rhs, lhs.w & rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a uint value and a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator & (uint lhs, uint4 rhs) { return new uint4 (lhs & rhs.x, lhs & rhs.y, lhs & rhs.z, lhs & rhs.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on two uint4 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator | (uint4 lhs, uint4 rhs) { return new uint4 (lhs.x | rhs.x, lhs.y | rhs.y, lhs.z | rhs.z, lhs.w | rhs.w); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a uint4 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator | (uint4 lhs, uint rhs) { return new uint4 (lhs.x | rhs, lhs.y | rhs, lhs.z | rhs, lhs.w | rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a uint value and a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator | (uint lhs, uint4 rhs) { return new uint4 (lhs | rhs.x, lhs | rhs.y, lhs | rhs.z, lhs | rhs.w); }
 
-
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on two uint4 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator ^ (uint4 lhs, uint4 rhs) { return new uint4 (lhs.x ^ rhs.x, lhs.y ^ rhs.y, lhs.z ^ rhs.z, lhs.w ^ rhs.w); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a uint4 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator ^ (uint4 lhs, uint rhs) { return new uint4 (lhs.x ^ rhs, lhs.y ^ rhs, lhs.z ^ rhs, lhs.w ^ rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a uint value and a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 operator ^ (uint lhs, uint4 rhs) { return new uint4 (lhs ^ rhs.x, lhs ^ rhs.y, lhs ^ rhs.z, lhs ^ rhs.w); }
-
-
 
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
@@ -600,14 +523,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, x, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, x, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxxz
@@ -616,14 +537,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, x, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxxw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, x, x, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxyx
@@ -632,14 +551,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, x, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, x, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxyz
@@ -648,14 +565,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, x, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxyw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, x, y, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxzx
@@ -664,14 +579,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, x, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, x, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxzz
@@ -680,14 +593,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, x, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxzw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, x, z, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxwx
@@ -696,14 +607,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, x, w, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxwy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, x, w, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxwz
@@ -712,14 +621,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, x, w, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xxww
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, x, w, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xyxx
@@ -728,14 +635,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, y, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xyxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, y, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xyxz
@@ -744,14 +649,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, y, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xyxw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, y, x, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xyyx
@@ -760,14 +663,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, y, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xyyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, y, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xyyz
@@ -776,14 +677,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, y, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xyyw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, y, y, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xyzx
@@ -792,7 +691,6 @@ namespace Raster.Math.Simd
             get { return new uint4(x, y, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xyzy
         {
@@ -800,14 +698,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, y, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xyzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, y, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xyzw
@@ -818,7 +714,6 @@ namespace Raster.Math.Simd
             set { x = value.x; y = value.y; z = value.z; w = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xywx
         {
@@ -826,14 +721,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, y, w, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xywy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, y, w, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xywz
@@ -844,14 +737,12 @@ namespace Raster.Math.Simd
             set { x = value.x; y = value.y; w = value.z; z = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xyww
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, y, w, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzxx
@@ -860,14 +751,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, z, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, z, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzxz
@@ -876,14 +765,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, z, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzxw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, z, x, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzyx
@@ -892,7 +779,6 @@ namespace Raster.Math.Simd
             get { return new uint4(x, z, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzyy
         {
@@ -900,14 +786,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, z, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, z, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzyw
@@ -918,14 +802,12 @@ namespace Raster.Math.Simd
             set { x = value.x; z = value.y; y = value.z; w = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, z, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzzy
@@ -934,14 +816,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, z, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, z, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzzw
@@ -950,14 +830,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, z, z, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzwx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, z, w, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzwy
@@ -968,14 +846,12 @@ namespace Raster.Math.Simd
             set { x = value.x; z = value.y; w = value.z; y = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzwz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, z, w, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xzww
@@ -984,14 +860,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, z, w, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, w, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwxy
@@ -1000,14 +874,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, w, x, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, w, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwxw
@@ -1016,7 +888,6 @@ namespace Raster.Math.Simd
             get { return new uint4(x, w, x, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwyx
         {
@@ -1024,14 +895,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, w, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, w, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwyz
@@ -1042,7 +911,6 @@ namespace Raster.Math.Simd
             set { x = value.x; w = value.y; y = value.z; z = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwyw
         {
@@ -1050,14 +918,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, w, y, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, w, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwzy
@@ -1068,14 +934,12 @@ namespace Raster.Math.Simd
             set { x = value.x; w = value.y; z = value.z; y = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, w, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwzw
@@ -1084,14 +948,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, w, z, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwwx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, w, w, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwwy
@@ -1100,14 +962,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, w, w, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwwz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(x, w, w, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 xwww
@@ -1116,14 +976,12 @@ namespace Raster.Math.Simd
             get { return new uint4(x, w, w, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, x, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxxy
@@ -1132,14 +990,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, x, x, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, x, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxxw
@@ -1148,14 +1004,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, x, x, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, x, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxyy
@@ -1164,14 +1018,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, x, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, x, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxyw
@@ -1180,14 +1032,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, x, y, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, x, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxzy
@@ -1196,14 +1046,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, x, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, x, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxzw
@@ -1214,7 +1062,6 @@ namespace Raster.Math.Simd
             set { y = value.x; x = value.y; z = value.z; w = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxwx
         {
@@ -1222,14 +1069,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, x, w, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxwy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, x, w, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxwz
@@ -1240,14 +1085,12 @@ namespace Raster.Math.Simd
             set { y = value.x; x = value.y; w = value.z; z = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yxww
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, x, w, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yyxx
@@ -1256,14 +1099,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, y, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yyxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, y, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yyxz
@@ -1272,14 +1113,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, y, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yyxw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, y, x, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yyyx
@@ -1288,14 +1127,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, y, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yyyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, y, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yyyz
@@ -1304,14 +1141,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, y, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yyyw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, y, y, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yyzx
@@ -1320,14 +1155,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, y, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yyzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, y, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yyzz
@@ -1336,14 +1169,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, y, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yyzw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, y, z, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yywx
@@ -1352,14 +1183,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, y, w, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yywy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, y, w, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yywz
@@ -1368,14 +1197,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, y, w, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yyww
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, y, w, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzxx
@@ -1384,7 +1211,6 @@ namespace Raster.Math.Simd
             get { return new uint4(y, z, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzxy
         {
@@ -1392,14 +1218,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, z, x, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, z, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzxw
@@ -1410,14 +1234,12 @@ namespace Raster.Math.Simd
             set { y = value.x; z = value.y; x = value.z; w = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, z, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzyy
@@ -1426,14 +1248,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, z, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, z, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzyw
@@ -1442,14 +1262,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, z, y, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, z, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzzy
@@ -1458,7 +1276,6 @@ namespace Raster.Math.Simd
             get { return new uint4(y, z, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzzz
         {
@@ -1466,14 +1283,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, z, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzzw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, z, z, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzwx
@@ -1484,14 +1299,12 @@ namespace Raster.Math.Simd
             set { y = value.x; z = value.y; w = value.z; x = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzwy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, z, w, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzwz
@@ -1500,14 +1313,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, z, w, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 yzww
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, z, w, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywxx
@@ -1516,14 +1327,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, w, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, w, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywxz
@@ -1534,14 +1343,12 @@ namespace Raster.Math.Simd
             set { y = value.x; w = value.y; x = value.z; z = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywxw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, w, x, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywyx
@@ -1550,14 +1357,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, w, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, w, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywyz
@@ -1566,14 +1371,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, w, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywyw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, w, y, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywzx
@@ -1584,14 +1387,12 @@ namespace Raster.Math.Simd
             set { y = value.x; w = value.y; z = value.z; x = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, w, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywzz
@@ -1600,14 +1401,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, w, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywzw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, w, z, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywwx
@@ -1616,14 +1415,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, w, w, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywwy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, w, w, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywwz
@@ -1632,14 +1429,12 @@ namespace Raster.Math.Simd
             get { return new uint4(y, w, w, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 ywww
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(y, w, w, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxxx
@@ -1648,14 +1443,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, x, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, x, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxxz
@@ -1664,14 +1457,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, x, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxxw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, x, x, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxyx
@@ -1680,7 +1471,6 @@ namespace Raster.Math.Simd
             get { return new uint4(z, x, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxyy
         {
@@ -1688,14 +1478,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, x, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, x, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxyw
@@ -1706,14 +1494,12 @@ namespace Raster.Math.Simd
             set { z = value.x; x = value.y; y = value.z; w = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, x, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxzy
@@ -1722,14 +1508,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, x, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, x, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxzw
@@ -1738,14 +1522,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, x, z, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxwx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, x, w, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxwy
@@ -1756,14 +1538,12 @@ namespace Raster.Math.Simd
             set { z = value.x; x = value.y; w = value.z; y = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxwz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, x, w, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zxww
@@ -1772,14 +1552,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, x, w, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zyxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, y, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zyxy
@@ -1788,14 +1566,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, y, x, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zyxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, y, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zyxw
@@ -1806,14 +1582,12 @@ namespace Raster.Math.Simd
             set { z = value.x; y = value.y; x = value.z; w = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zyyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, y, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zyyy
@@ -1822,14 +1596,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, y, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zyyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, y, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zyyw
@@ -1838,14 +1610,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, y, y, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zyzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, y, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zyzy
@@ -1854,7 +1624,6 @@ namespace Raster.Math.Simd
             get { return new uint4(z, y, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zyzz
         {
@@ -1862,14 +1631,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, y, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zyzw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, y, z, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zywx
@@ -1880,14 +1647,12 @@ namespace Raster.Math.Simd
             set { z = value.x; y = value.y; w = value.z; x = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zywy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, y, w, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zywz
@@ -1896,14 +1661,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, y, w, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zyww
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, y, w, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzxx
@@ -1912,14 +1675,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, z, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, z, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzxz
@@ -1928,14 +1689,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, z, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzxw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, z, x, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzyx
@@ -1944,14 +1703,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, z, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, z, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzyz
@@ -1960,14 +1717,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, z, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzyw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, z, y, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzzx
@@ -1976,14 +1731,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, z, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, z, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzzz
@@ -1992,14 +1745,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, z, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzzw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, z, z, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzwx
@@ -2008,14 +1759,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, z, w, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzwy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, z, w, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzwz
@@ -2024,7 +1773,6 @@ namespace Raster.Math.Simd
             get { return new uint4(z, z, w, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zzww
         {
@@ -2032,14 +1780,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, z, w, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, w, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwxy
@@ -2050,7 +1796,6 @@ namespace Raster.Math.Simd
             set { z = value.x; w = value.y; x = value.z; y = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwxz
         {
@@ -2058,14 +1803,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, w, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwxw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, w, x, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwyx
@@ -2076,14 +1819,12 @@ namespace Raster.Math.Simd
             set { z = value.x; w = value.y; y = value.z; x = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, w, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwyz
@@ -2092,14 +1833,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, w, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwyw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, w, y, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwzx
@@ -2108,14 +1847,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, w, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, w, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwzz
@@ -2124,14 +1861,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, w, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwzw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, w, z, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwwx
@@ -2140,14 +1875,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, w, w, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwwy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, w, w, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwwz
@@ -2156,14 +1889,12 @@ namespace Raster.Math.Simd
             get { return new uint4(z, w, w, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 zwww
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(z, w, w, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxxx
@@ -2172,14 +1903,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, x, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, x, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxxz
@@ -2188,14 +1917,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, x, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxxw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, x, x, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxyx
@@ -2204,14 +1931,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, x, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, x, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxyz
@@ -2222,7 +1947,6 @@ namespace Raster.Math.Simd
             set { w = value.x; x = value.y; y = value.z; z = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxyw
         {
@@ -2230,14 +1954,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, x, y, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, x, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxzy
@@ -2248,14 +1970,12 @@ namespace Raster.Math.Simd
             set { w = value.x; x = value.y; z = value.z; y = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, x, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxzw
@@ -2264,14 +1984,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, x, z, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxwx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, x, w, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxwy
@@ -2280,14 +1998,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, x, w, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxwz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, x, w, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wxww
@@ -2296,7 +2012,6 @@ namespace Raster.Math.Simd
             get { return new uint4(w, x, w, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wyxx
         {
@@ -2304,14 +2019,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, y, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wyxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, y, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wyxz
@@ -2322,14 +2035,12 @@ namespace Raster.Math.Simd
             set { w = value.x; y = value.y; x = value.z; z = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wyxw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, y, x, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wyyx
@@ -2338,14 +2049,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, y, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wyyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, y, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wyyz
@@ -2354,14 +2063,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, y, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wyyw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, y, y, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wyzx
@@ -2372,14 +2079,12 @@ namespace Raster.Math.Simd
             set { w = value.x; y = value.y; z = value.z; x = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wyzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, y, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wyzz
@@ -2388,14 +2093,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, y, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wyzw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, y, z, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wywx
@@ -2404,14 +2107,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, y, w, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wywy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, y, w, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wywz
@@ -2420,7 +2121,6 @@ namespace Raster.Math.Simd
             get { return new uint4(w, y, w, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wyww
         {
@@ -2428,14 +2128,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, y, w, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, z, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzxy
@@ -2446,7 +2144,6 @@ namespace Raster.Math.Simd
             set { w = value.x; z = value.y; x = value.z; y = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzxz
         {
@@ -2454,14 +2151,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, z, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzxw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, z, x, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzyx
@@ -2472,14 +2167,12 @@ namespace Raster.Math.Simd
             set { w = value.x; z = value.y; y = value.z; x = value.w; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, z, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzyz
@@ -2488,14 +2181,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, z, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzyw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, z, y, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzzx
@@ -2504,14 +2195,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, z, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, z, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzzz
@@ -2520,14 +2209,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, z, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzzw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, z, z, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzwx
@@ -2536,14 +2223,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, z, w, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzwy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, z, w, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzwz
@@ -2552,14 +2237,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, z, w, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wzww
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, z, w, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwxx
@@ -2568,14 +2251,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, w, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, w, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwxz
@@ -2584,14 +2265,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, w, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwxw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, w, x, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwyx
@@ -2600,14 +2279,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, w, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, w, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwyz
@@ -2616,14 +2293,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, w, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwyw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, w, y, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwzx
@@ -2632,14 +2307,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, w, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, w, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwzz
@@ -2648,14 +2321,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, w, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwzw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, w, z, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwwx
@@ -2664,14 +2335,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, w, w, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwwy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, w, w, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwwz
@@ -2680,14 +2349,12 @@ namespace Raster.Math.Simd
             get { return new uint4(w, w, w, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint4 wwww
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint4(w, w, w, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xxx
@@ -2696,14 +2363,12 @@ namespace Raster.Math.Simd
             get { return new uint3(x, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(x, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xxz
@@ -2712,14 +2377,12 @@ namespace Raster.Math.Simd
             get { return new uint3(x, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xxw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(x, x, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xyx
@@ -2728,14 +2391,12 @@ namespace Raster.Math.Simd
             get { return new uint3(x, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(x, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xyz
@@ -2746,7 +2407,6 @@ namespace Raster.Math.Simd
             set { x = value.x; y = value.y; z = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xyw
         {
@@ -2756,14 +2416,12 @@ namespace Raster.Math.Simd
             set { x = value.x; y = value.y; w = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(x, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xzy
@@ -2774,14 +2432,12 @@ namespace Raster.Math.Simd
             set { x = value.x; z = value.y; y = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(x, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xzw
@@ -2792,14 +2448,12 @@ namespace Raster.Math.Simd
             set { x = value.x; z = value.y; w = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xwx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(x, w, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xwy
@@ -2810,7 +2464,6 @@ namespace Raster.Math.Simd
             set { x = value.x; w = value.y; y = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xwz
         {
@@ -2820,14 +2473,12 @@ namespace Raster.Math.Simd
             set { x = value.x; w = value.y; z = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 xww
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(x, w, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 yxx
@@ -2836,14 +2487,12 @@ namespace Raster.Math.Simd
             get { return new uint3(y, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 yxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(y, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 yxz
@@ -2854,7 +2503,6 @@ namespace Raster.Math.Simd
             set { y = value.x; x = value.y; z = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 yxw
         {
@@ -2864,14 +2512,12 @@ namespace Raster.Math.Simd
             set { y = value.x; x = value.y; w = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 yyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(y, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 yyy
@@ -2880,7 +2526,6 @@ namespace Raster.Math.Simd
             get { return new uint3(y, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 yyz
         {
@@ -2888,14 +2533,12 @@ namespace Raster.Math.Simd
             get { return new uint3(y, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 yyw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(y, y, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 yzx
@@ -2906,7 +2549,6 @@ namespace Raster.Math.Simd
             set { y = value.x; z = value.y; x = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 yzy
         {
@@ -2914,14 +2556,12 @@ namespace Raster.Math.Simd
             get { return new uint3(y, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 yzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(y, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 yzw
@@ -2932,7 +2572,6 @@ namespace Raster.Math.Simd
             set { y = value.x; z = value.y; w = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 ywx
         {
@@ -2942,14 +2581,12 @@ namespace Raster.Math.Simd
             set { y = value.x; w = value.y; x = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 ywy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(y, w, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 ywz
@@ -2960,7 +2597,6 @@ namespace Raster.Math.Simd
             set { y = value.x; w = value.y; z = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 yww
         {
@@ -2968,14 +2604,12 @@ namespace Raster.Math.Simd
             get { return new uint3(y, w, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(z, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zxy
@@ -2986,14 +2620,12 @@ namespace Raster.Math.Simd
             set { z = value.x; x = value.y; y = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(z, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zxw
@@ -3004,7 +2636,6 @@ namespace Raster.Math.Simd
             set { z = value.x; x = value.y; w = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zyx
         {
@@ -3014,7 +2645,6 @@ namespace Raster.Math.Simd
             set { z = value.x; y = value.y; x = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zyy
         {
@@ -3022,14 +2652,12 @@ namespace Raster.Math.Simd
             get { return new uint3(z, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(z, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zyw
@@ -3040,14 +2668,12 @@ namespace Raster.Math.Simd
             set { z = value.x; y = value.y; w = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(z, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zzy
@@ -3056,7 +2682,6 @@ namespace Raster.Math.Simd
             get { return new uint3(z, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zzz
         {
@@ -3064,14 +2689,12 @@ namespace Raster.Math.Simd
             get { return new uint3(z, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zzw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(z, z, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zwx
@@ -3082,7 +2705,6 @@ namespace Raster.Math.Simd
             set { z = value.x; w = value.y; x = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zwy
         {
@@ -3092,14 +2714,12 @@ namespace Raster.Math.Simd
             set { z = value.x; w = value.y; y = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zwz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(z, w, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 zww
@@ -3108,14 +2728,12 @@ namespace Raster.Math.Simd
             get { return new uint3(z, w, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(w, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wxy
@@ -3126,7 +2744,6 @@ namespace Raster.Math.Simd
             set { w = value.x; x = value.y; y = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wxz
         {
@@ -3136,14 +2753,12 @@ namespace Raster.Math.Simd
             set { w = value.x; x = value.y; z = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wxw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(w, x, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wyx
@@ -3154,14 +2769,12 @@ namespace Raster.Math.Simd
             set { w = value.x; y = value.y; x = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(w, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wyz
@@ -3172,14 +2785,12 @@ namespace Raster.Math.Simd
             set { w = value.x; y = value.y; z = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wyw
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(w, y, w); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wzx
@@ -3190,7 +2801,6 @@ namespace Raster.Math.Simd
             set { w = value.x; z = value.y; x = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wzy
         {
@@ -3200,14 +2810,12 @@ namespace Raster.Math.Simd
             set { w = value.x; z = value.y; y = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(w, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wzw
@@ -3216,14 +2824,12 @@ namespace Raster.Math.Simd
             get { return new uint3(w, z, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wwx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(w, w, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wwy
@@ -3232,14 +2838,12 @@ namespace Raster.Math.Simd
             get { return new uint3(w, w, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 wwz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint3(w, w, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint3 www
@@ -3248,14 +2852,12 @@ namespace Raster.Math.Simd
             get { return new uint3(w, w, w); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 xx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint2(x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 xy
@@ -3266,7 +2868,6 @@ namespace Raster.Math.Simd
             set { x = value.x; y = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 xz
         {
@@ -3275,7 +2876,6 @@ namespace Raster.Math.Simd
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { x = value.x; z = value.y; }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 xw
@@ -3286,7 +2886,6 @@ namespace Raster.Math.Simd
             set { x = value.x; w = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 yx
         {
@@ -3296,14 +2895,12 @@ namespace Raster.Math.Simd
             set { y = value.x; x = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 yy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint2(y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 yz
@@ -3314,7 +2911,6 @@ namespace Raster.Math.Simd
             set { y = value.x; z = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 yw
         {
@@ -3323,7 +2919,6 @@ namespace Raster.Math.Simd
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { y = value.x; w = value.y; }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 zx
@@ -3334,7 +2929,6 @@ namespace Raster.Math.Simd
             set { z = value.x; x = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 zy
         {
@@ -3344,14 +2938,12 @@ namespace Raster.Math.Simd
             set { z = value.x; y = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 zz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint2(z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 zw
@@ -3362,7 +2954,6 @@ namespace Raster.Math.Simd
             set { z = value.x; w = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 wx
         {
@@ -3371,7 +2962,6 @@ namespace Raster.Math.Simd
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { w = value.x; x = value.y; }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 wy
@@ -3382,7 +2972,6 @@ namespace Raster.Math.Simd
             set { w = value.x; y = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 wz
         {
@@ -3392,14 +2981,12 @@ namespace Raster.Math.Simd
             set { w = value.x; z = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public uint2 ww
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new uint2(w, w); }
         }
-
 
 
         /// <summary>
@@ -3430,18 +3017,15 @@ namespace Raster.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(uint4 rhs) { return x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w; }
-
         /// <summary>
         /// Returns true if the uint4 is equal to a given uint4, false otherwise.
         /// </summary>
         public override bool Equals(object o) { return Equals((uint4)o); }
 
-
         /// <summary>
         /// Returns a hash code for the uint4.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() { return (int)math.hash(this); }
-
 
         /// <summary>
         /// Returns a string representation of the uint4.
@@ -3451,7 +3035,6 @@ namespace Raster.Math.Simd
         {
             return string.Format("uint4({0}, {1}, {2}, {3})", x, y, z, w);
         }
-
         /// <summary>
         /// Returns a string representation of the uint4 using a specified format and culture-specific format information.
         /// </summary>
@@ -3460,7 +3043,6 @@ namespace Raster.Math.Simd
         {
             return string.Format("uint4({0}, {1}, {2}, {3})", x.ToString(format, formatProvider), y.ToString(format, formatProvider), z.ToString(format, formatProvider), w.ToString(format, formatProvider));
         }
-
         internal sealed class DebuggerProxy
         {
             public uint x;
@@ -3475,9 +3057,7 @@ namespace Raster.Math.Simd
                 w = v.w;
             }
         }
-
     }
-
     public static partial class math
     {
         /// <summary>
@@ -3485,110 +3065,92 @@ namespace Raster.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(uint x, uint y, uint z, uint w) { return new uint4(x, y, z, w); }
-
         /// <summary>
         /// Returns a uint4 vector constructed from two uint values and a uint2 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(uint x, uint y, uint2 zw) { return new uint4(x, y, zw); }
-
         /// <summary>
         /// Returns a uint4 vector constructed from a uint value, a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(uint x, uint2 yz, uint w) { return new uint4(x, yz, w); }
-
         /// <summary>
         /// Returns a uint4 vector constructed from a uint value and a uint3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(uint x, uint3 yzw) { return new uint4(x, yzw); }
-
         /// <summary>
         /// Returns a uint4 vector constructed from a uint2 vector and two uint values.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(uint2 xy, uint z, uint w) { return new uint4(xy, z, w); }
-
         /// <summary>
         /// Returns a uint4 vector constructed from two uint2 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(uint2 xy, uint2 zw) { return new uint4(xy, zw); }
-
         /// <summary>
         /// Returns a uint4 vector constructed from a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(uint3 xyz, uint w) { return new uint4(xyz, w); }
-
         /// <summary>
         /// Returns a uint4 vector constructed from a uint4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(uint4 xyzw) { return new uint4(xyzw); }
-
         /// <summary>
         /// Returns a uint4 vector constructed from a single uint value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(uint v) { return new uint4(v); }
-
         /// <summary>
         /// Returns a uint4 vector constructed from a single bool value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(bool v) { return new uint4(v); }
-
         /// <summary>
         /// Return a uint4 vector constructed from a bool4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(bool4 v) { return new uint4(v); }
-
         /// <summary>
         /// Returns a uint4 vector constructed from a single int value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(int v) { return new uint4(v); }
-
         /// <summary>
         /// Return a uint4 vector constructed from a int4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(int4 v) { return new uint4(v); }
-
         /// <summary>
         /// Returns a uint4 vector constructed from a single float value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(float v) { return new uint4(v); }
-
         /// <summary>
         /// Return a uint4 vector constructed from a float4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(float4 v) { return new uint4(v); }
-
         /// <summary>
         /// Returns a uint4 vector constructed from a single double value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(double v) { return new uint4(v); }
-
         /// <summary>
         /// Return a uint4 vector constructed from a double4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 uint4(double4 v) { return new uint4(v); }
-
         /// <summary>Returns a uint hash code of a uint4 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(uint4 v)
         {
             return csum(v * uint4(0xB492BF15u, 0xD37220E3u, 0x7AA2C2BDu, 0xE16BC89Du)) + 0x7AA07CD3u;
         }
-
         /// <summary>
         /// Returns a uint4 vector hash code of a uint4 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -3599,7 +3161,6 @@ namespace Raster.Math.Simd
         {
             return (v * uint4(0xAF642BA9u, 0xA8F2213Bu, 0x9F3FDC37u, 0xAC60D0C3u)) + 0x9263662Fu;
         }
-
         /// <summary>
         /// Returns the result of specified shuffling of the components from two uint4 vectors into a uint value.
         /// </summary>
@@ -3608,7 +3169,6 @@ namespace Raster.Math.Simd
         {
             return select_shuffle_component(a, b, x);
         }
-
         /// <summary>
         /// Returns the result of specified shuffling of the components from two uint4 vectors into a uint2 vector.
         /// </summary>
@@ -3619,7 +3179,6 @@ namespace Raster.Math.Simd
                 select_shuffle_component(a, b, x),
                 select_shuffle_component(a, b, y));
         }
-
         /// <summary>
         /// Returns the result of specified shuffling of the components from two uint4 vectors into a uint3 vector.
         /// </summary>
@@ -3631,7 +3190,6 @@ namespace Raster.Math.Simd
                 select_shuffle_component(a, b, y),
                 select_shuffle_component(a, b, z));
         }
-
         /// <summary>
         /// Returns the result of specified shuffling of the components from two uint4 vectors into a uint4 vector.
         /// </summary>
@@ -3644,7 +3202,6 @@ namespace Raster.Math.Simd
                 select_shuffle_component(a, b, z),
                 select_shuffle_component(a, b, w));
         }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static uint select_shuffle_component(uint4 a, uint4 b, ShuffleComponent component)
         {
@@ -3670,6 +3227,5 @@ namespace Raster.Math.Simd
                     throw new System.ArgumentException("Invalid shuffle component: " + component);
             }
         }
-
     }
 }

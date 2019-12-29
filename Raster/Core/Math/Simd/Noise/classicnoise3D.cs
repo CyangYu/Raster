@@ -11,8 +11,9 @@
 // Distributed under the MIT license. See LICENSE file.
 // https://github.com/stegu/webgl-noise
 //
-using static Raster.Math.Simd.math;
-namespace Raster.Math.Simd.Noise
+using static Raster.Core.Math.Simd.math;
+
+namespace Raster.Core.Math.Simd.Noise
 {
     public static partial class noise
     {

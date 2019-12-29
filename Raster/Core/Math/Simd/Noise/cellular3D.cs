@@ -4,6 +4,7 @@
 // See LICENSE file for details.
 // https://github.com/stegu/webgl-noise
 using static Raster.Math.Simd.math;
+
 namespace Raster.Math.Simd.Noise
 {
     public static partial class noise

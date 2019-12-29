@@ -2,8 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable 0660, 0661
-
-namespace Raster.Math.Simd
+namespace Raster.Core.Math.Simd
 {
     [System.Serializable]
     public partial struct double2x2 : System.IEquatable<double2x2>, IFormattable
@@ -15,7 +14,6 @@ namespace Raster.Math.Simd
         /// double2x2 identity transform.
         /// </summary>
         public static readonly double2x2 identity = new double2x2(1.0, 0.0,   0.0, 1.0);
-
         /// <summary>
         /// double2x2 zero value.
         /// </summary>
@@ -30,7 +28,6 @@ namespace Raster.Math.Simd
             this.c0 = c0;
             this.c1 = c1;
         }
-
         /// <summary>
         /// Constructs a double2x2 matrix from 4 double values given in row-major order.
         /// </summary>
@@ -41,7 +38,6 @@ namespace Raster.Math.Simd
             this.c0 = new double2(m00, m10);
             this.c1 = new double2(m01, m11);
         }
-
         /// <summary>
         /// Constructs a double2x2 matrix from a single double value by assigning it to every component.
         /// </summary>
@@ -51,7 +47,6 @@ namespace Raster.Math.Simd
             this.c0 = v;
             this.c1 = v;
         }
-
         /// <summary>
         /// Constructs a double2x2 matrix from a single bool value by converting it to double and assigning it to every component.
         /// </summary>
@@ -61,7 +56,6 @@ namespace Raster.Math.Simd
             this.c0 = math.select(new double2(0.0), new double2(1.0), v);
             this.c1 = math.select(new double2(0.0), new double2(1.0), v);
         }
-
         /// <summary>
         /// Constructs a double2x2 matrix from a bool2x2 matrix by componentwise conversion.
         /// </summary>
@@ -71,7 +65,6 @@ namespace Raster.Math.Simd
             this.c0 = math.select(new double2(0.0), new double2(1.0), v.c0);
             this.c1 = math.select(new double2(0.0), new double2(1.0), v.c1);
         }
-
         /// <summary>
         /// Constructs a double2x2 matrix from a single int value by converting it to double and assigning it to every component.
         /// </summary>
@@ -81,7 +74,6 @@ namespace Raster.Math.Simd
             this.c0 = v;
             this.c1 = v;
         }
-
         /// <summary>
         /// Constructs a double2x2 matrix from a int2x2 matrix by componentwise conversion.
         /// </summary>
@@ -91,7 +83,6 @@ namespace Raster.Math.Simd
             this.c0 = v.c0;
             this.c1 = v.c1;
         }
-
         /// <summary>
         /// Constructs a double2x2 matrix from a single uint value by converting it to double and assigning it to every component.
         /// </summary>
@@ -101,7 +92,6 @@ namespace Raster.Math.Simd
             this.c0 = v;
             this.c1 = v;
         }
-
         /// <summary>
         /// Constructs a double2x2 matrix from a uint2x2 matrix by componentwise conversion.
         /// </summary>
@@ -111,7 +101,6 @@ namespace Raster.Math.Simd
             this.c0 = v.c0;
             this.c1 = v.c1;
         }
-
         /// <summary>
         /// Constructs a double2x2 matrix from a single float value by converting it to double and assigning it to every component.
         /// </summary>
@@ -121,7 +110,6 @@ namespace Raster.Math.Simd
             this.c0 = v;
             this.c1 = v;
         }
-
         /// <summary>
         /// Constructs a double2x2 matrix from a float2x2 matrix by componentwise conversion.
         /// </summary>
@@ -132,298 +120,251 @@ namespace Raster.Math.Simd
             this.c1 = v.c1;
         }
 
-
         /// <summary>
         /// Implicitly converts a single double value to a double2x2 matrix by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double2x2(double v) { return new double2x2(v); }
-
         /// <summary>
         /// Explicitly converts a single bool value to a double2x2 matrix by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator double2x2(bool v) { return new double2x2(v); }
-
         /// <summary>
         /// Explicitly converts a bool2x2 matrix to a double2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator double2x2(bool2x2 v) { return new double2x2(v); }
-
         /// <summary>
         /// Implicitly converts a single int value to a double2x2 matrix by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double2x2(int v) { return new double2x2(v); }
-
         /// <summary>
         /// Implicitly converts a int2x2 matrix to a double2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double2x2(int2x2 v) { return new double2x2(v); }
-
         /// <summary>
         /// Implicitly converts a single uint value to a double2x2 matrix by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double2x2(uint v) { return new double2x2(v); }
-
         /// <summary>
         /// Implicitly converts a uint2x2 matrix to a double2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double2x2(uint2x2 v) { return new double2x2(v); }
-
         /// <summary>
         /// Implicitly converts a single float value to a double2x2 matrix by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double2x2(float v) { return new double2x2(v); }
-
         /// <summary>
         /// Implicitly converts a float2x2 matrix to a double2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double2x2(float2x2 v) { return new double2x2(v); }
 
-
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on two double2x2 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator * (double2x2 lhs, double2x2 rhs) { return new double2x2 (lhs.c0 * rhs.c0, lhs.c1 * rhs.c1); }
-
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a double2x2 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator * (double2x2 lhs, double rhs) { return new double2x2 (lhs.c0 * rhs, lhs.c1 * rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a double value and a double2x2 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator * (double lhs, double2x2 rhs) { return new double2x2 (lhs * rhs.c0, lhs * rhs.c1); }
 
-
         /// <summary>
         /// Returns the result of a componentwise addition operation on two double2x2 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator + (double2x2 lhs, double2x2 rhs) { return new double2x2 (lhs.c0 + rhs.c0, lhs.c1 + rhs.c1); }
-
         /// <summary>
         /// Returns the result of a componentwise addition operation on a double2x2 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator + (double2x2 lhs, double rhs) { return new double2x2 (lhs.c0 + rhs, lhs.c1 + rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise addition operation on a double value and a double2x2 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator + (double lhs, double2x2 rhs) { return new double2x2 (lhs + rhs.c0, lhs + rhs.c1); }
 
-
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on two double2x2 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator - (double2x2 lhs, double2x2 rhs) { return new double2x2 (lhs.c0 - rhs.c0, lhs.c1 - rhs.c1); }
-
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a double2x2 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator - (double2x2 lhs, double rhs) { return new double2x2 (lhs.c0 - rhs, lhs.c1 - rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a double value and a double2x2 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator - (double lhs, double2x2 rhs) { return new double2x2 (lhs - rhs.c0, lhs - rhs.c1); }
 
-
         /// <summary>
         /// Returns the result of a componentwise division operation on two double2x2 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator / (double2x2 lhs, double2x2 rhs) { return new double2x2 (lhs.c0 / rhs.c0, lhs.c1 / rhs.c1); }
-
         /// <summary>
         /// Returns the result of a componentwise division operation on a double2x2 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator / (double2x2 lhs, double rhs) { return new double2x2 (lhs.c0 / rhs, lhs.c1 / rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise division operation on a double value and a double2x2 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator / (double lhs, double2x2 rhs) { return new double2x2 (lhs / rhs.c0, lhs / rhs.c1); }
 
-
         /// <summary>
         /// Returns the result of a componentwise modulus operation on two double2x2 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator % (double2x2 lhs, double2x2 rhs) { return new double2x2 (lhs.c0 % rhs.c0, lhs.c1 % rhs.c1); }
-
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a double2x2 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator % (double2x2 lhs, double rhs) { return new double2x2 (lhs.c0 % rhs, lhs.c1 % rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a double value and a double2x2 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator % (double lhs, double2x2 rhs) { return new double2x2 (lhs % rhs.c0, lhs % rhs.c1); }
 
-
         /// <summary>
         /// Returns the result of a componentwise increment operation on a double2x2 matrix.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator ++ (double2x2 val) { return new double2x2 (++val.c0, ++val.c1); }
 
-
         /// <summary>
         /// Returns the result of a componentwise decrement operation on a double2x2 matrix.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator -- (double2x2 val) { return new double2x2 (--val.c0, --val.c1); }
-
 
         /// <summary>
         /// Returns the result of a componentwise less than operation on two double2x2 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator < (double2x2 lhs, double2x2 rhs) { return new bool2x2 (lhs.c0 < rhs.c0, lhs.c1 < rhs.c1); }
-
         /// <summary>
         /// Returns the result of a componentwise less than operation on a double2x2 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator < (double2x2 lhs, double rhs) { return new bool2x2 (lhs.c0 < rhs, lhs.c1 < rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise less than operation on a double value and a double2x2 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator < (double lhs, double2x2 rhs) { return new bool2x2 (lhs < rhs.c0, lhs < rhs.c1); }
 
-
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on two double2x2 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator <= (double2x2 lhs, double2x2 rhs) { return new bool2x2 (lhs.c0 <= rhs.c0, lhs.c1 <= rhs.c1); }
-
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a double2x2 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator <= (double2x2 lhs, double rhs) { return new bool2x2 (lhs.c0 <= rhs, lhs.c1 <= rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a double value and a double2x2 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator <= (double lhs, double2x2 rhs) { return new bool2x2 (lhs <= rhs.c0, lhs <= rhs.c1); }
 
-
         /// <summary>
         /// Returns the result of a componentwise greater than operation on two double2x2 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator > (double2x2 lhs, double2x2 rhs) { return new bool2x2 (lhs.c0 > rhs.c0, lhs.c1 > rhs.c1); }
-
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a double2x2 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator > (double2x2 lhs, double rhs) { return new bool2x2 (lhs.c0 > rhs, lhs.c1 > rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a double value and a double2x2 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator > (double lhs, double2x2 rhs) { return new bool2x2 (lhs > rhs.c0, lhs > rhs.c1); }
 
-
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on two double2x2 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator >= (double2x2 lhs, double2x2 rhs) { return new bool2x2 (lhs.c0 >= rhs.c0, lhs.c1 >= rhs.c1); }
-
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a double2x2 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator >= (double2x2 lhs, double rhs) { return new bool2x2 (lhs.c0 >= rhs, lhs.c1 >= rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a double value and a double2x2 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator >= (double lhs, double2x2 rhs) { return new bool2x2 (lhs >= rhs.c0, lhs >= rhs.c1); }
 
-
         /// <summary>
         /// Returns the result of a componentwise unary minus operation on a double2x2 matrix.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator - (double2x2 val) { return new double2x2 (-val.c0, -val.c1); }
 
-
         /// <summary>
         /// Returns the result of a componentwise unary plus operation on a double2x2 matrix.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 operator + (double2x2 val) { return new double2x2 (+val.c0, +val.c1); }
-
 
         /// <summary>
         /// Returns the result of a componentwise equality operation on two double2x2 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator == (double2x2 lhs, double2x2 rhs) { return new bool2x2 (lhs.c0 == rhs.c0, lhs.c1 == rhs.c1); }
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on a double2x2 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator == (double2x2 lhs, double rhs) { return new bool2x2 (lhs.c0 == rhs, lhs.c1 == rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on a double value and a double2x2 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator == (double lhs, double2x2 rhs) { return new bool2x2 (lhs == rhs.c0, lhs == rhs.c1); }
 
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on two double2x2 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator != (double2x2 lhs, double2x2 rhs) { return new bool2x2 (lhs.c0 != rhs.c0, lhs.c1 != rhs.c1); }
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a double2x2 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator != (double2x2 lhs, double rhs) { return new bool2x2 (lhs.c0 != rhs, lhs.c1 != rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a double value and a double2x2 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator != (double lhs, double2x2 rhs) { return new bool2x2 (lhs != rhs.c0, lhs != rhs.c1); }
-
 
 
         /// <summary>
@@ -446,18 +387,15 @@ namespace Raster.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(double2x2 rhs) { return c0.Equals(rhs.c0) && c1.Equals(rhs.c1); }
-
         /// <summary>
         /// Returns true if the double2x2 is equal to a given double2x2, false otherwise.
         /// </summary>
         public override bool Equals(object o) { return Equals((double2x2)o); }
 
-
         /// <summary>
         /// Returns a hash code for the double2x2.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() { return (int)math.hash(this); }
-
 
         /// <summary>
         /// Returns a string representation of the double2x2.
@@ -467,7 +405,6 @@ namespace Raster.Math.Simd
         {
             return string.Format("double2x2({0}, {1},  {2}, {3})", c0.x, c1.x, c0.y, c1.y);
         }
-
         /// <summary>
         /// Returns a string representation of the double2x2 using a specified format and culture-specific format information.
         /// </summary>
@@ -476,9 +413,7 @@ namespace Raster.Math.Simd
         {
             return string.Format("double2x2({0}, {1},  {2}, {3})", c0.x.ToString(format, formatProvider), c1.x.ToString(format, formatProvider), c0.y.ToString(format, formatProvider), c1.y.ToString(format, formatProvider));
         }
-
     }
-
     public static partial class math
     {
         /// <summary>
@@ -486,7 +421,6 @@ namespace Raster.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 double2x2(double2 c0, double2 c1) { return new double2x2(c0, c1); }
-
         /// <summary>
         /// Returns a double2x2 matrix constructed from from 4 double values given in row-major order.
         /// </summary>
@@ -497,61 +431,51 @@ namespace Raster.Math.Simd
             return new double2x2(m00, m01,
                                  m10, m11);
         }
-
         /// <summary>
         /// Returns a double2x2 matrix constructed from a single double value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 double2x2(double v) { return new double2x2(v); }
-
         /// <summary>
         /// Returns a double2x2 matrix constructed from a single bool value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 double2x2(bool v) { return new double2x2(v); }
-
         /// <summary>
         /// Return a double2x2 matrix constructed from a bool2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 double2x2(bool2x2 v) { return new double2x2(v); }
-
         /// <summary>
         /// Returns a double2x2 matrix constructed from a single int value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 double2x2(int v) { return new double2x2(v); }
-
         /// <summary>
         /// Return a double2x2 matrix constructed from a int2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 double2x2(int2x2 v) { return new double2x2(v); }
-
         /// <summary>
         /// Returns a double2x2 matrix constructed from a single uint value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 double2x2(uint v) { return new double2x2(v); }
-
         /// <summary>
         /// Return a double2x2 matrix constructed from a uint2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 double2x2(uint2x2 v) { return new double2x2(v); }
-
         /// <summary>
         /// Returns a double2x2 matrix constructed from a single float value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 double2x2(float v) { return new double2x2(v); }
-
         /// <summary>
         /// Return a double2x2 matrix constructed from a float2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 double2x2(float2x2 v) { return new double2x2(v); }
-
         /// <summary>
         /// Return the double2x2 transpose of a double2x2 matrix.
         /// </summary>
@@ -562,7 +486,6 @@ namespace Raster.Math.Simd
                 v.c0.x, v.c0.y,
                 v.c1.x, v.c1.y);
         }
-
         /// <summary>\n\t\t/// Returns the double2x2 full inverse of a double2x2 matrix.\n\t\t/// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double2x2 inverse(double2x2 m)
@@ -596,7 +519,6 @@ namespace Raster.Math.Simd
             return csum(fold_to_uint(v.c0) * uint2(0xFD80290Bu, 0x8B65ADB7u) + 
                         fold_to_uint(v.c1) * uint2(0xDFF4F563u, 0x7069770Du)) + 0xD1224537u;
         }
-
         /// <summary>
         /// Returns a uint2 vector hash code of a double2x2 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -608,6 +530,5 @@ namespace Raster.Math.Simd
             return (fold_to_uint(v.c0) * uint2(0xE99ED6F3u, 0x48125549u) + 
                     fold_to_uint(v.c1) * uint2(0xEEE2123Bu, 0xE3AD9FE5u)) + 0xCE1CF8BFu;
         }
-
     }
 }

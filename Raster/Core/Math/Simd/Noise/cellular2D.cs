@@ -4,9 +4,9 @@
 // See LICENSE file for details.
 // https://github.com/stegu/webgl-noise
 
-using static Unity.Mathematics.math;
+using static Raster.Core.Math.Simd.math;
 
-namespace Unity.Mathematics
+namespace Raster.Core.Math.Simd.Noise
 {
     public static partial class noise
     {
@@ -17,7 +17,6 @@ namespace Unity.Mathematics
             const float K = 0.142857142857f; // 1/7
             const float Ko = 0.428571428571f; // 3/7
             const float jitter = 1.0f; // Less gives more regular pattern
-
             float2 Pi = mod289(floor(P));
             float2 Pf = frac(P);
             float3 oi = float3(-1.0f, 0.0f, 1.0f);

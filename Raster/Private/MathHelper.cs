@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using SysMath = System.Math;
 
-namespace Raster.Math
+namespace Raster.Core.Math
 {
     /// <summary>
     /// 
@@ -101,7 +101,10 @@ namespace Raster.Math
         /// <param name="f"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe static int FloatToInt32Bits(float f) => *((int*)&f);
+        private unsafe static int FloatToInt32Bits(float f)
+        {
+            return *((int*)&f);
+        }
         
         #endregion Private Static Methods
 
@@ -117,7 +120,6 @@ namespace Raster.Math
             return Factorial(n) / Factorial(k) * Factorial(n - k);
         }
             
-
         /// <summary>
         /// 
         /// </summary>
@@ -323,8 +325,10 @@ namespace Raster.Math
         /// <param name="n"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float NextPowerOfTwo(float n) =>
-            (float)SysMath.Pow(2.0, SysMath.Ceiling(SysMath.Log((double)n, 2.0)));
+        public static float NextPowerOfTwo(float n)
+        {
+            return (float)SysMath.Pow(2.0, SysMath.Ceiling(SysMath.Log((double)n, 2.0)));
+        }
 
         /// <summary>
         /// 

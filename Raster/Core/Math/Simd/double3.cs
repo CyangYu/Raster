@@ -3,8 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Diagnostics;
 
 #pragma warning disable 0660, 0661
-
-namespace Raster.Math.Simd
+namespace Raster.Core.Math.Simd
 {
     [DebuggerTypeProxy(typeof(double3.DebuggerProxy))]
     [System.Serializable]
@@ -29,7 +28,6 @@ namespace Raster.Math.Simd
             this.y = y;
             this.z = z;
         }
-
         /// <summary>
         /// Constructs a double3 vector from a double value and a double2 vector.
         /// </summary>
@@ -40,7 +38,6 @@ namespace Raster.Math.Simd
             this.y = yz.x;
             this.z = yz.y;
         }
-
         /// <summary>
         /// Constructs a double3 vector from a double2 vector and a double value.
         /// </summary>
@@ -51,7 +48,6 @@ namespace Raster.Math.Simd
             this.y = xy.y;
             this.z = z;
         }
-
         /// <summary>
         /// Constructs a double3 vector from a double3 vector.
         /// </summary>
@@ -62,7 +58,6 @@ namespace Raster.Math.Simd
             this.y = xyz.y;
             this.z = xyz.z;
         }
-
         /// <summary>
         /// Constructs a double3 vector from a single double value by assigning it to every component.
         /// </summary>
@@ -73,7 +68,6 @@ namespace Raster.Math.Simd
             this.y = v;
             this.z = v;
         }
-
         /// <summary>
         /// Constructs a double3 vector from a single bool value by converting it to double and assigning it to every component.
         /// </summary>
@@ -84,7 +78,6 @@ namespace Raster.Math.Simd
             this.y = v ? 1.0 : 0.0;
             this.z = v ? 1.0 : 0.0;
         }
-
         /// <summary>
         /// Constructs a double3 vector from a bool3 vector by componentwise conversion.
         /// </summary>
@@ -95,7 +88,6 @@ namespace Raster.Math.Simd
             this.y = v.y ? 1.0 : 0.0;
             this.z = v.z ? 1.0 : 0.0;
         }
-
         /// <summary>
         /// Constructs a double3 vector from a single int value by converting it to double and assigning it to every component.
         /// </summary>
@@ -106,7 +98,6 @@ namespace Raster.Math.Simd
             this.y = v;
             this.z = v;
         }
-
         /// <summary>
         /// Constructs a double3 vector from a int3 vector by componentwise conversion.
         /// </summary>
@@ -117,7 +108,6 @@ namespace Raster.Math.Simd
             this.y = v.y;
             this.z = v.z;
         }
-
         /// <summary>
         /// Constructs a double3 vector from a single uint value by converting it to double and assigning it to every component.
         /// </summary>
@@ -128,7 +118,6 @@ namespace Raster.Math.Simd
             this.y = v;
             this.z = v;
         }
-
         /// <summary>
         /// Constructs a double3 vector from a uint3 vector by componentwise conversion.
         /// </summary>
@@ -139,7 +128,6 @@ namespace Raster.Math.Simd
             this.y = v.y;
             this.z = v.z;
         }
-
         /// <summary>
         /// Constructs a double3 vector from a single half value by converting it to double and assigning it to every component.
         /// </summary>
@@ -150,7 +138,6 @@ namespace Raster.Math.Simd
             this.y = v;
             this.z = v;
         }
-
         /// <summary>
         /// Constructs a double3 vector from a half3 vector by componentwise conversion.
         /// </summary>
@@ -161,7 +148,6 @@ namespace Raster.Math.Simd
             this.y = v.y;
             this.z = v.z;
         }
-
         /// <summary>
         /// Constructs a double3 vector from a single float value by converting it to double and assigning it to every component.
         /// </summary>
@@ -172,7 +158,6 @@ namespace Raster.Math.Simd
             this.y = v;
             this.z = v;
         }
-
         /// <summary>
         /// Constructs a double3 vector from a float3 vector by componentwise conversion.
         /// </summary>
@@ -184,311 +169,261 @@ namespace Raster.Math.Simd
             this.z = v.z;
         }
 
-
         /// <summary>
         /// Implicitly converts a single double value to a double3 vector by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(double v) { return new double3(v); }
-
         /// <summary>
         /// Explicitly converts a single bool value to a double3 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator double3(bool v) { return new double3(v); }
-
         /// <summary>
         /// Explicitly converts a bool3 vector to a double3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator double3(bool3 v) { return new double3(v); }
-
         /// <summary>
         /// Implicitly converts a single int value to a double3 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(int v) { return new double3(v); }
-
         /// <summary>
         /// Implicitly converts a int3 vector to a double3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(int3 v) { return new double3(v); }
-
         /// <summary>
         /// Implicitly converts a single uint value to a double3 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(uint v) { return new double3(v); }
-
         /// <summary>
         /// Implicitly converts a uint3 vector to a double3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(uint3 v) { return new double3(v); }
-
         /// <summary>
         /// Implicitly converts a single half value to a double3 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(half v) { return new double3(v); }
-
         /// <summary>
         /// Implicitly converts a half3 vector to a double3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(half3 v) { return new double3(v); }
-
         /// <summary>
         /// Implicitly converts a single float value to a double3 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(float v) { return new double3(v); }
-
         /// <summary>
         /// Implicitly converts a float3 vector to a double3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(float3 v) { return new double3(v); }
 
-
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on two double3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator * (double3 lhs, double3 rhs) { return new double3 (lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator * (double3 lhs, double rhs) { return new double3 (lhs.x * rhs, lhs.y * rhs, lhs.z * rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a double value and a double3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator * (double lhs, double3 rhs) { return new double3 (lhs * rhs.x, lhs * rhs.y, lhs * rhs.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise addition operation on two double3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator + (double3 lhs, double3 rhs) { return new double3 (lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise addition operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator + (double3 lhs, double rhs) { return new double3 (lhs.x + rhs, lhs.y + rhs, lhs.z + rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise addition operation on a double value and a double3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator + (double lhs, double3 rhs) { return new double3 (lhs + rhs.x, lhs + rhs.y, lhs + rhs.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on two double3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator - (double3 lhs, double3 rhs) { return new double3 (lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator - (double3 lhs, double rhs) { return new double3 (lhs.x - rhs, lhs.y - rhs, lhs.z - rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a double value and a double3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator - (double lhs, double3 rhs) { return new double3 (lhs - rhs.x, lhs - rhs.y, lhs - rhs.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise division operation on two double3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator / (double3 lhs, double3 rhs) { return new double3 (lhs.x / rhs.x, lhs.y / rhs.y, lhs.z / rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise division operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator / (double3 lhs, double rhs) { return new double3 (lhs.x / rhs, lhs.y / rhs, lhs.z / rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise division operation on a double value and a double3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator / (double lhs, double3 rhs) { return new double3 (lhs / rhs.x, lhs / rhs.y, lhs / rhs.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise modulus operation on two double3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator % (double3 lhs, double3 rhs) { return new double3 (lhs.x % rhs.x, lhs.y % rhs.y, lhs.z % rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator % (double3 lhs, double rhs) { return new double3 (lhs.x % rhs, lhs.y % rhs, lhs.z % rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a double value and a double3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator % (double lhs, double3 rhs) { return new double3 (lhs % rhs.x, lhs % rhs.y, lhs % rhs.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise increment operation on a double3 vector.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator ++ (double3 val) { return new double3 (++val.x, ++val.y, ++val.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise decrement operation on a double3 vector.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator -- (double3 val) { return new double3 (--val.x, --val.y, --val.z); }
-
 
         /// <summary>
         /// Returns the result of a componentwise less than operation on two double3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator < (double3 lhs, double3 rhs) { return new bool3 (lhs.x < rhs.x, lhs.y < rhs.y, lhs.z < rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise less than operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator < (double3 lhs, double rhs) { return new bool3 (lhs.x < rhs, lhs.y < rhs, lhs.z < rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise less than operation on a double value and a double3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator < (double lhs, double3 rhs) { return new bool3 (lhs < rhs.x, lhs < rhs.y, lhs < rhs.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on two double3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator <= (double3 lhs, double3 rhs) { return new bool3 (lhs.x <= rhs.x, lhs.y <= rhs.y, lhs.z <= rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator <= (double3 lhs, double rhs) { return new bool3 (lhs.x <= rhs, lhs.y <= rhs, lhs.z <= rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a double value and a double3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator <= (double lhs, double3 rhs) { return new bool3 (lhs <= rhs.x, lhs <= rhs.y, lhs <= rhs.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise greater than operation on two double3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator > (double3 lhs, double3 rhs) { return new bool3 (lhs.x > rhs.x, lhs.y > rhs.y, lhs.z > rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator > (double3 lhs, double rhs) { return new bool3 (lhs.x > rhs, lhs.y > rhs, lhs.z > rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a double value and a double3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator > (double lhs, double3 rhs) { return new bool3 (lhs > rhs.x, lhs > rhs.y, lhs > rhs.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on two double3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator >= (double3 lhs, double3 rhs) { return new bool3 (lhs.x >= rhs.x, lhs.y >= rhs.y, lhs.z >= rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator >= (double3 lhs, double rhs) { return new bool3 (lhs.x >= rhs, lhs.y >= rhs, lhs.z >= rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a double value and a double3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator >= (double lhs, double3 rhs) { return new bool3 (lhs >= rhs.x, lhs >= rhs.y, lhs >= rhs.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise unary minus operation on a double3 vector.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator - (double3 val) { return new double3 (-val.x, -val.y, -val.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise unary plus operation on a double3 vector.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator + (double3 val) { return new double3 (+val.x, +val.y, +val.z); }
-
 
         /// <summary>
         /// Returns the result of a componentwise equality operation on two double3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (double3 lhs, double3 rhs) { return new bool3 (lhs.x == rhs.x, lhs.y == rhs.y, lhs.z == rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (double3 lhs, double rhs) { return new bool3 (lhs.x == rhs, lhs.y == rhs, lhs.z == rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on a double value and a double3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (double lhs, double3 rhs) { return new bool3 (lhs == rhs.x, lhs == rhs.y, lhs == rhs.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on two double3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (double3 lhs, double3 rhs) { return new bool3 (lhs.x != rhs.x, lhs.y != rhs.y, lhs.z != rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (double3 lhs, double rhs) { return new bool3 (lhs.x != rhs, lhs.y != rhs, lhs.z != rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a double value and a double3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (double lhs, double3 rhs) { return new bool3 (lhs != rhs.x, lhs != rhs.y, lhs != rhs.z); }
-
-
 
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
@@ -498,14 +433,12 @@ namespace Raster.Math.Simd
             get { return new double4(x, x, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xxxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(x, x, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xxxz
@@ -514,14 +447,12 @@ namespace Raster.Math.Simd
             get { return new double4(x, x, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xxyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(x, x, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xxyy
@@ -530,14 +461,12 @@ namespace Raster.Math.Simd
             get { return new double4(x, x, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xxyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(x, x, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xxzx
@@ -546,14 +475,12 @@ namespace Raster.Math.Simd
             get { return new double4(x, x, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xxzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(x, x, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xxzz
@@ -562,14 +489,12 @@ namespace Raster.Math.Simd
             get { return new double4(x, x, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xyxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(x, y, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xyxy
@@ -578,14 +503,12 @@ namespace Raster.Math.Simd
             get { return new double4(x, y, x, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xyxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(x, y, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xyyx
@@ -594,14 +517,12 @@ namespace Raster.Math.Simd
             get { return new double4(x, y, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xyyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(x, y, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xyyz
@@ -610,14 +531,12 @@ namespace Raster.Math.Simd
             get { return new double4(x, y, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xyzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(x, y, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xyzy
@@ -626,14 +545,12 @@ namespace Raster.Math.Simd
             get { return new double4(x, y, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xyzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(x, y, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xzxx
@@ -642,14 +559,12 @@ namespace Raster.Math.Simd
             get { return new double4(x, z, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xzxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(x, z, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xzxz
@@ -658,14 +573,12 @@ namespace Raster.Math.Simd
             get { return new double4(x, z, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xzyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(x, z, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xzyy
@@ -674,14 +587,12 @@ namespace Raster.Math.Simd
             get { return new double4(x, z, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xzyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(x, z, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xzzx
@@ -690,14 +601,12 @@ namespace Raster.Math.Simd
             get { return new double4(x, z, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xzzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(x, z, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 xzzz
@@ -706,14 +615,12 @@ namespace Raster.Math.Simd
             get { return new double4(x, z, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yxxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(y, x, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yxxy
@@ -722,14 +629,12 @@ namespace Raster.Math.Simd
             get { return new double4(y, x, x, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yxxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(y, x, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yxyx
@@ -738,14 +643,12 @@ namespace Raster.Math.Simd
             get { return new double4(y, x, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yxyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(y, x, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yxyz
@@ -754,14 +657,12 @@ namespace Raster.Math.Simd
             get { return new double4(y, x, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yxzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(y, x, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yxzy
@@ -770,14 +671,12 @@ namespace Raster.Math.Simd
             get { return new double4(y, x, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yxzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(y, x, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yyxx
@@ -786,14 +685,12 @@ namespace Raster.Math.Simd
             get { return new double4(y, y, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yyxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(y, y, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yyxz
@@ -802,14 +699,12 @@ namespace Raster.Math.Simd
             get { return new double4(y, y, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yyyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(y, y, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yyyy
@@ -818,14 +713,12 @@ namespace Raster.Math.Simd
             get { return new double4(y, y, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yyyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(y, y, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yyzx
@@ -834,14 +727,12 @@ namespace Raster.Math.Simd
             get { return new double4(y, y, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yyzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(y, y, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yyzz
@@ -850,14 +741,12 @@ namespace Raster.Math.Simd
             get { return new double4(y, y, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yzxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(y, z, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yzxy
@@ -866,14 +755,12 @@ namespace Raster.Math.Simd
             get { return new double4(y, z, x, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yzxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(y, z, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yzyx
@@ -882,14 +769,12 @@ namespace Raster.Math.Simd
             get { return new double4(y, z, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yzyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(y, z, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yzyz
@@ -898,14 +783,12 @@ namespace Raster.Math.Simd
             get { return new double4(y, z, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yzzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(y, z, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yzzy
@@ -914,14 +797,12 @@ namespace Raster.Math.Simd
             get { return new double4(y, z, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 yzzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(y, z, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zxxx
@@ -930,14 +811,12 @@ namespace Raster.Math.Simd
             get { return new double4(z, x, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zxxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(z, x, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zxxz
@@ -946,14 +825,12 @@ namespace Raster.Math.Simd
             get { return new double4(z, x, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zxyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(z, x, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zxyy
@@ -962,14 +839,12 @@ namespace Raster.Math.Simd
             get { return new double4(z, x, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zxyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(z, x, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zxzx
@@ -978,14 +853,12 @@ namespace Raster.Math.Simd
             get { return new double4(z, x, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zxzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(z, x, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zxzz
@@ -994,14 +867,12 @@ namespace Raster.Math.Simd
             get { return new double4(z, x, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zyxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(z, y, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zyxy
@@ -1010,14 +881,12 @@ namespace Raster.Math.Simd
             get { return new double4(z, y, x, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zyxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(z, y, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zyyx
@@ -1026,14 +895,12 @@ namespace Raster.Math.Simd
             get { return new double4(z, y, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zyyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(z, y, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zyyz
@@ -1042,14 +909,12 @@ namespace Raster.Math.Simd
             get { return new double4(z, y, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zyzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(z, y, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zyzy
@@ -1058,14 +923,12 @@ namespace Raster.Math.Simd
             get { return new double4(z, y, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zyzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(z, y, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zzxx
@@ -1074,14 +937,12 @@ namespace Raster.Math.Simd
             get { return new double4(z, z, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zzxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(z, z, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zzxz
@@ -1090,14 +951,12 @@ namespace Raster.Math.Simd
             get { return new double4(z, z, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zzyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(z, z, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zzyy
@@ -1106,14 +965,12 @@ namespace Raster.Math.Simd
             get { return new double4(z, z, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zzyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(z, z, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zzzx
@@ -1122,14 +979,12 @@ namespace Raster.Math.Simd
             get { return new double4(z, z, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zzzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double4(z, z, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double4 zzzz
@@ -1138,14 +993,12 @@ namespace Raster.Math.Simd
             get { return new double4(z, z, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 xxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double3(x, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 xxy
@@ -1154,14 +1007,12 @@ namespace Raster.Math.Simd
             get { return new double3(x, x, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 xxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double3(x, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 xyx
@@ -1170,14 +1021,12 @@ namespace Raster.Math.Simd
             get { return new double3(x, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 xyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double3(x, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 xyz
@@ -1188,14 +1037,12 @@ namespace Raster.Math.Simd
             set { x = value.x; y = value.y; z = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 xzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double3(x, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 xzy
@@ -1206,14 +1053,12 @@ namespace Raster.Math.Simd
             set { x = value.x; z = value.y; y = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 xzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double3(x, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 yxx
@@ -1222,14 +1067,12 @@ namespace Raster.Math.Simd
             get { return new double3(y, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 yxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double3(y, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 yxz
@@ -1240,14 +1083,12 @@ namespace Raster.Math.Simd
             set { y = value.x; x = value.y; z = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 yyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double3(y, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 yyy
@@ -1256,14 +1097,12 @@ namespace Raster.Math.Simd
             get { return new double3(y, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 yyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double3(y, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 yzx
@@ -1274,14 +1113,12 @@ namespace Raster.Math.Simd
             set { y = value.x; z = value.y; x = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 yzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double3(y, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 yzz
@@ -1290,14 +1127,12 @@ namespace Raster.Math.Simd
             get { return new double3(y, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 zxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double3(z, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 zxy
@@ -1308,14 +1143,12 @@ namespace Raster.Math.Simd
             set { z = value.x; x = value.y; y = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 zxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double3(z, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 zyx
@@ -1326,14 +1159,12 @@ namespace Raster.Math.Simd
             set { z = value.x; y = value.y; x = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 zyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double3(z, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 zyz
@@ -1342,14 +1173,12 @@ namespace Raster.Math.Simd
             get { return new double3(z, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 zzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double3(z, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 zzy
@@ -1358,7 +1187,6 @@ namespace Raster.Math.Simd
             get { return new double3(z, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double3 zzz
         {
@@ -1366,14 +1194,12 @@ namespace Raster.Math.Simd
             get { return new double3(z, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double2 xx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double2(x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double2 xy
@@ -1384,7 +1210,6 @@ namespace Raster.Math.Simd
             set { x = value.x; y = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double2 xz
         {
@@ -1393,7 +1218,6 @@ namespace Raster.Math.Simd
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { x = value.x; z = value.y; }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double2 yx
@@ -1404,14 +1228,12 @@ namespace Raster.Math.Simd
             set { y = value.x; x = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double2 yy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double2(y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double2 yz
@@ -1422,7 +1244,6 @@ namespace Raster.Math.Simd
             set { y = value.x; z = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double2 zx
         {
@@ -1431,7 +1252,6 @@ namespace Raster.Math.Simd
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { z = value.x; x = value.y; }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double2 zy
@@ -1442,14 +1262,12 @@ namespace Raster.Math.Simd
             set { z = value.x; y = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public double2 zz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new double2(z, z); }
         }
-
 
 
         /// <summary>
@@ -1480,18 +1298,15 @@ namespace Raster.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(double3 rhs) { return x == rhs.x && y == rhs.y && z == rhs.z; }
-
         /// <summary>
         /// Returns true if the double3 is equal to a given double3, false otherwise.
         /// </summary>
         public override bool Equals(object o) { return Equals((double3)o); }
 
-
         /// <summary>
         /// Returns a hash code for the double3.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() { return (int)math.hash(this); }
-
 
         /// <summary>
         /// Returns a string representation of the double3.
@@ -1501,7 +1316,6 @@ namespace Raster.Math.Simd
         {
             return string.Format("double3({0}, {1}, {2})", x, y, z);
         }
-
         /// <summary>
         /// Returns a string representation of the double3 using a specified format and culture-specific format information.
         /// </summary>
@@ -1510,7 +1324,6 @@ namespace Raster.Math.Simd
         {
             return string.Format("double3({0}, {1}, {2})", x.ToString(format, formatProvider), y.ToString(format, formatProvider), z.ToString(format, formatProvider));
         }
-
         internal sealed class DebuggerProxy
         {
             public double x;
@@ -1523,9 +1336,7 @@ namespace Raster.Math.Simd
                 z = v.z;
             }
         }
-
     }
-
     public static partial class math
     {
         /// <summary>
@@ -1533,98 +1344,82 @@ namespace Raster.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(double x, double y, double z) { return new double3(x, y, z); }
-
         /// <summary>
         /// Returns a double3 vector constructed from a double value and a double2 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(double x, double2 yz) { return new double3(x, yz); }
-
         /// <summary>
         /// Returns a double3 vector constructed from a double2 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(double2 xy, double z) { return new double3(xy, z); }
-
         /// <summary>
         /// Returns a double3 vector constructed from a double3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(double3 xyz) { return new double3(xyz); }
-
         /// <summary>
         /// Returns a double3 vector constructed from a single double value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(double v) { return new double3(v); }
-
         /// <summary>
         /// Returns a double3 vector constructed from a single bool value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(bool v) { return new double3(v); }
-
         /// <summary>
         /// Return a double3 vector constructed from a bool3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(bool3 v) { return new double3(v); }
-
         /// <summary>
         /// Returns a double3 vector constructed from a single int value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(int v) { return new double3(v); }
-
         /// <summary>
         /// Return a double3 vector constructed from a int3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(int3 v) { return new double3(v); }
-
         /// <summary>
         /// Returns a double3 vector constructed from a single uint value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(uint v) { return new double3(v); }
-
         /// <summary>
         /// Return a double3 vector constructed from a uint3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(uint3 v) { return new double3(v); }
-
         /// <summary>
         /// Returns a double3 vector constructed from a single half value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(half v) { return new double3(v); }
-
         /// <summary>
         /// Return a double3 vector constructed from a half3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(half3 v) { return new double3(v); }
-
         /// <summary>
         /// Returns a double3 vector constructed from a single float value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(float v) { return new double3(v); }
-
         /// <summary>
         /// Return a double3 vector constructed from a float3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(float3 v) { return new double3(v); }
-
         /// <summary>Returns a uint hash code of a double3 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(double3 v)
         {
             return csum(fold_to_uint(v) * uint3(0xAF0F3103u, 0xE4A056C7u, 0x841D8225u)) + 0xC9393C7Du;
         }
-
         /// <summary>
         /// Returns a uint3 vector hash code of a double3 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -1635,7 +1430,6 @@ namespace Raster.Math.Simd
         {
             return (fold_to_uint(v) * uint3(0xD42EAFA3u, 0xD9AFD06Du, 0x97A65421u)) + 0x7809205Fu;
         }
-
         /// <summary>
         /// Returns the result of specified shuffling of the components from two double3 vectors into a double value.
         /// </summary>
@@ -1644,7 +1438,6 @@ namespace Raster.Math.Simd
         {
             return select_shuffle_component(a, b, x);
         }
-
         /// <summary>
         /// Returns the result of specified shuffling of the components from two double3 vectors into a double2 vector.
         /// </summary>
@@ -1655,7 +1448,6 @@ namespace Raster.Math.Simd
                 select_shuffle_component(a, b, x),
                 select_shuffle_component(a, b, y));
         }
-
         /// <summary>
         /// Returns the result of specified shuffling of the components from two double3 vectors into a double3 vector.
         /// </summary>
@@ -1667,7 +1459,6 @@ namespace Raster.Math.Simd
                 select_shuffle_component(a, b, y),
                 select_shuffle_component(a, b, z));
         }
-
         /// <summary>
         /// Returns the result of specified shuffling of the components from two double3 vectors into a double4 vector.
         /// </summary>
@@ -1680,7 +1471,6 @@ namespace Raster.Math.Simd
                 select_shuffle_component(a, b, z),
                 select_shuffle_component(a, b, w));
         }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static double select_shuffle_component(double3 a, double3 b, ShuffleComponent component)
         {
@@ -1702,6 +1492,5 @@ namespace Raster.Math.Simd
                     throw new System.ArgumentException("Invalid shuffle component: " + component);
             }
         }
-
     }
 }

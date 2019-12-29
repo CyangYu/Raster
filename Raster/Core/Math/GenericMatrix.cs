@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Raster.Math
+namespace Raster.Core.Math
 {
     public class GenericMatrix<T>
     {

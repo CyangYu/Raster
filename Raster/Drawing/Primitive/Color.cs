@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Raster.Math;
+using Raster.Core.Math;
 using Raster.Private;
 
 namespace Raster.Drawing.Primitive

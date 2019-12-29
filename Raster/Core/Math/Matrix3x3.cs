@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Raster.Math
+namespace Raster.Core.Math
 {
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public struct Matrix3x3 : IEquatable<Matrix3x3>

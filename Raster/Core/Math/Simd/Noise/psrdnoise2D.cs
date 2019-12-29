@@ -65,8 +65,9 @@
 // places, but the quick fix works fine.
 // (If you run into problems with this, please let me know.)
 //
-using static Raster.Math.Simd.math;
-namespace Raster.Math.Simd.Noise
+using static Raster.Core.Math.Simd.math;
+
+namespace Raster.Core.Math.Simd.Noise
 {
     public static partial class noise
     {

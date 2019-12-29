@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Raster.Math
+namespace Raster.Core.Math
 {
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public struct Matrix3x4 : IEquatable<Matrix3x4>

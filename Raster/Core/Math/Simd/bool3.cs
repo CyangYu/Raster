@@ -4,8 +4,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 
 #pragma warning disable 0660, 0661
-
-namespace Raster.Math.Simd
+namespace Raster.Core.Math.Simd
 {
     [DebuggerTypeProxy(typeof(bool3.DebuggerProxy))]
     [System.Serializable]
@@ -29,7 +28,6 @@ namespace Raster.Math.Simd
             this.y = y;
             this.z = z;
         }
-
         /// <summary>
         /// Constructs a bool3 vector from a bool value and a bool2 vector.
         /// </summary>
@@ -40,7 +38,6 @@ namespace Raster.Math.Simd
             this.y = yz.x;
             this.z = yz.y;
         }
-
         /// <summary>
         /// Constructs a bool3 vector from a bool2 vector and a bool value.
         /// </summary>
@@ -51,7 +48,6 @@ namespace Raster.Math.Simd
             this.y = xy.y;
             this.z = z;
         }
-
         /// <summary>
         /// Constructs a bool3 vector from a bool3 vector.
         /// </summary>
@@ -62,7 +58,6 @@ namespace Raster.Math.Simd
             this.y = xyz.y;
             this.z = xyz.z;
         }
-
         /// <summary>
         /// Constructs a bool3 vector from a single bool value by assigning it to every component.
         /// </summary>
@@ -74,116 +69,97 @@ namespace Raster.Math.Simd
             this.z = v;
         }
 
-
         /// <summary>
         /// Implicitly converts a single bool value to a bool3 vector by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator bool3(bool v) { return new bool3(v); }
 
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on two bool3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (bool3 lhs, bool3 rhs) { return new bool3 (lhs.x == rhs.x, lhs.y == rhs.y, lhs.z == rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on a bool3 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (bool3 lhs, bool rhs) { return new bool3 (lhs.x == rhs, lhs.y == rhs, lhs.z == rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on a bool value and a bool3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (bool lhs, bool3 rhs) { return new bool3 (lhs == rhs.x, lhs == rhs.y, lhs == rhs.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on two bool3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (bool3 lhs, bool3 rhs) { return new bool3 (lhs.x != rhs.x, lhs.y != rhs.y, lhs.z != rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a bool3 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (bool3 lhs, bool rhs) { return new bool3 (lhs.x != rhs, lhs.y != rhs, lhs.z != rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a bool value and a bool3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (bool lhs, bool3 rhs) { return new bool3 (lhs != rhs.x, lhs != rhs.y, lhs != rhs.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise not operation on a bool3 vector.
-/t/t/// </summary>
+        /// </summary>>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator ! (bool3 val) { return new bool3 (!val.x, !val.y, !val.z); }
-
 
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on two bool3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator & (bool3 lhs, bool3 rhs) { return new bool3 (lhs.x & rhs.x, lhs.y & rhs.y, lhs.z & rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a bool3 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator & (bool3 lhs, bool rhs) { return new bool3 (lhs.x & rhs, lhs.y & rhs, lhs.z & rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a bool value and a bool3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator & (bool lhs, bool3 rhs) { return new bool3 (lhs & rhs.x, lhs & rhs.y, lhs & rhs.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on two bool3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator | (bool3 lhs, bool3 rhs) { return new bool3 (lhs.x | rhs.x, lhs.y | rhs.y, lhs.z | rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a bool3 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator | (bool3 lhs, bool rhs) { return new bool3 (lhs.x | rhs, lhs.y | rhs, lhs.z | rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a bool value and a bool3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator | (bool lhs, bool3 rhs) { return new bool3 (lhs | rhs.x, lhs | rhs.y, lhs | rhs.z); }
 
-
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on two bool3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator ^ (bool3 lhs, bool3 rhs) { return new bool3 (lhs.x ^ rhs.x, lhs.y ^ rhs.y, lhs.z ^ rhs.z); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a bool3 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator ^ (bool3 lhs, bool rhs) { return new bool3 (lhs.x ^ rhs, lhs.y ^ rhs, lhs.z ^ rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a bool value and a bool3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator ^ (bool lhs, bool3 rhs) { return new bool3 (lhs ^ rhs.x, lhs ^ rhs.y, lhs ^ rhs.z); }
-
-
 
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
@@ -193,14 +169,12 @@ namespace Raster.Math.Simd
             get { return new bool4(x, x, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xxxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(x, x, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xxxz
@@ -209,14 +183,12 @@ namespace Raster.Math.Simd
             get { return new bool4(x, x, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xxyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(x, x, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xxyy
@@ -225,14 +197,12 @@ namespace Raster.Math.Simd
             get { return new bool4(x, x, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xxyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(x, x, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xxzx
@@ -241,14 +211,12 @@ namespace Raster.Math.Simd
             get { return new bool4(x, x, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xxzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(x, x, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xxzz
@@ -257,14 +225,12 @@ namespace Raster.Math.Simd
             get { return new bool4(x, x, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xyxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(x, y, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xyxy
@@ -273,14 +239,12 @@ namespace Raster.Math.Simd
             get { return new bool4(x, y, x, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xyxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(x, y, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xyyx
@@ -289,14 +253,12 @@ namespace Raster.Math.Simd
             get { return new bool4(x, y, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xyyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(x, y, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xyyz
@@ -305,14 +267,12 @@ namespace Raster.Math.Simd
             get { return new bool4(x, y, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xyzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(x, y, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xyzy
@@ -321,14 +281,12 @@ namespace Raster.Math.Simd
             get { return new bool4(x, y, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xyzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(x, y, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xzxx
@@ -337,14 +295,12 @@ namespace Raster.Math.Simd
             get { return new bool4(x, z, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xzxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(x, z, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xzxz
@@ -353,14 +309,12 @@ namespace Raster.Math.Simd
             get { return new bool4(x, z, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xzyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(x, z, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xzyy
@@ -369,14 +323,12 @@ namespace Raster.Math.Simd
             get { return new bool4(x, z, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xzyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(x, z, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xzzx
@@ -385,14 +337,12 @@ namespace Raster.Math.Simd
             get { return new bool4(x, z, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xzzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(x, z, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xzzz
@@ -401,14 +351,12 @@ namespace Raster.Math.Simd
             get { return new bool4(x, z, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yxxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(y, x, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yxxy
@@ -417,14 +365,12 @@ namespace Raster.Math.Simd
             get { return new bool4(y, x, x, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yxxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(y, x, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yxyx
@@ -433,14 +379,12 @@ namespace Raster.Math.Simd
             get { return new bool4(y, x, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yxyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(y, x, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yxyz
@@ -449,14 +393,12 @@ namespace Raster.Math.Simd
             get { return new bool4(y, x, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yxzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(y, x, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yxzy
@@ -465,14 +407,12 @@ namespace Raster.Math.Simd
             get { return new bool4(y, x, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yxzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(y, x, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yyxx
@@ -481,14 +421,12 @@ namespace Raster.Math.Simd
             get { return new bool4(y, y, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yyxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(y, y, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yyxz
@@ -497,14 +435,12 @@ namespace Raster.Math.Simd
             get { return new bool4(y, y, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yyyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(y, y, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yyyy
@@ -513,14 +449,12 @@ namespace Raster.Math.Simd
             get { return new bool4(y, y, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yyyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(y, y, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yyzx
@@ -529,14 +463,12 @@ namespace Raster.Math.Simd
             get { return new bool4(y, y, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yyzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(y, y, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yyzz
@@ -545,14 +477,12 @@ namespace Raster.Math.Simd
             get { return new bool4(y, y, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yzxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(y, z, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yzxy
@@ -561,14 +491,12 @@ namespace Raster.Math.Simd
             get { return new bool4(y, z, x, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yzxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(y, z, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yzyx
@@ -577,14 +505,12 @@ namespace Raster.Math.Simd
             get { return new bool4(y, z, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yzyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(y, z, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yzyz
@@ -593,14 +519,12 @@ namespace Raster.Math.Simd
             get { return new bool4(y, z, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yzzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(y, z, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yzzy
@@ -609,14 +533,12 @@ namespace Raster.Math.Simd
             get { return new bool4(y, z, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 yzzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(y, z, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zxxx
@@ -625,14 +547,12 @@ namespace Raster.Math.Simd
             get { return new bool4(z, x, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zxxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(z, x, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zxxz
@@ -641,14 +561,12 @@ namespace Raster.Math.Simd
             get { return new bool4(z, x, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zxyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(z, x, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zxyy
@@ -657,14 +575,12 @@ namespace Raster.Math.Simd
             get { return new bool4(z, x, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zxyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(z, x, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zxzx
@@ -673,14 +589,12 @@ namespace Raster.Math.Simd
             get { return new bool4(z, x, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zxzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(z, x, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zxzz
@@ -689,14 +603,12 @@ namespace Raster.Math.Simd
             get { return new bool4(z, x, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zyxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(z, y, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zyxy
@@ -705,14 +617,12 @@ namespace Raster.Math.Simd
             get { return new bool4(z, y, x, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zyxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(z, y, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zyyx
@@ -721,14 +631,12 @@ namespace Raster.Math.Simd
             get { return new bool4(z, y, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zyyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(z, y, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zyyz
@@ -737,14 +645,12 @@ namespace Raster.Math.Simd
             get { return new bool4(z, y, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zyzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(z, y, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zyzy
@@ -753,14 +659,12 @@ namespace Raster.Math.Simd
             get { return new bool4(z, y, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zyzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(z, y, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zzxx
@@ -769,14 +673,12 @@ namespace Raster.Math.Simd
             get { return new bool4(z, z, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zzxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(z, z, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zzxz
@@ -785,14 +687,12 @@ namespace Raster.Math.Simd
             get { return new bool4(z, z, x, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zzyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(z, z, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zzyy
@@ -801,14 +701,12 @@ namespace Raster.Math.Simd
             get { return new bool4(z, z, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zzyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(z, z, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zzzx
@@ -817,14 +715,12 @@ namespace Raster.Math.Simd
             get { return new bool4(z, z, z, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zzzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool4(z, z, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 zzzz
@@ -833,14 +729,12 @@ namespace Raster.Math.Simd
             get { return new bool4(z, z, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 xxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool3(x, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 xxy
@@ -849,14 +743,12 @@ namespace Raster.Math.Simd
             get { return new bool3(x, x, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 xxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool3(x, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 xyx
@@ -865,14 +757,12 @@ namespace Raster.Math.Simd
             get { return new bool3(x, y, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 xyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool3(x, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 xyz
@@ -883,14 +773,12 @@ namespace Raster.Math.Simd
             set { x = value.x; y = value.y; z = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 xzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool3(x, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 xzy
@@ -901,14 +789,12 @@ namespace Raster.Math.Simd
             set { x = value.x; z = value.y; y = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 xzz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool3(x, z, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 yxx
@@ -917,14 +803,12 @@ namespace Raster.Math.Simd
             get { return new bool3(y, x, x); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 yxy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool3(y, x, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 yxz
@@ -935,14 +819,12 @@ namespace Raster.Math.Simd
             set { y = value.x; x = value.y; z = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 yyx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool3(y, y, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 yyy
@@ -951,14 +833,12 @@ namespace Raster.Math.Simd
             get { return new bool3(y, y, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 yyz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool3(y, y, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 yzx
@@ -969,14 +849,12 @@ namespace Raster.Math.Simd
             set { y = value.x; z = value.y; x = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 yzy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool3(y, z, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 yzz
@@ -985,14 +863,12 @@ namespace Raster.Math.Simd
             get { return new bool3(y, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 zxx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool3(z, x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 zxy
@@ -1003,14 +879,12 @@ namespace Raster.Math.Simd
             set { z = value.x; x = value.y; y = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 zxz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool3(z, x, z); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 zyx
@@ -1021,14 +895,12 @@ namespace Raster.Math.Simd
             set { z = value.x; y = value.y; x = value.z; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 zyy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool3(z, y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 zyz
@@ -1037,14 +909,12 @@ namespace Raster.Math.Simd
             get { return new bool3(z, y, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 zzx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool3(z, z, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 zzy
@@ -1053,7 +923,6 @@ namespace Raster.Math.Simd
             get { return new bool3(z, z, y); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool3 zzz
         {
@@ -1061,14 +930,12 @@ namespace Raster.Math.Simd
             get { return new bool3(z, z, z); }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool2 xx
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool2(x, x); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool2 xy
@@ -1079,7 +946,6 @@ namespace Raster.Math.Simd
             set { x = value.x; y = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool2 xz
         {
@@ -1088,7 +954,6 @@ namespace Raster.Math.Simd
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { x = value.x; z = value.y; }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool2 yx
@@ -1099,14 +964,12 @@ namespace Raster.Math.Simd
             set { y = value.x; x = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool2 yy
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool2(y, y); }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool2 yz
@@ -1117,7 +980,6 @@ namespace Raster.Math.Simd
             set { y = value.x; z = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool2 zx
         {
@@ -1126,7 +988,6 @@ namespace Raster.Math.Simd
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set { z = value.x; x = value.y; }
         }
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool2 zy
@@ -1137,14 +998,12 @@ namespace Raster.Math.Simd
             set { z = value.x; y = value.y; }
         }
 
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool2 zz
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return new bool2(z, z); }
         }
-
 
 
         /// <summary>
@@ -1175,18 +1034,15 @@ namespace Raster.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(bool3 rhs) { return x == rhs.x && y == rhs.y && z == rhs.z; }
-
         /// <summary>
         /// Returns true if the bool3 is equal to a given bool3, false otherwise.
         /// </summary>
         public override bool Equals(object o) { return Equals((bool3)o); }
 
-
         /// <summary>
         /// Returns a hash code for the bool3.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() { return (int)math.hash(this); }
-
 
         /// <summary>
         /// Returns a string representation of the bool3.
@@ -1196,7 +1052,6 @@ namespace Raster.Math.Simd
         {
             return string.Format("bool3({0}, {1}, {2})", x, y, z);
         }
-
         internal sealed class DebuggerProxy
         {
             public bool x;
@@ -1209,9 +1064,7 @@ namespace Raster.Math.Simd
                 z = v.z;
             }
         }
-
     }
-
     public static partial class math
     {
         /// <summary>
@@ -1219,38 +1072,32 @@ namespace Raster.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 bool3(bool x, bool y, bool z) { return new bool3(x, y, z); }
-
         /// <summary>
         /// Returns a bool3 vector constructed from a bool value and a bool2 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 bool3(bool x, bool2 yz) { return new bool3(x, yz); }
-
         /// <summary>
         /// Returns a bool3 vector constructed from a bool2 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 bool3(bool2 xy, bool z) { return new bool3(xy, z); }
-
         /// <summary>
         /// Returns a bool3 vector constructed from a bool3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 bool3(bool3 xyz) { return new bool3(xyz); }
-
         /// <summary>
         /// Returns a bool3 vector constructed from a single bool value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 bool3(bool v) { return new bool3(v); }
-
         /// <summary>Returns a uint hash code of a bool3 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(bool3 v)
         {
             return csum(select(uint3(0xA1E92D39u, 0x4583C801u, 0x9536A0F5u), uint3(0xAF816615u, 0x9AF8D62Du, 0xE3600729u), v));
         }
-
         /// <summary>
         /// Returns a uint3 vector hash code of a bool3 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -1261,7 +1108,6 @@ namespace Raster.Math.Simd
         {
             return (select(uint3(0x5F17300Du, 0x670D6809u, 0x7AF32C49u), uint3(0xAE131389u, 0x5D1B165Bu, 0x87096CD7u), v));
         }
-
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool3 vectors into a bool value.
         /// </summary>
@@ -1270,7 +1116,6 @@ namespace Raster.Math.Simd
         {
             return select_shuffle_component(a, b, x);
         }
-
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool3 vectors into a bool2 vector.
         /// </summary>
@@ -1281,7 +1126,6 @@ namespace Raster.Math.Simd
                 select_shuffle_component(a, b, x),
                 select_shuffle_component(a, b, y));
         }
-
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool3 vectors into a bool3 vector.
         /// </summary>
@@ -1293,7 +1137,6 @@ namespace Raster.Math.Simd
                 select_shuffle_component(a, b, y),
                 select_shuffle_component(a, b, z));
         }
-
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool3 vectors into a bool4 vector.
         /// </summary>
@@ -1306,7 +1149,6 @@ namespace Raster.Math.Simd
                 select_shuffle_component(a, b, z),
                 select_shuffle_component(a, b, w));
         }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool select_shuffle_component(bool3 a, bool3 b, ShuffleComponent component)
         {
@@ -1328,6 +1170,5 @@ namespace Raster.Math.Simd
                     throw new System.ArgumentException("Invalid shuffle component: " + component);
             }
         }
-
     }
 }

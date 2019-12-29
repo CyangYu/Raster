@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Raster.Math
+namespace Raster.Core.Math
 {
     /// <summary>
     /// 
@@ -248,7 +248,10 @@ namespace Raster.Math
         /// <summary>
         /// 
         /// </summary>
-        public void Transpose() => MathHelper.Swap(ref M01, ref M10);
+        public void Transpose()
+        {
+            MathHelper.Swap(ref M01, ref M10);
+        }
 
         /// <summary>
         /// 

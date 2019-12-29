@@ -2,7 +2,6 @@ using System;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable 0660, 0661
-
 namespace Raster.Math.Simd
 {
     [System.Serializable]
@@ -25,7 +24,6 @@ namespace Raster.Math.Simd
             this.c2 = c2;
             this.c3 = c3;
         }
-
         /// <summary>
         /// Constructs a bool2x4 matrix from 8 bool values given in row-major order.
         /// </summary>
@@ -38,7 +36,6 @@ namespace Raster.Math.Simd
             this.c2 = new bool2(m02, m12);
             this.c3 = new bool2(m03, m13);
         }
-
         /// <summary>
         /// Constructs a bool2x4 matrix from a single bool value by assigning it to every component.
         /// </summary>
@@ -51,51 +48,43 @@ namespace Raster.Math.Simd
             this.c3 = v;
         }
 
-
         /// <summary>
         /// Implicitly converts a single bool value to a bool2x4 matrix by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator bool2x4(bool v) { return new bool2x4(v); }
 
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on two bool2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator == (bool2x4 lhs, bool2x4 rhs) { return new bool2x4 (lhs.c0 == rhs.c0, lhs.c1 == rhs.c1, lhs.c2 == rhs.c2, lhs.c3 == rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on a bool2x4 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator == (bool2x4 lhs, bool rhs) { return new bool2x4 (lhs.c0 == rhs, lhs.c1 == rhs, lhs.c2 == rhs, lhs.c3 == rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise equality operation on a bool value and a bool2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator == (bool lhs, bool2x4 rhs) { return new bool2x4 (lhs == rhs.c0, lhs == rhs.c1, lhs == rhs.c2, lhs == rhs.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on two bool2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator != (bool2x4 lhs, bool2x4 rhs) { return new bool2x4 (lhs.c0 != rhs.c0, lhs.c1 != rhs.c1, lhs.c2 != rhs.c2, lhs.c3 != rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a bool2x4 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator != (bool2x4 lhs, bool rhs) { return new bool2x4 (lhs.c0 != rhs, lhs.c1 != rhs, lhs.c2 != rhs, lhs.c3 != rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a bool value and a bool2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator != (bool lhs, bool2x4 rhs) { return new bool2x4 (lhs != rhs.c0, lhs != rhs.c1, lhs != rhs.c2, lhs != rhs.c3); }
-
 
         /// <summary>
         /// Returns the result of a componentwise not operation on a bool2x4 matrix.
@@ -103,63 +92,53 @@ namespace Raster.Math.Simd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator ! (bool2x4 val) { return new bool2x4 (!val.c0, !val.c1, !val.c2, !val.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on two bool2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator & (bool2x4 lhs, bool2x4 rhs) { return new bool2x4 (lhs.c0 & rhs.c0, lhs.c1 & rhs.c1, lhs.c2 & rhs.c2, lhs.c3 & rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a bool2x4 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator & (bool2x4 lhs, bool rhs) { return new bool2x4 (lhs.c0 & rhs, lhs.c1 & rhs, lhs.c2 & rhs, lhs.c3 & rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a bool value and a bool2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator & (bool lhs, bool2x4 rhs) { return new bool2x4 (lhs & rhs.c0, lhs & rhs.c1, lhs & rhs.c2, lhs & rhs.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on two bool2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator | (bool2x4 lhs, bool2x4 rhs) { return new bool2x4 (lhs.c0 | rhs.c0, lhs.c1 | rhs.c1, lhs.c2 | rhs.c2, lhs.c3 | rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a bool2x4 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator | (bool2x4 lhs, bool rhs) { return new bool2x4 (lhs.c0 | rhs, lhs.c1 | rhs, lhs.c2 | rhs, lhs.c3 | rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a bool value and a bool2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator | (bool lhs, bool2x4 rhs) { return new bool2x4 (lhs | rhs.c0, lhs | rhs.c1, lhs | rhs.c2, lhs | rhs.c3); }
 
-
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on two bool2x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator ^ (bool2x4 lhs, bool2x4 rhs) { return new bool2x4 (lhs.c0 ^ rhs.c0, lhs.c1 ^ rhs.c1, lhs.c2 ^ rhs.c2, lhs.c3 ^ rhs.c3); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a bool2x4 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator ^ (bool2x4 lhs, bool rhs) { return new bool2x4 (lhs.c0 ^ rhs, lhs.c1 ^ rhs, lhs.c2 ^ rhs, lhs.c3 ^ rhs); }
-
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a bool value and a bool2x4 matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 operator ^ (bool lhs, bool2x4 rhs) { return new bool2x4 (lhs ^ rhs.c0, lhs ^ rhs.c1, lhs ^ rhs.c2, lhs ^ rhs.c3); }
-
 
 
         /// <summary>
@@ -182,18 +161,15 @@ namespace Raster.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(bool2x4 rhs) { return c0.Equals(rhs.c0) && c1.Equals(rhs.c1) && c2.Equals(rhs.c2) && c3.Equals(rhs.c3); }
-
         /// <summary>
         /// Returns true if the bool2x4 is equal to a given bool2x4, false otherwise.
         /// </summary>
         public override bool Equals(object o) { return Equals((bool2x4)o); }
 
-
         /// <summary>
         /// Returns a hash code for the bool2x4.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() { return (int)math.hash(this); }
-
 
         /// <summary>
         /// Returns a string representation of the bool2x4.
@@ -203,9 +179,7 @@ namespace Raster.Math.Simd
         {
             return string.Format("bool2x4({0}, {1}, {2}, {3},  {4}, {5}, {6}, {7})", c0.x, c1.x, c2.x, c3.x, c0.y, c1.y, c2.y, c3.y);
         }
-
     }
-
     public static partial class math
     {
         /// <summary>
@@ -213,7 +187,6 @@ namespace Raster.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 bool2x4(bool2 c0, bool2 c1, bool2 c2, bool2 c3) { return new bool2x4(c0, c1, c2, c3); }
-
         /// <summary>
         /// Returns a bool2x4 matrix constructed from from 8 bool values given in row-major order.
         /// </summary>
@@ -224,13 +197,11 @@ namespace Raster.Math.Simd
             return new bool2x4(m00, m01, m02, m03,
                                m10, m11, m12, m13);
         }
-
         /// <summary>
         /// Returns a bool2x4 matrix constructed from a single bool value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x4 bool2x4(bool v) { return new bool2x4(v); }
-
         /// <summary>
         /// Return the bool4x2 transpose of a bool2x4 matrix.
         /// </summary>
@@ -243,7 +214,6 @@ namespace Raster.Math.Simd
                 v.c2.x, v.c2.y,
                 v.c3.x, v.c3.y);
         }
-
         /// <summary>Returns a uint hash code of a bool2x4 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(bool2x4 v)
@@ -253,7 +223,6 @@ namespace Raster.Math.Simd
                         select(uint2(0xE133B0B3u, 0xC3E0A3B9u), uint2(0xFE31134Fu, 0x712A34D7u), v.c2) + 
                         select(uint2(0x9D77A59Bu, 0x4942CA39u), uint2(0xB40EC62Du, 0x565ED63Fu), v.c3));
         }
-
         /// <summary>
         /// Returns a uint2 vector hash code of a bool2x4 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -267,6 +236,5 @@ namespace Raster.Math.Simd
                     select(uint2(0xC267163Fu, 0x67BC9149u), uint2(0xAD7C5EC1u, 0x822A7D6Du), v.c2) + 
                     select(uint2(0xB492BF15u, 0xD37220E3u), uint2(0x7AA2C2BDu, 0xE16BC89Du), v.c3));
         }
-
     }
 }

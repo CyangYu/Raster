@@ -1,7 +1,7 @@
 ﻿using System;
-using Raster.Math;
+using Raster.Core.Math;
 
-namespace Raster.Math.Geometry
+namespace Raster.Core.Math.Geometry
 {
     /// <summary>
     /// Axis-Aligned Bounding Box
