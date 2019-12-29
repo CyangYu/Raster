@@ -92,13 +92,11 @@ namespace Raster.Math.Simd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator != (bool lhs, bool2 rhs) { return new bool2 (lhs != rhs.x, lhs != rhs.y); }
 
-
         /// <summary>
         /// Returns the result of a componentwise not operation on a bool2 vector.
-/t/t/// </summary>
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator ! (bool2 val) { return new bool2 (!val.x, !val.y); }
-
 
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on two bool2 vectors.
@@ -118,7 +116,6 @@ namespace Raster.Math.Simd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator & (bool lhs, bool2 rhs) { return new bool2 (lhs & rhs.x, lhs & rhs.y); }
 
-
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on two bool2 vectors.
         /// </summary>
@@ -137,7 +134,6 @@ namespace Raster.Math.Simd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator | (bool lhs, bool2 rhs) { return new bool2 (lhs | rhs.x, lhs | rhs.y); }
 
-
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on two bool2 vectors.
         /// </summary>
@@ -155,9 +151,6 @@ namespace Raster.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator ^ (bool lhs, bool2 rhs) { return new bool2 (lhs ^ rhs.x, lhs ^ rhs.y); }
-
-
-
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool4 xxxx

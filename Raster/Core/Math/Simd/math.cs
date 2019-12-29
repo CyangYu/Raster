@@ -6,7 +6,9 @@ namespace Raster.Math.Simd
 {
     public static partial class math
     {
-        /// <summary>Extrinsic rotation order. Specifies in which order rotations around the principal axes (x, y and z) are to be applied.</summary>
+        /// <summary>
+        /// Extrinsic rotation order. Specifies in which order rotations around the principal axes (x, y and z) are to be applied.
+        /// </summary>
         public enum RotationOrder : byte
         {
             /// <summary>
@@ -14,43 +16,70 @@ namespace Raster.Math.Simd
             /// </summary>
             XYZ,
             /// <summary>
-            /// Extrinsic rotation around the x axis, then around the z axis and finally around the y axis.</summary>
+            /// Extrinsic rotation around the x axis, then around the z axis and finally around the y axis.
+            /// </summary>
             XZY,
-            /// <summary>Extrinsic rotation around the y axis, then around the x axis and finally around the z axis.</summary>
+            /// <summary>
+            /// Extrinsic rotation around the y axis, then around the x axis and finally around the z axis.
+            /// </summary>
             YXZ,
-            /// <summary>Extrinsic rotation around the y axis, then around the z axis and finally around the x axis.</summary>
+            /// <summary>
+            /// Extrinsic rotation around the y axis, then around the z axis and finally around the x axis.
+            /// </summary>
             YZX,
-            /// <summary>Extrinsic rotation around the z axis, then around the x axis and finally around the y axis.</summary>
+            /// <summary>
+            /// Extrinsic rotation around the z axis, then around the x axis and finally around the y axis.
+            /// </summary>
             ZXY,
-            /// <summary>Extrinsic rotation around the z axis, then around the y axis and finally around the x axis.</summary>
+            /// <summary>
+            /// Extrinsic rotation around the z axis, then around the y axis and finally around the x axis.
+            /// </summary>
             ZYX,
-            /// <summary>Unity default rotation order. Extrinsic Rotation around the z axis, then around the x axis and finally around the y axis.</summary>
+            /// <summary>
+            /// Unity default rotation order. Extrinsic Rotation around the z axis, then around the x axis and finally around the y axis.
+            /// </summary>
             Default = ZXY
         };
 
         /// <summary>Specifies a shuffle component.</summary>
         public enum ShuffleComponent : byte
         {
-            /// <summary>Specified the x component of the left vector.</summary>
+            /// <summary>
+            /// Specified the x component of the left vector.
+            /// </summary>
             LeftX,
-            /// <summary>Specified the y component of the left vector.</summary>
+            /// <summary>
+            /// Specified the y component of the left vector.
+            /// </summary>
             LeftY,
-            /// <summary>Specified the z component of the left vector.</summary>
+            /// <summary>
+            /// Specified the z component of the left vector.
+            /// </summary>
             LeftZ,
-            /// <summary>Specified the w component of the left vector.</summary>
+            /// <summary>
+            /// Specified the w component of the left vector.
+            /// </summary>
             LeftW,
 
-            /// <summary>Specified the x component of the right vector.</summary>
+            /// <summary>
+            /// Specified the x component of the right vector.</summary>
             RightX,
-            /// <summary>Specified the y component of the right vector.</summary>
+            /// <summary>Specified the y component of the right vector.
+            /// </summary>
             RightY,
-            /// <summary>Specified the z component of the right vector.</summary>
+            /// <summary>
+            /// Specified the z component of the right vector.
+            /// </summary>
             RightZ,
-            /// <summary>Specified the w component of the right vector.</summary>
+            /// <summary>
+            /// Specified the w component of the right vector.
+            /// </summary>
             RightW
         };
 
-        /// <summary>The mathematical constant e also known as Euler's number. Approximately 2.72. This is a f64/double precision constant.</summary>
+        /// <summary>
+        /// The mathematical constant e also known as Euler's number. Approximately 2.72. This is a f64/double precision constant.
+        /// </summary>
         public const double E_DBL = 2.71828182845904523536;
 
         /// <summary>The base 2 logarithm of e. Approximately 1.44. This is a f64/double precision constant.</summary>
@@ -114,8 +143,9 @@ namespace Raster.Math.Simd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int4 asint(uint4 x) { return int4((int)x.x, (int)x.y, (int)x.z, (int)x.w); }
 
-
-        /// <summary>Returns the bit pattern of a float as an int.</summary>
+        /// <summary>
+        /// Returns the bit pattern of a float as an int.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int asint(float x) {
             IntFloatUnion u;
@@ -124,7 +154,9 @@ namespace Raster.Math.Simd
             return u.intValue;
         }
 
-        /// <summary>Returns the bit pattern of a float2 as an int2.</summary>
+        /// <summary>
+        /// Returns the bit pattern of a float2 as an int2.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2 asint(float2 x) { return int2(asint(x.x), asint(x.y)); }
 
@@ -136,8 +168,9 @@ namespace Raster.Math.Simd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int4 asint(float4 x) { return int4(asint(x.x), asint(x.y), asint(x.z), asint(x.w)); }
 
-
-        /// <summary>Returns the bit pattern of an int as a uint.</summary>
+        /// <summary>
+        /// Returns the bit pattern of an int as a uint.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint asuint(int x) { return (uint)x; }
 
@@ -149,10 +182,11 @@ namespace Raster.Math.Simd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 asuint(int3 x) { return uint3((uint)x.x, (uint)x.y, (uint)x.z); }
 
-        /// <summary>Returns the bit pattern of an int4 as a uint4.</summary>
+        /// <summary>
+        /// Returns the bit pattern of an int4 as a uint4.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 asuint(int4 x) { return uint4((uint)x.x, (uint)x.y, (uint)x.z, (uint)x.w); }
-
 
         /// <summary>Returns the bit pattern of a float as a uint.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -170,7 +204,6 @@ namespace Raster.Math.Simd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint4 asuint(float4 x) { return uint4(asuint(x.x), asuint(x.y), asuint(x.z), asuint(x.w)); }
 
-
         /// <summary>Returns the bit pattern of a ulong as a long.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long aslong(ulong x) { return (long)x; }
@@ -184,7 +217,6 @@ namespace Raster.Math.Simd
             u.doubleValue = x;
             return u.longValue;
         }
-
 
         /// <summary>Returns the bit pattern of a long as a ulong.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
