@@ -161,6 +161,33 @@ namespace Raster.Core.Math
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>       
+        public bool IsZero
+        {
+            get
+            {
+                return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f &&
+                        M10 == 0.0f && M11 == 0.0f && M12 == 0.0f &&
+                        M20 == 0.0f && M21 == 0.0f && M22 == 0.0f);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>        
+        public bool IsIdentity
+        {
+            get
+            {
+                return (M00 == 1.0f && M01 == 0.0f && M02 == 0.0f &&
+                        M10 == 0.0f && M11 == 1.0f && M12 == 0.0f &&
+                        M20 == 0.0f && M21 == 0.0f && M22 == 1.0f);
+            }
+        }
         #endregion Public Instance Properties
 
         #region Constructor
@@ -305,8 +332,11 @@ namespace Raster.Core.Math
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        
-        public bool Equals(Matrix3x3 other) => this == other;
+
+        public bool Equals(Matrix3x3 other)
+        {
+            return this == other;
+        }
 
         /// <summary>
         /// 
@@ -330,29 +360,7 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>       
-        public bool IsZero()
-        {
-            return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f &&
-                    M10 == 0.0f && M11 == 0.0f && M12 == 0.0f &&
-                    M20 == 0.0f && M21 == 0.0f && M22 == 0.0f);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>        
-        public bool IsIdentity()
-        {
-            return (M00 == 1.0f && M01 == 0.0f && M02 == 0.0f &&
-                    M10 == 0.0f && M11 == 1.0f && M12 == 0.0f &&
-                    M20 == 0.0f && M21 == 0.0f && M22 == 1.0f);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void SetIdentity()
+        public void SetToIdentity()
         {
             M00 = 1.0f;
             M01 = 0.0f;
@@ -370,7 +378,7 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
-        public void SetZero()
+        public void SetToZero()
         {
             M00 = 0.0f;
             M01 = 0.0f;

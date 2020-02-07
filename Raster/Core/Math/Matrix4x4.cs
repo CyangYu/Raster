@@ -218,6 +218,21 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
+        public Vector4 Column3
+        {
+            get { return new Vector4(M03, M13, M23, M33); }
+            set
+            {
+                M03 = value.X;
+                M13 = value.Y;
+                M23 = value.Z;
+                M33 = value.W;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float Determinant
         {
             get
@@ -243,12 +258,119 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+
+        public bool IsZero
+        {
+            get
+            {
+                return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f && M03 == 0.0f &&
+                        M10 == 0.0f && M11 == 0.0f && M12 == 0.0f && M13 == 0.0f &&
+                        M20 == 0.0f && M21 == 0.0f && M22 == 0.0f && M23 == 0.0f &&
+                        M30 == 0.0f && M31 == 0.0f && M32 == 0.0f && M33 == 0.0f);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsIdentity
+        {
+            get
+            {
+                return (M00 == 1.0f && M01 == 0.0f && M02 == 0.0f && M03 == 0.0f &&
+                        M10 == 0.0f && M11 == 1.0f && M12 == 0.0f && M13 == 0.0f &&
+                        M20 == 0.0f && M21 == 0.0f && M22 == 1.0f && M23 == 0.0f &&
+                        M30 == 0.0f && M31 == 0.0f && M32 == 0.0f && M33 == 1.0f);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Matrix4x4 Inverted
         {
             get
             {
                 Matrix4x4.Inverse(this, out Matrix4x4 result);
                 return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public float this[int index]
+        {
+            get
+            {
+                switch (index)
+                {
+                    case 0:  return M00;
+                    case 1:  return M01;
+                    case 2:  return M02;
+                    case 3:  return M03;
+                    case 4:  return M10;
+                    case 5:  return M11;
+                    case 6:  return M12;
+                    case 7:  return M13;
+                    case 8:  return M20;
+                    case 9:  return M21;
+                    case 10: return M22;
+                    case 11: return M23;
+                    case 12: return M30;
+                    case 13: return M31;
+                    case 14: return M32;
+                    case 15: return M33;
+                }
+
+                throw new ArgumentOutOfRangeException("index");
+            }
+
+            set
+            {
+                switch (index)
+                {
+                    case 0:  M00 = value; break;
+                    case 1:  M01 = value; break;
+                    case 2:  M02 = value; break;
+                    case 3:  M03 = value; break;
+                    case 4:  M10 = value; break;
+                    case 5:  M11 = value; break;
+                    case 6:  M12 = value; break;
+                    case 7:  M13 = value; break;
+                    case 8:  M20 = value; break;
+                    case 9:  M21 = value; break;
+                    case 10: M22 = value; break;
+                    case 11: M23 = value; break;
+                    case 12: M30 = value; break;
+                    case 13: M31 = value; break;
+                    case 14: M32 = value; break;
+                    case 15: M33 = value; break;
+                    default: throw new ArgumentOutOfRangeException("index");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <returns></returns>
+        public float this[int row, int column]
+        {
+            get
+            {
+
+            }
+
+            set
+            {
+
             }
         }
 
@@ -286,7 +408,7 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="other"></param>
-        public Matrix4x4(Matrix2x2 other)
+        public Matrix4x4(in Matrix2x2 other)
         {
             M00 = other.M00;
             M01 = other.M01;
@@ -313,7 +435,7 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="other"></param>
-        public Matrix4x4(Matrix2x3 other)
+        public Matrix4x4(in Matrix2x3 other)
         {
             M00 = other.M00;
             M01 = other.M01;
@@ -340,7 +462,7 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="other"></param>
-        public Matrix4x4(Matrix2x4 other)
+        public Matrix4x4(in Matrix2x4 other)
         {
             M00 = other.M00;
             M01 = other.M01;
@@ -367,7 +489,7 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="other"></param>
-        public Matrix4x4(Matrix3x2 other)
+        public Matrix4x4(in Matrix3x2 other)
         {
             M00 = other.M00;
             M01 = other.M01;
@@ -394,7 +516,7 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="other"></param>
-        public Matrix4x4(Matrix3x3 other)
+        public Matrix4x4(in Matrix3x3 other)
         {
             M00 = other.M00;
             M01 = other.M01;
@@ -421,7 +543,7 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="other"></param>
-        public Matrix4x4(Matrix3x4 other)
+        public Matrix4x4(in Matrix3x4 other)
         {
             M00 = other.M00;
             M01 = other.M01;
@@ -663,32 +785,234 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="other"></param>
-        
-        public bool Equals(Matrix4x4 other) => this == other;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-
-        public bool IsZero()
+        public bool Equals(Matrix4x4 other)
         {
-            return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f && M03 == 0.0f &&
-                    M10 == 0.0f && M11 == 0.0f && M12 == 0.0f && M13 == 0.0f &&
-                    M20 == 0.0f && M21 == 0.0f && M22 == 0.0f && M23 == 0.0f &&
-                    M30 == 0.0f && M31 == 0.0f && M32 == 0.0f && M33 == 0.0f);
+            return this == other;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        public bool IsIdentity()
+        /// <param name="other"></param>
+        public void Add(float value)
         {
-            return (M00 == 1.0f && M01 == 0.0f && M02 == 0.0f && M03 == 0.0f &&
-                    M10 == 0.0f && M11 == 1.0f && M12 == 0.0f && M13 == 0.0f &&
-                    M20 == 0.0f && M21 == 0.0f && M22 == 1.0f && M23 == 0.0f &&
-                    M30 == 0.0f && M31 == 0.0f && M32 == 0.0f && M33 == 1.0f);
+            M00 += value;
+            M01 += value;
+            M02 += value;
+            M03 += value;
+
+            M10 += value;
+            M11 += value;
+            M12 += value;
+            M13 += value;
+
+            M20 += value;
+            M21 += value;
+            M22 += value;
+            M23 += value;
+
+            M30 += value;
+            M31 += value;
+            M32 += value;
+            M33 += value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        public void Add(in Matrix4x4 other)
+        {
+            M00 += other.M00;
+            M01 += other.M01;
+            M02 += other.M02;
+            M03 += other.M03;
+
+            M10 += other.M10;
+            M11 += other.M11;
+            M12 += other.M12;
+            M13 += other.M13;
+
+            M20 += other.M20;
+            M21 += other.M21;
+            M22 += other.M22;
+            M23 += other.M23;
+
+            M30 += other.M30;
+            M31 += other.M31;
+            M32 += other.M32;
+            M33 += other.M33;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        public void Subtract(float value)
+        {
+            M00 -= value;
+            M01 -= value;
+            M02 -= value;
+            M03 -= value;
+
+            M10 -= value;
+            M11 -= value;
+            M12 -= value;
+            M13 -= value;
+
+            M20 -= value;
+            M21 -= value;
+            M22 -= value;
+            M23 -= value;
+
+            M30 -= value;
+            M31 -= value;
+            M32 -= value;
+            M33 -= value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        public void Subtract(in Matrix4x4 other)
+        {
+            M00 -= other.M00;
+            M01 -= other.M01;
+            M02 -= other.M02;
+            M03 -= other.M03;
+
+            M10 -= other.M10;
+            M11 -= other.M11;
+            M12 -= other.M12;
+            M13 -= other.M13;
+
+            M20 -= other.M20;
+            M21 -= other.M21;
+            M22 -= other.M22;
+            M23 -= other.M23;
+
+            M30 -= other.M30;
+            M31 -= other.M31;
+            M32 -= other.M32;
+            M33 -= other.M33;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        public void Multiply(float value)
+        {
+            M00 *= value;
+            M01 *= value;
+            M02 *= value;
+            M03 *= value;
+
+            M10 *= value;
+            M11 *= value;
+            M12 *= value;
+            M13 *= value;
+
+            M20 *= value;
+            M21 *= value;
+            M22 *= value;
+            M23 *= value;
+
+            M30 *= value;
+            M31 *= value;
+            M32 *= value;
+            M33 *= value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        public void Multiply(in Matrix4x4 other)
+        {
+            float m0, m1, m2;
+
+            m0 = other.M00 * M00
+                    + other.M01 * M10
+                    + other.M02 * M20
+                    + other.M03 * M30;
+            m1 = other.M10 * M00
+                    + other.M11 * M10
+                    + other.M12 * M20
+                    + other.M13 * M30;
+            m2 = other.M20 * M00
+                    + other.M21 * M10
+                    + other.M22 * M20
+                    + other.M23 * M30;
+            M30 = other.M30 * M00
+                    + other.M31 * M10
+                    + other.M32 * M20
+                    + other.M33 * M30;
+            M00 = m0;
+            M10 = m1;
+            M20 = m2;
+
+            m0 = other.M00 * M01
+                    + other.M01 * M11
+                    + other.M02 * M21
+                    + other.M03 * M31;
+            m1 = other.M10 * M01
+                    + other.M11 * M11
+                    + other.M12 * M21
+                    + other.M13 * M31;
+            m2 = other.M20 * M01
+                    + other.M21 * M11
+                    + other.M22 * M21
+                    + other.M23 * M31;
+            M31 = other.M30 * M01
+                    + other.M31 * M11
+                    + other.M32 * M21
+                    + other.M33 * M31;
+            M01 = m0;
+            M11 = m1;
+            M21 = m2;
+
+            m0 = other.M00 * M02
+                    + other.M01 * M12
+                    + other.M02 * M22
+                    + other.M03 * M32;
+            m1 = other.M10 * M02
+                    + other.M11 * M12
+                    + other.M12 * M22
+                    + other.M13 * M32;
+            m2 = other.M20 * M02
+                    + other.M21 * M12
+                    + other.M22 * M22
+                    + other.M23 * M32;
+            M32 = other.M30 * M02
+                    + other.M31 * M12
+                    + other.M32 * M22
+                    + other.M33 * M32;
+            M02 = m0;
+            M12 = m1;
+            M22 = m2;
+
+            m0 = other.M00 * M03
+                    + other.M01 * M13
+                    + other.M02 * M23
+                    + other.M03 * M33;
+            m1 = other.M10 * M03
+                    + other.M11 * M13
+                    + other.M12 * M23
+                    + other.M13 * M33;
+            m2 = other.M20 * M03
+                    + other.M21 * M13
+                    + other.M22 * M23
+                    + other.M23 * M33;
+            M33 = other.M30 * M03
+                    + other.M31 * M13
+                    + other.M32 * M23
+                    + other.M33 * M33;
+            M03 = m0;
+            M13 = m1;
+            M23 = m2;
         }
 
         /// <summary>
@@ -717,7 +1041,7 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
-        public void SetIdentity()
+        public void SetToIdentity()
         {
             M00 = 1.0f;
             M01 = 0.0f;
@@ -743,7 +1067,7 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
-        public void SetZero()
+        public void SetToZero()
         {
             M00 = 0.0f;
             M01 = 0.0f;
@@ -785,25 +1109,25 @@ namespace Raster.Core.Math
         /// <param name="other"></param>
         public void CopyFrom(in Matrix4x4 other)
         {
-            this.M00 = other.M00;
-            this.M01 = other.M01;
-            this.M02 = other.M02;
-            this.M03 = other.M03;
+            M00 = other.M00;
+            M01 = other.M01;
+            M02 = other.M02;
+            M03 = other.M03;
 
-            this.M10 = other.M10;
-            this.M11 = other.M11;
-            this.M12 = other.M12;
-            this.M13 = other.M13;
+            M10 = other.M10;
+            M11 = other.M11;
+            M12 = other.M12;
+            M13 = other.M13;
 
-            this.M20 = other.M20;
-            this.M21 = other.M21;
-            this.M22 = other.M22;
-            this.M23 = other.M23;
+            M20 = other.M20;
+            M21 = other.M21;
+            M22 = other.M22;
+            M23 = other.M23;
 
-            this.M30 = other.M30;
-            this.M31 = other.M31;
-            this.M32 = other.M32;
-            this.M33 = other.M32;
+            M30 = other.M30;
+            M31 = other.M31;
+            M32 = other.M32;
+            M33 = other.M32;
         }
 
         /// <summary>
@@ -905,9 +1229,8 @@ namespace Raster.Core.Math
                 RotateZ(angle);
             else
             {
-                FromAxisAngle(new AxisAngle(x, y, z, angle), out Matrix4x4 rotate);
-                Multiply(rotate, this, out Matrix4x4 temp);
-                this.CopyFrom(temp);
+                FromAxisAngle(new AxisAngle(x, y, z, angle), out Matrix4x4 result);
+                Multiply(result);
             }
         }
 
@@ -919,6 +1242,15 @@ namespace Raster.Core.Math
         public void Rotate(in Vector3 axis, float angle)
         {
             Rotate(axis.X, axis.Y, axis.Z, angle);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="quaternion"></param>
+        public void Rotate(in Quaternion quaternion)
+        {
+            
         }
 
         /// <summary>
@@ -1042,7 +1374,7 @@ namespace Raster.Core.Math
         /// <param name="position"></param>
         /// <param name="rotation"></param>
         /// <param name="scale"></param>
-        public void SetTranslationAndRotation(in Vector3 translation, in Quaternion rotation, in Vector3 scale)
+        public void FromTRS(in Vector3 translation, in Quaternion rotation, in Vector3 scale)
         {
             float x2 = rotation.X + rotation.X;
             float y2 = rotation.Y + rotation.Y;
@@ -1079,7 +1411,14 @@ namespace Raster.Core.Math
             M33 = 1.0f;
         }
 
-        public void ExtractTranslationAndRotation(out Vector3 translation, out Quaternion rotation, out Vector3 scale)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="translation"></param>
+        /// <param name="rotation"></param>
+        /// <param name="scale"></param>
+        /// <returns></returns>
+        public bool DecomposeTRS(out Vector3 translation, out Quaternion rotation, out Vector3 scale)
         {
             translation.X = M30;
             translation.Y = M31;
@@ -1093,7 +1432,7 @@ namespace Raster.Core.Math
                 scale.Z < MathHelper.ZeroTolerance)
             {
                 rotation = Quaternion.Identity;
-                return;
+                return false;
             }
 
             float invScaleX = 1.0f / scale.X;
@@ -1115,6 +1454,7 @@ namespace Raster.Core.Math
             rot3x3.M22 = M22 * invScaleZ;
 
             Quaternion.FromRotationMatrix(rot3x3, out rotation);
+            return true;
         }
 
         /// <summary>
@@ -1297,7 +1637,6 @@ namespace Raster.Core.Math
         /// <param name="zFar"></param>
         public void PerspectiveRH(float width, float height, float zNear, float zFar)
         {
-            
             if (zNear <= 0.0f || zFar <= 0.0f || zNear >= zFar)
             {
                 return;

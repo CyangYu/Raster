@@ -29,6 +29,7 @@ namespace Raster.Core.Math.Simd
             this.z = z;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a half4 vector from two half values and a half2 vector.
         /// </summary>
@@ -40,6 +41,7 @@ namespace Raster.Core.Math.Simd
             this.z = zw.x;
             this.w = zw.y;
         }
+
         /// <summary>
         /// Constructs a half4 vector from a half value, a half2 vector and a half value.
         /// </summary>
@@ -51,6 +53,7 @@ namespace Raster.Core.Math.Simd
             this.z = yz.y;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a half4 vector from a half value and a half3 vector.
         /// </summary>
@@ -62,6 +65,7 @@ namespace Raster.Core.Math.Simd
             this.z = yzw.y;
             this.w = yzw.z;
         }
+
         /// <summary>
         /// Constructs a half4 vector from a half2 vector and two half values.
         /// </summary>
@@ -73,6 +77,7 @@ namespace Raster.Core.Math.Simd
             this.z = z;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a half4 vector from two half2 vectors.
         /// </summary>
@@ -84,6 +89,7 @@ namespace Raster.Core.Math.Simd
             this.z = zw.x;
             this.w = zw.y;
         }
+
         /// <summary>
         /// Constructs a half4 vector from a half3 vector and a half value.
         /// </summary>
@@ -95,6 +101,7 @@ namespace Raster.Core.Math.Simd
             this.z = xyz.z;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a half4 vector from a half4 vector.
         /// </summary>
@@ -106,6 +113,7 @@ namespace Raster.Core.Math.Simd
             this.z = xyzw.z;
             this.w = xyzw.w;
         }
+
         /// <summary>
         /// Constructs a half4 vector from a single half value by assigning it to every component.
         /// </summary>
@@ -117,6 +125,7 @@ namespace Raster.Core.Math.Simd
             this.z = v;
             this.w = v;
         }
+
         /// <summary>
         /// Constructs a half4 vector from a single float value by converting it to half and assigning it to every component.
         /// </summary>
@@ -128,6 +137,7 @@ namespace Raster.Core.Math.Simd
             this.z = (half)v;
             this.w = (half)v;
         }
+
         /// <summary>
         /// Constructs a half4 vector from a float4 vector by componentwise conversion.
         /// </summary>
@@ -139,6 +149,7 @@ namespace Raster.Core.Math.Simd
             this.z = (half)v.z;
             this.w = (half)v.w;
         }
+
         /// <summary>
         /// Constructs a half4 vector from a single double value by converting it to half and assigning it to every component.
         /// </summary>
@@ -150,6 +161,7 @@ namespace Raster.Core.Math.Simd
             this.z = (half)v;
             this.w = (half)v;
         }
+
         /// <summary>
         /// Constructs a half4 vector from a double4 vector by componentwise conversion.
         /// </summary>
@@ -167,21 +179,25 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator half4(half v) { return new half4(v); }
+
         /// <summary>
         /// Explicitly converts a single float value to a half4 vector by converting it to half and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator half4(float v) { return new half4(v); }
+
         /// <summary>
         /// Explicitly converts a float4 vector to a half4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator half4(float4 v) { return new half4(v); }
+
         /// <summary>
         /// Explicitly converts a single double value to a half4 vector by converting it to half and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator half4(double v) { return new half4(v); }
+
         /// <summary>
         /// Explicitly converts a double4 vector to a half4 vector by componentwise conversion.
         /// </summary>
@@ -193,11 +209,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator == (half4 lhs, half4 rhs) { return new bool4 (lhs.x == rhs.x, lhs.y == rhs.y, lhs.z == rhs.z, lhs.w == rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a half4 vector and a half value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator == (half4 lhs, half rhs) { return new bool4 (lhs.x == rhs, lhs.y == rhs, lhs.z == rhs, lhs.w == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a half value and a half4 vector.
         /// </summary>
@@ -209,11 +227,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator != (half4 lhs, half4 rhs) { return new bool4 (lhs.x != rhs.x, lhs.y != rhs.y, lhs.z != rhs.z, lhs.w != rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a half4 vector and a half value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator != (half4 lhs, half rhs) { return new bool4 (lhs.x != rhs, lhs.y != rhs, lhs.z != rhs, lhs.w != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a half value and a half4 vector.
         /// </summary>
@@ -2722,6 +2742,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(half4 rhs) { return x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w; }
+
         /// <summary>
         /// Returns true if the half4 is equal to a given half4, false otherwise.
         /// </summary>
@@ -2740,6 +2761,7 @@ namespace Raster.Core.Math.Simd
         {
             return string.Format("half4({0}, {1}, {2}, {3})", x, y, z, w);
         }
+
         /// <summary>
         /// Returns a string representation of the half4 using a specified format and culture-specific format information.
         /// </summary>
@@ -2770,72 +2792,86 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half4 half4(half x, half y, half z, half w) { return new half4(x, y, z, w); }
+
         /// <summary>
         /// Returns a half4 vector constructed from two half values and a half2 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half4 half4(half x, half y, half2 zw) { return new half4(x, y, zw); }
+
         /// <summary>
         /// Returns a half4 vector constructed from a half value, a half2 vector and a half value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half4 half4(half x, half2 yz, half w) { return new half4(x, yz, w); }
+
         /// <summary>
         /// Returns a half4 vector constructed from a half value and a half3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half4 half4(half x, half3 yzw) { return new half4(x, yzw); }
+
         /// <summary>
         /// Returns a half4 vector constructed from a half2 vector and two half values.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half4 half4(half2 xy, half z, half w) { return new half4(xy, z, w); }
+
         /// <summary>
         /// Returns a half4 vector constructed from two half2 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half4 half4(half2 xy, half2 zw) { return new half4(xy, zw); }
+
         /// <summary>
         /// Returns a half4 vector constructed from a half3 vector and a half value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half4 half4(half3 xyz, half w) { return new half4(xyz, w); }
+
         /// <summary>
         /// Returns a half4 vector constructed from a half4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half4 half4(half4 xyzw) { return new half4(xyzw); }
+
         /// <summary>
         /// Returns a half4 vector constructed from a single half value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half4 half4(half v) { return new half4(v); }
+
         /// <summary>
         /// Returns a half4 vector constructed from a single float value by converting it to half and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half4 half4(float v) { return new half4(v); }
+
         /// <summary>
         /// Return a half4 vector constructed from a float4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half4 half4(float4 v) { return new half4(v); }
+
         /// <summary>
         /// Returns a half4 vector constructed from a single double value by converting it to half and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half4 half4(double v) { return new half4(v); }
+
         /// <summary>
         /// Return a half4 vector constructed from a double4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half4 half4(double4 v) { return new half4(v); }
+
         /// <summary>Returns a uint hash code of a half4 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(half4 v)
         {
             return csum(uint4(v.x.value, v.y.value, v.z.value, v.w.value) * uint4(0x745ED837u, 0x9CDC88F5u, 0xFA62D721u, 0x7E4DB1CFu)) + 0x68EEE0F5u;
         }
+
         /// <summary>
         /// Returns a uint4 vector hash code of a half4 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash

@@ -28,6 +28,7 @@ namespace Raster.Core.Math.Simd
             this.c2 = c2;
             this.c3 = c3;
         }
+
         /// <summary>
         /// Constructs a uint3x4 matrix from 12 uint values given in row-major order.
         /// </summary>
@@ -41,6 +42,7 @@ namespace Raster.Core.Math.Simd
             this.c2 = new uint3(m02, m12, m22);
             this.c3 = new uint3(m03, m13, m23);
         }
+
         /// <summary>
         /// Constructs a uint3x4 matrix from a single uint value by assigning it to every component.
         /// </summary>
@@ -52,6 +54,7 @@ namespace Raster.Core.Math.Simd
             this.c2 = v;
             this.c3 = v;
         }
+
         /// <summary>
         /// Constructs a uint3x4 matrix from a single bool value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -63,6 +66,7 @@ namespace Raster.Core.Math.Simd
             this.c2 = math.select(new uint3(0u), new uint3(1u), v);
             this.c3 = math.select(new uint3(0u), new uint3(1u), v);
         }
+
         /// <summary>
         /// Constructs a uint3x4 matrix from a bool3x4 matrix by componentwise conversion.
         /// </summary>
@@ -74,6 +78,7 @@ namespace Raster.Core.Math.Simd
             this.c2 = math.select(new uint3(0u), new uint3(1u), v.c2);
             this.c3 = math.select(new uint3(0u), new uint3(1u), v.c3);
         }
+
         /// <summary>
         /// Constructs a uint3x4 matrix from a single int value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -85,6 +90,7 @@ namespace Raster.Core.Math.Simd
             this.c2 = (uint3)v;
             this.c3 = (uint3)v;
         }
+
         /// <summary>
         /// Constructs a uint3x4 matrix from a int3x4 matrix by componentwise conversion.
         /// </summary>
@@ -96,6 +102,7 @@ namespace Raster.Core.Math.Simd
             this.c2 = (uint3)v.c2;
             this.c3 = (uint3)v.c3;
         }
+
         /// <summary>
         /// Constructs a uint3x4 matrix from a single float value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -107,6 +114,7 @@ namespace Raster.Core.Math.Simd
             this.c2 = (uint3)v;
             this.c3 = (uint3)v;
         }
+
         /// <summary>
         /// Constructs a uint3x4 matrix from a float3x4 matrix by componentwise conversion.
         /// </summary>
@@ -118,6 +126,7 @@ namespace Raster.Core.Math.Simd
             this.c2 = (uint3)v.c2;
             this.c3 = (uint3)v.c3;
         }
+
         /// <summary>
         /// Constructs a uint3x4 matrix from a single double value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -129,6 +138,7 @@ namespace Raster.Core.Math.Simd
             this.c2 = (uint3)v;
             this.c3 = (uint3)v;
         }
+
         /// <summary>
         /// Constructs a uint3x4 matrix from a double3x4 matrix by componentwise conversion.
         /// </summary>
@@ -146,41 +156,49 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator uint3x4(uint v) { return new uint3x4(v); }
+
         /// <summary>
         /// Explicitly converts a single bool value to a uint3x4 matrix by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3x4(bool v) { return new uint3x4(v); }
+
         /// <summary>
         /// Explicitly converts a bool3x4 matrix to a uint3x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3x4(bool3x4 v) { return new uint3x4(v); }
+
         /// <summary>
         /// Explicitly converts a single int value to a uint3x4 matrix by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3x4(int v) { return new uint3x4(v); }
+
         /// <summary>
         /// Explicitly converts a int3x4 matrix to a uint3x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3x4(int3x4 v) { return new uint3x4(v); }
+
         /// <summary>
         /// Explicitly converts a single float value to a uint3x4 matrix by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3x4(float v) { return new uint3x4(v); }
+
         /// <summary>
         /// Explicitly converts a float3x4 matrix to a uint3x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3x4(float3x4 v) { return new uint3x4(v); }
+
         /// <summary>
         /// Explicitly converts a single double value to a uint3x4 matrix by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3x4(double v) { return new uint3x4(v); }
+
         /// <summary>
         /// Explicitly converts a double3x4 matrix to a uint3x4 matrix by componentwise conversion.
         /// </summary>
@@ -192,11 +210,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator * (uint3x4 lhs, uint3x4 rhs) { return new uint3x4 (lhs.c0 * rhs.c0, lhs.c1 * rhs.c1, lhs.c2 * rhs.c2, lhs.c3 * rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a uint3x4 matrix and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator * (uint3x4 lhs, uint rhs) { return new uint3x4 (lhs.c0 * rhs, lhs.c1 * rhs, lhs.c2 * rhs, lhs.c3 * rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a uint value and a uint3x4 matrix.
         /// </summary>
@@ -208,11 +228,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator + (uint3x4 lhs, uint3x4 rhs) { return new uint3x4 (lhs.c0 + rhs.c0, lhs.c1 + rhs.c1, lhs.c2 + rhs.c2, lhs.c3 + rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a uint3x4 matrix and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator + (uint3x4 lhs, uint rhs) { return new uint3x4 (lhs.c0 + rhs, lhs.c1 + rhs, lhs.c2 + rhs, lhs.c3 + rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a uint value and a uint3x4 matrix.
         /// </summary>
@@ -224,11 +246,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator - (uint3x4 lhs, uint3x4 rhs) { return new uint3x4 (lhs.c0 - rhs.c0, lhs.c1 - rhs.c1, lhs.c2 - rhs.c2, lhs.c3 - rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a uint3x4 matrix and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator - (uint3x4 lhs, uint rhs) { return new uint3x4 (lhs.c0 - rhs, lhs.c1 - rhs, lhs.c2 - rhs, lhs.c3 - rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a uint value and a uint3x4 matrix.
         /// </summary>
@@ -240,11 +264,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator / (uint3x4 lhs, uint3x4 rhs) { return new uint3x4 (lhs.c0 / rhs.c0, lhs.c1 / rhs.c1, lhs.c2 / rhs.c2, lhs.c3 / rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a uint3x4 matrix and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator / (uint3x4 lhs, uint rhs) { return new uint3x4 (lhs.c0 / rhs, lhs.c1 / rhs, lhs.c2 / rhs, lhs.c3 / rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a uint value and a uint3x4 matrix.
         /// </summary>
@@ -256,11 +282,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator % (uint3x4 lhs, uint3x4 rhs) { return new uint3x4 (lhs.c0 % rhs.c0, lhs.c1 % rhs.c1, lhs.c2 % rhs.c2, lhs.c3 % rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a uint3x4 matrix and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator % (uint3x4 lhs, uint rhs) { return new uint3x4 (lhs.c0 % rhs, lhs.c1 % rhs, lhs.c2 % rhs, lhs.c3 % rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a uint value and a uint3x4 matrix.
         /// </summary>
@@ -284,11 +312,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator < (uint3x4 lhs, uint3x4 rhs) { return new bool3x4 (lhs.c0 < rhs.c0, lhs.c1 < rhs.c1, lhs.c2 < rhs.c2, lhs.c3 < rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a uint3x4 matrix and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator < (uint3x4 lhs, uint rhs) { return new bool3x4 (lhs.c0 < rhs, lhs.c1 < rhs, lhs.c2 < rhs, lhs.c3 < rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a uint value and a uint3x4 matrix.
         /// </summary>
@@ -300,11 +330,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator <= (uint3x4 lhs, uint3x4 rhs) { return new bool3x4 (lhs.c0 <= rhs.c0, lhs.c1 <= rhs.c1, lhs.c2 <= rhs.c2, lhs.c3 <= rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a uint3x4 matrix and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator <= (uint3x4 lhs, uint rhs) { return new bool3x4 (lhs.c0 <= rhs, lhs.c1 <= rhs, lhs.c2 <= rhs, lhs.c3 <= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a uint value and a uint3x4 matrix.
         /// </summary>
@@ -316,11 +348,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator > (uint3x4 lhs, uint3x4 rhs) { return new bool3x4 (lhs.c0 > rhs.c0, lhs.c1 > rhs.c1, lhs.c2 > rhs.c2, lhs.c3 > rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a uint3x4 matrix and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator > (uint3x4 lhs, uint rhs) { return new bool3x4 (lhs.c0 > rhs, lhs.c1 > rhs, lhs.c2 > rhs, lhs.c3 > rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a uint value and a uint3x4 matrix.
         /// </summary>
@@ -332,11 +366,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator >= (uint3x4 lhs, uint3x4 rhs) { return new bool3x4 (lhs.c0 >= rhs.c0, lhs.c1 >= rhs.c1, lhs.c2 >= rhs.c2, lhs.c3 >= rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a uint3x4 matrix and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator >= (uint3x4 lhs, uint rhs) { return new bool3x4 (lhs.c0 >= rhs, lhs.c1 >= rhs, lhs.c2 >= rhs, lhs.c3 >= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a uint value and a uint3x4 matrix.
         /// </summary>
@@ -359,20 +395,24 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator << (uint3x4 x, int n) { return new uint3x4 (x.c0 << n, x.c1 << n, x.c2 << n, x.c3 << n); }
+
         /// <summary>Returns the result of a componentwise right shift operation on a uint3x4 matrix by a number of bits specified by a single int.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator >> (uint3x4 x, int n) { return new uint3x4 (x.c0 >> n, x.c1 >> n, x.c2 >> n, x.c3 >> n); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on two uint3x4 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator == (uint3x4 lhs, uint3x4 rhs) { return new bool3x4 (lhs.c0 == rhs.c0, lhs.c1 == rhs.c1, lhs.c2 == rhs.c2, lhs.c3 == rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a uint3x4 matrix and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator == (uint3x4 lhs, uint rhs) { return new bool3x4 (lhs.c0 == rhs, lhs.c1 == rhs, lhs.c2 == rhs, lhs.c3 == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a uint value and a uint3x4 matrix.
         /// </summary>
@@ -384,11 +424,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator != (uint3x4 lhs, uint3x4 rhs) { return new bool3x4 (lhs.c0 != rhs.c0, lhs.c1 != rhs.c1, lhs.c2 != rhs.c2, lhs.c3 != rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a uint3x4 matrix and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator != (uint3x4 lhs, uint rhs) { return new bool3x4 (lhs.c0 != rhs, lhs.c1 != rhs, lhs.c2 != rhs, lhs.c3 != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a uint value and a uint3x4 matrix.
         /// </summary>
@@ -406,11 +448,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator & (uint3x4 lhs, uint3x4 rhs) { return new uint3x4 (lhs.c0 & rhs.c0, lhs.c1 & rhs.c1, lhs.c2 & rhs.c2, lhs.c3 & rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a uint3x4 matrix and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator & (uint3x4 lhs, uint rhs) { return new uint3x4 (lhs.c0 & rhs, lhs.c1 & rhs, lhs.c2 & rhs, lhs.c3 & rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a uint value and a uint3x4 matrix.
         /// </summary>
@@ -422,11 +466,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator | (uint3x4 lhs, uint3x4 rhs) { return new uint3x4 (lhs.c0 | rhs.c0, lhs.c1 | rhs.c1, lhs.c2 | rhs.c2, lhs.c3 | rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a uint3x4 matrix and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator | (uint3x4 lhs, uint rhs) { return new uint3x4 (lhs.c0 | rhs, lhs.c1 | rhs, lhs.c2 | rhs, lhs.c3 | rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a uint value and a uint3x4 matrix.
         /// </summary>
@@ -438,11 +484,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator ^ (uint3x4 lhs, uint3x4 rhs) { return new uint3x4 (lhs.c0 ^ rhs.c0, lhs.c1 ^ rhs.c1, lhs.c2 ^ rhs.c2, lhs.c3 ^ rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a uint3x4 matrix and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 operator ^ (uint3x4 lhs, uint rhs) { return new uint3x4 (lhs.c0 ^ rhs, lhs.c1 ^ rhs, lhs.c2 ^ rhs, lhs.c3 ^ rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a uint value and a uint3x4 matrix.
         /// </summary>
@@ -470,6 +518,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(uint3x4 rhs) { return c0.Equals(rhs.c0) && c1.Equals(rhs.c1) && c2.Equals(rhs.c2) && c3.Equals(rhs.c3); }
+
         /// <summary>
         /// Returns true if the uint3x4 is equal to a given uint3x4, false otherwise.
         /// </summary>
@@ -488,6 +537,7 @@ namespace Raster.Core.Math.Simd
         {
             return string.Format("uint3x4({0}, {1}, {2}, {3},  {4}, {5}, {6}, {7},  {8}, {9}, {10}, {11})", c0.x, c1.x, c2.x, c3.x, c0.y, c1.y, c2.y, c3.y, c0.z, c1.z, c2.z, c3.z);
         }
+
         /// <summary>
         /// Returns a string representation of the uint3x4 using a specified format and culture-specific format information.
         /// </summary>
@@ -504,6 +554,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 uint3x4(uint3 c0, uint3 c1, uint3 c2, uint3 c3) { return new uint3x4(c0, c1, c2, c3); }
+
         /// <summary>
         /// Returns a uint3x4 matrix constructed from from 12 uint values given in row-major order.
         /// </summary>
@@ -516,51 +567,61 @@ namespace Raster.Core.Math.Simd
                                m10, m11, m12, m13,
                                m20, m21, m22, m23);
         }
+
         /// <summary>
         /// Returns a uint3x4 matrix constructed from a single uint value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 uint3x4(uint v) { return new uint3x4(v); }
+
         /// <summary>
         /// Returns a uint3x4 matrix constructed from a single bool value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 uint3x4(bool v) { return new uint3x4(v); }
+
         /// <summary>
         /// Return a uint3x4 matrix constructed from a bool3x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 uint3x4(bool3x4 v) { return new uint3x4(v); }
+
         /// <summary>
         /// Returns a uint3x4 matrix constructed from a single int value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 uint3x4(int v) { return new uint3x4(v); }
+
         /// <summary>
         /// Return a uint3x4 matrix constructed from a int3x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 uint3x4(int3x4 v) { return new uint3x4(v); }
+
         /// <summary>
         /// Returns a uint3x4 matrix constructed from a single float value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 uint3x4(float v) { return new uint3x4(v); }
+
         /// <summary>
         /// Return a uint3x4 matrix constructed from a float3x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 uint3x4(float3x4 v) { return new uint3x4(v); }
+
         /// <summary>
         /// Returns a uint3x4 matrix constructed from a single double value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 uint3x4(double v) { return new uint3x4(v); }
+
         /// <summary>
         /// Return a uint3x4 matrix constructed from a double3x4 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3x4 uint3x4(double3x4 v) { return new uint3x4(v); }
+
         /// <summary>
         /// Return the uint4x3 transpose of a uint3x4 matrix.
         /// </summary>
@@ -573,6 +634,7 @@ namespace Raster.Core.Math.Simd
                 v.c2.x, v.c2.y, v.c2.z,
                 v.c3.x, v.c3.y, v.c3.z);
         }
+
         /// <summary>Returns a uint hash code of a uint3x4 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(uint3x4 v)
@@ -582,6 +644,7 @@ namespace Raster.Core.Math.Simd
                         v.c2 * uint3(0x7BE39F3Bu, 0xFAB9913Fu, 0xB4501269u) + 
                         v.c3 * uint3(0xE04B89FDu, 0xDB3DE101u, 0x7B6D1B4Bu)) + 0x58399E77u;
         }
+
         /// <summary>
         /// Returns a uint3 vector hash code of a uint3x4 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash

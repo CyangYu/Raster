@@ -24,6 +24,7 @@ namespace Raster.Core.Math.Simd
             this.c2 = c2;
             this.c3 = c3;
         }
+
         /// <summary>
         /// Constructs a bool3x4 matrix from 12 bool values given in row-major order.
         /// </summary>
@@ -37,6 +38,7 @@ namespace Raster.Core.Math.Simd
             this.c2 = new bool3(m02, m12, m22);
             this.c3 = new bool3(m03, m13, m23);
         }
+
         /// <summary>
         /// Constructs a bool3x4 matrix from a single bool value by assigning it to every component.
         /// </summary>
@@ -60,11 +62,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator == (bool3x4 lhs, bool3x4 rhs) { return new bool3x4 (lhs.c0 == rhs.c0, lhs.c1 == rhs.c1, lhs.c2 == rhs.c2, lhs.c3 == rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a bool3x4 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator == (bool3x4 lhs, bool rhs) { return new bool3x4 (lhs.c0 == rhs, lhs.c1 == rhs, lhs.c2 == rhs, lhs.c3 == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a bool value and a bool3x4 matrix.
         /// </summary>
@@ -76,11 +80,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator != (bool3x4 lhs, bool3x4 rhs) { return new bool3x4 (lhs.c0 != rhs.c0, lhs.c1 != rhs.c1, lhs.c2 != rhs.c2, lhs.c3 != rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a bool3x4 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator != (bool3x4 lhs, bool rhs) { return new bool3x4 (lhs.c0 != rhs, lhs.c1 != rhs, lhs.c2 != rhs, lhs.c3 != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a bool value and a bool3x4 matrix.
         /// </summary>
@@ -98,11 +104,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator & (bool3x4 lhs, bool3x4 rhs) { return new bool3x4 (lhs.c0 & rhs.c0, lhs.c1 & rhs.c1, lhs.c2 & rhs.c2, lhs.c3 & rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a bool3x4 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator & (bool3x4 lhs, bool rhs) { return new bool3x4 (lhs.c0 & rhs, lhs.c1 & rhs, lhs.c2 & rhs, lhs.c3 & rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a bool value and a bool3x4 matrix.
         /// </summary>
@@ -114,11 +122,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator | (bool3x4 lhs, bool3x4 rhs) { return new bool3x4 (lhs.c0 | rhs.c0, lhs.c1 | rhs.c1, lhs.c2 | rhs.c2, lhs.c3 | rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a bool3x4 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator | (bool3x4 lhs, bool rhs) { return new bool3x4 (lhs.c0 | rhs, lhs.c1 | rhs, lhs.c2 | rhs, lhs.c3 | rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a bool value and a bool3x4 matrix.
         /// </summary>
@@ -130,11 +140,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator ^ (bool3x4 lhs, bool3x4 rhs) { return new bool3x4 (lhs.c0 ^ rhs.c0, lhs.c1 ^ rhs.c1, lhs.c2 ^ rhs.c2, lhs.c3 ^ rhs.c3); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a bool3x4 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 operator ^ (bool3x4 lhs, bool rhs) { return new bool3x4 (lhs.c0 ^ rhs, lhs.c1 ^ rhs, lhs.c2 ^ rhs, lhs.c3 ^ rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a bool value and a bool3x4 matrix.
         /// </summary>
@@ -162,6 +174,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(bool3x4 rhs) { return c0.Equals(rhs.c0) && c1.Equals(rhs.c1) && c2.Equals(rhs.c2) && c3.Equals(rhs.c3); }
+
         /// <summary>
         /// Returns true if the bool3x4 is equal to a given bool3x4, false otherwise.
         /// </summary>
@@ -188,6 +201,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 bool3x4(bool3 c0, bool3 c1, bool3 c2, bool3 c3) { return new bool3x4(c0, c1, c2, c3); }
+
         /// <summary>
         /// Returns a bool3x4 matrix constructed from from 12 bool values given in row-major order.
         /// </summary>
@@ -200,11 +214,13 @@ namespace Raster.Core.Math.Simd
                                m10, m11, m12, m13,
                                m20, m21, m22, m23);
         }
+
         /// <summary>
         /// Returns a bool3x4 matrix constructed from a single bool value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x4 bool3x4(bool v) { return new bool3x4(v); }
+
         /// <summary>
         /// Return the bool4x3 transpose of a bool3x4 matrix.
         /// </summary>
@@ -217,6 +233,7 @@ namespace Raster.Core.Math.Simd
                 v.c2.x, v.c2.y, v.c2.z,
                 v.c3.x, v.c3.y, v.c3.z);
         }
+
         /// <summary>Returns a uint hash code of a bool3x4 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(bool3x4 v)
@@ -226,6 +243,7 @@ namespace Raster.Core.Math.Simd
                         select(uint3(0xFA3A3285u, 0xAD55999Du, 0xDCDD5341u), uint3(0x94DDD769u, 0xA1E92D39u, 0x4583C801u), v.c2) + 
                         select(uint3(0x9536A0F5u, 0xAF816615u, 0x9AF8D62Du), uint3(0xE3600729u, 0x5F17300Du, 0x670D6809u), v.c3));
         }
+
         /// <summary>
         /// Returns a uint3 vector hash code of a bool3x4 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash

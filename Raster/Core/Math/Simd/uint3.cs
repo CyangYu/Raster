@@ -28,6 +28,7 @@ namespace Raster.Core.Math.Simd
             this.y = y;
             this.z = z;
         }
+
         /// <summary>
         /// Constructs a uint3 vector from a uint value and a uint2 vector.
         /// </summary>
@@ -38,6 +39,7 @@ namespace Raster.Core.Math.Simd
             this.y = yz.x;
             this.z = yz.y;
         }
+
         /// <summary>
         /// Constructs a uint3 vector from a uint2 vector and a uint value.
         /// </summary>
@@ -48,6 +50,7 @@ namespace Raster.Core.Math.Simd
             this.y = xy.y;
             this.z = z;
         }
+
         /// <summary>
         /// Constructs a uint3 vector from a uint3 vector.
         /// </summary>
@@ -58,6 +61,7 @@ namespace Raster.Core.Math.Simd
             this.y = xyz.y;
             this.z = xyz.z;
         }
+
         /// <summary>
         /// Constructs a uint3 vector from a single uint value by assigning it to every component.
         /// </summary>
@@ -68,6 +72,7 @@ namespace Raster.Core.Math.Simd
             this.y = v;
             this.z = v;
         }
+
         /// <summary>
         /// Constructs a uint3 vector from a single bool value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -78,6 +83,7 @@ namespace Raster.Core.Math.Simd
             this.y = v ? 1u : 0u;
             this.z = v ? 1u : 0u;
         }
+
         /// <summary>
         /// Constructs a uint3 vector from a bool3 vector by componentwise conversion.
         /// </summary>
@@ -88,6 +94,7 @@ namespace Raster.Core.Math.Simd
             this.y = v.y ? 1u : 0u;
             this.z = v.z ? 1u : 0u;
         }
+
         /// <summary>
         /// Constructs a uint3 vector from a single int value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -98,6 +105,7 @@ namespace Raster.Core.Math.Simd
             this.y = (uint)v;
             this.z = (uint)v;
         }
+
         /// <summary>
         /// Constructs a uint3 vector from a int3 vector by componentwise conversion.
         /// </summary>
@@ -108,6 +116,7 @@ namespace Raster.Core.Math.Simd
             this.y = (uint)v.y;
             this.z = (uint)v.z;
         }
+
         /// <summary>
         /// Constructs a uint3 vector from a single float value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -118,6 +127,7 @@ namespace Raster.Core.Math.Simd
             this.y = (uint)v;
             this.z = (uint)v;
         }
+
         /// <summary>
         /// Constructs a uint3 vector from a float3 vector by componentwise conversion.
         /// </summary>
@@ -128,6 +138,7 @@ namespace Raster.Core.Math.Simd
             this.y = (uint)v.y;
             this.z = (uint)v.z;
         }
+
         /// <summary>
         /// Constructs a uint3 vector from a single double value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -138,6 +149,7 @@ namespace Raster.Core.Math.Simd
             this.y = (uint)v;
             this.z = (uint)v;
         }
+
         /// <summary>
         /// Constructs a uint3 vector from a double3 vector by componentwise conversion.
         /// </summary>
@@ -154,41 +166,49 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator uint3(uint v) { return new uint3(v); }
+
         /// <summary>
         /// Explicitly converts a single bool value to a uint3 vector by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3(bool v) { return new uint3(v); }
+
         /// <summary>
         /// Explicitly converts a bool3 vector to a uint3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3(bool3 v) { return new uint3(v); }
+
         /// <summary>
         /// Explicitly converts a single int value to a uint3 vector by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3(int v) { return new uint3(v); }
+
         /// <summary>
         /// Explicitly converts a int3 vector to a uint3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3(int3 v) { return new uint3(v); }
+
         /// <summary>
         /// Explicitly converts a single float value to a uint3 vector by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3(float v) { return new uint3(v); }
+
         /// <summary>
         /// Explicitly converts a float3 vector to a uint3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3(float3 v) { return new uint3(v); }
+
         /// <summary>
         /// Explicitly converts a single double value to a uint3 vector by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint3(double v) { return new uint3(v); }
+
         /// <summary>
         /// Explicitly converts a double3 vector to a uint3 vector by componentwise conversion.
         /// </summary>
@@ -200,11 +220,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator * (uint3 lhs, uint3 rhs) { return new uint3 (lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator * (uint3 lhs, uint rhs) { return new uint3 (lhs.x * rhs, lhs.y * rhs, lhs.z * rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a uint value and a uint3 vector.
         /// </summary>
@@ -216,11 +238,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator + (uint3 lhs, uint3 rhs) { return new uint3 (lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator + (uint3 lhs, uint rhs) { return new uint3 (lhs.x + rhs, lhs.y + rhs, lhs.z + rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a uint value and a uint3 vector.
         /// </summary>
@@ -232,11 +256,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator - (uint3 lhs, uint3 rhs) { return new uint3 (lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator - (uint3 lhs, uint rhs) { return new uint3 (lhs.x - rhs, lhs.y - rhs, lhs.z - rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a uint value and a uint3 vector.
         /// </summary>
@@ -248,11 +274,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator / (uint3 lhs, uint3 rhs) { return new uint3 (lhs.x / rhs.x, lhs.y / rhs.y, lhs.z / rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator / (uint3 lhs, uint rhs) { return new uint3 (lhs.x / rhs, lhs.y / rhs, lhs.z / rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a uint value and a uint3 vector.
         /// </summary>
@@ -264,11 +292,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator % (uint3 lhs, uint3 rhs) { return new uint3 (lhs.x % rhs.x, lhs.y % rhs.y, lhs.z % rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator % (uint3 lhs, uint rhs) { return new uint3 (lhs.x % rhs, lhs.y % rhs, lhs.z % rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a uint value and a uint3 vector.
         /// </summary>
@@ -292,11 +322,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator < (uint3 lhs, uint3 rhs) { return new bool3 (lhs.x < rhs.x, lhs.y < rhs.y, lhs.z < rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator < (uint3 lhs, uint rhs) { return new bool3 (lhs.x < rhs, lhs.y < rhs, lhs.z < rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a uint value and a uint3 vector.
         /// </summary>
@@ -308,11 +340,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator <= (uint3 lhs, uint3 rhs) { return new bool3 (lhs.x <= rhs.x, lhs.y <= rhs.y, lhs.z <= rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator <= (uint3 lhs, uint rhs) { return new bool3 (lhs.x <= rhs, lhs.y <= rhs, lhs.z <= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a uint value and a uint3 vector.
         /// </summary>
@@ -324,11 +358,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator > (uint3 lhs, uint3 rhs) { return new bool3 (lhs.x > rhs.x, lhs.y > rhs.y, lhs.z > rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator > (uint3 lhs, uint rhs) { return new bool3 (lhs.x > rhs, lhs.y > rhs, lhs.z > rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a uint value and a uint3 vector.
         /// </summary>
@@ -340,11 +376,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator >= (uint3 lhs, uint3 rhs) { return new bool3 (lhs.x >= rhs.x, lhs.y >= rhs.y, lhs.z >= rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator >= (uint3 lhs, uint rhs) { return new bool3 (lhs.x >= rhs, lhs.y >= rhs, lhs.z >= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a uint value and a uint3 vector.
         /// </summary>
@@ -367,20 +405,24 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator << (uint3 x, int n) { return new uint3 (x.x << n, x.y << n, x.z << n); }
+
         /// <summary>Returns the result of a componentwise right shift operation on a uint3 vector by a number of bits specified by a single int.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator >> (uint3 x, int n) { return new uint3 (x.x >> n, x.y >> n, x.z >> n); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on two uint3 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (uint3 lhs, uint3 rhs) { return new bool3 (lhs.x == rhs.x, lhs.y == rhs.y, lhs.z == rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (uint3 lhs, uint rhs) { return new bool3 (lhs.x == rhs, lhs.y == rhs, lhs.z == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a uint value and a uint3 vector.
         /// </summary>
@@ -392,11 +434,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (uint3 lhs, uint3 rhs) { return new bool3 (lhs.x != rhs.x, lhs.y != rhs.y, lhs.z != rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (uint3 lhs, uint rhs) { return new bool3 (lhs.x != rhs, lhs.y != rhs, lhs.z != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a uint value and a uint3 vector.
         /// </summary>
@@ -414,11 +458,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator & (uint3 lhs, uint3 rhs) { return new uint3 (lhs.x & rhs.x, lhs.y & rhs.y, lhs.z & rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator & (uint3 lhs, uint rhs) { return new uint3 (lhs.x & rhs, lhs.y & rhs, lhs.z & rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a uint value and a uint3 vector.
         /// </summary>
@@ -430,11 +476,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator | (uint3 lhs, uint3 rhs) { return new uint3 (lhs.x | rhs.x, lhs.y | rhs.y, lhs.z | rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator | (uint3 lhs, uint rhs) { return new uint3 (lhs.x | rhs, lhs.y | rhs, lhs.z | rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a uint value and a uint3 vector.
         /// </summary>
@@ -446,11 +494,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator ^ (uint3 lhs, uint3 rhs) { return new uint3 (lhs.x ^ rhs.x, lhs.y ^ rhs.y, lhs.z ^ rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a uint3 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 operator ^ (uint3 lhs, uint rhs) { return new uint3 (lhs.x ^ rhs, lhs.y ^ rhs, lhs.z ^ rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a uint value and a uint3 vector.
         /// </summary>
@@ -1330,6 +1380,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(uint3 rhs) { return x == rhs.x && y == rhs.y && z == rhs.z; }
+
         /// <summary>
         /// Returns true if the uint3 is equal to a given uint3, false otherwise.
         /// </summary>
@@ -1348,6 +1399,7 @@ namespace Raster.Core.Math.Simd
         {
             return string.Format("uint3({0}, {1}, {2})", x, y, z);
         }
+
         /// <summary>
         /// Returns a string representation of the uint3 using a specified format and culture-specific format information.
         /// </summary>
@@ -1376,72 +1428,86 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 uint3(uint x, uint y, uint z) { return new uint3(x, y, z); }
+
         /// <summary>
         /// Returns a uint3 vector constructed from a uint value and a uint2 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 uint3(uint x, uint2 yz) { return new uint3(x, yz); }
+
         /// <summary>
         /// Returns a uint3 vector constructed from a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 uint3(uint2 xy, uint z) { return new uint3(xy, z); }
+
         /// <summary>
         /// Returns a uint3 vector constructed from a uint3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 uint3(uint3 xyz) { return new uint3(xyz); }
+
         /// <summary>
         /// Returns a uint3 vector constructed from a single uint value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 uint3(uint v) { return new uint3(v); }
+
         /// <summary>
         /// Returns a uint3 vector constructed from a single bool value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 uint3(bool v) { return new uint3(v); }
+
         /// <summary>
         /// Return a uint3 vector constructed from a bool3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 uint3(bool3 v) { return new uint3(v); }
+
         /// <summary>
         /// Returns a uint3 vector constructed from a single int value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 uint3(int v) { return new uint3(v); }
+
         /// <summary>
         /// Return a uint3 vector constructed from a int3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 uint3(int3 v) { return new uint3(v); }
+
         /// <summary>
         /// Returns a uint3 vector constructed from a single float value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 uint3(float v) { return new uint3(v); }
+
         /// <summary>
         /// Return a uint3 vector constructed from a float3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 uint3(float3 v) { return new uint3(v); }
+
         /// <summary>
         /// Returns a uint3 vector constructed from a single double value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 uint3(double v) { return new uint3(v); }
+
         /// <summary>
         /// Return a uint3 vector constructed from a double3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint3 uint3(double3 v) { return new uint3(v); }
+
         /// <summary>Returns a uint hash code of a uint3 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(uint3 v)
         {
             return csum(v * uint3(0xCD266C89u, 0xF1852A33u, 0x77E35E77u)) + 0x863E3729u;
         }
+
         /// <summary>
         /// Returns a uint3 vector hash code of a uint3 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -1452,6 +1518,7 @@ namespace Raster.Core.Math.Simd
         {
             return (v * uint3(0xE191B035u, 0x68586FAFu, 0xD4DFF6D3u)) + 0xCB634F4Du;
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two uint3 vectors into a uint value.
         /// </summary>
@@ -1460,6 +1527,7 @@ namespace Raster.Core.Math.Simd
         {
             return select_shuffle_component(a, b, x);
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two uint3 vectors into a uint2 vector.
         /// </summary>
@@ -1470,6 +1538,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, x),
                 select_shuffle_component(a, b, y));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two uint3 vectors into a uint3 vector.
         /// </summary>
@@ -1481,6 +1550,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, y),
                 select_shuffle_component(a, b, z));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two uint3 vectors into a uint4 vector.
         /// </summary>

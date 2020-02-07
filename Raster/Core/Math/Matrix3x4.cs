@@ -520,6 +520,7 @@ namespace Raster.Core.Math
             result.M22 = left.M22 + right.M22;
             result.M23 = left.M23 + right.M23;
         }
+
         /// <summary>
         /// 
         /// </summary>

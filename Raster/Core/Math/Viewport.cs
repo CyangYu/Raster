@@ -51,6 +51,7 @@ namespace Raster.Core.Math
                 return 0.0f;
             }
         }
+
         /// <summary>
         /// 
         /// </summary>

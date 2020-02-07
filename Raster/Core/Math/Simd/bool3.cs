@@ -28,6 +28,7 @@ namespace Raster.Core.Math.Simd
             this.y = y;
             this.z = z;
         }
+
         /// <summary>
         /// Constructs a bool3 vector from a bool value and a bool2 vector.
         /// </summary>
@@ -38,6 +39,7 @@ namespace Raster.Core.Math.Simd
             this.y = yz.x;
             this.z = yz.y;
         }
+
         /// <summary>
         /// Constructs a bool3 vector from a bool2 vector and a bool value.
         /// </summary>
@@ -48,6 +50,7 @@ namespace Raster.Core.Math.Simd
             this.y = xy.y;
             this.z = z;
         }
+
         /// <summary>
         /// Constructs a bool3 vector from a bool3 vector.
         /// </summary>
@@ -58,6 +61,7 @@ namespace Raster.Core.Math.Simd
             this.y = xyz.y;
             this.z = xyz.z;
         }
+
         /// <summary>
         /// Constructs a bool3 vector from a single bool value by assigning it to every component.
         /// </summary>
@@ -80,11 +84,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (bool3 lhs, bool3 rhs) { return new bool3 (lhs.x == rhs.x, lhs.y == rhs.y, lhs.z == rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a bool3 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (bool3 lhs, bool rhs) { return new bool3 (lhs.x == rhs, lhs.y == rhs, lhs.z == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a bool value and a bool3 vector.
         /// </summary>
@@ -96,11 +102,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (bool3 lhs, bool3 rhs) { return new bool3 (lhs.x != rhs.x, lhs.y != rhs.y, lhs.z != rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a bool3 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (bool3 lhs, bool rhs) { return new bool3 (lhs.x != rhs, lhs.y != rhs, lhs.z != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a bool value and a bool3 vector.
         /// </summary>
@@ -118,11 +126,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator & (bool3 lhs, bool3 rhs) { return new bool3 (lhs.x & rhs.x, lhs.y & rhs.y, lhs.z & rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a bool3 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator & (bool3 lhs, bool rhs) { return new bool3 (lhs.x & rhs, lhs.y & rhs, lhs.z & rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a bool value and a bool3 vector.
         /// </summary>
@@ -134,11 +144,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator | (bool3 lhs, bool3 rhs) { return new bool3 (lhs.x | rhs.x, lhs.y | rhs.y, lhs.z | rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a bool3 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator | (bool3 lhs, bool rhs) { return new bool3 (lhs.x | rhs, lhs.y | rhs, lhs.z | rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a bool value and a bool3 vector.
         /// </summary>
@@ -150,11 +162,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator ^ (bool3 lhs, bool3 rhs) { return new bool3 (lhs.x ^ rhs.x, lhs.y ^ rhs.y, lhs.z ^ rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a bool3 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator ^ (bool3 lhs, bool rhs) { return new bool3 (lhs.x ^ rhs, lhs.y ^ rhs, lhs.z ^ rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a bool value and a bool3 vector.
         /// </summary>
@@ -1034,6 +1048,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(bool3 rhs) { return x == rhs.x && y == rhs.y && z == rhs.z; }
+
         /// <summary>
         /// Returns true if the bool3 is equal to a given bool3, false otherwise.
         /// </summary>
@@ -1072,32 +1087,38 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 bool3(bool x, bool y, bool z) { return new bool3(x, y, z); }
+
         /// <summary>
         /// Returns a bool3 vector constructed from a bool value and a bool2 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 bool3(bool x, bool2 yz) { return new bool3(x, yz); }
+
         /// <summary>
         /// Returns a bool3 vector constructed from a bool2 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 bool3(bool2 xy, bool z) { return new bool3(xy, z); }
+
         /// <summary>
         /// Returns a bool3 vector constructed from a bool3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 bool3(bool3 xyz) { return new bool3(xyz); }
+
         /// <summary>
         /// Returns a bool3 vector constructed from a single bool value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 bool3(bool v) { return new bool3(v); }
+
         /// <summary>Returns a uint hash code of a bool3 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(bool3 v)
         {
             return csum(select(uint3(0xA1E92D39u, 0x4583C801u, 0x9536A0F5u), uint3(0xAF816615u, 0x9AF8D62Du, 0xE3600729u), v));
         }
+
         /// <summary>
         /// Returns a uint3 vector hash code of a bool3 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -1108,6 +1129,7 @@ namespace Raster.Core.Math.Simd
         {
             return (select(uint3(0x5F17300Du, 0x670D6809u, 0x7AF32C49u), uint3(0xAE131389u, 0x5D1B165Bu, 0x87096CD7u), v));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool3 vectors into a bool value.
         /// </summary>
@@ -1116,6 +1138,7 @@ namespace Raster.Core.Math.Simd
         {
             return select_shuffle_component(a, b, x);
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool3 vectors into a bool2 vector.
         /// </summary>
@@ -1126,6 +1149,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, x),
                 select_shuffle_component(a, b, y));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool3 vectors into a bool3 vector.
         /// </summary>
@@ -1137,6 +1161,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, y),
                 select_shuffle_component(a, b, z));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool3 vectors into a bool4 vector.
         /// </summary>

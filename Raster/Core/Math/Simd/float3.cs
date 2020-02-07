@@ -28,6 +28,7 @@ namespace Raster.Core.Math.Simd
             this.y = y;
             this.z = z;
         }
+
         /// <summary>
         /// Constructs a float3 vector from a float value and a float2 vector.
         /// </summary>
@@ -38,6 +39,7 @@ namespace Raster.Core.Math.Simd
             this.y = yz.x;
             this.z = yz.y;
         }
+
         /// <summary>
         /// Constructs a float3 vector from a float2 vector and a float value.
         /// </summary>
@@ -48,6 +50,7 @@ namespace Raster.Core.Math.Simd
             this.y = xy.y;
             this.z = z;
         }
+
         /// <summary>
         /// Constructs a float3 vector from a float3 vector.
         /// </summary>
@@ -58,6 +61,7 @@ namespace Raster.Core.Math.Simd
             this.y = xyz.y;
             this.z = xyz.z;
         }
+
         /// <summary>
         /// Constructs a float3 vector from a single float value by assigning it to every component.
         /// </summary>
@@ -68,6 +72,7 @@ namespace Raster.Core.Math.Simd
             this.y = v;
             this.z = v;
         }
+
         /// <summary>
         /// Constructs a float3 vector from a single bool value by converting it to float and assigning it to every component.
         /// </summary>
@@ -78,6 +83,7 @@ namespace Raster.Core.Math.Simd
             this.y = v ? 1.0f : 0.0f;
             this.z = v ? 1.0f : 0.0f;
         }
+
         /// <summary>
         /// Constructs a float3 vector from a bool3 vector by componentwise conversion.
         /// </summary>
@@ -88,6 +94,7 @@ namespace Raster.Core.Math.Simd
             this.y = v.y ? 1.0f : 0.0f;
             this.z = v.z ? 1.0f : 0.0f;
         }
+
         /// <summary>
         /// Constructs a float3 vector from a single int value by converting it to float and assigning it to every component.
         /// </summary>
@@ -98,6 +105,7 @@ namespace Raster.Core.Math.Simd
             this.y = v;
             this.z = v;
         }
+
         /// <summary>
         /// Constructs a float3 vector from a int3 vector by componentwise conversion.
         /// </summary>
@@ -108,6 +116,7 @@ namespace Raster.Core.Math.Simd
             this.y = v.y;
             this.z = v.z;
         }
+
         /// <summary>
         /// Constructs a float3 vector from a single uint value by converting it to float and assigning it to every component.
         /// </summary>
@@ -118,6 +127,7 @@ namespace Raster.Core.Math.Simd
             this.y = v;
             this.z = v;
         }
+
         /// <summary>
         /// Constructs a float3 vector from a uint3 vector by componentwise conversion.
         /// </summary>
@@ -128,6 +138,7 @@ namespace Raster.Core.Math.Simd
             this.y = v.y;
             this.z = v.z;
         }
+
         /// <summary>
         /// Constructs a float3 vector from a single half value by converting it to float and assigning it to every component.
         /// </summary>
@@ -138,6 +149,7 @@ namespace Raster.Core.Math.Simd
             this.y = v;
             this.z = v;
         }
+
         /// <summary>
         /// Constructs a float3 vector from a half3 vector by componentwise conversion.
         /// </summary>
@@ -148,6 +160,7 @@ namespace Raster.Core.Math.Simd
             this.y = v.y;
             this.z = v.z;
         }
+
         /// <summary>
         /// Constructs a float3 vector from a single double value by converting it to float and assigning it to every component.
         /// </summary>
@@ -158,6 +171,7 @@ namespace Raster.Core.Math.Simd
             this.y = (float)v;
             this.z = (float)v;
         }
+
         /// <summary>
         /// Constructs a float3 vector from a double3 vector by componentwise conversion.
         /// </summary>
@@ -174,51 +188,61 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float3(float v) { return new float3(v); }
+
         /// <summary>
         /// Explicitly converts a single bool value to a float3 vector by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float3(bool v) { return new float3(v); }
+
         /// <summary>
         /// Explicitly converts a bool3 vector to a float3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float3(bool3 v) { return new float3(v); }
+
         /// <summary>
         /// Implicitly converts a single int value to a float3 vector by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float3(int v) { return new float3(v); }
+
         /// <summary>
         /// Implicitly converts a int3 vector to a float3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float3(int3 v) { return new float3(v); }
+
         /// <summary>
         /// Implicitly converts a single uint value to a float3 vector by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float3(uint v) { return new float3(v); }
+
         /// <summary>
         /// Implicitly converts a uint3 vector to a float3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float3(uint3 v) { return new float3(v); }
+
         /// <summary>
         /// Implicitly converts a single half value to a float3 vector by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float3(half v) { return new float3(v); }
+
         /// <summary>
         /// Implicitly converts a half3 vector to a float3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float3(half3 v) { return new float3(v); }
+
         /// <summary>
         /// Explicitly converts a single double value to a float3 vector by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float3(double v) { return new float3(v); }
+
         /// <summary>
         /// Explicitly converts a double3 vector to a float3 vector by componentwise conversion.
         /// </summary>
@@ -230,11 +254,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 operator * (float3 lhs, float3 rhs) { return new float3 (lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a float3 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 operator * (float3 lhs, float rhs) { return new float3 (lhs.x * rhs, lhs.y * rhs, lhs.z * rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a float value and a float3 vector.
         /// </summary>
@@ -246,11 +272,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 operator + (float3 lhs, float3 rhs) { return new float3 (lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a float3 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 operator + (float3 lhs, float rhs) { return new float3 (lhs.x + rhs, lhs.y + rhs, lhs.z + rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a float value and a float3 vector.
         /// </summary>
@@ -262,11 +290,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 operator - (float3 lhs, float3 rhs) { return new float3 (lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a float3 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 operator - (float3 lhs, float rhs) { return new float3 (lhs.x - rhs, lhs.y - rhs, lhs.z - rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a float value and a float3 vector.
         /// </summary>
@@ -278,11 +308,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 operator / (float3 lhs, float3 rhs) { return new float3 (lhs.x / rhs.x, lhs.y / rhs.y, lhs.z / rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a float3 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 operator / (float3 lhs, float rhs) { return new float3 (lhs.x / rhs, lhs.y / rhs, lhs.z / rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a float value and a float3 vector.
         /// </summary>
@@ -294,11 +326,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 operator % (float3 lhs, float3 rhs) { return new float3 (lhs.x % rhs.x, lhs.y % rhs.y, lhs.z % rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a float3 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 operator % (float3 lhs, float rhs) { return new float3 (lhs.x % rhs, lhs.y % rhs, lhs.z % rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a float value and a float3 vector.
         /// </summary>
@@ -322,11 +356,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator < (float3 lhs, float3 rhs) { return new bool3 (lhs.x < rhs.x, lhs.y < rhs.y, lhs.z < rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a float3 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator < (float3 lhs, float rhs) { return new bool3 (lhs.x < rhs, lhs.y < rhs, lhs.z < rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a float value and a float3 vector.
         /// </summary>
@@ -338,11 +374,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator <= (float3 lhs, float3 rhs) { return new bool3 (lhs.x <= rhs.x, lhs.y <= rhs.y, lhs.z <= rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a float3 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator <= (float3 lhs, float rhs) { return new bool3 (lhs.x <= rhs, lhs.y <= rhs, lhs.z <= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a float value and a float3 vector.
         /// </summary>
@@ -354,11 +392,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator > (float3 lhs, float3 rhs) { return new bool3 (lhs.x > rhs.x, lhs.y > rhs.y, lhs.z > rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a float3 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator > (float3 lhs, float rhs) { return new bool3 (lhs.x > rhs, lhs.y > rhs, lhs.z > rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a float value and a float3 vector.
         /// </summary>
@@ -370,11 +410,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator >= (float3 lhs, float3 rhs) { return new bool3 (lhs.x >= rhs.x, lhs.y >= rhs.y, lhs.z >= rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a float3 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator >= (float3 lhs, float rhs) { return new bool3 (lhs.x >= rhs, lhs.y >= rhs, lhs.z >= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a float value and a float3 vector.
         /// </summary>
@@ -398,11 +440,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (float3 lhs, float3 rhs) { return new bool3 (lhs.x == rhs.x, lhs.y == rhs.y, lhs.z == rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a float3 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (float3 lhs, float rhs) { return new bool3 (lhs.x == rhs, lhs.y == rhs, lhs.z == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a float value and a float3 vector.
         /// </summary>
@@ -414,11 +458,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (float3 lhs, float3 rhs) { return new bool3 (lhs.x != rhs.x, lhs.y != rhs.y, lhs.z != rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a float3 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (float3 lhs, float rhs) { return new bool3 (lhs.x != rhs, lhs.y != rhs, lhs.z != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a float value and a float3 vector.
         /// </summary>
@@ -1298,6 +1344,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(float3 rhs) { return x == rhs.x && y == rhs.y && z == rhs.z; }
+
         /// <summary>
         /// Returns true if the float3 is equal to a given float3, false otherwise.
         /// </summary>
@@ -1316,6 +1363,7 @@ namespace Raster.Core.Math.Simd
         {
             return string.Format("float3({0}f, {1}f, {2}f)", x, y, z);
         }
+
         /// <summary>
         /// Returns a string representation of the float3 using a specified format and culture-specific format information.
         /// </summary>
@@ -1344,82 +1392,98 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(float x, float y, float z) { return new float3(x, y, z); }
+
         /// <summary>
         /// Returns a float3 vector constructed from a float value and a float2 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(float x, float2 yz) { return new float3(x, yz); }
+
         /// <summary>
         /// Returns a float3 vector constructed from a float2 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(float2 xy, float z) { return new float3(xy, z); }
+
         /// <summary>
         /// Returns a float3 vector constructed from a float3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(float3 xyz) { return new float3(xyz); }
+
         /// <summary>
         /// Returns a float3 vector constructed from a single float value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(float v) { return new float3(v); }
+
         /// <summary>
         /// Returns a float3 vector constructed from a single bool value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(bool v) { return new float3(v); }
+
         /// <summary>
         /// Return a float3 vector constructed from a bool3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(bool3 v) { return new float3(v); }
+
         /// <summary>
         /// Returns a float3 vector constructed from a single int value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(int v) { return new float3(v); }
+
         /// <summary>
         /// Return a float3 vector constructed from a int3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(int3 v) { return new float3(v); }
+
         /// <summary>
         /// Returns a float3 vector constructed from a single uint value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(uint v) { return new float3(v); }
+
         /// <summary>
         /// Return a float3 vector constructed from a uint3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(uint3 v) { return new float3(v); }
+
         /// <summary>
         /// Returns a float3 vector constructed from a single half value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(half v) { return new float3(v); }
+
         /// <summary>
         /// Return a float3 vector constructed from a half3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(half3 v) { return new float3(v); }
+
         /// <summary>
         /// Returns a float3 vector constructed from a single double value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(double v) { return new float3(v); }
+
         /// <summary>
         /// Return a float3 vector constructed from a double3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3 float3(double3 v) { return new float3(v); }
+
         /// <summary>Returns a uint hash code of a float3 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(float3 v)
         {
             return csum(asuint(v) * uint3(0x9B13B92Du, 0x4ABF0813u, 0x86068063u)) + 0xD75513F9u;
         }
+
         /// <summary>
         /// Returns a uint3 vector hash code of a float3 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -1430,6 +1494,7 @@ namespace Raster.Core.Math.Simd
         {
             return (asuint(v) * uint3(0x5AB3E8CDu, 0x676E8407u, 0xB36DE767u)) + 0x6FCA387Du;
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two float3 vectors into a float value.
         /// </summary>
@@ -1438,6 +1503,7 @@ namespace Raster.Core.Math.Simd
         {
             return select_shuffle_component(a, b, x);
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two float3 vectors into a float2 vector.
         /// </summary>
@@ -1448,6 +1514,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, x),
                 select_shuffle_component(a, b, y));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two float3 vectors into a float3 vector.
         /// </summary>
@@ -1459,6 +1526,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, y),
                 select_shuffle_component(a, b, z));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two float3 vectors into a float4 vector.
         /// </summary>

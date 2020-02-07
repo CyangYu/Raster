@@ -258,6 +258,7 @@ namespace Raster.Core.Math
             M20 = 0.0f;
             M21 = 0.0f;
         }
+
         /// <summary>
         /// 
         /// </summary>

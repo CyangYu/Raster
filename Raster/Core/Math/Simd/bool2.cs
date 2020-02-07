@@ -25,6 +25,7 @@ namespace Raster.Core.Math.Simd
             this.x = x;
             this.y = y;
         }
+
         /// <summary>
         /// Constructs a bool2 vector from a bool2 vector.
         /// </summary>
@@ -34,6 +35,7 @@ namespace Raster.Core.Math.Simd
             this.x = xy.x;
             this.y = xy.y;
         }
+
         /// <summary>
         /// Constructs a bool2 vector from a single bool value by assigning it to every component.
         /// </summary>
@@ -55,11 +57,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator == (bool2 lhs, bool2 rhs) { return new bool2 (lhs.x == rhs.x, lhs.y == rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a bool2 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator == (bool2 lhs, bool rhs) { return new bool2 (lhs.x == rhs, lhs.y == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a bool value and a bool2 vector.
         /// </summary>
@@ -71,11 +75,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator != (bool2 lhs, bool2 rhs) { return new bool2 (lhs.x != rhs.x, lhs.y != rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a bool2 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator != (bool2 lhs, bool rhs) { return new bool2 (lhs.x != rhs, lhs.y != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a bool value and a bool2 vector.
         /// </summary>
@@ -93,11 +99,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator & (bool2 lhs, bool2 rhs) { return new bool2 (lhs.x & rhs.x, lhs.y & rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a bool2 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator & (bool2 lhs, bool rhs) { return new bool2 (lhs.x & rhs, lhs.y & rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a bool value and a bool2 vector.
         /// </summary>
@@ -109,11 +117,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator | (bool2 lhs, bool2 rhs) { return new bool2 (lhs.x | rhs.x, lhs.y | rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a bool2 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator | (bool2 lhs, bool rhs) { return new bool2 (lhs.x | rhs, lhs.y | rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a bool value and a bool2 vector.
         /// </summary>
@@ -125,11 +135,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator ^ (bool2 lhs, bool2 rhs) { return new bool2 (lhs.x ^ rhs.x, lhs.y ^ rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a bool2 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator ^ (bool2 lhs, bool rhs) { return new bool2 (lhs.x ^ rhs, lhs.y ^ rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a bool value and a bool2 vector.
         /// </summary>
@@ -366,6 +378,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(bool2 rhs) { return x == rhs.x && y == rhs.y; }
+
         /// <summary>
         /// Returns true if the bool2 is equal to a given bool2, false otherwise.
         /// </summary>
@@ -402,22 +415,26 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 bool2(bool x, bool y) { return new bool2(x, y); }
+
         /// <summary>
         /// Returns a bool2 vector constructed from a bool2 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 bool2(bool2 xy) { return new bool2(xy); }
+
         /// <summary>
         /// Returns a bool2 vector constructed from a single bool value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 bool2(bool v) { return new bool2(v); }
+
         /// <summary>Returns a uint hash code of a bool2 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(bool2 v)
         {
             return csum(select(uint2(0x90A285BBu, 0x5D19E1D5u), uint2(0xFAAF07DDu, 0x625C45BDu), v));
         }
+
         /// <summary>
         /// Returns a uint2 vector hash code of a bool2 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -428,6 +445,7 @@ namespace Raster.Core.Math.Simd
         {
             return (select(uint2(0xC9F27FCBu, 0x6D2523B1u), uint2(0x6E2BF6A9u, 0xCC74B3B7u), v));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool2 vectors into a bool value.
         /// </summary>
@@ -436,6 +454,7 @@ namespace Raster.Core.Math.Simd
         {
             return select_shuffle_component(a, b, x);
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool2 vectors into a bool2 vector.
         /// </summary>
@@ -446,6 +465,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, x),
                 select_shuffle_component(a, b, y));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool2 vectors into a bool3 vector.
         /// </summary>
@@ -457,6 +477,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, y),
                 select_shuffle_component(a, b, z));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool2 vectors into a bool4 vector.
         /// </summary>

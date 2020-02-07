@@ -12,6 +12,19 @@ namespace Raster.Transform
         /// <summary>
         /// 
         /// </summary>
+        public Vector3 Up;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Right;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Forward;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Vector3 Position;
         /// <summary>
         /// 
@@ -20,7 +33,7 @@ namespace Raster.Transform
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 LocalScale;
+        public Vector3 Scale;
         #endregion Public Instance Fields
 
         #region Public Instance Methods
@@ -28,6 +41,16 @@ namespace Raster.Transform
         /// 
         /// </summary>
         public void LookAt()
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="up"></param>
+        public void LookAt(in Vector3 target, in Vector3 up)
         {
 
         }

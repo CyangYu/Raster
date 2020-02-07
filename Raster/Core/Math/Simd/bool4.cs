@@ -32,6 +32,7 @@ namespace Raster.Core.Math.Simd
             this.z = z;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a bool4 vector from two bool values and a bool2 vector.
         /// </summary>
@@ -43,6 +44,7 @@ namespace Raster.Core.Math.Simd
             this.z = zw.x;
             this.w = zw.y;
         }
+
         /// <summary>
         /// Constructs a bool4 vector from a bool value, a bool2 vector and a bool value.
         /// </summary>
@@ -54,6 +56,7 @@ namespace Raster.Core.Math.Simd
             this.z = yz.y;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a bool4 vector from a bool value and a bool3 vector.
         /// </summary>
@@ -65,6 +68,7 @@ namespace Raster.Core.Math.Simd
             this.z = yzw.y;
             this.w = yzw.z;
         }
+
         /// <summary>
         /// Constructs a bool4 vector from a bool2 vector and two bool values.
         /// </summary>
@@ -76,6 +80,7 @@ namespace Raster.Core.Math.Simd
             this.z = z;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a bool4 vector from two bool2 vectors.
         /// </summary>
@@ -87,6 +92,7 @@ namespace Raster.Core.Math.Simd
             this.z = zw.x;
             this.w = zw.y;
         }
+
         /// <summary>
         /// Constructs a bool4 vector from a bool3 vector and a bool value.
         /// </summary>
@@ -98,6 +104,7 @@ namespace Raster.Core.Math.Simd
             this.z = xyz.z;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a bool4 vector from a bool4 vector.
         /// </summary>
@@ -109,6 +116,7 @@ namespace Raster.Core.Math.Simd
             this.z = xyzw.z;
             this.w = xyzw.w;
         }
+
         /// <summary>
         /// Constructs a bool4 vector from a single bool value by assigning it to every component.
         /// </summary>
@@ -132,11 +140,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator == (bool4 lhs, bool4 rhs) { return new bool4 (lhs.x == rhs.x, lhs.y == rhs.y, lhs.z == rhs.z, lhs.w == rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a bool4 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator == (bool4 lhs, bool rhs) { return new bool4 (lhs.x == rhs, lhs.y == rhs, lhs.z == rhs, lhs.w == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a bool value and a bool4 vector.
         /// </summary>
@@ -148,11 +158,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator != (bool4 lhs, bool4 rhs) { return new bool4 (lhs.x != rhs.x, lhs.y != rhs.y, lhs.z != rhs.z, lhs.w != rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a bool4 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator != (bool4 lhs, bool rhs) { return new bool4 (lhs.x != rhs, lhs.y != rhs, lhs.z != rhs, lhs.w != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a bool value and a bool4 vector.
         /// </summary>
@@ -170,11 +182,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator & (bool4 lhs, bool4 rhs) { return new bool4 (lhs.x & rhs.x, lhs.y & rhs.y, lhs.z & rhs.z, lhs.w & rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a bool4 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator & (bool4 lhs, bool rhs) { return new bool4 (lhs.x & rhs, lhs.y & rhs, lhs.z & rhs, lhs.w & rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a bool value and a bool4 vector.
         /// </summary>
@@ -186,11 +200,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator | (bool4 lhs, bool4 rhs) { return new bool4 (lhs.x | rhs.x, lhs.y | rhs.y, lhs.z | rhs.z, lhs.w | rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a bool4 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator | (bool4 lhs, bool rhs) { return new bool4 (lhs.x | rhs, lhs.y | rhs, lhs.z | rhs, lhs.w | rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a bool value and a bool4 vector.
         /// </summary>
@@ -202,11 +218,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator ^ (bool4 lhs, bool4 rhs) { return new bool4 (lhs.x ^ rhs.x, lhs.y ^ rhs.y, lhs.z ^ rhs.z, lhs.w ^ rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a bool4 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator ^ (bool4 lhs, bool rhs) { return new bool4 (lhs.x ^ rhs, lhs.y ^ rhs, lhs.z ^ rhs, lhs.w ^ rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a bool value and a bool4 vector.
         /// </summary>
@@ -2715,6 +2733,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(bool4 rhs) { return x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w; }
+
         /// <summary>
         /// Returns true if the bool4 is equal to a given bool4, false otherwise.
         /// </summary>
@@ -2755,52 +2774,62 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 bool4(bool x, bool y, bool z, bool w) { return new bool4(x, y, z, w); }
+
         /// <summary>
         /// Returns a bool4 vector constructed from two bool values and a bool2 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 bool4(bool x, bool y, bool2 zw) { return new bool4(x, y, zw); }
+
         /// <summary>
         /// Returns a bool4 vector constructed from a bool value, a bool2 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 bool4(bool x, bool2 yz, bool w) { return new bool4(x, yz, w); }
+
         /// <summary>
         /// Returns a bool4 vector constructed from a bool value and a bool3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 bool4(bool x, bool3 yzw) { return new bool4(x, yzw); }
+
         /// <summary>
         /// Returns a bool4 vector constructed from a bool2 vector and two bool values.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 bool4(bool2 xy, bool z, bool w) { return new bool4(xy, z, w); }
+
         /// <summary>
         /// Returns a bool4 vector constructed from two bool2 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 bool4(bool2 xy, bool2 zw) { return new bool4(xy, zw); }
+
         /// <summary>
         /// Returns a bool4 vector constructed from a bool3 vector and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 bool4(bool3 xyz, bool w) { return new bool4(xyz, w); }
+
         /// <summary>
         /// Returns a bool4 vector constructed from a bool4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 bool4(bool4 xyzw) { return new bool4(xyzw); }
+
         /// <summary>
         /// Returns a bool4 vector constructed from a single bool value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 bool4(bool v) { return new bool4(v); }
+
         /// <summary>Returns a uint hash code of a bool4 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(bool4 v)
         {
             return csum(select(uint4(0x5FFF6B19u, 0x5E6CBF3Bu, 0xB546F2A5u, 0xBBCF63E7u), uint4(0xC53F4755u, 0x6985C229u, 0xE133B0B3u, 0xC3E0A3B9u), v));
         }
+
         /// <summary>
         /// Returns a uint4 vector hash code of a bool4 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -2811,6 +2840,7 @@ namespace Raster.Core.Math.Simd
         {
             return (select(uint4(0xFE31134Fu, 0x712A34D7u, 0x9D77A59Bu, 0x4942CA39u), uint4(0xB40EC62Du, 0x565ED63Fu, 0x93C30C2Bu, 0xDCAF0351u), v));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool4 vectors into a bool value.
         /// </summary>
@@ -2819,6 +2849,7 @@ namespace Raster.Core.Math.Simd
         {
             return select_shuffle_component(a, b, x);
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool4 vectors into a bool2 vector.
         /// </summary>
@@ -2829,6 +2860,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, x),
                 select_shuffle_component(a, b, y));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool4 vectors into a bool3 vector.
         /// </summary>
@@ -2840,6 +2872,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, y),
                 select_shuffle_component(a, b, z));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two bool4 vectors into a bool4 vector.
         /// </summary>

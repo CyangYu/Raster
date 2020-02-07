@@ -244,6 +244,7 @@ namespace Raster.Core.Math
                    value1.Z * value2.Z +
                    value1.W * value1.W;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -452,6 +453,7 @@ namespace Raster.Core.Math
         {
             return dot > 1.0F - kEpsilon;
         }
+
         /// 
         /// </summary>
         /// <param name="value1"></param>
@@ -1025,7 +1027,7 @@ namespace Raster.Core.Math
                 }
             }
         }
-
+        
         /// <summary>
         /// 
         /// </summary>

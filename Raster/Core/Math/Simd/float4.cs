@@ -30,6 +30,7 @@ namespace Raster.Core.Math.Simd
             this.z = z;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a float4 vector from two float values and a float2 vector.
         /// </summary>
@@ -41,6 +42,7 @@ namespace Raster.Core.Math.Simd
             this.z = zw.x;
             this.w = zw.y;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a float value, a float2 vector and a float value.
         /// </summary>
@@ -52,6 +54,7 @@ namespace Raster.Core.Math.Simd
             this.z = yz.y;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a float value and a float3 vector.
         /// </summary>
@@ -63,6 +66,7 @@ namespace Raster.Core.Math.Simd
             this.z = yzw.y;
             this.w = yzw.z;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a float2 vector and two float values.
         /// </summary>
@@ -74,6 +78,7 @@ namespace Raster.Core.Math.Simd
             this.z = z;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a float4 vector from two float2 vectors.
         /// </summary>
@@ -85,6 +90,7 @@ namespace Raster.Core.Math.Simd
             this.z = zw.x;
             this.w = zw.y;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a float3 vector and a float value.
         /// </summary>
@@ -96,6 +102,7 @@ namespace Raster.Core.Math.Simd
             this.z = xyz.z;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a float4 vector.
         /// </summary>
@@ -107,6 +114,7 @@ namespace Raster.Core.Math.Simd
             this.z = xyzw.z;
             this.w = xyzw.w;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a single float value by assigning it to every component.
         /// </summary>
@@ -118,6 +126,7 @@ namespace Raster.Core.Math.Simd
             this.z = v;
             this.w = v;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a single bool value by converting it to float and assigning it to every component.
         /// </summary>
@@ -129,6 +138,7 @@ namespace Raster.Core.Math.Simd
             this.z = v ? 1.0f : 0.0f;
             this.w = v ? 1.0f : 0.0f;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a bool4 vector by componentwise conversion.
         /// </summary>
@@ -140,6 +150,7 @@ namespace Raster.Core.Math.Simd
             this.z = v.z ? 1.0f : 0.0f;
             this.w = v.w ? 1.0f : 0.0f;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a single int value by converting it to float and assigning it to every component.
         /// </summary>
@@ -151,6 +162,7 @@ namespace Raster.Core.Math.Simd
             this.z = v;
             this.w = v;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a int4 vector by componentwise conversion.
         /// </summary>
@@ -162,6 +174,7 @@ namespace Raster.Core.Math.Simd
             this.z = v.z;
             this.w = v.w;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a single uint value by converting it to float and assigning it to every component.
         /// </summary>
@@ -173,6 +186,7 @@ namespace Raster.Core.Math.Simd
             this.z = v;
             this.w = v;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a uint4 vector by componentwise conversion.
         /// </summary>
@@ -184,6 +198,7 @@ namespace Raster.Core.Math.Simd
             this.z = v.z;
             this.w = v.w;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a single half value by converting it to float and assigning it to every component.
         /// </summary>
@@ -195,6 +210,7 @@ namespace Raster.Core.Math.Simd
             this.z = v;
             this.w = v;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a half4 vector by componentwise conversion.
         /// </summary>
@@ -206,6 +222,7 @@ namespace Raster.Core.Math.Simd
             this.z = v.z;
             this.w = v.w;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a single double value by converting it to float and assigning it to every component.
         /// </summary>
@@ -217,6 +234,7 @@ namespace Raster.Core.Math.Simd
             this.z = (float)v;
             this.w = (float)v;
         }
+
         /// <summary>
         /// Constructs a float4 vector from a double4 vector by componentwise conversion.
         /// </summary>
@@ -234,51 +252,61 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float4(float v) { return new float4(v); }
+
         /// <summary>
         /// Explicitly converts a single bool value to a float4 vector by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float4(bool v) { return new float4(v); }
+
         /// <summary>
         /// Explicitly converts a bool4 vector to a float4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float4(bool4 v) { return new float4(v); }
+
         /// <summary>
         /// Implicitly converts a single int value to a float4 vector by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float4(int v) { return new float4(v); }
+
         /// <summary>
         /// Implicitly converts a int4 vector to a float4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float4(int4 v) { return new float4(v); }
+
         /// <summary>
         /// Implicitly converts a single uint value to a float4 vector by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float4(uint v) { return new float4(v); }
+
         /// <summary>
         /// Implicitly converts a uint4 vector to a float4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float4(uint4 v) { return new float4(v); }
+
         /// <summary>
         /// Implicitly converts a single half value to a float4 vector by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float4(half v) { return new float4(v); }
+
         /// <summary>
         /// Implicitly converts a half4 vector to a float4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float4(half4 v) { return new float4(v); }
+
         /// <summary>
         /// Explicitly converts a single double value to a float4 vector by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float4(double v) { return new float4(v); }
+
         /// <summary>
         /// Explicitly converts a double4 vector to a float4 vector by componentwise conversion.
         /// </summary>
@@ -290,11 +318,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 operator * (float4 lhs, float4 rhs) { return new float4 (lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z, lhs.w * rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a float4 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 operator * (float4 lhs, float rhs) { return new float4 (lhs.x * rhs, lhs.y * rhs, lhs.z * rhs, lhs.w * rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a float value and a float4 vector.
         /// </summary>
@@ -306,11 +336,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 operator + (float4 lhs, float4 rhs) { return new float4 (lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z, lhs.w + rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a float4 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 operator + (float4 lhs, float rhs) { return new float4 (lhs.x + rhs, lhs.y + rhs, lhs.z + rhs, lhs.w + rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a float value and a float4 vector.
         /// </summary>
@@ -322,11 +354,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 operator - (float4 lhs, float4 rhs) { return new float4 (lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z, lhs.w - rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a float4 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 operator - (float4 lhs, float rhs) { return new float4 (lhs.x - rhs, lhs.y - rhs, lhs.z - rhs, lhs.w - rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a float value and a float4 vector.
         /// </summary>
@@ -338,11 +372,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 operator / (float4 lhs, float4 rhs) { return new float4 (lhs.x / rhs.x, lhs.y / rhs.y, lhs.z / rhs.z, lhs.w / rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a float4 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 operator / (float4 lhs, float rhs) { return new float4 (lhs.x / rhs, lhs.y / rhs, lhs.z / rhs, lhs.w / rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a float value and a float4 vector.
         /// </summary>
@@ -354,11 +390,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 operator % (float4 lhs, float4 rhs) { return new float4 (lhs.x % rhs.x, lhs.y % rhs.y, lhs.z % rhs.z, lhs.w % rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a float4 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 operator % (float4 lhs, float rhs) { return new float4 (lhs.x % rhs, lhs.y % rhs, lhs.z % rhs, lhs.w % rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a float value and a float4 vector.
         /// </summary>
@@ -382,11 +420,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator < (float4 lhs, float4 rhs) { return new bool4 (lhs.x < rhs.x, lhs.y < rhs.y, lhs.z < rhs.z, lhs.w < rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a float4 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator < (float4 lhs, float rhs) { return new bool4 (lhs.x < rhs, lhs.y < rhs, lhs.z < rhs, lhs.w < rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a float value and a float4 vector.
         /// </summary>
@@ -398,11 +438,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator <= (float4 lhs, float4 rhs) { return new bool4 (lhs.x <= rhs.x, lhs.y <= rhs.y, lhs.z <= rhs.z, lhs.w <= rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a float4 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator <= (float4 lhs, float rhs) { return new bool4 (lhs.x <= rhs, lhs.y <= rhs, lhs.z <= rhs, lhs.w <= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a float value and a float4 vector.
         /// </summary>
@@ -414,11 +456,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator > (float4 lhs, float4 rhs) { return new bool4 (lhs.x > rhs.x, lhs.y > rhs.y, lhs.z > rhs.z, lhs.w > rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a float4 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator > (float4 lhs, float rhs) { return new bool4 (lhs.x > rhs, lhs.y > rhs, lhs.z > rhs, lhs.w > rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a float value and a float4 vector.
         /// </summary>
@@ -430,11 +474,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator >= (float4 lhs, float4 rhs) { return new bool4 (lhs.x >= rhs.x, lhs.y >= rhs.y, lhs.z >= rhs.z, lhs.w >= rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a float4 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator >= (float4 lhs, float rhs) { return new bool4 (lhs.x >= rhs, lhs.y >= rhs, lhs.z >= rhs, lhs.w >= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a float value and a float4 vector.
         /// </summary>
@@ -458,11 +504,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator == (float4 lhs, float4 rhs) { return new bool4 (lhs.x == rhs.x, lhs.y == rhs.y, lhs.z == rhs.z, lhs.w == rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a float4 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator == (float4 lhs, float rhs) { return new bool4 (lhs.x == rhs, lhs.y == rhs, lhs.z == rhs, lhs.w == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a float value and a float4 vector.
         /// </summary>
@@ -474,11 +522,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator != (float4 lhs, float4 rhs) { return new bool4 (lhs.x != rhs.x, lhs.y != rhs.y, lhs.z != rhs.z, lhs.w != rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a float4 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator != (float4 lhs, float rhs) { return new bool4 (lhs.x != rhs, lhs.y != rhs, lhs.z != rhs, lhs.w != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a float value and a float4 vector.
         /// </summary>
@@ -2987,6 +3037,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(float4 rhs) { return x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w; }
+
         /// <summary>
         /// Returns true if the float4 is equal to a given float4, false otherwise.
         /// </summary>
@@ -3005,6 +3056,7 @@ namespace Raster.Core.Math.Simd
         {
             return string.Format("float4({0}f, {1}f, {2}f, {3}f)", x, y, z, w);
         }
+
         /// <summary>
         /// Returns a string representation of the float4 using a specified format and culture-specific format information.
         /// </summary>
@@ -3035,102 +3087,122 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(float x, float y, float z, float w) { return new float4(x, y, z, w); }
+
         /// <summary>
         /// Returns a float4 vector constructed from two float values and a float2 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(float x, float y, float2 zw) { return new float4(x, y, zw); }
+
         /// <summary>
         /// Returns a float4 vector constructed from a float value, a float2 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(float x, float2 yz, float w) { return new float4(x, yz, w); }
+
         /// <summary>
         /// Returns a float4 vector constructed from a float value and a float3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(float x, float3 yzw) { return new float4(x, yzw); }
+
         /// <summary>
         /// Returns a float4 vector constructed from a float2 vector and two float values.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(float2 xy, float z, float w) { return new float4(xy, z, w); }
+
         /// <summary>
         /// Returns a float4 vector constructed from two float2 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(float2 xy, float2 zw) { return new float4(xy, zw); }
+
         /// <summary>
         /// Returns a float4 vector constructed from a float3 vector and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(float3 xyz, float w) { return new float4(xyz, w); }
+
         /// <summary>
         /// Returns a float4 vector constructed from a float4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(float4 xyzw) { return new float4(xyzw); }
+
         /// <summary>
         /// Returns a float4 vector constructed from a single float value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(float v) { return new float4(v); }
+
         /// <summary>
         /// Returns a float4 vector constructed from a single bool value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(bool v) { return new float4(v); }
+
         /// <summary>
         /// Return a float4 vector constructed from a bool4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(bool4 v) { return new float4(v); }
+
         /// <summary>
         /// Returns a float4 vector constructed from a single int value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(int v) { return new float4(v); }
+
         /// <summary>
         /// Return a float4 vector constructed from a int4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(int4 v) { return new float4(v); }
+
         /// <summary>
         /// Returns a float4 vector constructed from a single uint value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(uint v) { return new float4(v); }
+
         /// <summary>
         /// Return a float4 vector constructed from a uint4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(uint4 v) { return new float4(v); }
+
         /// <summary>
         /// Returns a float4 vector constructed from a single half value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(half v) { return new float4(v); }
+
         /// <summary>
         /// Return a float4 vector constructed from a half4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(half4 v) { return new float4(v); }
+
         /// <summary>
         /// Returns a float4 vector constructed from a single double value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(double v) { return new float4(v); }
+
         /// <summary>
         /// Return a float4 vector constructed from a double4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float4 float4(double4 v) { return new float4(v); }
+
         /// <summary>Returns a uint hash code of a float4 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(float4 v)
         {
             return csum(asuint(v) * uint4(0xE69626FFu, 0xBD010EEBu, 0x9CEDE1D1u, 0x43BE0B51u)) + 0xAF836EE1u;
         }
+
         /// <summary>
         /// Returns a uint4 vector hash code of a float4 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -3141,6 +3213,7 @@ namespace Raster.Core.Math.Simd
         {
             return (asuint(v) * uint4(0xB130C137u, 0x54834775u, 0x7C022221u, 0xA2D00EDFu)) + 0xA8977779u;
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two float4 vectors into a float value.
         /// </summary>
@@ -3149,6 +3222,7 @@ namespace Raster.Core.Math.Simd
         {
             return select_shuffle_component(a, b, x);
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two float4 vectors into a float2 vector.
         /// </summary>
@@ -3159,6 +3233,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, x),
                 select_shuffle_component(a, b, y));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two float4 vectors into a float3 vector.
         /// </summary>
@@ -3170,6 +3245,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, y),
                 select_shuffle_component(a, b, z));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two float4 vectors into a float4 vector.
         /// </summary>

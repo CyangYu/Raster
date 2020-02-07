@@ -22,6 +22,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = c1;
             this.c2 = c2;
         }
+
         /// <summary>
         /// Constructs a bool2x3 matrix from 6 bool values given in row-major order.
         /// </summary>
@@ -33,6 +34,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = new bool2(m01, m11);
             this.c2 = new bool2(m02, m12);
         }
+
         /// <summary>
         /// Constructs a bool2x3 matrix from a single bool value by assigning it to every component.
         /// </summary>
@@ -55,11 +57,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator == (bool2x3 lhs, bool2x3 rhs) { return new bool2x3 (lhs.c0 == rhs.c0, lhs.c1 == rhs.c1, lhs.c2 == rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a bool2x3 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator == (bool2x3 lhs, bool rhs) { return new bool2x3 (lhs.c0 == rhs, lhs.c1 == rhs, lhs.c2 == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a bool value and a bool2x3 matrix.
         /// </summary>
@@ -71,11 +75,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator != (bool2x3 lhs, bool2x3 rhs) { return new bool2x3 (lhs.c0 != rhs.c0, lhs.c1 != rhs.c1, lhs.c2 != rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a bool2x3 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator != (bool2x3 lhs, bool rhs) { return new bool2x3 (lhs.c0 != rhs, lhs.c1 != rhs, lhs.c2 != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a bool value and a bool2x3 matrix.
         /// </summary>
@@ -93,11 +99,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator & (bool2x3 lhs, bool2x3 rhs) { return new bool2x3 (lhs.c0 & rhs.c0, lhs.c1 & rhs.c1, lhs.c2 & rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a bool2x3 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator & (bool2x3 lhs, bool rhs) { return new bool2x3 (lhs.c0 & rhs, lhs.c1 & rhs, lhs.c2 & rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a bool value and a bool2x3 matrix.
         /// </summary>
@@ -109,11 +117,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator | (bool2x3 lhs, bool2x3 rhs) { return new bool2x3 (lhs.c0 | rhs.c0, lhs.c1 | rhs.c1, lhs.c2 | rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a bool2x3 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator | (bool2x3 lhs, bool rhs) { return new bool2x3 (lhs.c0 | rhs, lhs.c1 | rhs, lhs.c2 | rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a bool value and a bool2x3 matrix.
         /// </summary>
@@ -125,11 +135,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator ^ (bool2x3 lhs, bool2x3 rhs) { return new bool2x3 (lhs.c0 ^ rhs.c0, lhs.c1 ^ rhs.c1, lhs.c2 ^ rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a bool2x3 matrix and a bool value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator ^ (bool2x3 lhs, bool rhs) { return new bool2x3 (lhs.c0 ^ rhs, lhs.c1 ^ rhs, lhs.c2 ^ rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a bool value and a bool2x3 matrix.
         /// </summary>
@@ -157,6 +169,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(bool2x3 rhs) { return c0.Equals(rhs.c0) && c1.Equals(rhs.c1) && c2.Equals(rhs.c2); }
+
         /// <summary>
         /// Returns true if the bool2x3 is equal to a given bool2x3, false otherwise.
         /// </summary>
@@ -183,6 +196,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 bool2x3(bool2 c0, bool2 c1, bool2 c2) { return new bool2x3(c0, c1, c2); }
+
         /// <summary>
         /// Returns a bool2x3 matrix constructed from from 6 bool values given in row-major order.
         /// </summary>
@@ -193,11 +207,13 @@ namespace Raster.Core.Math.Simd
             return new bool2x3(m00, m01, m02,
                                m10, m11, m12);
         }
+
         /// <summary>
         /// Returns a bool2x3 matrix constructed from a single bool value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 bool2x3(bool v) { return new bool2x3(v); }
+
         /// <summary>
         /// Return the bool3x2 transpose of a bool2x3 matrix.
         /// </summary>
@@ -209,6 +225,7 @@ namespace Raster.Core.Math.Simd
                 v.c1.x, v.c1.y,
                 v.c2.x, v.c2.y);
         }
+
         /// <summary>Returns a uint hash code of a bool2x3 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(bool2x3 v)
@@ -217,6 +234,7 @@ namespace Raster.Core.Math.Simd
                         select(uint2(0xDB3DE101u, 0x7B6D1B4Bu), uint2(0x58399E77u, 0x5EAC29C9u), v.c1) + 
                         select(uint2(0xFC6014F9u, 0x6BF6693Fu), uint2(0x9D1B1D9Bu, 0xF842F5C1u), v.c2));
         }
+
         /// <summary>
         /// Returns a uint2 vector hash code of a bool2x3 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash

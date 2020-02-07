@@ -26,6 +26,7 @@ namespace Raster.Core.Math.Simd
             this.x = x;
             this.y = y;
         }
+
         /// <summary>
         /// Constructs a uint2 vector from a uint2 vector.
         /// </summary>
@@ -35,6 +36,7 @@ namespace Raster.Core.Math.Simd
             this.x = xy.x;
             this.y = xy.y;
         }
+
         /// <summary>
         /// Constructs a uint2 vector from a single uint value by assigning it to every component.
         /// </summary>
@@ -44,6 +46,7 @@ namespace Raster.Core.Math.Simd
             this.x = v;
             this.y = v;
         }
+
         /// <summary>
         /// Constructs a uint2 vector from a single bool value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -53,6 +56,7 @@ namespace Raster.Core.Math.Simd
             this.x = v ? 1u : 0u;
             this.y = v ? 1u : 0u;
         }
+
         /// <summary>
         /// Constructs a uint2 vector from a bool2 vector by componentwise conversion.
         /// </summary>
@@ -62,6 +66,7 @@ namespace Raster.Core.Math.Simd
             this.x = v.x ? 1u : 0u;
             this.y = v.y ? 1u : 0u;
         }
+
         /// <summary>
         /// Constructs a uint2 vector from a single int value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -71,6 +76,7 @@ namespace Raster.Core.Math.Simd
             this.x = (uint)v;
             this.y = (uint)v;
         }
+
         /// <summary>
         /// Constructs a uint2 vector from a int2 vector by componentwise conversion.
         /// </summary>
@@ -80,6 +86,7 @@ namespace Raster.Core.Math.Simd
             this.x = (uint)v.x;
             this.y = (uint)v.y;
         }
+
         /// <summary>
         /// Constructs a uint2 vector from a single float value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -89,6 +96,7 @@ namespace Raster.Core.Math.Simd
             this.x = (uint)v;
             this.y = (uint)v;
         }
+
         /// <summary>
         /// Constructs a uint2 vector from a float2 vector by componentwise conversion.
         /// </summary>
@@ -98,6 +106,7 @@ namespace Raster.Core.Math.Simd
             this.x = (uint)v.x;
             this.y = (uint)v.y;
         }
+
         /// <summary>
         /// Constructs a uint2 vector from a single double value by converting it to uint and assigning it to every component.
         /// </summary>
@@ -107,6 +116,7 @@ namespace Raster.Core.Math.Simd
             this.x = (uint)v;
             this.y = (uint)v;
         }
+
         /// <summary>
         /// Constructs a uint2 vector from a double2 vector by componentwise conversion.
         /// </summary>
@@ -122,41 +132,49 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator uint2(uint v) { return new uint2(v); }
+
         /// <summary>
         /// Explicitly converts a single bool value to a uint2 vector by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint2(bool v) { return new uint2(v); }
+
         /// <summary>
         /// Explicitly converts a bool2 vector to a uint2 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint2(bool2 v) { return new uint2(v); }
+
         /// <summary>
         /// Explicitly converts a single int value to a uint2 vector by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint2(int v) { return new uint2(v); }
+
         /// <summary>
         /// Explicitly converts a int2 vector to a uint2 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint2(int2 v) { return new uint2(v); }
+
         /// <summary>
         /// Explicitly converts a single float value to a uint2 vector by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint2(float v) { return new uint2(v); }
+
         /// <summary>
         /// Explicitly converts a float2 vector to a uint2 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint2(float2 v) { return new uint2(v); }
+
         /// <summary>
         /// Explicitly converts a single double value to a uint2 vector by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator uint2(double v) { return new uint2(v); }
+
         /// <summary>
         /// Explicitly converts a double2 vector to a uint2 vector by componentwise conversion.
         /// </summary>
@@ -168,11 +186,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator * (uint2 lhs, uint2 rhs) { return new uint2 (lhs.x * rhs.x, lhs.y * rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator * (uint2 lhs, uint rhs) { return new uint2 (lhs.x * rhs, lhs.y * rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a uint value and a uint2 vector.
         /// </summary>
@@ -184,11 +204,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator + (uint2 lhs, uint2 rhs) { return new uint2 (lhs.x + rhs.x, lhs.y + rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator + (uint2 lhs, uint rhs) { return new uint2 (lhs.x + rhs, lhs.y + rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a uint value and a uint2 vector.
         /// </summary>
@@ -200,11 +222,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator - (uint2 lhs, uint2 rhs) { return new uint2 (lhs.x - rhs.x, lhs.y - rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator - (uint2 lhs, uint rhs) { return new uint2 (lhs.x - rhs, lhs.y - rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a uint value and a uint2 vector.
         /// </summary>
@@ -216,11 +240,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator / (uint2 lhs, uint2 rhs) { return new uint2 (lhs.x / rhs.x, lhs.y / rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator / (uint2 lhs, uint rhs) { return new uint2 (lhs.x / rhs, lhs.y / rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a uint value and a uint2 vector.
         /// </summary>
@@ -232,11 +258,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator % (uint2 lhs, uint2 rhs) { return new uint2 (lhs.x % rhs.x, lhs.y % rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator % (uint2 lhs, uint rhs) { return new uint2 (lhs.x % rhs, lhs.y % rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a uint value and a uint2 vector.
         /// </summary>
@@ -260,11 +288,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator < (uint2 lhs, uint2 rhs) { return new bool2 (lhs.x < rhs.x, lhs.y < rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator < (uint2 lhs, uint rhs) { return new bool2 (lhs.x < rhs, lhs.y < rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a uint value and a uint2 vector.
         /// </summary>
@@ -276,11 +306,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator <= (uint2 lhs, uint2 rhs) { return new bool2 (lhs.x <= rhs.x, lhs.y <= rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator <= (uint2 lhs, uint rhs) { return new bool2 (lhs.x <= rhs, lhs.y <= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a uint value and a uint2 vector.
         /// </summary>
@@ -292,11 +324,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator > (uint2 lhs, uint2 rhs) { return new bool2 (lhs.x > rhs.x, lhs.y > rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator > (uint2 lhs, uint rhs) { return new bool2 (lhs.x > rhs, lhs.y > rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a uint value and a uint2 vector.
         /// </summary>
@@ -308,11 +342,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator >= (uint2 lhs, uint2 rhs) { return new bool2 (lhs.x >= rhs.x, lhs.y >= rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator >= (uint2 lhs, uint rhs) { return new bool2 (lhs.x >= rhs, lhs.y >= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a uint value and a uint2 vector.
         /// </summary>
@@ -335,20 +371,24 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator << (uint2 x, int n) { return new uint2 (x.x << n, x.y << n); }
+
         /// <summary>Returns the result of a componentwise right shift operation on a uint2 vector by a number of bits specified by a single int.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator >> (uint2 x, int n) { return new uint2 (x.x >> n, x.y >> n); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on two uint2 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator == (uint2 lhs, uint2 rhs) { return new bool2 (lhs.x == rhs.x, lhs.y == rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator == (uint2 lhs, uint rhs) { return new bool2 (lhs.x == rhs, lhs.y == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a uint value and a uint2 vector.
         /// </summary>
@@ -360,11 +400,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator != (uint2 lhs, uint2 rhs) { return new bool2 (lhs.x != rhs.x, lhs.y != rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2 operator != (uint2 lhs, uint rhs) { return new bool2 (lhs.x != rhs, lhs.y != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a uint value and a uint2 vector.
         /// </summary>
@@ -382,11 +424,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator & (uint2 lhs, uint2 rhs) { return new uint2 (lhs.x & rhs.x, lhs.y & rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator & (uint2 lhs, uint rhs) { return new uint2 (lhs.x & rhs, lhs.y & rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on a uint value and a uint2 vector.
         /// </summary>
@@ -398,11 +442,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator | (uint2 lhs, uint2 rhs) { return new uint2 (lhs.x | rhs.x, lhs.y | rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator | (uint2 lhs, uint rhs) { return new uint2 (lhs.x | rhs, lhs.y | rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on a uint value and a uint2 vector.
         /// </summary>
@@ -414,11 +460,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator ^ (uint2 lhs, uint2 rhs) { return new uint2 (lhs.x ^ rhs.x, lhs.y ^ rhs.y); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a uint2 vector and a uint value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 operator ^ (uint2 lhs, uint rhs) { return new uint2 (lhs.x ^ rhs, lhs.y ^ rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on a uint value and a uint2 vector.
         /// </summary>
@@ -655,6 +703,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(uint2 rhs) { return x == rhs.x && y == rhs.y; }
+
         /// <summary>
         /// Returns true if the uint2 is equal to a given uint2, false otherwise.
         /// </summary>
@@ -673,6 +722,7 @@ namespace Raster.Core.Math.Simd
         {
             return string.Format("uint2({0}, {1})", x, y);
         }
+
         /// <summary>
         /// Returns a string representation of the uint2 using a specified format and culture-specific format information.
         /// </summary>
@@ -699,62 +749,74 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 uint2(uint x, uint y) { return new uint2(x, y); }
+
         /// <summary>
         /// Returns a uint2 vector constructed from a uint2 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 uint2(uint2 xy) { return new uint2(xy); }
+
         /// <summary>
         /// Returns a uint2 vector constructed from a single uint value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 uint2(uint v) { return new uint2(v); }
+
         /// <summary>
         /// Returns a uint2 vector constructed from a single bool value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 uint2(bool v) { return new uint2(v); }
+
         /// <summary>
         /// Return a uint2 vector constructed from a bool2 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 uint2(bool2 v) { return new uint2(v); }
+
         /// <summary>
         /// Returns a uint2 vector constructed from a single int value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 uint2(int v) { return new uint2(v); }
+
         /// <summary>
         /// Return a uint2 vector constructed from a int2 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 uint2(int2 v) { return new uint2(v); }
+
         /// <summary>
         /// Returns a uint2 vector constructed from a single float value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 uint2(float v) { return new uint2(v); }
+
         /// <summary>
         /// Return a uint2 vector constructed from a float2 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 uint2(float2 v) { return new uint2(v); }
+
         /// <summary>
         /// Returns a uint2 vector constructed from a single double value by converting it to uint and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 uint2(double v) { return new uint2(v); }
+
         /// <summary>
         /// Return a uint2 vector constructed from a double2 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint2 uint2(double2 v) { return new uint2(v); }
+
         /// <summary>Returns a uint hash code of a uint2 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(uint2 v)
         {
             return csum(v * uint2(0x4473BBB1u, 0xCBA11D5Fu)) + 0x685835CFu;
         }
+
         /// <summary>
         /// Returns a uint2 vector hash code of a uint2 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -765,6 +827,7 @@ namespace Raster.Core.Math.Simd
         {
             return (v * uint2(0xC3D32AE1u, 0xB966942Fu)) + 0xFE9856B3u;
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two uint2 vectors into a uint value.
         /// </summary>
@@ -773,6 +836,7 @@ namespace Raster.Core.Math.Simd
         {
             return select_shuffle_component(a, b, x);
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two uint2 vectors into a uint2 vector.
         /// </summary>
@@ -783,6 +847,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, x),
                 select_shuffle_component(a, b, y));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two uint2 vectors into a uint3 vector.
         /// </summary>
@@ -794,6 +859,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, y),
                 select_shuffle_component(a, b, z));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two uint2 vectors into a uint4 vector.
         /// </summary>

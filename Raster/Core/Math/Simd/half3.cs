@@ -27,6 +27,7 @@ namespace Raster.Core.Math.Simd
             this.y = y;
             this.z = z;
         }
+
         /// <summary>
         /// Constructs a half3 vector from a half value and a half2 vector.
         /// </summary>
@@ -37,6 +38,7 @@ namespace Raster.Core.Math.Simd
             this.y = yz.x;
             this.z = yz.y;
         }
+
         /// <summary>
         /// Constructs a half3 vector from a half2 vector and a half value.
         /// </summary>
@@ -47,6 +49,7 @@ namespace Raster.Core.Math.Simd
             this.y = xy.y;
             this.z = z;
         }
+
         /// <summary>
         /// Constructs a half3 vector from a half3 vector.
         /// </summary>
@@ -57,6 +60,7 @@ namespace Raster.Core.Math.Simd
             this.y = xyz.y;
             this.z = xyz.z;
         }
+
         /// <summary>
         /// Constructs a half3 vector from a single half value by assigning it to every component.
         /// </summary>
@@ -67,6 +71,7 @@ namespace Raster.Core.Math.Simd
             this.y = v;
             this.z = v;
         }
+
         /// <summary>
         /// Constructs a half3 vector from a single float value by converting it to half and assigning it to every component.
         /// </summary>
@@ -77,6 +82,7 @@ namespace Raster.Core.Math.Simd
             this.y = (half)v;
             this.z = (half)v;
         }
+
         /// <summary>
         /// Constructs a half3 vector from a float3 vector by componentwise conversion.
         /// </summary>
@@ -87,6 +93,7 @@ namespace Raster.Core.Math.Simd
             this.y = (half)v.y;
             this.z = (half)v.z;
         }
+
         /// <summary>
         /// Constructs a half3 vector from a single double value by converting it to half and assigning it to every component.
         /// </summary>
@@ -97,6 +104,7 @@ namespace Raster.Core.Math.Simd
             this.y = (half)v;
             this.z = (half)v;
         }
+
         /// <summary>
         /// Constructs a half3 vector from a double3 vector by componentwise conversion.
         /// </summary>
@@ -113,21 +121,25 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator half3(half v) { return new half3(v); }
+
         /// <summary>
         /// Explicitly converts a single float value to a half3 vector by converting it to half and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator half3(float v) { return new half3(v); }
+
         /// <summary>
         /// Explicitly converts a float3 vector to a half3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator half3(float3 v) { return new half3(v); }
+
         /// <summary>
         /// Explicitly converts a single double value to a half3 vector by converting it to half and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator half3(double v) { return new half3(v); }
+
         /// <summary>
         /// Explicitly converts a double3 vector to a half3 vector by componentwise conversion.
         /// </summary>
@@ -139,11 +151,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (half3 lhs, half3 rhs) { return new bool3 (lhs.x == rhs.x, lhs.y == rhs.y, lhs.z == rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a half3 vector and a half value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (half3 lhs, half rhs) { return new bool3 (lhs.x == rhs, lhs.y == rhs, lhs.z == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a half value and a half3 vector.
         /// </summary>
@@ -155,11 +169,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (half3 lhs, half3 rhs) { return new bool3 (lhs.x != rhs.x, lhs.y != rhs.y, lhs.z != rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a half3 vector and a half value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (half3 lhs, half rhs) { return new bool3 (lhs.x != rhs, lhs.y != rhs, lhs.z != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a half value and a half3 vector.
         /// </summary>
@@ -1039,6 +1055,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(half3 rhs) { return x == rhs.x && y == rhs.y && z == rhs.z; }
+
         /// <summary>
         /// Returns true if the half3 is equal to a given half3, false otherwise.
         /// </summary>
@@ -1057,6 +1074,7 @@ namespace Raster.Core.Math.Simd
         {
             return string.Format("half3({0}, {1}, {2})", x, y, z);
         }
+
         /// <summary>
         /// Returns a string representation of the half3 using a specified format and culture-specific format information.
         /// </summary>
@@ -1085,52 +1103,62 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half3 half3(half x, half y, half z) { return new half3(x, y, z); }
+
         /// <summary>
         /// Returns a half3 vector constructed from a half value and a half2 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half3 half3(half x, half2 yz) { return new half3(x, yz); }
+
         /// <summary>
         /// Returns a half3 vector constructed from a half2 vector and a half value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half3 half3(half2 xy, half z) { return new half3(xy, z); }
+
         /// <summary>
         /// Returns a half3 vector constructed from a half3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half3 half3(half3 xyz) { return new half3(xyz); }
+
         /// <summary>
         /// Returns a half3 vector constructed from a single half value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half3 half3(half v) { return new half3(v); }
+
         /// <summary>
         /// Returns a half3 vector constructed from a single float value by converting it to half and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half3 half3(float v) { return new half3(v); }
+
         /// <summary>
         /// Return a half3 vector constructed from a float3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half3 half3(float3 v) { return new half3(v); }
+
         /// <summary>
         /// Returns a half3 vector constructed from a single double value by converting it to half and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half3 half3(double v) { return new half3(v); }
+
         /// <summary>
         /// Return a half3 vector constructed from a double3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static half3 half3(double3 v) { return new half3(v); }
+
         /// <summary>Returns a uint hash code of a half3 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(half3 v)
         {
             return csum(uint3(v.x.value, v.y.value, v.z.value) * uint3(0x685835CFu, 0xC3D32AE1u, 0xB966942Fu)) + 0xFE9856B3u;
         }
+
         /// <summary>
         /// Returns a uint3 vector hash code of a half3 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash

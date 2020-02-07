@@ -30,6 +30,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = c1;
             this.c2 = c2;
         }
+
         /// <summary>
         /// Constructs a float3x3 matrix from 9 float values given in row-major order.
         /// </summary>
@@ -42,6 +43,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = new float3(m01, m11, m21);
             this.c2 = new float3(m02, m12, m22);
         }
+
         /// <summary>
         /// Constructs a float3x3 matrix from a single float value by assigning it to every component.
         /// </summary>
@@ -52,6 +54,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = v;
             this.c2 = v;
         }
+
         /// <summary>
         /// Constructs a float3x3 matrix from a single bool value by converting it to float and assigning it to every component.
         /// </summary>
@@ -62,6 +65,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = math.select(new float3(0.0f), new float3(1.0f), v);
             this.c2 = math.select(new float3(0.0f), new float3(1.0f), v);
         }
+
         /// <summary>
         /// Constructs a float3x3 matrix from a bool3x3 matrix by componentwise conversion.
         /// </summary>
@@ -72,6 +76,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = math.select(new float3(0.0f), new float3(1.0f), v.c1);
             this.c2 = math.select(new float3(0.0f), new float3(1.0f), v.c2);
         }
+
         /// <summary>
         /// Constructs a float3x3 matrix from a single int value by converting it to float and assigning it to every component.
         /// </summary>
@@ -82,6 +87,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = v;
             this.c2 = v;
         }
+
         /// <summary>
         /// Constructs a float3x3 matrix from a int3x3 matrix by componentwise conversion.
         /// </summary>
@@ -92,6 +98,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = v.c1;
             this.c2 = v.c2;
         }
+
         /// <summary>
         /// Constructs a float3x3 matrix from a single uint value by converting it to float and assigning it to every component.
         /// </summary>
@@ -102,6 +109,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = v;
             this.c2 = v;
         }
+
         /// <summary>
         /// Constructs a float3x3 matrix from a uint3x3 matrix by componentwise conversion.
         /// </summary>
@@ -112,6 +120,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = v.c1;
             this.c2 = v.c2;
         }
+
         /// <summary>
         /// Constructs a float3x3 matrix from a single double value by converting it to float and assigning it to every component.
         /// </summary>
@@ -122,6 +131,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = (float3)v;
             this.c2 = (float3)v;
         }
+
         /// <summary>
         /// Constructs a float3x3 matrix from a double3x3 matrix by componentwise conversion.
         /// </summary>
@@ -138,41 +148,49 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float3x3(float v) { return new float3x3(v); }
+
         /// <summary>
         /// Explicitly converts a single bool value to a float3x3 matrix by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float3x3(bool v) { return new float3x3(v); }
+
         /// <summary>
         /// Explicitly converts a bool3x3 matrix to a float3x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float3x3(bool3x3 v) { return new float3x3(v); }
+
         /// <summary>
         /// Implicitly converts a single int value to a float3x3 matrix by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float3x3(int v) { return new float3x3(v); }
+
         /// <summary>
         /// Implicitly converts a int3x3 matrix to a float3x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float3x3(int3x3 v) { return new float3x3(v); }
+
         /// <summary>
         /// Implicitly converts a single uint value to a float3x3 matrix by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float3x3(uint v) { return new float3x3(v); }
+
         /// <summary>
         /// Implicitly converts a uint3x3 matrix to a float3x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float3x3(uint3x3 v) { return new float3x3(v); }
+
         /// <summary>
         /// Explicitly converts a single double value to a float3x3 matrix by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float3x3(double v) { return new float3x3(v); }
+
         /// <summary>
         /// Explicitly converts a double3x3 matrix to a float3x3 matrix by componentwise conversion.
         /// </summary>
@@ -184,11 +202,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 operator * (float3x3 lhs, float3x3 rhs) { return new float3x3 (lhs.c0 * rhs.c0, lhs.c1 * rhs.c1, lhs.c2 * rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a float3x3 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 operator * (float3x3 lhs, float rhs) { return new float3x3 (lhs.c0 * rhs, lhs.c1 * rhs, lhs.c2 * rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a float value and a float3x3 matrix.
         /// </summary>
@@ -200,11 +220,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 operator + (float3x3 lhs, float3x3 rhs) { return new float3x3 (lhs.c0 + rhs.c0, lhs.c1 + rhs.c1, lhs.c2 + rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a float3x3 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 operator + (float3x3 lhs, float rhs) { return new float3x3 (lhs.c0 + rhs, lhs.c1 + rhs, lhs.c2 + rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a float value and a float3x3 matrix.
         /// </summary>
@@ -216,11 +238,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 operator - (float3x3 lhs, float3x3 rhs) { return new float3x3 (lhs.c0 - rhs.c0, lhs.c1 - rhs.c1, lhs.c2 - rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a float3x3 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 operator - (float3x3 lhs, float rhs) { return new float3x3 (lhs.c0 - rhs, lhs.c1 - rhs, lhs.c2 - rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a float value and a float3x3 matrix.
         /// </summary>
@@ -232,11 +256,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 operator / (float3x3 lhs, float3x3 rhs) { return new float3x3 (lhs.c0 / rhs.c0, lhs.c1 / rhs.c1, lhs.c2 / rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a float3x3 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 operator / (float3x3 lhs, float rhs) { return new float3x3 (lhs.c0 / rhs, lhs.c1 / rhs, lhs.c2 / rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a float value and a float3x3 matrix.
         /// </summary>
@@ -248,11 +274,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 operator % (float3x3 lhs, float3x3 rhs) { return new float3x3 (lhs.c0 % rhs.c0, lhs.c1 % rhs.c1, lhs.c2 % rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a float3x3 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 operator % (float3x3 lhs, float rhs) { return new float3x3 (lhs.c0 % rhs, lhs.c1 % rhs, lhs.c2 % rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a float value and a float3x3 matrix.
         /// </summary>
@@ -276,11 +304,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator < (float3x3 lhs, float3x3 rhs) { return new bool3x3 (lhs.c0 < rhs.c0, lhs.c1 < rhs.c1, lhs.c2 < rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a float3x3 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator < (float3x3 lhs, float rhs) { return new bool3x3 (lhs.c0 < rhs, lhs.c1 < rhs, lhs.c2 < rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a float value and a float3x3 matrix.
         /// </summary>
@@ -292,11 +322,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator <= (float3x3 lhs, float3x3 rhs) { return new bool3x3 (lhs.c0 <= rhs.c0, lhs.c1 <= rhs.c1, lhs.c2 <= rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a float3x3 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator <= (float3x3 lhs, float rhs) { return new bool3x3 (lhs.c0 <= rhs, lhs.c1 <= rhs, lhs.c2 <= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a float value and a float3x3 matrix.
         /// </summary>
@@ -308,11 +340,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator > (float3x3 lhs, float3x3 rhs) { return new bool3x3 (lhs.c0 > rhs.c0, lhs.c1 > rhs.c1, lhs.c2 > rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a float3x3 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator > (float3x3 lhs, float rhs) { return new bool3x3 (lhs.c0 > rhs, lhs.c1 > rhs, lhs.c2 > rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a float value and a float3x3 matrix.
         /// </summary>
@@ -324,11 +358,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator >= (float3x3 lhs, float3x3 rhs) { return new bool3x3 (lhs.c0 >= rhs.c0, lhs.c1 >= rhs.c1, lhs.c2 >= rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a float3x3 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator >= (float3x3 lhs, float rhs) { return new bool3x3 (lhs.c0 >= rhs, lhs.c1 >= rhs, lhs.c2 >= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a float value and a float3x3 matrix.
         /// </summary>
@@ -352,11 +388,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator == (float3x3 lhs, float3x3 rhs) { return new bool3x3 (lhs.c0 == rhs.c0, lhs.c1 == rhs.c1, lhs.c2 == rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a float3x3 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator == (float3x3 lhs, float rhs) { return new bool3x3 (lhs.c0 == rhs, lhs.c1 == rhs, lhs.c2 == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a float value and a float3x3 matrix.
         /// </summary>
@@ -368,11 +406,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator != (float3x3 lhs, float3x3 rhs) { return new bool3x3 (lhs.c0 != rhs.c0, lhs.c1 != rhs.c1, lhs.c2 != rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a float3x3 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator != (float3x3 lhs, float rhs) { return new bool3x3 (lhs.c0 != rhs, lhs.c1 != rhs, lhs.c2 != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a float value and a float3x3 matrix.
         /// </summary>
@@ -400,6 +440,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(float3x3 rhs) { return c0.Equals(rhs.c0) && c1.Equals(rhs.c1) && c2.Equals(rhs.c2); }
+
         /// <summary>
         /// Returns true if the float3x3 is equal to a given float3x3, false otherwise.
         /// </summary>
@@ -418,6 +459,7 @@ namespace Raster.Core.Math.Simd
         {
             return string.Format("float3x3({0}f, {1}f, {2}f,  {3}f, {4}f, {5}f,  {6}f, {7}f, {8}f)", c0.x, c1.x, c2.x, c0.y, c1.y, c2.y, c0.z, c1.z, c2.z);
         }
+
         /// <summary>
         /// Returns a string representation of the float3x3 using a specified format and culture-specific format information.
         /// </summary>
@@ -434,6 +476,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 float3x3(float3 c0, float3 c1, float3 c2) { return new float3x3(c0, c1, c2); }
+
         /// <summary>
         /// Returns a float3x3 matrix constructed from from 9 float values given in row-major order.
         /// </summary>
@@ -446,51 +489,61 @@ namespace Raster.Core.Math.Simd
                                 m10, m11, m12,
                                 m20, m21, m22);
         }
+
         /// <summary>
         /// Returns a float3x3 matrix constructed from a single float value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 float3x3(float v) { return new float3x3(v); }
+
         /// <summary>
         /// Returns a float3x3 matrix constructed from a single bool value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 float3x3(bool v) { return new float3x3(v); }
+
         /// <summary>
         /// Return a float3x3 matrix constructed from a bool3x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 float3x3(bool3x3 v) { return new float3x3(v); }
+
         /// <summary>
         /// Returns a float3x3 matrix constructed from a single int value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 float3x3(int v) { return new float3x3(v); }
+
         /// <summary>
         /// Return a float3x3 matrix constructed from a int3x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 float3x3(int3x3 v) { return new float3x3(v); }
+
         /// <summary>
         /// Returns a float3x3 matrix constructed from a single uint value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 float3x3(uint v) { return new float3x3(v); }
+
         /// <summary>
         /// Return a float3x3 matrix constructed from a uint3x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 float3x3(uint3x3 v) { return new float3x3(v); }
+
         /// <summary>
         /// Returns a float3x3 matrix constructed from a single double value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 float3x3(double v) { return new float3x3(v); }
+
         /// <summary>
         /// Return a float3x3 matrix constructed from a double3x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 float3x3(double3x3 v) { return new float3x3(v); }
+
         /// <summary>
         /// Return the float3x3 transpose of a float3x3 matrix.
         /// </summary>
@@ -502,6 +555,7 @@ namespace Raster.Core.Math.Simd
                 v.c1.x, v.c1.y, v.c1.z,
                 v.c2.x, v.c2.y, v.c2.z);
         }
+
         /// <summary>Returns the float3x3 full inverse of a float3x3 matrix.\n\t\t/// </summary>
         public static float3x3 inverse(float3x3 m)
         {
@@ -544,6 +598,7 @@ namespace Raster.Core.Math.Simd
                         asuint(v.c1) * uint3(0xB5D0BF63u, 0xF9102C5Fu, 0x9881FB9Fu) + 
                         asuint(v.c2) * uint3(0x56A1530Du, 0x804B722Du, 0x738E50E5u)) + 0x4FC93C25u;
         }
+
         /// <summary>
         /// Returns a uint3 vector hash code of a float3x3 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash

@@ -30,6 +30,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = c1;
             this.c2 = c2;
         }
+
         /// <summary>
         /// Constructs a double3x3 matrix from 9 double values given in row-major order.
         /// </summary>
@@ -42,6 +43,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = new double3(m01, m11, m21);
             this.c2 = new double3(m02, m12, m22);
         }
+
         /// <summary>
         /// Constructs a double3x3 matrix from a single double value by assigning it to every component.
         /// </summary>
@@ -52,6 +54,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = v;
             this.c2 = v;
         }
+
         /// <summary>
         /// Constructs a double3x3 matrix from a single bool value by converting it to double and assigning it to every component.
         /// </summary>
@@ -62,6 +65,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = math.select(new double3(0.0), new double3(1.0), v);
             this.c2 = math.select(new double3(0.0), new double3(1.0), v);
         }
+
         /// <summary>
         /// Constructs a double3x3 matrix from a bool3x3 matrix by componentwise conversion.
         /// </summary>
@@ -72,6 +76,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = math.select(new double3(0.0), new double3(1.0), v.c1);
             this.c2 = math.select(new double3(0.0), new double3(1.0), v.c2);
         }
+
         /// <summary>
         /// Constructs a double3x3 matrix from a single int value by converting it to double and assigning it to every component.
         /// </summary>
@@ -82,6 +87,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = v;
             this.c2 = v;
         }
+
         /// <summary>
         /// Constructs a double3x3 matrix from a int3x3 matrix by componentwise conversion.
         /// </summary>
@@ -92,6 +98,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = v.c1;
             this.c2 = v.c2;
         }
+
         /// <summary>
         /// Constructs a double3x3 matrix from a single uint value by converting it to double and assigning it to every component.
         /// </summary>
@@ -102,6 +109,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = v;
             this.c2 = v;
         }
+
         /// <summary>
         /// Constructs a double3x3 matrix from a uint3x3 matrix by componentwise conversion.
         /// </summary>
@@ -112,6 +120,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = v.c1;
             this.c2 = v.c2;
         }
+
         /// <summary>
         /// Constructs a double3x3 matrix from a single float value by converting it to double and assigning it to every component.
         /// </summary>
@@ -122,6 +131,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = v;
             this.c2 = v;
         }
+
         /// <summary>
         /// Constructs a double3x3 matrix from a float3x3 matrix by componentwise conversion.
         /// </summary>
@@ -138,41 +148,49 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3x3(double v) { return new double3x3(v); }
+
         /// <summary>
         /// Explicitly converts a single bool value to a double3x3 matrix by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator double3x3(bool v) { return new double3x3(v); }
+
         /// <summary>
         /// Explicitly converts a bool3x3 matrix to a double3x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator double3x3(bool3x3 v) { return new double3x3(v); }
+
         /// <summary>
         /// Implicitly converts a single int value to a double3x3 matrix by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3x3(int v) { return new double3x3(v); }
+
         /// <summary>
         /// Implicitly converts a int3x3 matrix to a double3x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3x3(int3x3 v) { return new double3x3(v); }
+
         /// <summary>
         /// Implicitly converts a single uint value to a double3x3 matrix by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3x3(uint v) { return new double3x3(v); }
+
         /// <summary>
         /// Implicitly converts a uint3x3 matrix to a double3x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3x3(uint3x3 v) { return new double3x3(v); }
+
         /// <summary>
         /// Implicitly converts a single float value to a double3x3 matrix by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3x3(float v) { return new double3x3(v); }
+
         /// <summary>
         /// Implicitly converts a float3x3 matrix to a double3x3 matrix by componentwise conversion.
         /// </summary>
@@ -184,11 +202,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 operator * (double3x3 lhs, double3x3 rhs) { return new double3x3 (lhs.c0 * rhs.c0, lhs.c1 * rhs.c1, lhs.c2 * rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a double3x3 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 operator * (double3x3 lhs, double rhs) { return new double3x3 (lhs.c0 * rhs, lhs.c1 * rhs, lhs.c2 * rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a double value and a double3x3 matrix.
         /// </summary>
@@ -200,11 +220,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 operator + (double3x3 lhs, double3x3 rhs) { return new double3x3 (lhs.c0 + rhs.c0, lhs.c1 + rhs.c1, lhs.c2 + rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a double3x3 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 operator + (double3x3 lhs, double rhs) { return new double3x3 (lhs.c0 + rhs, lhs.c1 + rhs, lhs.c2 + rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a double value and a double3x3 matrix.
         /// </summary>
@@ -216,11 +238,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 operator - (double3x3 lhs, double3x3 rhs) { return new double3x3 (lhs.c0 - rhs.c0, lhs.c1 - rhs.c1, lhs.c2 - rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a double3x3 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 operator - (double3x3 lhs, double rhs) { return new double3x3 (lhs.c0 - rhs, lhs.c1 - rhs, lhs.c2 - rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a double value and a double3x3 matrix.
         /// </summary>
@@ -232,11 +256,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 operator / (double3x3 lhs, double3x3 rhs) { return new double3x3 (lhs.c0 / rhs.c0, lhs.c1 / rhs.c1, lhs.c2 / rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a double3x3 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 operator / (double3x3 lhs, double rhs) { return new double3x3 (lhs.c0 / rhs, lhs.c1 / rhs, lhs.c2 / rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a double value and a double3x3 matrix.
         /// </summary>
@@ -248,11 +274,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 operator % (double3x3 lhs, double3x3 rhs) { return new double3x3 (lhs.c0 % rhs.c0, lhs.c1 % rhs.c1, lhs.c2 % rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a double3x3 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 operator % (double3x3 lhs, double rhs) { return new double3x3 (lhs.c0 % rhs, lhs.c1 % rhs, lhs.c2 % rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a double value and a double3x3 matrix.
         /// </summary>
@@ -276,11 +304,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator < (double3x3 lhs, double3x3 rhs) { return new bool3x3 (lhs.c0 < rhs.c0, lhs.c1 < rhs.c1, lhs.c2 < rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a double3x3 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator < (double3x3 lhs, double rhs) { return new bool3x3 (lhs.c0 < rhs, lhs.c1 < rhs, lhs.c2 < rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a double value and a double3x3 matrix.
         /// </summary>
@@ -292,11 +322,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator <= (double3x3 lhs, double3x3 rhs) { return new bool3x3 (lhs.c0 <= rhs.c0, lhs.c1 <= rhs.c1, lhs.c2 <= rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a double3x3 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator <= (double3x3 lhs, double rhs) { return new bool3x3 (lhs.c0 <= rhs, lhs.c1 <= rhs, lhs.c2 <= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a double value and a double3x3 matrix.
         /// </summary>
@@ -308,11 +340,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator > (double3x3 lhs, double3x3 rhs) { return new bool3x3 (lhs.c0 > rhs.c0, lhs.c1 > rhs.c1, lhs.c2 > rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a double3x3 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator > (double3x3 lhs, double rhs) { return new bool3x3 (lhs.c0 > rhs, lhs.c1 > rhs, lhs.c2 > rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a double value and a double3x3 matrix.
         /// </summary>
@@ -324,11 +358,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator >= (double3x3 lhs, double3x3 rhs) { return new bool3x3 (lhs.c0 >= rhs.c0, lhs.c1 >= rhs.c1, lhs.c2 >= rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a double3x3 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator >= (double3x3 lhs, double rhs) { return new bool3x3 (lhs.c0 >= rhs, lhs.c1 >= rhs, lhs.c2 >= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a double value and a double3x3 matrix.
         /// </summary>
@@ -352,11 +388,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator == (double3x3 lhs, double3x3 rhs) { return new bool3x3 (lhs.c0 == rhs.c0, lhs.c1 == rhs.c1, lhs.c2 == rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a double3x3 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator == (double3x3 lhs, double rhs) { return new bool3x3 (lhs.c0 == rhs, lhs.c1 == rhs, lhs.c2 == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a double value and a double3x3 matrix.
         /// </summary>
@@ -368,11 +406,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator != (double3x3 lhs, double3x3 rhs) { return new bool3x3 (lhs.c0 != rhs.c0, lhs.c1 != rhs.c1, lhs.c2 != rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a double3x3 matrix and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3x3 operator != (double3x3 lhs, double rhs) { return new bool3x3 (lhs.c0 != rhs, lhs.c1 != rhs, lhs.c2 != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a double value and a double3x3 matrix.
         /// </summary>
@@ -400,6 +440,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(double3x3 rhs) { return c0.Equals(rhs.c0) && c1.Equals(rhs.c1) && c2.Equals(rhs.c2); }
+
         /// <summary>
         /// Returns true if the double3x3 is equal to a given double3x3, false otherwise.
         /// </summary>
@@ -418,6 +459,7 @@ namespace Raster.Core.Math.Simd
         {
             return string.Format("double3x3({0}, {1}, {2},  {3}, {4}, {5},  {6}, {7}, {8})", c0.x, c1.x, c2.x, c0.y, c1.y, c2.y, c0.z, c1.z, c2.z);
         }
+
         /// <summary>
         /// Returns a string representation of the double3x3 using a specified format and culture-specific format information.
         /// </summary>
@@ -434,6 +476,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 double3x3(double3 c0, double3 c1, double3 c2) { return new double3x3(c0, c1, c2); }
+
         /// <summary>
         /// Returns a double3x3 matrix constructed from from 9 double values given in row-major order.
         /// </summary>
@@ -446,51 +489,61 @@ namespace Raster.Core.Math.Simd
                                  m10, m11, m12,
                                  m20, m21, m22);
         }
+
         /// <summary>
         /// Returns a double3x3 matrix constructed from a single double value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 double3x3(double v) { return new double3x3(v); }
+
         /// <summary>
         /// Returns a double3x3 matrix constructed from a single bool value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 double3x3(bool v) { return new double3x3(v); }
+
         /// <summary>
         /// Return a double3x3 matrix constructed from a bool3x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 double3x3(bool3x3 v) { return new double3x3(v); }
+
         /// <summary>
         /// Returns a double3x3 matrix constructed from a single int value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 double3x3(int v) { return new double3x3(v); }
+
         /// <summary>
         /// Return a double3x3 matrix constructed from a int3x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 double3x3(int3x3 v) { return new double3x3(v); }
+
         /// <summary>
         /// Returns a double3x3 matrix constructed from a single uint value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 double3x3(uint v) { return new double3x3(v); }
+
         /// <summary>
         /// Return a double3x3 matrix constructed from a uint3x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 double3x3(uint3x3 v) { return new double3x3(v); }
+
         /// <summary>
         /// Returns a double3x3 matrix constructed from a single float value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 double3x3(float v) { return new double3x3(v); }
+
         /// <summary>
         /// Return a double3x3 matrix constructed from a float3x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3x3 double3x3(float3x3 v) { return new double3x3(v); }
+
         /// <summary>
         /// Return the double3x3 transpose of a double3x3 matrix.
         /// </summary>
@@ -502,6 +555,7 @@ namespace Raster.Core.Math.Simd
                 v.c1.x, v.c1.y, v.c1.z,
                 v.c2.x, v.c2.y, v.c2.z);
         }
+
         /// <summary>Returns the double3x3 full inverse of a double3x3 matrix.\n\t\t/// </summary>
         public static double3x3 inverse(double3x3 m)
         {
@@ -544,6 +598,7 @@ namespace Raster.Core.Math.Simd
                         fold_to_uint(v.c1) * uint3(0xF43A9ABBu, 0x84E7E01Bu, 0x8E055BE5u) + 
                         fold_to_uint(v.c2) * uint3(0x6E624EB7u, 0x7383ED49u, 0xDD49C23Bu)) + 0xEBD0D005u;
         }
+
         /// <summary>
         /// Returns a uint3 vector hash code of a double3x3 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash

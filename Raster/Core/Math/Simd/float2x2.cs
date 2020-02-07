@@ -28,6 +28,7 @@ namespace Raster.Core.Math.Simd
             this.c0 = c0;
             this.c1 = c1;
         }
+
         /// <summary>
         /// Constructs a float2x2 matrix from 4 float values given in row-major order.
         /// </summary>
@@ -38,6 +39,7 @@ namespace Raster.Core.Math.Simd
             this.c0 = new float2(m00, m10);
             this.c1 = new float2(m01, m11);
         }
+
         /// <summary>
         /// Constructs a float2x2 matrix from a single float value by assigning it to every component.
         /// </summary>
@@ -47,6 +49,7 @@ namespace Raster.Core.Math.Simd
             this.c0 = v;
             this.c1 = v;
         }
+
         /// <summary>
         /// Constructs a float2x2 matrix from a single bool value by converting it to float and assigning it to every component.
         /// </summary>
@@ -56,6 +59,7 @@ namespace Raster.Core.Math.Simd
             this.c0 = math.select(new float2(0.0f), new float2(1.0f), v);
             this.c1 = math.select(new float2(0.0f), new float2(1.0f), v);
         }
+
         /// <summary>
         /// Constructs a float2x2 matrix from a bool2x2 matrix by componentwise conversion.
         /// </summary>
@@ -65,6 +69,7 @@ namespace Raster.Core.Math.Simd
             this.c0 = math.select(new float2(0.0f), new float2(1.0f), v.c0);
             this.c1 = math.select(new float2(0.0f), new float2(1.0f), v.c1);
         }
+
         /// <summary>
         /// Constructs a float2x2 matrix from a single int value by converting it to float and assigning it to every component.
         /// </summary>
@@ -74,6 +79,7 @@ namespace Raster.Core.Math.Simd
             this.c0 = v;
             this.c1 = v;
         }
+
         /// <summary>
         /// Constructs a float2x2 matrix from a int2x2 matrix by componentwise conversion.
         /// </summary>
@@ -83,6 +89,7 @@ namespace Raster.Core.Math.Simd
             this.c0 = v.c0;
             this.c1 = v.c1;
         }
+
         /// <summary>
         /// Constructs a float2x2 matrix from a single uint value by converting it to float and assigning it to every component.
         /// </summary>
@@ -92,6 +99,7 @@ namespace Raster.Core.Math.Simd
             this.c0 = v;
             this.c1 = v;
         }
+
         /// <summary>
         /// Constructs a float2x2 matrix from a uint2x2 matrix by componentwise conversion.
         /// </summary>
@@ -101,6 +109,7 @@ namespace Raster.Core.Math.Simd
             this.c0 = v.c0;
             this.c1 = v.c1;
         }
+
         /// <summary>
         /// Constructs a float2x2 matrix from a single double value by converting it to float and assigning it to every component.
         /// </summary>
@@ -110,6 +119,7 @@ namespace Raster.Core.Math.Simd
             this.c0 = (float2)v;
             this.c1 = (float2)v;
         }
+
         /// <summary>
         /// Constructs a float2x2 matrix from a double2x2 matrix by componentwise conversion.
         /// </summary>
@@ -125,41 +135,49 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float2x2(float v) { return new float2x2(v); }
+
         /// <summary>
         /// Explicitly converts a single bool value to a float2x2 matrix by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float2x2(bool v) { return new float2x2(v); }
+
         /// <summary>
         /// Explicitly converts a bool2x2 matrix to a float2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float2x2(bool2x2 v) { return new float2x2(v); }
+
         /// <summary>
         /// Implicitly converts a single int value to a float2x2 matrix by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float2x2(int v) { return new float2x2(v); }
+
         /// <summary>
         /// Implicitly converts a int2x2 matrix to a float2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float2x2(int2x2 v) { return new float2x2(v); }
+
         /// <summary>
         /// Implicitly converts a single uint value to a float2x2 matrix by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float2x2(uint v) { return new float2x2(v); }
+
         /// <summary>
         /// Implicitly converts a uint2x2 matrix to a float2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator float2x2(uint2x2 v) { return new float2x2(v); }
+
         /// <summary>
         /// Explicitly converts a single double value to a float2x2 matrix by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator float2x2(double v) { return new float2x2(v); }
+
         /// <summary>
         /// Explicitly converts a double2x2 matrix to a float2x2 matrix by componentwise conversion.
         /// </summary>
@@ -171,11 +189,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 operator * (float2x2 lhs, float2x2 rhs) { return new float2x2 (lhs.c0 * rhs.c0, lhs.c1 * rhs.c1); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a float2x2 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 operator * (float2x2 lhs, float rhs) { return new float2x2 (lhs.c0 * rhs, lhs.c1 * rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a float value and a float2x2 matrix.
         /// </summary>
@@ -187,11 +207,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 operator + (float2x2 lhs, float2x2 rhs) { return new float2x2 (lhs.c0 + rhs.c0, lhs.c1 + rhs.c1); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a float2x2 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 operator + (float2x2 lhs, float rhs) { return new float2x2 (lhs.c0 + rhs, lhs.c1 + rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a float value and a float2x2 matrix.
         /// </summary>
@@ -203,11 +225,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 operator - (float2x2 lhs, float2x2 rhs) { return new float2x2 (lhs.c0 - rhs.c0, lhs.c1 - rhs.c1); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a float2x2 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 operator - (float2x2 lhs, float rhs) { return new float2x2 (lhs.c0 - rhs, lhs.c1 - rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a float value and a float2x2 matrix.
         /// </summary>
@@ -219,11 +243,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 operator / (float2x2 lhs, float2x2 rhs) { return new float2x2 (lhs.c0 / rhs.c0, lhs.c1 / rhs.c1); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a float2x2 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 operator / (float2x2 lhs, float rhs) { return new float2x2 (lhs.c0 / rhs, lhs.c1 / rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a float value and a float2x2 matrix.
         /// </summary>
@@ -235,11 +261,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 operator % (float2x2 lhs, float2x2 rhs) { return new float2x2 (lhs.c0 % rhs.c0, lhs.c1 % rhs.c1); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a float2x2 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 operator % (float2x2 lhs, float rhs) { return new float2x2 (lhs.c0 % rhs, lhs.c1 % rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a float value and a float2x2 matrix.
         /// </summary>
@@ -263,11 +291,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator < (float2x2 lhs, float2x2 rhs) { return new bool2x2 (lhs.c0 < rhs.c0, lhs.c1 < rhs.c1); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a float2x2 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator < (float2x2 lhs, float rhs) { return new bool2x2 (lhs.c0 < rhs, lhs.c1 < rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a float value and a float2x2 matrix.
         /// </summary>
@@ -279,11 +309,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator <= (float2x2 lhs, float2x2 rhs) { return new bool2x2 (lhs.c0 <= rhs.c0, lhs.c1 <= rhs.c1); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a float2x2 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator <= (float2x2 lhs, float rhs) { return new bool2x2 (lhs.c0 <= rhs, lhs.c1 <= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a float value and a float2x2 matrix.
         /// </summary>
@@ -295,11 +327,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator > (float2x2 lhs, float2x2 rhs) { return new bool2x2 (lhs.c0 > rhs.c0, lhs.c1 > rhs.c1); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a float2x2 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator > (float2x2 lhs, float rhs) { return new bool2x2 (lhs.c0 > rhs, lhs.c1 > rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a float value and a float2x2 matrix.
         /// </summary>
@@ -311,11 +345,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator >= (float2x2 lhs, float2x2 rhs) { return new bool2x2 (lhs.c0 >= rhs.c0, lhs.c1 >= rhs.c1); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a float2x2 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator >= (float2x2 lhs, float rhs) { return new bool2x2 (lhs.c0 >= rhs, lhs.c1 >= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a float value and a float2x2 matrix.
         /// </summary>
@@ -339,11 +375,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator == (float2x2 lhs, float2x2 rhs) { return new bool2x2 (lhs.c0 == rhs.c0, lhs.c1 == rhs.c1); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a float2x2 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator == (float2x2 lhs, float rhs) { return new bool2x2 (lhs.c0 == rhs, lhs.c1 == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a float value and a float2x2 matrix.
         /// </summary>
@@ -355,11 +393,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator != (float2x2 lhs, float2x2 rhs) { return new bool2x2 (lhs.c0 != rhs.c0, lhs.c1 != rhs.c1); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a float2x2 matrix and a float value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x2 operator != (float2x2 lhs, float rhs) { return new bool2x2 (lhs.c0 != rhs, lhs.c1 != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a float value and a float2x2 matrix.
         /// </summary>
@@ -387,6 +427,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(float2x2 rhs) { return c0.Equals(rhs.c0) && c1.Equals(rhs.c1); }
+
         /// <summary>
         /// Returns true if the float2x2 is equal to a given float2x2, false otherwise.
         /// </summary>
@@ -405,6 +446,7 @@ namespace Raster.Core.Math.Simd
         {
             return string.Format("float2x2({0}f, {1}f,  {2}f, {3}f)", c0.x, c1.x, c0.y, c1.y);
         }
+
         /// <summary>
         /// Returns a string representation of the float2x2 using a specified format and culture-specific format information.
         /// </summary>
@@ -421,6 +463,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 float2x2(float2 c0, float2 c1) { return new float2x2(c0, c1); }
+
         /// <summary>
         /// Returns a float2x2 matrix constructed from from 4 float values given in row-major order.
         /// </summary>
@@ -431,51 +474,61 @@ namespace Raster.Core.Math.Simd
             return new float2x2(m00, m01,
                                 m10, m11);
         }
+
         /// <summary>
         /// Returns a float2x2 matrix constructed from a single float value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 float2x2(float v) { return new float2x2(v); }
+
         /// <summary>
         /// Returns a float2x2 matrix constructed from a single bool value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 float2x2(bool v) { return new float2x2(v); }
+
         /// <summary>
         /// Return a float2x2 matrix constructed from a bool2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 float2x2(bool2x2 v) { return new float2x2(v); }
+
         /// <summary>
         /// Returns a float2x2 matrix constructed from a single int value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 float2x2(int v) { return new float2x2(v); }
+
         /// <summary>
         /// Return a float2x2 matrix constructed from a int2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 float2x2(int2x2 v) { return new float2x2(v); }
+
         /// <summary>
         /// Returns a float2x2 matrix constructed from a single uint value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 float2x2(uint v) { return new float2x2(v); }
+
         /// <summary>
         /// Return a float2x2 matrix constructed from a uint2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 float2x2(uint2x2 v) { return new float2x2(v); }
+
         /// <summary>
         /// Returns a float2x2 matrix constructed from a single double value by converting it to float and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 float2x2(double v) { return new float2x2(v); }
+
         /// <summary>
         /// Return a float2x2 matrix constructed from a double2x2 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 float2x2(double2x2 v) { return new float2x2(v); }
+
         /// <summary>
         /// Return the float2x2 transpose of a float2x2 matrix.
         /// </summary>
@@ -486,6 +539,7 @@ namespace Raster.Core.Math.Simd
                 v.c0.x, v.c0.y,
                 v.c1.x, v.c1.y);
         }
+
         /// <summary>\n\t\t/// Returns the float2x2 full inverse of a float2x2 matrix.\n\t\t/// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float2x2 inverse(float2x2 m)
@@ -519,6 +573,7 @@ namespace Raster.Core.Math.Simd
             return csum(asuint(v.c0) * uint2(0x9C9F0823u, 0x5A9CA13Bu) + 
                         asuint(v.c1) * uint2(0xAFCDD5EFu, 0xA88D187Du)) + 0xCF6EBA1Du;
         }
+
         /// <summary>
         /// Returns a uint2 vector hash code of a float2x2 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash

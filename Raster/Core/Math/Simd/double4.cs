@@ -30,6 +30,7 @@ namespace Raster.Core.Math.Simd
             this.z = z;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a double4 vector from two double values and a double2 vector.
         /// </summary>
@@ -41,6 +42,7 @@ namespace Raster.Core.Math.Simd
             this.z = zw.x;
             this.w = zw.y;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a double value, a double2 vector and a double value.
         /// </summary>
@@ -52,6 +54,7 @@ namespace Raster.Core.Math.Simd
             this.z = yz.y;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a double value and a double3 vector.
         /// </summary>
@@ -63,6 +66,7 @@ namespace Raster.Core.Math.Simd
             this.z = yzw.y;
             this.w = yzw.z;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a double2 vector and two double values.
         /// </summary>
@@ -74,6 +78,7 @@ namespace Raster.Core.Math.Simd
             this.z = z;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a double4 vector from two double2 vectors.
         /// </summary>
@@ -85,6 +90,7 @@ namespace Raster.Core.Math.Simd
             this.z = zw.x;
             this.w = zw.y;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a double3 vector and a double value.
         /// </summary>
@@ -96,6 +102,7 @@ namespace Raster.Core.Math.Simd
             this.z = xyz.z;
             this.w = w;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a double4 vector.
         /// </summary>
@@ -107,6 +114,7 @@ namespace Raster.Core.Math.Simd
             this.z = xyzw.z;
             this.w = xyzw.w;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a single double value by assigning it to every component.
         /// </summary>
@@ -118,6 +126,7 @@ namespace Raster.Core.Math.Simd
             this.z = v;
             this.w = v;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a single bool value by converting it to double and assigning it to every component.
         /// </summary>
@@ -129,6 +138,7 @@ namespace Raster.Core.Math.Simd
             this.z = v ? 1.0 : 0.0;
             this.w = v ? 1.0 : 0.0;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a bool4 vector by componentwise conversion.
         /// </summary>
@@ -140,6 +150,7 @@ namespace Raster.Core.Math.Simd
             this.z = v.z ? 1.0 : 0.0;
             this.w = v.w ? 1.0 : 0.0;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a single int value by converting it to double and assigning it to every component.
         /// </summary>
@@ -151,6 +162,7 @@ namespace Raster.Core.Math.Simd
             this.z = v;
             this.w = v;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a int4 vector by componentwise conversion.
         /// </summary>
@@ -162,6 +174,7 @@ namespace Raster.Core.Math.Simd
             this.z = v.z;
             this.w = v.w;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a single uint value by converting it to double and assigning it to every component.
         /// </summary>
@@ -173,6 +186,7 @@ namespace Raster.Core.Math.Simd
             this.z = v;
             this.w = v;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a uint4 vector by componentwise conversion.
         /// </summary>
@@ -184,6 +198,7 @@ namespace Raster.Core.Math.Simd
             this.z = v.z;
             this.w = v.w;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a single half value by converting it to double and assigning it to every component.
         /// </summary>
@@ -195,6 +210,7 @@ namespace Raster.Core.Math.Simd
             this.z = v;
             this.w = v;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a half4 vector by componentwise conversion.
         /// </summary>
@@ -206,6 +222,7 @@ namespace Raster.Core.Math.Simd
             this.z = v.z;
             this.w = v.w;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a single float value by converting it to double and assigning it to every component.
         /// </summary>
@@ -217,6 +234,7 @@ namespace Raster.Core.Math.Simd
             this.z = v;
             this.w = v;
         }
+
         /// <summary>
         /// Constructs a double4 vector from a float4 vector by componentwise conversion.
         /// </summary>
@@ -234,51 +252,61 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double4(double v) { return new double4(v); }
+
         /// <summary>
         /// Explicitly converts a single bool value to a double4 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator double4(bool v) { return new double4(v); }
+
         /// <summary>
         /// Explicitly converts a bool4 vector to a double4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator double4(bool4 v) { return new double4(v); }
+
         /// <summary>
         /// Implicitly converts a single int value to a double4 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double4(int v) { return new double4(v); }
+
         /// <summary>
         /// Implicitly converts a int4 vector to a double4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double4(int4 v) { return new double4(v); }
+
         /// <summary>
         /// Implicitly converts a single uint value to a double4 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double4(uint v) { return new double4(v); }
+
         /// <summary>
         /// Implicitly converts a uint4 vector to a double4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double4(uint4 v) { return new double4(v); }
+
         /// <summary>
         /// Implicitly converts a single half value to a double4 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double4(half v) { return new double4(v); }
+
         /// <summary>
         /// Implicitly converts a half4 vector to a double4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double4(half4 v) { return new double4(v); }
+
         /// <summary>
         /// Implicitly converts a single float value to a double4 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double4(float v) { return new double4(v); }
+
         /// <summary>
         /// Implicitly converts a float4 vector to a double4 vector by componentwise conversion.
         /// </summary>
@@ -290,11 +318,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 operator * (double4 lhs, double4 rhs) { return new double4 (lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z, lhs.w * rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a double4 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 operator * (double4 lhs, double rhs) { return new double4 (lhs.x * rhs, lhs.y * rhs, lhs.z * rhs, lhs.w * rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a double value and a double4 vector.
         /// </summary>
@@ -306,11 +336,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 operator + (double4 lhs, double4 rhs) { return new double4 (lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z, lhs.w + rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a double4 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 operator + (double4 lhs, double rhs) { return new double4 (lhs.x + rhs, lhs.y + rhs, lhs.z + rhs, lhs.w + rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a double value and a double4 vector.
         /// </summary>
@@ -322,11 +354,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 operator - (double4 lhs, double4 rhs) { return new double4 (lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z, lhs.w - rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a double4 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 operator - (double4 lhs, double rhs) { return new double4 (lhs.x - rhs, lhs.y - rhs, lhs.z - rhs, lhs.w - rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a double value and a double4 vector.
         /// </summary>
@@ -338,11 +372,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 operator / (double4 lhs, double4 rhs) { return new double4 (lhs.x / rhs.x, lhs.y / rhs.y, lhs.z / rhs.z, lhs.w / rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a double4 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 operator / (double4 lhs, double rhs) { return new double4 (lhs.x / rhs, lhs.y / rhs, lhs.z / rhs, lhs.w / rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a double value and a double4 vector.
         /// </summary>
@@ -354,11 +390,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 operator % (double4 lhs, double4 rhs) { return new double4 (lhs.x % rhs.x, lhs.y % rhs.y, lhs.z % rhs.z, lhs.w % rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a double4 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 operator % (double4 lhs, double rhs) { return new double4 (lhs.x % rhs, lhs.y % rhs, lhs.z % rhs, lhs.w % rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a double value and a double4 vector.
         /// </summary>
@@ -382,11 +420,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator < (double4 lhs, double4 rhs) { return new bool4 (lhs.x < rhs.x, lhs.y < rhs.y, lhs.z < rhs.z, lhs.w < rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a double4 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator < (double4 lhs, double rhs) { return new bool4 (lhs.x < rhs, lhs.y < rhs, lhs.z < rhs, lhs.w < rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a double value and a double4 vector.
         /// </summary>
@@ -398,11 +438,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator <= (double4 lhs, double4 rhs) { return new bool4 (lhs.x <= rhs.x, lhs.y <= rhs.y, lhs.z <= rhs.z, lhs.w <= rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a double4 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator <= (double4 lhs, double rhs) { return new bool4 (lhs.x <= rhs, lhs.y <= rhs, lhs.z <= rhs, lhs.w <= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a double value and a double4 vector.
         /// </summary>
@@ -414,11 +456,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator > (double4 lhs, double4 rhs) { return new bool4 (lhs.x > rhs.x, lhs.y > rhs.y, lhs.z > rhs.z, lhs.w > rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a double4 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator > (double4 lhs, double rhs) { return new bool4 (lhs.x > rhs, lhs.y > rhs, lhs.z > rhs, lhs.w > rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a double value and a double4 vector.
         /// </summary>
@@ -430,11 +474,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator >= (double4 lhs, double4 rhs) { return new bool4 (lhs.x >= rhs.x, lhs.y >= rhs.y, lhs.z >= rhs.z, lhs.w >= rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a double4 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator >= (double4 lhs, double rhs) { return new bool4 (lhs.x >= rhs, lhs.y >= rhs, lhs.z >= rhs, lhs.w >= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a double value and a double4 vector.
         /// </summary>
@@ -458,11 +504,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator == (double4 lhs, double4 rhs) { return new bool4 (lhs.x == rhs.x, lhs.y == rhs.y, lhs.z == rhs.z, lhs.w == rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a double4 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator == (double4 lhs, double rhs) { return new bool4 (lhs.x == rhs, lhs.y == rhs, lhs.z == rhs, lhs.w == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a double value and a double4 vector.
         /// </summary>
@@ -474,11 +522,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator != (double4 lhs, double4 rhs) { return new bool4 (lhs.x != rhs.x, lhs.y != rhs.y, lhs.z != rhs.z, lhs.w != rhs.w); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a double4 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool4 operator != (double4 lhs, double rhs) { return new bool4 (lhs.x != rhs, lhs.y != rhs, lhs.z != rhs, lhs.w != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a double value and a double4 vector.
         /// </summary>
@@ -2987,6 +3037,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(double4 rhs) { return x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w; }
+
         /// <summary>
         /// Returns true if the double4 is equal to a given double4, false otherwise.
         /// </summary>
@@ -3005,6 +3056,7 @@ namespace Raster.Core.Math.Simd
         {
             return string.Format("double4({0}, {1}, {2}, {3})", x, y, z, w);
         }
+
         /// <summary>
         /// Returns a string representation of the double4 using a specified format and culture-specific format information.
         /// </summary>
@@ -3035,102 +3087,122 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(double x, double y, double z, double w) { return new double4(x, y, z, w); }
+
         /// <summary>
         /// Returns a double4 vector constructed from two double values and a double2 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(double x, double y, double2 zw) { return new double4(x, y, zw); }
+
         /// <summary>
         /// Returns a double4 vector constructed from a double value, a double2 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(double x, double2 yz, double w) { return new double4(x, yz, w); }
+
         /// <summary>
         /// Returns a double4 vector constructed from a double value and a double3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(double x, double3 yzw) { return new double4(x, yzw); }
+
         /// <summary>
         /// Returns a double4 vector constructed from a double2 vector and two double values.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(double2 xy, double z, double w) { return new double4(xy, z, w); }
+
         /// <summary>
         /// Returns a double4 vector constructed from two double2 vectors.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(double2 xy, double2 zw) { return new double4(xy, zw); }
+
         /// <summary>
         /// Returns a double4 vector constructed from a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(double3 xyz, double w) { return new double4(xyz, w); }
+
         /// <summary>
         /// Returns a double4 vector constructed from a double4 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(double4 xyzw) { return new double4(xyzw); }
+
         /// <summary>
         /// Returns a double4 vector constructed from a single double value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(double v) { return new double4(v); }
+
         /// <summary>
         /// Returns a double4 vector constructed from a single bool value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(bool v) { return new double4(v); }
+
         /// <summary>
         /// Return a double4 vector constructed from a bool4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(bool4 v) { return new double4(v); }
+
         /// <summary>
         /// Returns a double4 vector constructed from a single int value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(int v) { return new double4(v); }
+
         /// <summary>
         /// Return a double4 vector constructed from a int4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(int4 v) { return new double4(v); }
+
         /// <summary>
         /// Returns a double4 vector constructed from a single uint value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(uint v) { return new double4(v); }
+
         /// <summary>
         /// Return a double4 vector constructed from a uint4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(uint4 v) { return new double4(v); }
+
         /// <summary>
         /// Returns a double4 vector constructed from a single half value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(half v) { return new double4(v); }
+
         /// <summary>
         /// Return a double4 vector constructed from a half4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(half4 v) { return new double4(v); }
+
         /// <summary>
         /// Returns a double4 vector constructed from a single float value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(float v) { return new double4(v); }
+
         /// <summary>
         /// Return a double4 vector constructed from a float4 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double4 double4(float4 v) { return new double4(v); }
+
         /// <summary>Returns a uint hash code of a double4 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(double4 v)
         {
             return csum(fold_to_uint(v) * uint4(0x9F1C739Bu, 0x4B1BD187u, 0x9DF50593u, 0xF18EEB85u)) + 0x9E19BFC3u;
         }
+
         /// <summary>
         /// Returns a uint4 vector hash code of a double4 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -3141,6 +3213,7 @@ namespace Raster.Core.Math.Simd
         {
             return (fold_to_uint(v) * uint4(0x8196B06Fu, 0xD24EFA19u, 0x7D8048BBu, 0x713BD06Fu)) + 0x753AD6ADu;
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two double4 vectors into a double value.
         /// </summary>
@@ -3149,6 +3222,7 @@ namespace Raster.Core.Math.Simd
         {
             return select_shuffle_component(a, b, x);
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two double4 vectors into a double2 vector.
         /// </summary>
@@ -3159,6 +3233,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, x),
                 select_shuffle_component(a, b, y));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two double4 vectors into a double3 vector.
         /// </summary>
@@ -3170,6 +3245,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, y),
                 select_shuffle_component(a, b, z));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two double4 vectors into a double4 vector.
         /// </summary>

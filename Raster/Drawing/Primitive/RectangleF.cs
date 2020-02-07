@@ -47,6 +47,7 @@ namespace Raster.Drawing.Primitive
             get { return X; }
             set { X = value; }
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -236,6 +237,7 @@ namespace Raster.Drawing.Primitive
         /// <param name="pt"></param>
         /// <returns></returns>
         public bool Contain(in Point pt) { return Contain(pt.X, pt.Y); }
+
         /// <summary>
         /// 
         /// </summary>

@@ -108,6 +108,31 @@ namespace Raster.Core.Math
             get { return M00 * M11 - M01 * M10; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsZero
+        {
+            get
+            {
+                return (M00 == 0.0f && M01 == 0.0f &&
+                        M10 == 0.0f && M11 == 0.0f);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsIdentity
+        {
+            get
+            {
+                return (M00 == 1.0f && M01 == 0.0f &&
+                        M10 == 0.0f && M11 == 1.0f);
+            }
+        }
         #endregion Public Instance Properties
 
         #region Constructor
@@ -186,26 +211,9 @@ namespace Raster.Core.Math
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(Matrix2x2 other) => this == other;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool IsZero()
+        public bool Equals(Matrix2x2 other)
         {
-            return (M00 == 0.0f && M01 == 0.0f &&
-                    M10 == 0.0f && M11 == 0.0f);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool IsIdentity()
-        {
-            return (M00 == 1.0f && M01 == 0.0f &&
-                    M10 == 0.0f && M11 == 1.0f);
+            return this == other;
         }
 
         /// <summary>
@@ -224,7 +232,7 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
-        public void SetZero()
+        public void SetToZero()
         {
             M00 = 0.0f;
             M01 = 0.0f;
@@ -236,7 +244,7 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
-        public void SetIdentity()
+        public void SetToIdentity()
         {
             M00 = 1.0f;
             M01 = 0.0f;

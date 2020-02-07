@@ -1269,6 +1269,7 @@ namespace Raster.Core.Math.Geometry
 
             return true;
         }
+
         /// <summary>
         /// 
         /// </summary>

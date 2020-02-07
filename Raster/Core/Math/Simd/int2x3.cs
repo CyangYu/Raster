@@ -26,6 +26,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = c1;
             this.c2 = c2;
         }
+
         /// <summary>
         /// Constructs a int2x3 matrix from 6 int values given in row-major order.
         /// </summary>
@@ -37,6 +38,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = new int2(m01, m11);
             this.c2 = new int2(m02, m12);
         }
+
         /// <summary>
         /// Constructs a int2x3 matrix from a single int value by assigning it to every component.
         /// </summary>
@@ -47,6 +49,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = v;
             this.c2 = v;
         }
+
         /// <summary>
         /// Constructs a int2x3 matrix from a single bool value by converting it to int and assigning it to every component.
         /// </summary>
@@ -57,6 +60,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = math.select(new int2(0), new int2(1), v);
             this.c2 = math.select(new int2(0), new int2(1), v);
         }
+
         /// <summary>
         /// Constructs a int2x3 matrix from a bool2x3 matrix by componentwise conversion.
         /// </summary>
@@ -67,6 +71,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = math.select(new int2(0), new int2(1), v.c1);
             this.c2 = math.select(new int2(0), new int2(1), v.c2);
         }
+
         /// <summary>
         /// Constructs a int2x3 matrix from a single uint value by converting it to int and assigning it to every component.
         /// </summary>
@@ -77,6 +82,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = (int2)v;
             this.c2 = (int2)v;
         }
+
         /// <summary>
         /// Constructs a int2x3 matrix from a uint2x3 matrix by componentwise conversion.
         /// </summary>
@@ -87,6 +93,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = (int2)v.c1;
             this.c2 = (int2)v.c2;
         }
+
         /// <summary>
         /// Constructs a int2x3 matrix from a single float value by converting it to int and assigning it to every component.
         /// </summary>
@@ -97,6 +104,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = (int2)v;
             this.c2 = (int2)v;
         }
+
         /// <summary>
         /// Constructs a int2x3 matrix from a float2x3 matrix by componentwise conversion.
         /// </summary>
@@ -107,6 +115,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = (int2)v.c1;
             this.c2 = (int2)v.c2;
         }
+
         /// <summary>
         /// Constructs a int2x3 matrix from a single double value by converting it to int and assigning it to every component.
         /// </summary>
@@ -117,6 +126,7 @@ namespace Raster.Core.Math.Simd
             this.c1 = (int2)v;
             this.c2 = (int2)v;
         }
+
         /// <summary>
         /// Constructs a int2x3 matrix from a double2x3 matrix by componentwise conversion.
         /// </summary>
@@ -133,41 +143,49 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator int2x3(int v) { return new int2x3(v); }
+
         /// <summary>
         /// Explicitly converts a single bool value to a int2x3 matrix by converting it to int and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator int2x3(bool v) { return new int2x3(v); }
+
         /// <summary>
         /// Explicitly converts a bool2x3 matrix to a int2x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator int2x3(bool2x3 v) { return new int2x3(v); }
+
         /// <summary>
         /// Explicitly converts a single uint value to a int2x3 matrix by converting it to int and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator int2x3(uint v) { return new int2x3(v); }
+
         /// <summary>
         /// Explicitly converts a uint2x3 matrix to a int2x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator int2x3(uint2x3 v) { return new int2x3(v); }
+
         /// <summary>
         /// Explicitly converts a single float value to a int2x3 matrix by converting it to int and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator int2x3(float v) { return new int2x3(v); }
+
         /// <summary>
         /// Explicitly converts a float2x3 matrix to a int2x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator int2x3(float2x3 v) { return new int2x3(v); }
+
         /// <summary>
         /// Explicitly converts a single double value to a int2x3 matrix by converting it to int and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator int2x3(double v) { return new int2x3(v); }
+
         /// <summary>
         /// Explicitly converts a double2x3 matrix to a int2x3 matrix by componentwise conversion.
         /// </summary>
@@ -179,11 +197,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator * (int2x3 lhs, int2x3 rhs) { return new int2x3 (lhs.c0 * rhs.c0, lhs.c1 * rhs.c1, lhs.c2 * rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on an int2x3 matrix and an int value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator * (int2x3 lhs, int rhs) { return new int2x3 (lhs.c0 * rhs, lhs.c1 * rhs, lhs.c2 * rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on an int value and an int2x3 matrix.
         /// </summary>
@@ -195,11 +215,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator + (int2x3 lhs, int2x3 rhs) { return new int2x3 (lhs.c0 + rhs.c0, lhs.c1 + rhs.c1, lhs.c2 + rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on an int2x3 matrix and an int value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator + (int2x3 lhs, int rhs) { return new int2x3 (lhs.c0 + rhs, lhs.c1 + rhs, lhs.c2 + rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on an int value and an int2x3 matrix.
         /// </summary>
@@ -211,11 +233,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator - (int2x3 lhs, int2x3 rhs) { return new int2x3 (lhs.c0 - rhs.c0, lhs.c1 - rhs.c1, lhs.c2 - rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on an int2x3 matrix and an int value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator - (int2x3 lhs, int rhs) { return new int2x3 (lhs.c0 - rhs, lhs.c1 - rhs, lhs.c2 - rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on an int value and an int2x3 matrix.
         /// </summary>
@@ -227,11 +251,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator / (int2x3 lhs, int2x3 rhs) { return new int2x3 (lhs.c0 / rhs.c0, lhs.c1 / rhs.c1, lhs.c2 / rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on an int2x3 matrix and an int value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator / (int2x3 lhs, int rhs) { return new int2x3 (lhs.c0 / rhs, lhs.c1 / rhs, lhs.c2 / rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on an int value and an int2x3 matrix.
         /// </summary>
@@ -243,11 +269,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator % (int2x3 lhs, int2x3 rhs) { return new int2x3 (lhs.c0 % rhs.c0, lhs.c1 % rhs.c1, lhs.c2 % rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on an int2x3 matrix and an int value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator % (int2x3 lhs, int rhs) { return new int2x3 (lhs.c0 % rhs, lhs.c1 % rhs, lhs.c2 % rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on an int value and an int2x3 matrix.
         /// </summary>
@@ -271,11 +299,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator < (int2x3 lhs, int2x3 rhs) { return new bool2x3 (lhs.c0 < rhs.c0, lhs.c1 < rhs.c1, lhs.c2 < rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on an int2x3 matrix and an int value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator < (int2x3 lhs, int rhs) { return new bool2x3 (lhs.c0 < rhs, lhs.c1 < rhs, lhs.c2 < rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on an int value and an int2x3 matrix.
         /// </summary>
@@ -287,11 +317,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator <= (int2x3 lhs, int2x3 rhs) { return new bool2x3 (lhs.c0 <= rhs.c0, lhs.c1 <= rhs.c1, lhs.c2 <= rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on an int2x3 matrix and an int value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator <= (int2x3 lhs, int rhs) { return new bool2x3 (lhs.c0 <= rhs, lhs.c1 <= rhs, lhs.c2 <= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on an int value and an int2x3 matrix.
         /// </summary>
@@ -303,11 +335,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator > (int2x3 lhs, int2x3 rhs) { return new bool2x3 (lhs.c0 > rhs.c0, lhs.c1 > rhs.c1, lhs.c2 > rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on an int2x3 matrix and an int value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator > (int2x3 lhs, int rhs) { return new bool2x3 (lhs.c0 > rhs, lhs.c1 > rhs, lhs.c2 > rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on an int value and an int2x3 matrix.
         /// </summary>
@@ -319,11 +353,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator >= (int2x3 lhs, int2x3 rhs) { return new bool2x3 (lhs.c0 >= rhs.c0, lhs.c1 >= rhs.c1, lhs.c2 >= rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on an int2x3 matrix and an int value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator >= (int2x3 lhs, int rhs) { return new bool2x3 (lhs.c0 >= rhs, lhs.c1 >= rhs, lhs.c2 >= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on an int value and an int2x3 matrix.
         /// </summary>
@@ -346,20 +382,24 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator << (int2x3 x, int n) { return new int2x3 (x.c0 << n, x.c1 << n, x.c2 << n); }
+
         /// <summary>Returns the result of a componentwise right shift operation on an int2x3 matrix by a number of bits specified by a single int.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator >> (int2x3 x, int n) { return new int2x3 (x.c0 >> n, x.c1 >> n, x.c2 >> n); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on two int2x3 matrices.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator == (int2x3 lhs, int2x3 rhs) { return new bool2x3 (lhs.c0 == rhs.c0, lhs.c1 == rhs.c1, lhs.c2 == rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on an int2x3 matrix and an int value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator == (int2x3 lhs, int rhs) { return new bool2x3 (lhs.c0 == rhs, lhs.c1 == rhs, lhs.c2 == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on an int value and an int2x3 matrix.
         /// </summary>
@@ -371,11 +411,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator != (int2x3 lhs, int2x3 rhs) { return new bool2x3 (lhs.c0 != rhs.c0, lhs.c1 != rhs.c1, lhs.c2 != rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on an int2x3 matrix and an int value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool2x3 operator != (int2x3 lhs, int rhs) { return new bool2x3 (lhs.c0 != rhs, lhs.c1 != rhs, lhs.c2 != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on an int value and an int2x3 matrix.
         /// </summary>
@@ -393,11 +435,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator & (int2x3 lhs, int2x3 rhs) { return new int2x3 (lhs.c0 & rhs.c0, lhs.c1 & rhs.c1, lhs.c2 & rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on an int2x3 matrix and an int value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator & (int2x3 lhs, int rhs) { return new int2x3 (lhs.c0 & rhs, lhs.c1 & rhs, lhs.c2 & rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise and operation on an int value and an int2x3 matrix.
         /// </summary>
@@ -409,11 +453,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator | (int2x3 lhs, int2x3 rhs) { return new int2x3 (lhs.c0 | rhs.c0, lhs.c1 | rhs.c1, lhs.c2 | rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on an int2x3 matrix and an int value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator | (int2x3 lhs, int rhs) { return new int2x3 (lhs.c0 | rhs, lhs.c1 | rhs, lhs.c2 | rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise or operation on an int value and an int2x3 matrix.
         /// </summary>
@@ -425,11 +471,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator ^ (int2x3 lhs, int2x3 rhs) { return new int2x3 (lhs.c0 ^ rhs.c0, lhs.c1 ^ rhs.c1, lhs.c2 ^ rhs.c2); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on an int2x3 matrix and an int value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 operator ^ (int2x3 lhs, int rhs) { return new int2x3 (lhs.c0 ^ rhs, lhs.c1 ^ rhs, lhs.c2 ^ rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise bitwise exclusive or operation on an int value and an int2x3 matrix.
         /// </summary>
@@ -457,6 +505,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(int2x3 rhs) { return c0.Equals(rhs.c0) && c1.Equals(rhs.c1) && c2.Equals(rhs.c2); }
+
         /// <summary>
         /// Returns true if the int2x3 is equal to a given int2x3, false otherwise.
         /// </summary>
@@ -475,6 +524,7 @@ namespace Raster.Core.Math.Simd
         {
             return string.Format("int2x3({0}, {1}, {2},  {3}, {4}, {5})", c0.x, c1.x, c2.x, c0.y, c1.y, c2.y);
         }
+
         /// <summary>
         /// Returns a string representation of the int2x3 using a specified format and culture-specific format information.
         /// </summary>
@@ -491,6 +541,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 int2x3(int2 c0, int2 c1, int2 c2) { return new int2x3(c0, c1, c2); }
+
         /// <summary>
         /// Returns a int2x3 matrix constructed from from 6 int values given in row-major order.
         /// </summary>
@@ -501,51 +552,61 @@ namespace Raster.Core.Math.Simd
             return new int2x3(m00, m01, m02,
                               m10, m11, m12);
         }
+
         /// <summary>
         /// Returns a int2x3 matrix constructed from a single int value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 int2x3(int v) { return new int2x3(v); }
+
         /// <summary>
         /// Returns a int2x3 matrix constructed from a single bool value by converting it to int and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 int2x3(bool v) { return new int2x3(v); }
+
         /// <summary>
         /// Return a int2x3 matrix constructed from a bool2x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 int2x3(bool2x3 v) { return new int2x3(v); }
+
         /// <summary>
         /// Returns a int2x3 matrix constructed from a single uint value by converting it to int and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 int2x3(uint v) { return new int2x3(v); }
+
         /// <summary>
         /// Return a int2x3 matrix constructed from a uint2x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 int2x3(uint2x3 v) { return new int2x3(v); }
+
         /// <summary>
         /// Returns a int2x3 matrix constructed from a single float value by converting it to int and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 int2x3(float v) { return new int2x3(v); }
+
         /// <summary>
         /// Return a int2x3 matrix constructed from a float2x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 int2x3(float2x3 v) { return new int2x3(v); }
+
         /// <summary>
         /// Returns a int2x3 matrix constructed from a single double value by converting it to int and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 int2x3(double v) { return new int2x3(v); }
+
         /// <summary>
         /// Return a int2x3 matrix constructed from a double2x3 matrix by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int2x3 int2x3(double2x3 v) { return new int2x3(v); }
+
         /// <summary>
         /// Return the int3x2 transpose of a int2x3 matrix.
         /// </summary>
@@ -557,6 +618,7 @@ namespace Raster.Core.Math.Simd
                 v.c1.x, v.c1.y,
                 v.c2.x, v.c2.y);
         }
+
         /// <summary>Returns a uint hash code of a int2x3 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(int2x3 v)
@@ -565,6 +627,7 @@ namespace Raster.Core.Math.Simd
                         asuint(v.c1) * uint2(0xF83BD927u, 0x6A243BCBu) + 
                         asuint(v.c2) * uint2(0x509B84C9u, 0x91D13847u)) + 0x52F7230Fu;
         }
+
         /// <summary>
         /// Returns a uint2 vector hash code of a int2x3 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash

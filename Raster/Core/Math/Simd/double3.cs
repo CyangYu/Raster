@@ -28,6 +28,7 @@ namespace Raster.Core.Math.Simd
             this.y = y;
             this.z = z;
         }
+
         /// <summary>
         /// Constructs a double3 vector from a double value and a double2 vector.
         /// </summary>
@@ -38,6 +39,7 @@ namespace Raster.Core.Math.Simd
             this.y = yz.x;
             this.z = yz.y;
         }
+
         /// <summary>
         /// Constructs a double3 vector from a double2 vector and a double value.
         /// </summary>
@@ -48,6 +50,7 @@ namespace Raster.Core.Math.Simd
             this.y = xy.y;
             this.z = z;
         }
+
         /// <summary>
         /// Constructs a double3 vector from a double3 vector.
         /// </summary>
@@ -58,6 +61,7 @@ namespace Raster.Core.Math.Simd
             this.y = xyz.y;
             this.z = xyz.z;
         }
+
         /// <summary>
         /// Constructs a double3 vector from a single double value by assigning it to every component.
         /// </summary>
@@ -68,6 +72,7 @@ namespace Raster.Core.Math.Simd
             this.y = v;
             this.z = v;
         }
+
         /// <summary>
         /// Constructs a double3 vector from a single bool value by converting it to double and assigning it to every component.
         /// </summary>
@@ -78,6 +83,7 @@ namespace Raster.Core.Math.Simd
             this.y = v ? 1.0 : 0.0;
             this.z = v ? 1.0 : 0.0;
         }
+
         /// <summary>
         /// Constructs a double3 vector from a bool3 vector by componentwise conversion.
         /// </summary>
@@ -88,6 +94,7 @@ namespace Raster.Core.Math.Simd
             this.y = v.y ? 1.0 : 0.0;
             this.z = v.z ? 1.0 : 0.0;
         }
+
         /// <summary>
         /// Constructs a double3 vector from a single int value by converting it to double and assigning it to every component.
         /// </summary>
@@ -98,6 +105,7 @@ namespace Raster.Core.Math.Simd
             this.y = v;
             this.z = v;
         }
+
         /// <summary>
         /// Constructs a double3 vector from a int3 vector by componentwise conversion.
         /// </summary>
@@ -108,6 +116,7 @@ namespace Raster.Core.Math.Simd
             this.y = v.y;
             this.z = v.z;
         }
+
         /// <summary>
         /// Constructs a double3 vector from a single uint value by converting it to double and assigning it to every component.
         /// </summary>
@@ -118,6 +127,7 @@ namespace Raster.Core.Math.Simd
             this.y = v;
             this.z = v;
         }
+
         /// <summary>
         /// Constructs a double3 vector from a uint3 vector by componentwise conversion.
         /// </summary>
@@ -128,6 +138,7 @@ namespace Raster.Core.Math.Simd
             this.y = v.y;
             this.z = v.z;
         }
+
         /// <summary>
         /// Constructs a double3 vector from a single half value by converting it to double and assigning it to every component.
         /// </summary>
@@ -138,6 +149,7 @@ namespace Raster.Core.Math.Simd
             this.y = v;
             this.z = v;
         }
+
         /// <summary>
         /// Constructs a double3 vector from a half3 vector by componentwise conversion.
         /// </summary>
@@ -148,6 +160,7 @@ namespace Raster.Core.Math.Simd
             this.y = v.y;
             this.z = v.z;
         }
+
         /// <summary>
         /// Constructs a double3 vector from a single float value by converting it to double and assigning it to every component.
         /// </summary>
@@ -158,6 +171,7 @@ namespace Raster.Core.Math.Simd
             this.y = v;
             this.z = v;
         }
+
         /// <summary>
         /// Constructs a double3 vector from a float3 vector by componentwise conversion.
         /// </summary>
@@ -174,51 +188,61 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(double v) { return new double3(v); }
+
         /// <summary>
         /// Explicitly converts a single bool value to a double3 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator double3(bool v) { return new double3(v); }
+
         /// <summary>
         /// Explicitly converts a bool3 vector to a double3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator double3(bool3 v) { return new double3(v); }
+
         /// <summary>
         /// Implicitly converts a single int value to a double3 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(int v) { return new double3(v); }
+
         /// <summary>
         /// Implicitly converts a int3 vector to a double3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(int3 v) { return new double3(v); }
+
         /// <summary>
         /// Implicitly converts a single uint value to a double3 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(uint v) { return new double3(v); }
+
         /// <summary>
         /// Implicitly converts a uint3 vector to a double3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(uint3 v) { return new double3(v); }
+
         /// <summary>
         /// Implicitly converts a single half value to a double3 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(half v) { return new double3(v); }
+
         /// <summary>
         /// Implicitly converts a half3 vector to a double3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(half3 v) { return new double3(v); }
+
         /// <summary>
         /// Implicitly converts a single float value to a double3 vector by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator double3(float v) { return new double3(v); }
+
         /// <summary>
         /// Implicitly converts a float3 vector to a double3 vector by componentwise conversion.
         /// </summary>
@@ -230,11 +254,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator * (double3 lhs, double3 rhs) { return new double3 (lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator * (double3 lhs, double rhs) { return new double3 (lhs.x * rhs, lhs.y * rhs, lhs.z * rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise multiplication operation on a double value and a double3 vector.
         /// </summary>
@@ -246,11 +272,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator + (double3 lhs, double3 rhs) { return new double3 (lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator + (double3 lhs, double rhs) { return new double3 (lhs.x + rhs, lhs.y + rhs, lhs.z + rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise addition operation on a double value and a double3 vector.
         /// </summary>
@@ -262,11 +290,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator - (double3 lhs, double3 rhs) { return new double3 (lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator - (double3 lhs, double rhs) { return new double3 (lhs.x - rhs, lhs.y - rhs, lhs.z - rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise subtraction operation on a double value and a double3 vector.
         /// </summary>
@@ -278,11 +308,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator / (double3 lhs, double3 rhs) { return new double3 (lhs.x / rhs.x, lhs.y / rhs.y, lhs.z / rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator / (double3 lhs, double rhs) { return new double3 (lhs.x / rhs, lhs.y / rhs, lhs.z / rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise division operation on a double value and a double3 vector.
         /// </summary>
@@ -294,11 +326,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator % (double3 lhs, double3 rhs) { return new double3 (lhs.x % rhs.x, lhs.y % rhs.y, lhs.z % rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 operator % (double3 lhs, double rhs) { return new double3 (lhs.x % rhs, lhs.y % rhs, lhs.z % rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise modulus operation on a double value and a double3 vector.
         /// </summary>
@@ -322,11 +356,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator < (double3 lhs, double3 rhs) { return new bool3 (lhs.x < rhs.x, lhs.y < rhs.y, lhs.z < rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator < (double3 lhs, double rhs) { return new bool3 (lhs.x < rhs, lhs.y < rhs, lhs.z < rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less than operation on a double value and a double3 vector.
         /// </summary>
@@ -338,11 +374,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator <= (double3 lhs, double3 rhs) { return new bool3 (lhs.x <= rhs.x, lhs.y <= rhs.y, lhs.z <= rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator <= (double3 lhs, double rhs) { return new bool3 (lhs.x <= rhs, lhs.y <= rhs, lhs.z <= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise less or equal operation on a double value and a double3 vector.
         /// </summary>
@@ -354,11 +392,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator > (double3 lhs, double3 rhs) { return new bool3 (lhs.x > rhs.x, lhs.y > rhs.y, lhs.z > rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator > (double3 lhs, double rhs) { return new bool3 (lhs.x > rhs, lhs.y > rhs, lhs.z > rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater than operation on a double value and a double3 vector.
         /// </summary>
@@ -370,11 +410,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator >= (double3 lhs, double3 rhs) { return new bool3 (lhs.x >= rhs.x, lhs.y >= rhs.y, lhs.z >= rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator >= (double3 lhs, double rhs) { return new bool3 (lhs.x >= rhs, lhs.y >= rhs, lhs.z >= rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise greater or equal operation on a double value and a double3 vector.
         /// </summary>
@@ -398,11 +440,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (double3 lhs, double3 rhs) { return new bool3 (lhs.x == rhs.x, lhs.y == rhs.y, lhs.z == rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator == (double3 lhs, double rhs) { return new bool3 (lhs.x == rhs, lhs.y == rhs, lhs.z == rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise equality operation on a double value and a double3 vector.
         /// </summary>
@@ -414,11 +458,13 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (double3 lhs, double3 rhs) { return new bool3 (lhs.x != rhs.x, lhs.y != rhs.y, lhs.z != rhs.z); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a double3 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool3 operator != (double3 lhs, double rhs) { return new bool3 (lhs.x != rhs, lhs.y != rhs, lhs.z != rhs); }
+
         /// <summary>
         /// Returns the result of a componentwise not equal operation on a double value and a double3 vector.
         /// </summary>
@@ -1298,6 +1344,7 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(double3 rhs) { return x == rhs.x && y == rhs.y && z == rhs.z; }
+
         /// <summary>
         /// Returns true if the double3 is equal to a given double3, false otherwise.
         /// </summary>
@@ -1316,6 +1363,7 @@ namespace Raster.Core.Math.Simd
         {
             return string.Format("double3({0}, {1}, {2})", x, y, z);
         }
+
         /// <summary>
         /// Returns a string representation of the double3 using a specified format and culture-specific format information.
         /// </summary>
@@ -1344,82 +1392,98 @@ namespace Raster.Core.Math.Simd
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(double x, double y, double z) { return new double3(x, y, z); }
+
         /// <summary>
         /// Returns a double3 vector constructed from a double value and a double2 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(double x, double2 yz) { return new double3(x, yz); }
+
         /// <summary>
         /// Returns a double3 vector constructed from a double2 vector and a double value.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(double2 xy, double z) { return new double3(xy, z); }
+
         /// <summary>
         /// Returns a double3 vector constructed from a double3 vector.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(double3 xyz) { return new double3(xyz); }
+
         /// <summary>
         /// Returns a double3 vector constructed from a single double value by assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(double v) { return new double3(v); }
+
         /// <summary>
         /// Returns a double3 vector constructed from a single bool value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(bool v) { return new double3(v); }
+
         /// <summary>
         /// Return a double3 vector constructed from a bool3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(bool3 v) { return new double3(v); }
+
         /// <summary>
         /// Returns a double3 vector constructed from a single int value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(int v) { return new double3(v); }
+
         /// <summary>
         /// Return a double3 vector constructed from a int3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(int3 v) { return new double3(v); }
+
         /// <summary>
         /// Returns a double3 vector constructed from a single uint value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(uint v) { return new double3(v); }
+
         /// <summary>
         /// Return a double3 vector constructed from a uint3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(uint3 v) { return new double3(v); }
+
         /// <summary>
         /// Returns a double3 vector constructed from a single half value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(half v) { return new double3(v); }
+
         /// <summary>
         /// Return a double3 vector constructed from a half3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(half3 v) { return new double3(v); }
+
         /// <summary>
         /// Returns a double3 vector constructed from a single float value by converting it to double and assigning it to every component.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(float v) { return new double3(v); }
+
         /// <summary>
         /// Return a double3 vector constructed from a float3 vector by componentwise conversion.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double3 double3(float3 v) { return new double3(v); }
+
         /// <summary>Returns a uint hash code of a double3 vector.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint hash(double3 v)
         {
             return csum(fold_to_uint(v) * uint3(0xAF0F3103u, 0xE4A056C7u, 0x841D8225u)) + 0xC9393C7Du;
         }
+
         /// <summary>
         /// Returns a uint3 vector hash code of a double3 vector.
         /// When multiple elements are to be hashes together, it can more efficient to calculate and combine wide hash
@@ -1430,6 +1494,7 @@ namespace Raster.Core.Math.Simd
         {
             return (fold_to_uint(v) * uint3(0xD42EAFA3u, 0xD9AFD06Du, 0x97A65421u)) + 0x7809205Fu;
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two double3 vectors into a double value.
         /// </summary>
@@ -1438,6 +1503,7 @@ namespace Raster.Core.Math.Simd
         {
             return select_shuffle_component(a, b, x);
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two double3 vectors into a double2 vector.
         /// </summary>
@@ -1448,6 +1514,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, x),
                 select_shuffle_component(a, b, y));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two double3 vectors into a double3 vector.
         /// </summary>
@@ -1459,6 +1526,7 @@ namespace Raster.Core.Math.Simd
                 select_shuffle_component(a, b, y),
                 select_shuffle_component(a, b, z));
         }
+
         /// <summary>
         /// Returns the result of specified shuffling of the components from two double3 vectors into a double4 vector.
         /// </summary>
