@@ -165,32 +165,6 @@ namespace Raster.Core.Math
             M13 = value;
         }
 
-        public Matrix2x4(in Matrix2x2 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = 0.0f;
-            M03 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = 0.0f;
-            M13 = 0.0f;
-        }
-
-        public Matrix2x4(in Matrix2x3 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-            M03 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-            M13 = 0.0f;
-        }
-
         public Matrix2x4(in Matrix2x4 other)
         {
             M00 = other.M00;

@@ -206,51 +206,6 @@ namespace Raster.Core.Math
             M22 = value;
         }
 
-        public Matrix3x3(Matrix2x2 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = 0.0f;
-
-            M20 = 0.0f;
-            M21 = 0.0f;
-            M22 = 0.0f;
-        }
-
-        public Matrix3x3(Matrix2x3 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-
-            M20 = 0.0f;
-            M21 = 0.0f;
-            M22 = 0.0f;
-        }
-
-        public Matrix3x3(Matrix3x2 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = 0.0f;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = 0.0f;
-        }
-
         public Matrix3x3(Matrix3x3 other)
         {
             M00 = other.M00;
@@ -461,7 +416,7 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="scale"></param>        
-        public void Scale(in Vector2 scale) => Scale(scale.X, scale.Y);
+        public void Scale(in Vector2 scale) { Scale(scale.X, scale.Y); }
 
         /// <summary>
         /// 
@@ -479,7 +434,7 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="translate"></param>       
-        public void Translate(in Vector2 translate) => Translate(translate.X, translate.Y);
+        public void Translate(in Vector2 translate) { Translate(translate.X, translate.Y); }
 
         #endregion Public Instance Methods
 

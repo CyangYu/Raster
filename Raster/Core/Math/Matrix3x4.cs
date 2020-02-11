@@ -202,96 +202,6 @@ namespace Raster.Core.Math
             M23 = value;
         }
 
-        public Matrix3x4(in Matrix2x2 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = 0.0f;
-            M03 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = 0.0f;
-            M13 = 0.0f;
-
-            M20 = 0.0f;
-            M21 = 0.0f;
-            M22 = 0.0f;
-            M23 = 0.0f;
-        }
-
-        public Matrix3x4(in Matrix2x3 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-            M03 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-            M13 = 0.0f;
-
-            M20 = 0.0f;
-            M21 = 0.0f;
-            M22 = 0.0f;
-            M23 = 0.0f;
-        }
-
-        public Matrix3x4(in Matrix2x4 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-            M03 = other.M03;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-            M13 = other.M13;
-
-            M20 = 0.0f;
-            M21 = 0.0f;
-            M22 = 0.0f;
-            M23 = 0.0f;
-        }
-
-        public Matrix3x4(in Matrix3x2 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = 0.0f;
-            M03 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = 0.0f;
-            M13 = 0.0f;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = 0.0f;
-            M23 = 0.0f;
-        }
-
-        public Matrix3x4(in Matrix3x3 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-            M03 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-            M13 = 0.0f;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = other.M22;
-            M23 = 0.0f;
-        }
-
         public Matrix3x4(in Matrix3x4 other)
         {
             M00 = other.M00;
@@ -417,7 +327,7 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
-        public void SetZero()
+        public void SetToZero()
         {
             M00 = 0.0f;
             M01 = 0.0f;

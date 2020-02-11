@@ -45,6 +45,9 @@ namespace Raster.Core.Math.Geometry
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(BoundingBox2d other) => true;
+        public bool Equals(BoundingBox2d other)
+        {
+            return true;
+        }
     }
 }

@@ -159,36 +159,6 @@ namespace Raster.Core.Math
             M31 = value;
         }
 
-        public Matrix4x2(Matrix2x2 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-
-            M10 = other.M10;
-            M11 = other.M11;
-
-            M20 = 0.0f;
-            M21 = 0.0f;
-
-            M30 = 0.0f;
-            M31 = 0.0f;
-        }
-
-        public Matrix4x2(Matrix3x2 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-
-            M10 = other.M10;
-            M11 = other.M11;
-
-            M20 = other.M20;
-            M21 = other.M21;
-
-            M30 = 0.0f;
-            M31 = 0.0f;
-        }
-
         public Matrix4x2(in Matrix4x2 other)
         {
             M00 = other.M00;

@@ -128,17 +128,6 @@ namespace Raster.Core.Math
             M12 = value;
         }
 
-        public Matrix2x3(Matrix2x2 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = 0.0f;
-        }
-
         public Matrix2x3(Matrix2x3 other)
         {
             M00 = other.M00;
@@ -209,8 +198,8 @@ namespace Raster.Core.Math
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        
-        public bool Equals(Matrix2x3 other) => this == other;
+
+        public bool Equals(Matrix2x3 other) { return this == other; }
 
         /// <summary>
         /// 

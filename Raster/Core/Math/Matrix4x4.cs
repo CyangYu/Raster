@@ -233,6 +233,90 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
+        public Vector3 Up
+        {
+            get { return new Vector3(M10, M11, M12); }
+            set
+            {
+                M10 = value.X;
+                M11 = value.Y;
+                M12 = value.Z;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Down
+        {
+            get { return new Vector3(-M10, -M11, -M12); }
+            set
+            {
+                M10 = -value.X;
+                M11 = -value.Y;
+                M12 = -value.Z;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Left
+        {
+            get { return new Vector3(-M00, -M01, -M02); }
+            set
+            {
+                M00 = -value.X;
+                M01 = -value.Y;
+                M02 = -value.Z;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Right
+        {
+            get { return new Vector3(M00, M01, M02); }
+            set
+            {
+                M00 = value.X;
+                M01 = value.Y;
+                M02 = value.Z;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Forward
+        {
+            get { return new Vector3(-M20, -M21, -M22); }
+            set
+            {
+                M20 = -value.X;
+                M21 = -value.Y;
+                M22 = -value.Z;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Backward
+        {
+            get { return new Vector3(M20, M21, M22); }
+            set
+            {
+                M20 = value.X;
+                M21 = value.Y;
+                M22 = value.Z;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float Determinant
         {
             get
@@ -365,12 +449,32 @@ namespace Raster.Core.Math
         {
             get
             {
+                if (row < 0 || row > 3)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
+                }
 
+                if (column < 0 || row > 3)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
+                }
+
+                return this[row * 4 + column];
             }
 
             set
             {
+                if (row < 0 || row > 3)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
+                }
 
+                if (column < 0 || row > 3)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
+                }
+
+                this[row * 4 + column] = value;
             }
         }
 
@@ -383,241 +487,10 @@ namespace Raster.Core.Math
         /// <param name="value"></param>
         public Matrix4x4(float value)
         {
-            M00 = value;
-            M01 = value;
-            M02 = value;
-            M03 = value;
-
-            M10 = value;
-            M11 = value;
-            M12 = value;
-            M13 = value;
-
-            M20 = value;
-            M21 = value;
-            M22 = value;
-            M23 = value;
-
-            M30 = value;
-            M31 = value;
-            M32 = value;
-            M33 = value;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="other"></param>
-        public Matrix4x4(in Matrix2x2 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = 0.0f;
-            M03 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = 0.0f;
-            M13 = 0.0f;
-
-            M20 = 0.0f;
-            M21 = 0.0f;
-            M22 = 0.0f;
-            M23 = 0.0f;
-
-            M30 = 0.0f;
-            M31 = 0.0f;
-            M32 = 0.0f;
-            M33 = 0.0f;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="other"></param>
-        public Matrix4x4(in Matrix2x3 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-            M03 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-            M13 = 0.0f;
-
-            M20 = 0.0f;
-            M21 = 0.0f;
-            M22 = 0.0f;
-            M23 = 0.0f;
-
-            M30 = 0.0f;
-            M31 = 0.0f;
-            M32 = 0.0f;
-            M33 = 0.0f;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="other"></param>
-        public Matrix4x4(in Matrix2x4 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-            M03 = other.M03;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-            M13 = other.M13;
-
-            M20 = 0.0f;
-            M21 = 0.0f;
-            M22 = 0.0f;
-            M23 = 0.0f;
-
-            M30 = 0.0f;
-            M31 = 0.0f;
-            M32 = 0.0f;
-            M33 = 0.0f;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="other"></param>
-        public Matrix4x4(in Matrix3x2 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = 0.0f;
-            M03 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = 0.0f;
-            M13 = 0.0f;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = 0.0f;
-            M23 = 0.0f;
-
-            M30 = 0.0f;
-            M31 = 0.0f;
-            M32 = 0.0f;
-            M33 = 0.0f;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="other"></param>
-        public Matrix4x4(in Matrix3x3 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-            M03 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-            M13 = 0.0f;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = other.M22;
-            M23 = 0.0f;
-
-            M30 = 0.0f;
-            M31 = 0.0f;
-            M32 = 0.0f;
-            M33 = 0.0f;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="other"></param>
-        public Matrix4x4(in Matrix3x4 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-            M03 = other.M03;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-            M13 = other.M13;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = other.M22;
-            M23 = other.M23;
-
-            M30 = 0.0f;
-            M31 = 0.0f;
-            M32 = 0.0f;
-            M33 = 0.0f;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="other"></param>
-        public Matrix4x4(in Matrix4x2 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = 0.0f;
-            M03 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = 0.0f;
-            M13 = 0.0f;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = 0.0f;
-            M23 = 0.0f;
-
-            M30 = other.M30;
-            M31 = other.M31;
-            M32 = 0.0f;
-            M33 = 0.0f;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="other"></param>
-        public Matrix4x4(in Matrix4x3 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-            M03 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-            M13 = 0.0f;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = other.M22;
-            M23 = 0.0f;
-
-            M30 = other.M30;
-            M31 = other.M31;
-            M32 = other.M32;
-            M33 = 0.0f;
+            M00 = value; M01 = value; M02 = value; M03 = value;
+            M10 = value; M11 = value; M12 = value; M13 = value;
+            M20 = value; M21 = value; M22 = value; M23 = value;
+            M30 = value; M31 = value; M32 = value; M33 = value;
         }
 
         /// <summary>
@@ -626,25 +499,10 @@ namespace Raster.Core.Math
         /// <param name="other"></param>
         public Matrix4x4(in Matrix4x4 other)
         {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-            M03 = other.M03;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-            M13 = other.M13;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = other.M22;
-            M23 = other.M23;
-
-            M30 = other.M30;
-            M31 = other.M31;
-            M32 = other.M32;
-            M33 = other.M33;
+            M00 = other.M00; M01 = other.M01; M02 = other.M02; M03 = other.M03;
+            M10 = other.M10; M11 = other.M11; M12 = other.M12; M13 = other.M13;
+            M20 = other.M20; M21 = other.M21; M22 = other.M22; M23 = other.M23;
+            M30 = other.M30; M31 = other.M31; M32 = other.M32; M33 = other.M33;
         }
 
         /// <summary>
@@ -671,25 +529,10 @@ namespace Raster.Core.Math
                          float m20, float m21, float m22, float m23,
                          float m30, float m31, float m32, float m33)
         {
-            M00 = m00;
-            M01 = m01;
-            M02 = m02;
-            M03 = m03;
-
-            M10 = m10;
-            M11 = m11;
-            M12 = m12;
-            M13 = m12;
-
-            M20 = m20;
-            M21 = m21;
-            M22 = m22;
-            M23 = m23;
-
-            M30 = m30;
-            M31 = m31;
-            M32 = m32;
-            M33 = m33;
+            M00 = m00; M01 = m01; M02 = m02; M03 = m03;
+            M10 = m10; M11 = m11; M12 = m12; M13 = m12;
+            M20 = m20; M21 = m21; M22 = m22; M23 = m23;
+            M30 = m30; M31 = m31; M32 = m32; M33 = m33;
         }
 
         /// <summary>
@@ -714,25 +557,10 @@ namespace Raster.Core.Math
             float yz2 = rotation.Y * z2;
             float zz2 = rotation.Z * z2;
 
-            M00 = (1.0f - yy2 - zz2) * scale.X;
-            M10 = (xy2 - wz2) * scale.Y;
-            M20 = (xz2 + wy2) * scale.Z;
-            M30 = translation.X;
-
-            M01 = (xy2 + wz2) * scale.X;
-            M11 = (1.0f - xx2 - zz2) * scale.Y;
-            M21 = (yz2 - wx2) * scale.Z;
-            M31 = translation.Y;
-
-            M02 = (xz2 - wy2) * scale.X;
-            M12 = (yz2 + wx2) * scale.Y;
-            M22 = (1.0f - xx2 - yy2) * scale.Z;
-            M32 = translation.Z;
-
-            M03 = 0.0f;
-            M13 = 0.0f;
-            M23 = 0.0f;
-            M33 = 1.0f;
+            M00 = (1.0f - yy2 - zz2) * scale.X; M01 = (xy2 + wz2) * scale.X;        M02 = (xz2 - wy2) * scale.X;        M03 = 0.0f;
+            M10 = (xy2 - wz2) * scale.Y;        M11 = (1.0f - xx2 - zz2) * scale.Y; M12 = (yz2 + wx2) * scale.Y;        M13 = 0.0f;
+            M20 = (xz2 + wy2) * scale.Z;        M21 = (yz2 - wx2) * scale.Z;        M22 = (1.0f - xx2 - yy2) * scale.Z; M23 = 0.0f;
+            M30 = translation.X;                M31 = translation.Y;                M32 = translation.Z;                M33 = 1.0f;
         }
 
         #endregion Constructor
@@ -797,25 +625,10 @@ namespace Raster.Core.Math
         /// <param name="other"></param>
         public void Add(float value)
         {
-            M00 += value;
-            M01 += value;
-            M02 += value;
-            M03 += value;
-
-            M10 += value;
-            M11 += value;
-            M12 += value;
-            M13 += value;
-
-            M20 += value;
-            M21 += value;
-            M22 += value;
-            M23 += value;
-
-            M30 += value;
-            M31 += value;
-            M32 += value;
-            M33 += value;
+            M00 += value; M01 += value; M02 += value; M03 += value;
+            M10 += value; M11 += value; M12 += value; M13 += value;
+            M20 += value; M21 += value; M22 += value; M23 += value;
+            M30 += value; M31 += value; M32 += value; M33 += value;
         }
 
         /// <summary>
@@ -824,25 +637,10 @@ namespace Raster.Core.Math
         /// <param name="other"></param>
         public void Add(in Matrix4x4 other)
         {
-            M00 += other.M00;
-            M01 += other.M01;
-            M02 += other.M02;
-            M03 += other.M03;
-
-            M10 += other.M10;
-            M11 += other.M11;
-            M12 += other.M12;
-            M13 += other.M13;
-
-            M20 += other.M20;
-            M21 += other.M21;
-            M22 += other.M22;
-            M23 += other.M23;
-
-            M30 += other.M30;
-            M31 += other.M31;
-            M32 += other.M32;
-            M33 += other.M33;
+            M00 += other.M00; M01 += other.M01; M02 += other.M02; M03 += other.M03;
+            M10 += other.M10; M11 += other.M11; M12 += other.M12; M13 += other.M13;
+            M20 += other.M20; M21 += other.M21; M22 += other.M22; M23 += other.M23;
+            M30 += other.M30; M31 += other.M31; M32 += other.M32; M33 += other.M33;
         }
 
         /// <summary>
@@ -851,25 +649,10 @@ namespace Raster.Core.Math
         /// <param name="value"></param>
         public void Subtract(float value)
         {
-            M00 -= value;
-            M01 -= value;
-            M02 -= value;
-            M03 -= value;
-
-            M10 -= value;
-            M11 -= value;
-            M12 -= value;
-            M13 -= value;
-
-            M20 -= value;
-            M21 -= value;
-            M22 -= value;
-            M23 -= value;
-
-            M30 -= value;
-            M31 -= value;
-            M32 -= value;
-            M33 -= value;
+            M00 -= value; M01 -= value; M02 -= value; M03 -= value;
+            M10 -= value; M11 -= value; M12 -= value; M13 -= value;
+            M20 -= value; M21 -= value; M22 -= value; M23 -= value;
+            M30 -= value; M31 -= value; M32 -= value; M33 -= value;
         }
 
         /// <summary>
@@ -878,25 +661,10 @@ namespace Raster.Core.Math
         /// <param name="other"></param>
         public void Subtract(in Matrix4x4 other)
         {
-            M00 -= other.M00;
-            M01 -= other.M01;
-            M02 -= other.M02;
-            M03 -= other.M03;
-
-            M10 -= other.M10;
-            M11 -= other.M11;
-            M12 -= other.M12;
-            M13 -= other.M13;
-
-            M20 -= other.M20;
-            M21 -= other.M21;
-            M22 -= other.M22;
-            M23 -= other.M23;
-
-            M30 -= other.M30;
-            M31 -= other.M31;
-            M32 -= other.M32;
-            M33 -= other.M33;
+            M00 -= other.M00; M01 -= other.M01; M02 -= other.M02; M03 -= other.M03;
+            M10 -= other.M10; M11 -= other.M11; M12 -= other.M12; M13 -= other.M13;
+            M20 -= other.M20; M21 -= other.M21; M22 -= other.M22; M23 -= other.M23;
+            M30 -= other.M30; M31 -= other.M31; M32 -= other.M32; M33 -= other.M33;
         }
 
         /// <summary>
@@ -905,25 +673,10 @@ namespace Raster.Core.Math
         /// <param name="value"></param>
         public void Multiply(float value)
         {
-            M00 *= value;
-            M01 *= value;
-            M02 *= value;
-            M03 *= value;
-
-            M10 *= value;
-            M11 *= value;
-            M12 *= value;
-            M13 *= value;
-
-            M20 *= value;
-            M21 *= value;
-            M22 *= value;
-            M23 *= value;
-
-            M30 *= value;
-            M31 *= value;
-            M32 *= value;
-            M33 *= value;
+            M00 *= value; M01 *= value; M02 *= value; M03 *= value;
+            M10 *= value; M11 *= value; M12 *= value; M13 *= value;
+            M20 *= value; M21 *= value; M22 *= value; M23 *= value;
+            M30 *= value; M31 *= value; M32 *= value; M33 *= value;
         }
 
         /// <summary>
@@ -1021,21 +774,10 @@ namespace Raster.Core.Math
         /// <param name="value"></param>
         public void Fill(float value)
         {
-            M00 = value;
-            M01 = value;
-            M02 = value;
-
-            M10 = value;
-            M11 = value;
-            M12 = value;
-
-            M20 = value;
-            M21 = value;
-            M22 = value;
-
-            M30 = value;
-            M31 = value;
-            M32 = value;
+            M00 = value; M01 = value; M02 = value; M03 = value;
+            M10 = value; M11 = value; M12 = value; M13 = value;
+            M20 = value; M21 = value; M22 = value; M23 = value;
+            M30 = value; M31 = value; M32 = value; M33 = value;
         }
 
         /// <summary>
@@ -1043,25 +785,10 @@ namespace Raster.Core.Math
         /// </summary>
         public void SetToIdentity()
         {
-            M00 = 1.0f;
-            M01 = 0.0f;
-            M02 = 0.0f;
-            M03 = 0.0f;
-
-            M10 = 0.0f;
-            M11 = 1.0f;
-            M12 = 0.0f;
-            M13 = 0.0f;
-
-            M20 = 0.0f;
-            M21 = 0.0f;
-            M22 = 0.0f;
-            M23 = 0.0f;
-
-            M30 = 0.0f;
-            M31 = 0.0f;
-            M32 = 0.0f;
-            M33 = 1.0f;
+            M00 = 1.0f; M01 = 0.0f; M02 = 0.0f; M03 = 0.0f;
+            M10 = 0.0f; M11 = 1.0f; M12 = 0.0f; M13 = 0.0f;
+            M20 = 0.0f; M21 = 0.0f; M22 = 1.0f; M23 = 0.0f;
+            M30 = 0.0f; M31 = 0.0f; M32 = 0.0f; M33 = 1.0f;
         }
 
         /// <summary>
@@ -1069,25 +796,10 @@ namespace Raster.Core.Math
         /// </summary>
         public void SetToZero()
         {
-            M00 = 0.0f;
-            M01 = 0.0f;
-            M02 = 0.0f;
-            M03 = 0.0f;
-
-            M10 = 0.0f;
-            M11 = 0.0f;
-            M12 = 0.0f;
-            M13 = 0.0f;
-
-            M20 = 0.0f;
-            M21 = 0.0f;
-            M22 = 0.0f;
-            M23 = 0.0f;
-
-            M30 = 0.0f;
-            M31 = 0.0f;
-            M32 = 0.0f;
-            M33 = 0.0f;
+            M00 = 0.0f; M01 = 0.0f; M02 = 0.0f; M03 = 0.0f;
+            M10 = 0.0f; M11 = 0.0f; M12 = 0.0f; M13 = 0.0f;
+            M20 = 0.0f; M21 = 0.0f; M22 = 0.0f; M23 = 0.0f;
+            M30 = 0.0f; M31 = 0.0f; M32 = 0.0f; M33 = 0.0f;
         }
 
         /// <summary>
@@ -1109,32 +821,17 @@ namespace Raster.Core.Math
         /// <param name="other"></param>
         public void CopyFrom(in Matrix4x4 other)
         {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-            M03 = other.M03;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-            M13 = other.M13;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = other.M22;
-            M23 = other.M23;
-
-            M30 = other.M30;
-            M31 = other.M31;
-            M32 = other.M32;
-            M33 = other.M32;
+            M00 = other.M00; M01 = other.M01; M02 = other.M02; M03 = other.M03;
+            M10 = other.M10; M11 = other.M11; M12 = other.M12; M13 = other.M13;
+            M20 = other.M20; M21 = other.M21; M22 = other.M22; M23 = other.M23;
+            M30 = other.M30; M31 = other.M31; M32 = other.M32; M33 = other.M33;
         }
 
+        #region Affine Transform
         /// <summary>
         /// 
         /// </summary>
         /// <param name="angle"></param>
-        
         public void RotateX(float angle)
         {
             float s = MathF.Sin(angle);
@@ -1156,6 +853,25 @@ namespace Raster.Core.Math
 
             M13 = (temp = M13) * c + M23 * s;
             M23 = M23 * c - temp * s;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="angle"></param>
+        /// <param name="centerPoint"></param>
+        public void RotateX(float angle, in Vector3 centerPoint)
+        {
+            float c = MathF.Cos(angle);
+            float s = MathF.Sin(angle);
+
+            float y = centerPoint.Y * (1.0f - c) + centerPoint.Z * s;
+            float z = centerPoint.Z * (1.0f - c) - centerPoint.Y * s;
+
+            // [  1  0  0  0 ]
+            // [  0  c  s  0 ]
+            // [  0 -s  c  0 ]
+            // [  0  y  z  1 ]
         }
 
         /// <summary>
@@ -1189,6 +905,26 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="angle"></param>
+        /// <param name="centerPoint"></param>
+        public void RotateY(float angle, in Vector3 centerPoint)
+        {
+            float c = MathF.Cos(angle);
+            float s = MathF.Sin(angle);
+
+            float x = centerPoint.X * (1.0f - c) + centerPoint.Z * s;
+            float z = centerPoint.Z * (1.0f - c) - centerPoint.X * s;
+
+
+            // [  c  0 -s  0 ]
+            // [  0  1  0  0 ]
+            // [  s  0  c  0 ]
+            // [  x  0  z  1 ]
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="angle"></param>
         public void RotateZ(float angle)
         {
             float s = MathF.Sin(angle);
@@ -1210,6 +946,25 @@ namespace Raster.Core.Math
 
             M03 = (temp = M03) * c + M13 * s;
             M13 = M13 * c - temp * s;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="angle"></param>
+        /// <param name="centerPoint"></param>
+        public void RotateZ(float angle, in Vector3 centerPoint)
+        {
+            float c = MathF.Cos(angle);
+            float s = MathF.Sin(angle);
+
+            float x = centerPoint.X * (1.0f - c) + centerPoint.Y * s;
+            float y = centerPoint.Y * (1.0f - c) - centerPoint.X * s;
+
+            // [  c  s  0  0 ]
+            // [ -s  c  0  0 ]
+            // [  0  0  1  0 ]
+            // [  x  y  0  1 ]
         }
 
         /// <summary>
@@ -1239,10 +994,7 @@ namespace Raster.Core.Math
         /// </summary>
         /// <param name="axis"></param>
         /// <param name="angle"></param> 
-        public void Rotate(in Vector3 axis, float angle)
-        {
-            Rotate(axis.X, axis.Y, axis.Z, angle);
-        }
+        public void Rotate(in Vector3 axis, float angle) { Rotate(axis.X, axis.Y, axis.Z, angle); }
 
         /// <summary>
         /// 
@@ -1250,7 +1002,8 @@ namespace Raster.Core.Math
         /// <param name="quaternion"></param>
         public void Rotate(in Quaternion quaternion)
         {
-            
+            FromQuaternion(quaternion, out Matrix4x4 result);
+            Multiply(result);
         }
 
         /// <summary>
@@ -1265,30 +1018,16 @@ namespace Raster.Core.Math
             // [  0  sy 0  0  ]
             // [  0  0  sz 0  ]
             // [  0  0  0  1  ]
-            M00 *= sx;
-            M01 *= sx;
-            M02 *= sx;
-            M03 *= sx;
-
-            M10 *= sy;
-            M11 *= sy;
-            M12 *= sy;
-            M13 *= sy;
-
-            M20 *= sz;
-            M21 *= sz;
-            M22 *= sz;
-            M23 *= sz;
+            M00 *= sx; M01 *= sx; M02 *= sx; M03 *= sx;
+            M10 *= sy; M11 *= sy; M12 *= sy; M13 *= sy;
+            M20 *= sz; M21 *= sz; M22 *= sz; M23 *= sz;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="scale"></param>
-        public void Scale(in Vector3 scale)
-        {
-            Scale(scale.X, scale.Y, scale.Z);
-        }
+        public void Scale(in Vector3 scale) { Scale(scale.X, scale.Y, scale.Z); }
 
         /// <summary>
         /// 
@@ -1363,10 +1102,7 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="translate"></param>
-        public void Translate(in Vector3 translate)
-        {
-            Translate(translate.X, translate.Y, translate.Z);
-        }
+        public void Translate(in Vector3 translation) { Translate(translation.X, translation.Y, translation.Z); }
 
         /// <summary>
         /// 
@@ -1390,25 +1126,10 @@ namespace Raster.Core.Math
             float yz2 = rotation.Y * z2;
             float zz2 = rotation.Z * z2;
 
-            M00 = (1.0f - yy2 - zz2) * scale.X;
-            M10 = (xy2 - wz2) * scale.Y;
-            M20 = (xz2 + wy2) * scale.Z;
-            M30 = translation.X;
-            
-            M01 = (xy2 + wz2) * scale.X;
-            M11 = (1.0f - xx2 - zz2) * scale.Y;
-            M21 = (yz2 - wx2) * scale.Z;
-            M31 = translation.Y;
-            
-            M02 = (xz2 - wy2) * scale.X;
-            M12 = (yz2 + wx2) * scale.Y;
-            M22 = (1.0f - xx2 - yy2) * scale.Z;
-            M32 = translation.Z;
-
-            M03 = 0.0f;
-            M13 = 0.0f;
-            M23 = 0.0f;
-            M33 = 1.0f;
+            M00 = (1.0f - yy2 - zz2) * scale.X; M01 = (xy2 + wz2) * scale.X;        M02 = (xz2 - wy2) * scale.X;        M03 = 0.0f;
+            M10 = (xy2 - wz2) * scale.Y;        M11 = (1.0f - xx2 - zz2) * scale.Y; M12 = (yz2 + wx2) * scale.Y;        M13 = 0.0f;
+            M20 = (xz2 + wy2) * scale.Z;        M21 = (yz2 - wx2) * scale.Z;        M22 = (1.0f - xx2 - yy2) * scale.Z; M23 = 0.0f;
+            M30 = translation.X;                M31 = translation.Y;                M32 = translation.Z;                M33 = 1.0f;
         }
 
         /// <summary>
@@ -1428,8 +1149,8 @@ namespace Raster.Core.Math
             scale.Y = MathF.Sqrt(M10 * M10 + M11 * M11 + M12 * M12);
             scale.Z = MathF.Sqrt(M20 * M20 + M21 * M21 + M22 * M22);
             
-            if (scale.X < MathHelper.ZeroTolerance || scale.Y < MathHelper.ZeroTolerance ||
-                scale.Z < MathHelper.ZeroTolerance)
+            if (MathHelper.IsZero(scale.X) || MathHelper.IsZero(scale.Y) ||
+                MathHelper.IsZero(scale.Z))
             {
                 rotation = Quaternion.Identity;
                 return false;
@@ -1441,20 +1162,256 @@ namespace Raster.Core.Math
 
             Matrix3x3 rot3x3;
 
-            rot3x3.M00 = M00 * invScaleX;
-            rot3x3.M01 = M01 * invScaleX;
-            rot3x3.M02 = M02 * invScaleX;
-
-            rot3x3.M10 = M10 * invScaleY;
-            rot3x3.M11 = M11 * invScaleY;
-            rot3x3.M12 = M12 * invScaleY;
-
-            rot3x3.M20 = M20 * invScaleZ;
-            rot3x3.M21 = M21 * invScaleZ;
-            rot3x3.M22 = M22 * invScaleZ;
+            rot3x3.M00 = M00 * invScaleX; rot3x3.M01 = M01 * invScaleX; rot3x3.M02 = M02 * invScaleX;
+            rot3x3.M10 = M10 * invScaleY; rot3x3.M11 = M11 * invScaleY; rot3x3.M12 = M12 * invScaleY;
+            rot3x3.M20 = M20 * invScaleZ; rot3x3.M21 = M21 * invScaleZ; rot3x3.M22 = M22 * invScaleZ;
 
             Quaternion.FromRotationMatrix(rot3x3, out rotation);
             return true;
+        }
+        #endregion Affine Transform
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eyeR"></param>
+        /// <param name="eyeY"></param>
+        /// <param name="eyeZ"></param>
+        /// <param name="centerR"></param>
+        /// <param name="centerY"></param>
+        /// <param name="centerZ"></param>
+        /// <param name="upR"></param>
+        /// <param name="upY"></param>
+        /// <param name="upZ"></param>
+        public void LookAtLH(float eyeX, float eyeY, float eyeZ,
+                             float centerX, float centerY, float centerZ,
+                             float upX, float upY, float upZ)
+        {
+            float forwardX = centerX - eyeX;
+            float forwardY = centerY - eyeY;
+            float forwardZ = centerZ - eyeZ;
+
+            float lenSqr = forwardX * forwardX + forwardY * forwardY + forwardZ * forwardZ;
+            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+            forwardX *= invNorm;
+            forwardY *= invNorm;
+            forwardZ *= invNorm;
+
+            float sideX = upY * forwardZ - upZ * forwardY;
+            float sideY = upX * forwardZ - upZ * forwardX;
+            float sideZ = upX * forwardY - upY * forwardX;
+
+            lenSqr = sideX * sideX + sideY * sideY + sideZ * sideZ;
+            invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+            sideX *= invNorm;
+            sideY *= invNorm;
+            sideZ *= invNorm;
+
+            float uX = sideY * forwardZ - sideZ * forwardY;
+            float uY = sideZ * forwardX - sideX * forwardZ;
+            float uZ = sideX * forwardY - sideY * forwardX;
+
+            M00 = sideX;
+            M01 = uX;
+            M02 = forwardX;
+            M03 = 0.0f;
+
+            M10 = sideY;
+            M11 = uY;
+            M12 = forwardY;
+            M13 = 0.0f;
+
+            M20 = sideZ;
+            M21 = uZ;
+            M22 = forwardZ;
+            M23 = 0.0f;
+
+            M30 = -(sideX * eyeX + sideY * eyeY + sideZ * eyeZ);
+            M31 = -(uX * eyeX + uY * eyeY + uZ * eyeZ);
+            M32 = -(forwardX * eyeX + forwardY * eyeY + forwardZ * eyeZ);
+            M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eyeX"></param>
+        /// <param name="eyeY"></param>
+        /// <param name="eyeZ"></param>
+        /// <param name="centerX"></param>
+        /// <param name="centerY"></param>
+        /// <param name="centerZ"></param>
+        /// <param name="upX"></param>
+        /// <param name="upY"></param>
+        /// <param name="upZ"></param>
+        public void LookAtRH(float eyeX, float eyeY, float eyeZ,
+                             float centerX, float centerY, float centerZ,
+                             float upX, float upY, float upZ)
+        {
+            float forwardX = centerX - eyeX;
+            float forwardY = centerY - eyeY;
+            float forwardZ = centerZ - eyeZ;
+
+            float lenSqr = forwardX * forwardX + forwardY * forwardY + forwardZ * forwardZ;
+            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+            forwardX *= invNorm;
+            forwardY *= invNorm;
+            forwardZ *= invNorm;
+
+            float sideX = forwardY * upZ - forwardZ * upY;
+            float sideY = forwardX * upZ - forwardZ * upX;
+            float sideZ = forwardX * upY - forwardY * upX;
+
+            lenSqr = sideX * sideX + sideY * sideY + sideZ * sideZ;
+            invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+            sideX *= invNorm;
+            sideY *= invNorm;
+            sideZ *= invNorm;
+
+            float uX = sideY * forwardZ - sideZ * forwardY;
+            float uY = sideZ * forwardX - sideX * forwardZ;
+            float uZ = sideX * forwardY - sideY * forwardX;
+
+            M00 = sideX;
+            M01 = uX;
+            M02 = -forwardX;
+            M03 = 0.0f;
+
+            M10 = sideY;
+            M11 = uY;
+            M12 = -forwardY;
+            M13 = 0.0f;
+
+            M20 = sideZ;
+            M21 = uZ;
+            M22 = -forwardZ;
+            M23 = 0.0f;
+
+            M30 = -(sideX * eyeX + sideY * eyeY + sideZ * eyeZ);
+            M31 = -(uX * eyeX + uY * eyeY + uZ * eyeZ);
+            M32 = (forwardX * eyeX + forwardY * eyeY + forwardZ * eyeZ);
+            M33 = 1.0f;
+        }
+
+        public void LookAt(float eyeX, float eyeY, float eyeZ,
+                           float centerX, float centerY, float centerZ,
+                           float upX, float upY, float upZ)
+        {
+#if RASTER_LEFT_HAND
+            LookAtLH(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
+#else
+            LookAtRH(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eye"></param>
+        /// <param name="center"></param>
+        /// <param name="up"></param>
+        public void LookAt(in Vector3 eye, in Vector3 center, in Vector3 up)
+        {
+#if RASTER_LEFT_HAND
+            LookAtLH(eye.X, eye.Y, eye.Z, center.X, center.Y, center.Z, up.X, up.Y, up.Z);
+#else
+            LookAtRH(eye.X, eye.Y, eye.Z, center.X, center.Y, center.Z, up.X, up.Y, up.Z);
+#endif
+        }
+
+        #region Projection Transform
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void Frustum(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+#if RASTER_CLIP_SPACE_D3D
+            FrustrumLH_ZO(left, right, bottom, top, zNear, zFar);
+#else
+            FrustrumLH_NO(left, right, bottom, top, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void FrustumLH(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+#if RASTER_CLIP_SPACE_D3D
+            FrustrumLH_ZO(left, right, bottom, top, zNear, zFar);
+#else
+            FrustrumLH_NO(left, right, bottom, top, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void FrustumRH(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+#if RASTER_CLIP_SPACE_D3D
+            FrustrumRH_ZO(left, right, bottom, top, zNear, zFar);
+#else
+            FrustrumRH_NO(left, right, bottom, top, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void FrustumNO(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+#if RASTER_USE_LEFT_HAND
+            FrustrumLH_NO(left, right, bottom, top, zNear, zFar);
+#else
+            FrustrumRH_ZO(left, right, bottom, top, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void FrustumZO(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+#if RASTER_USE_LEFT_HAND
+            FrustrumLH_ZO(left, right, bottom, top, zNear, zFar);
+#else
+            FrustrumRH_ZO(left, right, bottom, top, zNear, zFar);
+#endif
         }
 
         /// <summary>
@@ -1466,16 +1423,83 @@ namespace Raster.Core.Math
         /// <param name="bottom"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
-        public void Frustrum(float left, float right, float top, float bottom, float zNear, float zFar)
+        public void FrustrumLH_NO(float left, float right, float bottom, float top, float zNear, float zFar)
         {
-            if (left >= right || bottom >= top || zNear >= zFar)
-            {
-                return;
-            }
-
-            float invWidth  = 1.0f / (right - left);
+            float invWidth = 1.0f / (right - left);
             float invHeight = 1.0f / (top - bottom);
-            float invClip   = 1.0f / (zFar - zNear);
+            float invClip = 1.0f / (zFar - zNear);
+
+            M00 = 2.0f * zNear * invWidth;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 2.0f * zNear * invHeight;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = (left + right) * invWidth;
+            M21 = (top + bottom) * invHeight;
+            M22 = (zNear + zFar) * invClip;
+            M23 = 1.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = -(2.0f * zNear * zFar) * invClip;
+            M33 = 0.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="top"></param>
+        /// <param name="bottom"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void FrustrumLH_ZO(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+            float invWidth = 1.0f / (right - left);
+            float invHeight = 1.0f / (top - bottom);
+            float invClip = 1.0f / (zFar - zNear);
+
+            M00 = 2.0f * zNear * invWidth;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 2.0f * zNear * invHeight;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = (left + right) * invWidth;
+            M21 = (top + bottom) * invHeight;
+            M22 = zFar * invClip;
+            M23 = 1.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = -(zFar * zNear) * invClip;
+            M33 = 0.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="top"></param>
+        /// <param name="bottom"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void FrustrumRH_NO(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+            float invWidth = 1.0f / (right - left);
+            float invHeight = 1.0f / (top - bottom);
+            float invClip = 1.0f / (zFar - zNear);
 
             M00 = 2.0f * zNear * invWidth;
             M01 = 0.0f;
@@ -1494,82 +1518,44 @@ namespace Raster.Core.Math
 
             M30 = 0.0f;
             M31 = 0.0f;
-            M32 = (-2.0f * zNear + zFar) * invClip;
+            M32 = -(2.0f * zNear * zFar) * invClip;
             M33 = 0.0f;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="eyeR"></param>
-        /// <param name="eyeY"></param>
-        /// <param name="eyeZ"></param>
-        /// <param name="centerR"></param>
-        /// <param name="centerY"></param>
-        /// <param name="centerZ"></param>
-        /// <param name="upR"></param>
-        /// <param name="upY"></param>
-        /// <param name="upZ"></param>
-        public void LookAt(float eyeR, float eyeY, float eyeZ,
-                           float centerR, float centerY, float centerZ,
-                           float upR, float upY, float upZ)
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="top"></param>
+        /// <param name="bottom"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void FrustrumRH_ZO(float left, float right, float bottom, float top, float zNear, float zFar)
         {
-            float forwardR = centerR - eyeR;
-            float forwardY = centerY - eyeY;
-            float forwardZ = centerZ - eyeZ;
+            float invWidth = 1.0f / (right - left);
+            float invHeight = 1.0f / (top - bottom);
+            float invClip = 1.0f / (zFar - zNear);
 
-            float lenSqr = forwardR * forwardR + forwardY * forwardY + forwardZ * forwardZ;
-            float invNorm = MathHelper.FastSqrtInverse(lenSqr);
-
-            forwardR *= invNorm;
-            forwardY *= invNorm;
-            forwardZ *= invNorm;
-
-            float sideR = forwardY * upZ - forwardZ * upY;
-            float sideY = forwardR * upZ - forwardZ * upR;
-            float sideZ = forwardR * upY - forwardY * upR;
-
-            lenSqr = sideR * sideR + sideY * sideY + sideZ * sideZ;
-            invNorm = MathHelper.FastSqrtInverse(lenSqr);
-
-            sideR *= invNorm;
-            sideY *= invNorm;
-            sideZ *= invNorm;
-
-            float uR = sideY * forwardZ - sideZ * forwardY;
-            float uY = sideZ * forwardR - sideR * forwardZ;
-            float uZ = sideR * forwardY - sideY * forwardR;
-
-            M00 = sideR;
-            M01 = uR;
-            M02 = -forwardR;
+            M00 = 2.0f * zNear * invWidth;
+            M01 = 0.0f;
+            M02 = 0.0f;
             M03 = 0.0f;
 
-            M10 = sideY;
-            M11 = uY;
-            M12 = -forwardY;
+            M10 = 0.0f;
+            M11 = 2.0f * zNear * invHeight;
+            M12 = 0.0f;
             M13 = 0.0f;
 
-            M20 = sideZ;
-            M21 = uZ;
-            M22 = -forwardZ;
-            M23 = 0.0f;
+            M20 = (left + right) * invWidth;
+            M21 = (top + bottom) * invHeight;
+            M22 = zFar * invClip;
+            M23 = -1.0f;
 
-            M30 = -(sideR * eyeR + sideY * eyeY + sideZ * eyeZ);
-            M31 = -(uR * eyeR + uY * eyeY + uZ * eyeZ);
-            M32 = (forwardR * eyeR + forwardY * eyeY + forwardZ * eyeZ);
-            M33 = 1.0f;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="eye"></param>
-        /// <param name="center"></param>
-        /// <param name="up"></param>
-        public void LookAt(in Vector3 eye, in Vector3 center, in Vector3 up)
-        {
-            LookAt(eye.X, eye.Y, eye.Z, center.X, center.Y, center.Z, up.X, up.Y, up.Z);
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = -(zNear * zFar) * invClip;
+            M33 = 0.0f;
         }
 
         /// <summary>
@@ -1579,33 +1565,158 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
-        public void Ortho(float width, float height, float zNear, float zFar)
+        public void OrthoLH(float width, float height, float zNear, float zFar)
         {
-            float halfWidth = width * 0.5f;
-            float halfHeight = height * 0.5f;
-
-            OrthoOffCenter(-halfWidth, halfWidth, -halfHeight, halfHeight, zNear, zFar);
+#if RASTER_CLIP_SPACE_D3D
+            OrthoLH_ZO(width, height, zNear, zFar);
+#else
+            OrthoLH_NO(width, height, zNear, zFar);
+#endif
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <param name="bottom"></param>
-        /// <param name="top"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
-        public void OrthoOffCenter(float left, float right, float bottom, float top, float zNear, float zFar)
+        public void OrthoRH(float width, float height, float zNear, float zFar)
         {
-            if (top >= bottom || left >= right || zNear >= zFar)
-            {
-                return;
-            }
+#if RASTER_CLIP_SPACE_D3D
+            OrthoRH_ZO(width, height, zNear, zFar);
+#else
+            OrthoRH_NO(width, height, zNear, zFar);
+#endif
+        }
 
-            float invWidth  = 1.0f / (right - left);
-            float invHeight = 1.0f / (top - bottom);
-            float invClip   = 1.0f / (zFar - zNear);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void OrthoNO(float width, float height, float zNear, float zFar)
+        {
+#if RASTER_USE_LEFT_HAND
+            OrthoLH_NO(width, height, zNear, zFar);
+#else
+            OrthoRH_NO(width, height, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void OrthoZO(float width, float height, float zNear, float zFar)
+        {
+#if RASTER_USE_LEFT_HAND
+            OrthoLH_ZO(width, height, zNear, zFar);
+#else
+            OrthoRH_ZO(width, height, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void OrthoLH_NO(float width, float height, float zNear, float zFar)
+        {
+            float right = width * 0.5f;
+            float bottom = height * 0.5f;
+            float left = -right;
+            float top = -bottom;
+
+            float invWidth = 1.0f / width;
+            float invHeight = -1.0f / height;
+            float invClip = 1.0f / (zFar - zNear);
+
+            M00 = 2.0f * invWidth;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 2.0f * invHeight;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 2.0f * invClip;
+            M23 = 0.0f;
+
+            M30 = -(left + right) * invWidth;
+            M31 = -(top + bottom) * invHeight;
+            M32 = -(zNear + zFar) * invClip;
+            M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void OrthoLH_ZO(float width, float height, float zNear, float zFar)
+        {
+            float right = width * 0.5f;
+            float bottom = height * 0.5f;
+            float left = -right;
+            float top = -bottom;
+
+            float invWidth = 1.0f / width;
+            float invHeight = -1.0f / height;
+            float invClip = 1.0f / (zFar - zNear);
+
+            M00 = 2.0f * invWidth;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 2.0f * invHeight;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 1.0f * invClip;
+            M23 = 0.0f;
+
+            M30 = -(left + right) * invWidth;
+            M31 = -(top + bottom) * invHeight;
+            M32 = -zNear * invClip;
+            M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void OrthoRH_NO(float width, float height, float zNear, float zFar)
+        {
+            float right = width * 0.5f;
+            float bottom = height * 0.5f;
+            float left = -right;
+            float top = -bottom;
+
+            float invWidth = 1.0f / width;
+            float invHeight = -1.0f / height;
+            float invClip = 1.0f / (zFar - zNear);
 
             M00 = 2.0f * invWidth;
             M01 = 0.0f;
@@ -1635,35 +1746,329 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
-        public void PerspectiveRH(float width, float height, float zNear, float zFar)
+        public void OrthoRH_ZO(float width, float height, float zNear, float zFar)
         {
-            if (zNear <= 0.0f || zFar <= 0.0f || zNear >= zFar)
-            {
-                return;
-            }
+            float right = width * 0.5f;
+            float bottom = height * 0.5f;
+            float left = -right;
+            float top = -bottom;
 
-            float negFarRange = float.IsPositiveInfinity(zFar) ?
-                                             -1.0f :
-                                             zFar / (zNear - zFar);
+            float invWidth = 1.0f / width;
+            float invHeight = -1.0f / height;
+            float invClip = 1.0f / (zFar - zNear);
 
-            M00 = 2.0f * zNear / width;
+            M00 = 2.0f * invWidth;
             M01 = 0.0f;
             M02 = 0.0f;
             M03 = 0.0f;
 
             M10 = 0.0f;
-            M11 = 2.0f * zNear / height;
+            M11 = 2.0f * invHeight;
             M12 = 0.0f;
             M13 = 0.0f;
 
             M20 = 0.0f;
             M21 = 0.0f;
-            M22 = negFarRange;
-            M23 = -1.0f;
+            M22 = -1.0f * invClip;
+            M23 = 0.0f;
+
+            M30 = -(left + right) * invWidth;
+            M31 = -(top + bottom) * invHeight;
+            M32 = -zNear * invClip;
+            M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void OrthoOffCenterLH(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+#if RASTER_CLIP_SPACE_D3D
+            OrthoOffCenterLH_ZO(left, right, bottom, top, zNear, zFar);
+#else
+            OrthoOffCenterLH_NO(left, right, bottom, top, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void OrthoOffCenterRH(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+#if RASTER_CLIP_SPACE_D3D
+            OrthoOffCenterRH_ZO(left, right, bottom, top, zNear, zFar);
+#else
+            OrthoOffCenterRH_ZO(left, right, bottom, top, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void OrthoOffCenterNO(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+#if RASTER_USE_LEFT_HAND
+            OrthoOffCenterLH_NO(left, right, bottom, top, zNear, zFar);
+#else
+            OrthoOffCenterRH_NO(left, right, bottom, top, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void OrthoOffCenterZO(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+#if RASTER_USE_LEFT_HAND
+            OrthoOffCenterLH_ZO(left, right, bottom, top, zNear, zFar);
+#else
+            OrthoOffCenterRH_ZO(left, right, bottom, top, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void OrthoOffCenterLH_NO(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+            float invWidth  = 1.0f / (right - left);
+            float invHeight = 1.0f / (top - bottom);
+            float invClip   = 1.0f / (zFar - zNear);
+
+            M00 = 2.0f * invWidth;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 2.0f * invHeight;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 2.0f * invClip;
+            M23 = 0.0f;
+
+            M30 = -(left + right) * invWidth;
+            M31 = -(top + bottom) * invHeight;
+            M32 = -(zNear + zFar) * invClip;
+            M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void OrthoOffCenterLH_ZO(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+            float invWidth = 1.0f / (right - left);
+            float invHeight = 1.0f / (top - bottom);
+            float invClip = 1.0f / (zFar - zNear);
+
+            M00 = 2.0f * invWidth;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 2.0f * invHeight;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = 1.0f * invClip;
+            M23 = 0.0f;
+
+            M30 = -(left + right) * invWidth;
+            M31 = -(top + bottom) * invHeight;
+            M32 = -zNear * invClip;
+            M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void OrthoOffCenterRH_NO(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+            float invWidth = 1.0f / (right - left);
+            float invHeight = 1.0f / (top - bottom);
+            float invClip = 1.0f / (zFar - zNear);
+
+            M00 = 2.0f * invWidth;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 2.0f * invHeight;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = -2.0f * invClip;
+            M23 = 0.0f;
+
+            M30 = -(left + right) * invWidth;
+            M31 = -(top + bottom) * invHeight;
+            M32 = -(zNear + zFar) * invClip;
+            M33 = 1.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void OrthoOffCenterRH_ZO(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+            float invWidth = 1.0f / (right - left);
+            float invHeight = 1.0f / (top - bottom);
+            float invClip = 1.0f / (zFar - zNear);
+
+            M00 = 2.0f * invWidth;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 2.0f * invHeight;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = -1.0f * invClip;
+            M23 = 0.0f;
+
+            M30 = -(left + right) * invWidth;
+            M31 = -(top + bottom) * invHeight;
+            M32 = -zNear * invClip;
+            M33 = 1.0f;
+        }
+
+        public void PerspectiveFov(float fov, float aspect, float zNear, float zFar)
+        {
+#if RASTER_CLIP_SPACE_D3D && RASTER_USE_LEFT_HAND
+            PerspectiveFovLH_NO(fov, aspect, zNear, zFar);
+#else
+            PerspectiveFovLH_ZO(fov, aspect, zNear, zFar);
+#endif
+        }
+
+        public void PerspectiveFovLH(float fov, float aspect, float zNear, float zFar)
+        {
+#if RASTER_CLIP_SPACE_D3D
+            PerspectiveFovLH_NO(fov, aspect, zNear, zFar);
+#else
+            PerspectiveFovLH_ZO(fov, aspect, zNear, zFar);
+#endif
+        }
+
+        public void PerspectiveFovRH(float fov, float aspect, float zNear, float zFar)
+        {
+#if RASTER_CLIP_SPACE_D3D
+            PerspectiveFovRH_NO(fov, aspect, zNear, zFar);
+#else
+            PerspectiveFovRH_ZO(fov, aspect, zNear, zFar);
+#endif
+        }
+
+        public void PerspectiveFovNO(float fov, float aspect, float zNear, float zFar)
+        {
+#if RASTER_USE_LEFT_HAND
+            PerspectiveFovLH_NO(fov, aspect, zNear, zFar);
+#else
+            PerspectiveFovRH_NO(fov, aspect, zNear, zFar);
+#endif
+        }
+
+        public void PerspectiveFovZO(float fov, float aspect, float zNear, float zFar)
+        {
+#if RASTER_USE_LEFT_HAND
+            PerspectiveFovLH_ZO(fov, aspect, zNear, zFar);
+#else
+            PerspectiveFovRH_ZO(fov, aspect, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fov"></param>
+        /// <param name="aspect"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void PerspectiveFovLH_NO(float fov, float aspect, float zNear, float zFar)
+        {
+            float cot = 1.0f / MathF.Tan(0.5f * MathF.Deg2Rad * fov);
+            float invClip = 1.0f / (zFar - zNear);
+
+            M00 = cot / aspect;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = cot;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = (zNear + zFar) * invClip;
+            M23 = 1.0f;
 
             M30 = 0.0f;
             M31 = 0.0f;
-            M32 = zNear * negFarRange;
+            M32 = -(2.0f * zNear * zFar) * invClip;
             M33 = 0.0f;
         }
 
@@ -1674,27 +2079,42 @@ namespace Raster.Core.Math
         /// <param name="aspect"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
-        public void PerspectiveFOV(float fov, float aspect, float zNear, float zFar)
+        public void PerspectiveFovLH_ZO(float fov, float aspect, float zNear, float zFar)
         {
-            if (fov < 0.0f || fov > 180.0f)
-            {
-                return;
-            }
+            float cot = 1.0f / MathF.Tan(0.5f * MathF.Deg2Rad * fov);
+            float invClip = 1.0f / (zFar - zNear);
 
-            if (aspect == 0.0f || zNear <= 0.0f || zFar <= 0.0f || zNear >= zFar)
-            {
-                return;
-            }
+            M00 = cot / aspect;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
 
-            float radian = MathF.DegToRad(fov * 0.5f);
-            float sin = MathF.Sin(radian);
+            M10 = 0.0f;
+            M11 = cot;
+            M12 = 0.0f;
+            M13 = 0.0f;
 
-            if (sin == 0.0f)
-            {
-                return;
-            }
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = zFar * invClip;
+            M23 = 1.0f;
 
-            float cot = MathF.Cos(radian) / sin;
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = -(zNear * zFar) * invClip;
+            M33 = 0.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fov"></param>
+        /// <param name="aspect"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void PerspectiveFovRH_NO(float fov, float aspect, float zNear, float zFar)
+        {
+            float cot = 1.0f / MathF.Tan(0.5f * MathF.Deg2Rad * fov);
             float invClip = 1.0f / (zFar - zNear);
 
             M00 = cot / aspect;
@@ -1721,6 +2141,132 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="fov"></param>
+        /// <param name="aspect"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void PerspectiveFovRH_ZO(float fov, float aspect, float zNear, float zFar)
+        {
+            float cot = 1.0f / MathF.Tan(0.5f * MathF.Deg2Rad * fov);
+            float invClip = 1.0f / (zFar - zNear);
+
+            M00 = cot / aspect;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = cot;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = 0.0f;
+            M21 = 0.0f;
+            M22 = -zFar * invClip;
+            M23 = -1.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = -(zNear * zFar) * invClip;
+            M33 = 0.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void Perspective(float width, float height, float zNear, float zFar)
+        {
+#if RASTER_USE_LEFT_HAND
+            PerspectiveLH(width, height, zNear, zFar);
+#else
+            PerspectiveRH(width, height, zNear, zFar);
+#endif
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void PerspectiveLH(float width, float height, float zNear, float zFar)
+        {
+            float right = width * 0.5f;
+            float bottom = height * 0.5f;
+            float left = -right;
+            float top = -bottom;
+
+            float invWidth = 1.0f / (right - left);
+            float invHeight = 1.0f / (top - bottom);
+            float zRange = zFar / (zFar - zNear);
+
+            M00 = 2.0f * zNear * invWidth;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 2.0f * zNear * invHeight;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = (left + right) * invWidth;
+            M21 = (top + bottom) * -invHeight;
+            M22 = zRange;
+            M23 = 1.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = -zNear * zRange;
+            M33 = 0.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void PerspectiveRH(float width, float height, float zNear, float zFar)
+        {
+            float right = width * 0.5f;
+            float bottom = height * 0.5f;
+            float left = -right;
+            float top = -bottom;
+
+            float invWidth = 1.0f / (right - left);
+            float invHeight = 1.0f / (top - bottom);
+            float zRange = zFar / (zFar - zNear);
+
+            M00 = 2.0f * zNear * invWidth;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 2.0f * zNear * invHeight;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = -(left + right) * invWidth;
+            M21 = (top + bottom) * invHeight;
+            M22 = -zRange;
+            M23 = -1.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = -zNear * zRange;
+            M33 = 0.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <param name="bottom"></param>
@@ -1729,16 +2275,27 @@ namespace Raster.Core.Math
         /// <param name="zFar"></param>
         public void PerspectiveOffCenter(float left, float right, float bottom, float top, float zNear, float zFar)
         {
-            if (zNear <= 0.0f || zFar <= 0.0f || zNear >= zFar)
-            {
-                return;
-            }
+#if RASTER_USE_LEFT_HAND
+            PerspectiveOffCenterLH(left, right, bottom, top, zNear, zFar);
+#else 
+            PerspectiveOffCenterRH(left, right, bottom, top, zNear, zFar);
+#endif
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void PerspectiveOffCenterLH(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
             float invWidth = 1.0f / (right - left);
             float invHeight = 1.0f / (top - bottom);
-            float negFarRange = float.IsPositiveInfinity(zFar) ?
-                                            -1.0f :
-                                            zFar / (zNear - zFar);
+            float zRange = zFar / (zFar - zNear);
 
             M00 = 2.0f * zNear * invWidth;
             M01 = 0.0f;
@@ -1746,21 +2303,59 @@ namespace Raster.Core.Math
             M03 = 0.0f;
 
             M10 = 0.0f;
-            M11 = -2.0f * zNear * invHeight;
+            M11 = 2.0f * zNear * invHeight;
             M12 = 0.0f;
             M13 = 0.0f;
 
             M20 = (left + right) * invWidth;
+            M21 = (top + bottom) * -invHeight;
+            M22 = zRange;
+            M23 = 1.0f;
+
+            M30 = 0.0f;
+            M31 = 0.0f;
+            M32 = -zNear * zRange;
+            M33 = 0.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        public void PerspectiveOffCenterRH(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+            float invWidth = 1.0f / (right - left);
+            float invHeight = 1.0f / (top - bottom);
+            float zRange = zFar / (zFar - zNear);
+
+            M00 = 2.0f * zNear * invWidth;
+            M01 = 0.0f;
+            M02 = 0.0f;
+            M03 = 0.0f;
+
+            M10 = 0.0f;
+            M11 = 2.0f * zNear * invHeight;
+            M12 = 0.0f;
+            M13 = 0.0f;
+
+            M20 = -(left + right) * invWidth;
             M21 = (top + bottom) * invHeight;
-            M22 = negFarRange;
+            M22 = -zRange;
             M23 = -1.0f;
 
             M30 = 0.0f;
             M31 = 0.0f;
-            M32 = zNear * negFarRange;
+            M32 = -zNear * zRange;
             M33 = 0.0f;
         }
+        #endregion Projection Transform
 
+        #region View Transform
         /// <summary>
         /// 
         /// </summary>
@@ -1806,6 +2401,76 @@ namespace Raster.Core.Math
         {
             Viewport(viewport.X, viewport.Y, viewport.Width, viewport.Height, viewport.MinDepth, viewport.MaxDepth);
         }
+        #endregion View Transform
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectPos"></param>
+        /// <param name="cameraPos"></param>
+        /// <param name="cameraUp"></param>
+        /// <param name="cameraForward"></param>
+        public void BillboardMatrixLH(in Vector3 objectPos, in Vector3 cameraPos, in Vector3 cameraUp, in Vector3 cameraForward)
+        {
+            float zAxisX = cameraPos.X - objectPos.X;
+            float zAxisY = cameraPos.Y - objectPos.Y;
+            float zAxisZ = cameraPos.Z - objectPos.Z;
+
+            float lenSqr = zAxisX * zAxisX + zAxisY * zAxisY +
+                           zAxisZ * zAxisZ;
+            float invNorm = 0.0f;
+
+            if (lenSqr < BillboardEpsilon)
+            {
+                zAxisX = -cameraForward.X;
+                zAxisY = -cameraForward.Y;
+                zAxisZ = -cameraForward.Z;
+            }
+            else
+            {
+                invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+                zAxisX *= invNorm;
+                zAxisY *= invNorm;
+                zAxisZ *= invNorm;
+            }
+
+
+            float tempX = cameraUp.Y * zAxisZ - cameraUp.Z * zAxisY;
+            float tempY = cameraUp.X * zAxisZ - cameraUp.Z * zAxisX;
+            float tempZ = cameraUp.X * zAxisY - cameraUp.Y * zAxisX;
+
+            lenSqr = tempX * tempX + tempY * tempY + tempZ * tempZ;
+            invNorm = MathHelper.FastSqrtInverse(lenSqr);
+
+            float xAxisX = tempX * invNorm;
+            float xAxisY = tempY * invNorm;
+            float xAxisZ = tempZ * invNorm;
+
+            float yAxisX = zAxisY * xAxisZ - zAxisZ * xAxisY;
+            float yAxisY = zAxisX * xAxisZ - zAxisZ * xAxisX;
+            float yAxisZ = zAxisX * xAxisY - zAxisY * xAxisX;
+
+            M00 = xAxisX;
+            M01 = xAxisY;
+            M02 = xAxisZ;
+            M03 = 0.0f;
+
+            M10 = yAxisX;
+            M11 = yAxisY;
+            M12 = yAxisZ;
+            M13 = 0.0f;
+
+            M20 = zAxisX;
+            M21 = zAxisY;
+            M22 = zAxisZ;
+            M23 = 0.0f;
+
+            M30 = objectPos.X;
+            M31 = objectPos.Y;
+            M32 = objectPos.Z;
+            M33 = 1.0f;
+        }
 
         /// <summary>
         /// 
@@ -1816,17 +2481,17 @@ namespace Raster.Core.Math
         /// <param name="cameraForward"></param>
         public void BillboardMatrixRH(in Vector3 objectPos, in Vector3 cameraPos, in Vector3 cameraUp, in Vector3 cameraForward)
         {
-            float zAxisR = objectPos.X - cameraPos.X;
+            float zAxisX = objectPos.X - cameraPos.X;
             float zAxisY = objectPos.Y - cameraPos.Y;
             float zAxisZ = objectPos.Z - cameraPos.Z;
 
-            float lenSqr = zAxisR * zAxisR + zAxisY * zAxisY +
+            float lenSqr = zAxisX * zAxisX + zAxisY * zAxisY +
                            zAxisZ * zAxisZ;
             float invNorm = 0.0f;
 
             if (lenSqr < BillboardEpsilon)
             {
-                zAxisR = -cameraForward.X;
+                zAxisX = -cameraForward.X;
                 zAxisY = -cameraForward.Y;
                 zAxisZ = -cameraForward.Z;
             }
@@ -1834,38 +2499,38 @@ namespace Raster.Core.Math
             {
                 invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
-                zAxisR *= invNorm;
+                zAxisX *= invNorm;
                 zAxisY *= invNorm;
                 zAxisZ *= invNorm;
             }
-           
 
-            float tempR = cameraUp.Y * zAxisZ - cameraUp.Z * zAxisY;
-            float tempY = cameraUp.X * zAxisZ - cameraUp.Z * zAxisR;
-            float tempZ = cameraUp.X * zAxisY - cameraUp.Y * zAxisR;
 
-            lenSqr = tempR * tempR + tempY * tempY + tempZ * tempZ;
+            float tempX = cameraUp.Y * zAxisZ - cameraUp.Z * zAxisY;
+            float tempY = cameraUp.X * zAxisZ - cameraUp.Z * zAxisX;
+            float tempZ = cameraUp.X * zAxisY - cameraUp.Y * zAxisX;
+
+            lenSqr = tempX * tempX + tempY * tempY + tempZ * tempZ;
             invNorm = MathHelper.FastSqrtInverse(lenSqr);
 
-            float xAxisR = tempR * invNorm;
+            float xAxisX = tempX * invNorm;
             float xAxisY = tempY * invNorm;
             float xAxisZ = tempZ * invNorm;
 
-            float yAxisR = zAxisY * xAxisZ - zAxisZ * xAxisY;
-            float yAxisY = zAxisR * xAxisZ - zAxisZ * xAxisR;
-            float yAxisZ = zAxisR * xAxisY - zAxisY * xAxisR;
+            float yAxisX = zAxisY * xAxisZ - zAxisZ * xAxisY;
+            float yAxisY = zAxisX * xAxisZ - zAxisZ * xAxisX;
+            float yAxisZ = zAxisX * xAxisY - zAxisY * xAxisX;
 
-            M00 = xAxisR;
+            M00 = xAxisX;
             M01 = xAxisY;
             M02 = xAxisZ;
             M03 = 0.0f;
 
-            M10 = yAxisR;
+            M10 = yAxisX;
             M11 = yAxisY;
             M12 = yAxisZ;
             M13 = 0.0f;
 
-            M20 = zAxisR;
+            M20 = zAxisX;
             M21 = zAxisY;
             M22 = zAxisZ;
             M23 = 0.0f;
@@ -1954,7 +2619,7 @@ namespace Raster.Core.Math
         /// <param name="up"></param>
         public void WorldMatrix(in Vector3 position, in Vector3 forward, in Vector3 up)
         {
-            Vector3.Normalize(forward, out Vector3 zAxis);
+            Vector3.Normalize(-forward, out Vector3 zAxis);
             Vector3.Cross(up, zAxis, out Vector3 xAxis);
             
             xAxis.Normalize();

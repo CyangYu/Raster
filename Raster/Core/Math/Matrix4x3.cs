@@ -189,159 +189,54 @@ namespace Raster.Core.Math
         #endregion Public Instance Fields
 
         #region Constructor
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public Matrix4x3(float value)
         {
-            M00 = value;
-            M01 = value;
-            M02 = value;
-
-            M10 = value;
-            M11 = value;
-            M12 = value;
-
-            M20 = value;
-            M21 = value;
-            M22 = value;
-
-            M30 = value;
-            M31 = value;
-            M32 = value;
+            M00 = value; M01 = value; M02 = value;
+            M10 = value; M11 = value; M12 = value;
+            M20 = value; M21 = value; M22 = value;
+            M30 = value; M31 = value; M32 = value;
         }
 
-        public Matrix4x3(Matrix2x2 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = 0.0f;
-
-            M20 = 0.0f;
-            M21 = 0.0f;
-            M22 = 0.0f;
-
-            M30 = 0.0f;
-            M31 = 0.0f;
-            M32 = 0.0f;
-        }
-
-        public Matrix4x3(Matrix2x3 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-
-            M20 = 0.0f;
-            M21 = 0.0f;
-            M22 = 0.0f;
-
-            M30 = 0.0f;
-            M31 = 0.0f;
-            M32 = 0.0f;
-        }
-
-        public Matrix4x3(Matrix3x2 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = 0.0f;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = 0.0f;
-
-            M30 = 0.0f;
-            M31 = 0.0f;
-            M32 = 0.0f;
-        }
-
-        public Matrix4x3(Matrix3x3 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = other.M22;
-
-            M30 = 0.0f;
-            M31 = 0.0f;
-            M32 = 0.0f;
-        }
-
-        public Matrix4x3(in Matrix4x2 other)
-        {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = 0.0f;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = 0.0f;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = 0.0f;
-
-            M30 = other.M30;
-            M31 = other.M31;
-            M32 = 0.0f;
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public Matrix4x3(in Matrix4x3 other)
         {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = other.M22;
-
-            M30 = other.M30;
-            M31 = other.M31;
-            M32 = other.M32;
+            M00 = other.M00; M01 = other.M01; M02 = other.M02;
+            M10 = other.M10; M11 = other.M11; M12 = other.M12;
+            M20 = other.M20; M21 = other.M21; M22 = other.M22;
+            M30 = other.M30; M31 = other.M31; M32 = other.M32;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="m00"></param>
+        /// <param name="m01"></param>
+        /// <param name="m02"></param>
+        /// <param name="m10"></param>
+        /// <param name="m11"></param>
+        /// <param name="m12"></param>
+        /// <param name="m20"></param>
+        /// <param name="m21"></param>
+        /// <param name="m22"></param>
+        /// <param name="m30"></param>
+        /// <param name="m31"></param>
+        /// <param name="m32"></param>
         public Matrix4x3(float m00, float m01, float m02,
                          float m10, float m11, float m12,
                          float m20, float m21, float m22,
                          float m30, float m31, float m32)
         {
-            M00 = m00;
-            M01 = m01;
-            M02 = m02;
-
-            M10 = m10;
-            M11 = m11;
-            M12 = m12;
-
-            M20 = m20;
-            M21 = m21;
-            M22 = m22;
-
-            M30 = m30;
-            M31 = m31;
-            M32 = m32;
+            M00 = m00; M01 = m01; M02 = m02;
+            M10 = m10; M11 = m11; M12 = m12;
+            M20 = m20; M21 = m21; M22 = m22;
+            M30 = m30; M31 = m31; M32 = m32;
         }
         #endregion Constructor
 
@@ -394,7 +289,10 @@ namespace Raster.Core.Math
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(Matrix4x3 other) => this == other;
+        public bool Equals(Matrix4x3 other)
+        {
+            return this == other;
+        }
 
         /// <summary>
         /// 
@@ -434,7 +332,7 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
-        public void SetZero()
+        public void SetToZero()
         {
             M00 = 0.0f;
             M01 = 0.0f;

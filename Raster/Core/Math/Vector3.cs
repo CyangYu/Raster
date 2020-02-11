@@ -112,7 +112,7 @@ namespace Raster.Core.Math
         /// </summary>
         public Vector3 MidPoint
         {
-            get { return new Vector3(X / 2.0f, Y / 2.0f, Z / 2.0f); }
+            get { return new Vector3(X * 0.5f, Y * 0.5f, Z * 0.5f); }
         }
 
         /// <summary>
@@ -129,21 +129,40 @@ namespace Raster.Core.Math
         #endregion Public Instance Properties
 
         #region Constructor
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public Vector3(float value)
             : this(value, value, value)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public Vector3(in Vector3 other)
             : this(other.X, other.Y, other.Z)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vec2"></param>
+        /// <param name="z"></param>
         public Vector3(in Vector2 vec2, float z)
             : this(vec2.X, vec2.Y, z)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
         public Vector3(float x, float y, float z)
         {
             X = x;
@@ -180,7 +199,10 @@ namespace Raster.Core.Math
             return hash;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return string.Format("Vector3: X = {0}, Y = {1}, Z = {2}", X, Y, Z);
@@ -235,6 +257,17 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="value"></param>
+        public void Add(float value)
+        {
+            X += value;
+            Y += value;
+            Z += value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="other"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Add(in Vector3 other)
@@ -242,6 +275,17 @@ namespace Raster.Core.Math
             X += other.X;
             Y += other.Y;
             Z += other.Z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        public void Subtract(float value)
+        {
+            X -= value;
+            Y -= value;
+            Z -= value;
         }
 
         /// <summary>
@@ -303,6 +347,16 @@ namespace Raster.Core.Math
             X /= other.X;
             Y /= other.Y;
             Z /= other.Z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Negate()
+        {
+            X = -X;
+            Y = -Y;
+            Z = -Z;
         }
 
         #endregion Public Instance Methods
@@ -1172,11 +1226,53 @@ namespace Raster.Core.Math
         /// <param name="right"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Add(in Vector3 left, float right, out Vector3 result)
+        {
+            result.X = left.X + right;
+            result.Y = left.Y + right;
+            result.Z = left.Z + right;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Add(in Vector3 left, in Vector3 right, out Vector3 result)
         {
             result.X = left.X + right.X;
             result.Y = left.Y + right.Y;
             result.Z = left.Z + right.Z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Subtract(float left, in Vector3 right, out Vector3 result)
+        {
+            result.X = left - right.X;
+            result.Y = left - right.Y;
+            result.Z = left - right.Z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Subtract(in Vector3 left, float right, out Vector3 result)
+        {
+            result.X = left.X - right;
+            result.Y = left.Y - right;
+            result.Z = left.Z - right;
         }
 
         /// <summary>
@@ -1219,6 +1315,19 @@ namespace Raster.Core.Math
             result.X = left.X * right.X;
             result.Y = left.Y * right.Y;
             result.Z = left.Z * right.Z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Negate(in Vector3 value, out Vector3 result)
+        {
+            result.X = -value.X;
+            result.Y = -value.Y;
+            result.Z = -value.Z;
         }
 
         #endregion Public Static Methods
@@ -1275,18 +1384,6 @@ namespace Raster.Core.Math
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 operator -(in Vector3 left, in Vector3 right)
-        {
-            return new Vector3(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
         public static Vector3 operator -(float left, in Vector3 right)
         {
             return new Vector3(left - right.X, left - right.Y, left - right.Z);
@@ -1301,6 +1398,18 @@ namespace Raster.Core.Math
         public static Vector3 operator -(in Vector3 left, float right)
         {
             return new Vector3(left.X - right, left.Y - right, left.Z - right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 operator -(in Vector3 left, in Vector3 right)
+        {
+            return new Vector3(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
         }
 
         /// <summary>

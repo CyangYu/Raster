@@ -136,32 +136,38 @@ namespace Raster.Core.Math
         #endregion Public Instance Properties
 
         #region Constructor
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public Matrix2x2(float value)
         {
-            M00 = value;
-            M01 = value;
-
-            M10 = value;
-            M11 = value;
+            M00 = value; M01 = value;
+            M10 = value; M11 = value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public Matrix2x2(Matrix2x2 other)
         {
-            M00 = other.M00;
-            M01 = other.M01;
-
-            M10 = other.M10;
-            M11 = other.M11;
+            M00 = other.M00; M01 = other.M01;
+            M10 = other.M10; M11 = other.M11;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="m00"></param>
+        /// <param name="m01"></param>
+        /// <param name="m10"></param>
+        /// <param name="m11"></param>
         public Matrix2x2(float m00, float m01,
                          float m10, float m11)
         {
-            M00 = m00;
-            M01 = m01;
-
-            M10 = m10;
-            M11 = m11;
+            M00 = m00; M01 = m01;
+            M10 = m10; M11 = m11;
         }
 
         #endregion Constructor
@@ -222,11 +228,8 @@ namespace Raster.Core.Math
         /// <param name="value"></param>
         public void Fill(float value)
         {
-            M00 = value;
-            M01 = value;
-
-            M10 = value;
-            M11 = value;
+            M00 = value; M01 = value;
+            M10 = value; M11 = value;
         }
 
         /// <summary>
@@ -234,11 +237,8 @@ namespace Raster.Core.Math
         /// </summary>
         public void SetToZero()
         {
-            M00 = 0.0f;
-            M01 = 0.0f;
-
-            M10 = 0.0f;
-            M11 = 0.0f;
+            M00 = 0.0f; M01 = 0.0f;
+            M10 = 0.0f; M11 = 0.0f;
         }
 
         /// <summary>
@@ -246,11 +246,8 @@ namespace Raster.Core.Math
         /// </summary>
         public void SetToIdentity()
         {
-            M00 = 1.0f;
-            M01 = 0.0f;
-
-            M10 = 0.0f;
-            M11 = 1.0f;
+            M00 = 1.0f; M01 = 0.0f;
+            M10 = 0.0f; M11 = 1.0f;
         }
 
         /// <summary>
@@ -267,11 +264,8 @@ namespace Raster.Core.Math
         /// <param name="other"></param>
         public void Add(in Matrix2x2 other)
         {
-            M00 += other.M00;
-            M01 += other.M01;
-               
-            M10 += other.M10;
-            M11 += other.M11;
+            M00 += other.M00; M01 += other.M01;
+            M10 += other.M10; M11 += other.M11;
         }
 
         /// <summary>
@@ -280,13 +274,9 @@ namespace Raster.Core.Math
         /// <param name="other"></param>
         public void Subtract(in Matrix2x2 other)
         {
-            M00 -= other.M00;
-            M01 -= other.M01;
-
-            M10 -= other.M10;
-            M11 -= other.M11;
+            M00 -= other.M00; M01 -= other.M01;
+            M10 -= other.M10; M11 -= other.M11;
         }
-
         #endregion Public Instance Methods
 
         #region Public Static Methods
