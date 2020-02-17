@@ -181,6 +181,107 @@ namespace Raster.Core.Math
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsZero
+        {
+            get
+            {
+                return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f && M03 == 0.0f &&
+                        M10 == 0.0f && M11 == 0.0f && M12 == 0.0f && M13 == 0.0f &&
+                        M20 == 0.0f && M21 == 0.0f && M22 == 0.0f && M23 == 0.0f);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public float this[int index]
+        {
+            get
+            {
+                switch (index)
+                {
+                    case 0:  return M00;
+                    case 1:  return M01;
+                    case 2:  return M02;
+                    case 3:  return M03;
+                    case 4:  return M10;
+                    case 5:  return M11;
+                    case 6:  return M12;
+                    case 7:  return M13;
+                    case 8:  return M20;
+                    case 9:  return M21;
+                    case 10: return M22;
+                    case 11: return M23;
+                }
+
+                throw new ArgumentOutOfRangeException("index");
+            }
+
+            set
+            {
+                switch (index)
+                {
+                    case 0:  M00 = value; break;
+                    case 1:  M01 = value; break;
+                    case 2:  M02 = value; break;
+                    case 3:  M03 = value; break;
+                    case 4:  M10 = value; break;
+                    case 5:  M11 = value; break;
+                    case 6:  M12 = value; break;
+                    case 7:  M13 = value; break;
+                    case 8:  M20 = value; break;
+                    case 9:  M21 = value; break;
+                    case 10: M22 = value; break;
+                    case 11: M23 = value; break;
+                    default: throw new ArgumentOutOfRangeException("index");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <returns></returns>
+        public float this[int row, int column]
+        {
+            get
+            {
+                if (row < 0 || row > 2)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
+                }
+
+                if (column < 0 || column > 3)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
+                }
+
+                return this[row * 4 + column];
+            }
+
+            set
+            {
+                if (row < 0 || row > 2)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
+                }
+
+                if (column < 0 || column > 3)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
+                }
+
+                this[row * 4 + column] = value;
+            }
+        }
         #endregion Public Instance Properties
 
         #region Constructor
@@ -204,40 +305,18 @@ namespace Raster.Core.Math
 
         public Matrix3x4(in Matrix3x4 other)
         {
-            M00 = other.M00;
-            M01 = other.M01;
-            M02 = other.M02;
-            M03 = other.M03;
-
-            M10 = other.M10;
-            M11 = other.M11;
-            M12 = other.M12;
-            M13 = other.M13;
-
-            M20 = other.M20;
-            M21 = other.M21;
-            M22 = other.M22;
-            M23 = other.M23;
+            M00 = other.M00; M01 = other.M01; M02 = other.M02; M03 = other.M03;
+            M10 = other.M10; M11 = other.M11; M12 = other.M12; M13 = other.M13;
+            M20 = other.M20; M21 = other.M21; M22 = other.M22; M23 = other.M23;
         }
 
         public Matrix3x4(float m00, float m01, float m02, float m03,
                          float m10, float m11, float m12, float m13,
                          float m20, float m21, float m22, float m23)
         {
-            M00 = m00;
-            M01 = m01;
-            M02 = m02;
-            M03 = m03;
-
-            M10 = m10;
-            M11 = m11;
-            M12 = m12;
-            M13 = m13;
-
-            M20 = m20;
-            M21 = m21;
-            M22 = m22;
-            M23 = m23;
+            M00 = m00; M01 = m01; M02 = m02; M03 = m03;
+            M10 = m10; M11 = m11; M12 = m12; M13 = m13;
+            M20 = m20; M21 = m21; M22 = m22; M23 = m23;
         }
 
         #endregion Constructor
@@ -289,18 +368,7 @@ namespace Raster.Core.Math
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>       
-        public bool Equals(Matrix3x4 other) => this == other;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool IsZero()
-        {
-            return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f && M03 == 0.0f &&
-                    M10 == 0.0f && M11 == 0.0f && M12 == 0.0f && M13 == 0.0f &&
-                    M20 == 0.0f && M21 == 0.0f && M22 == 0.0f && M23 == 0.0f);
-        }
+        public bool Equals(Matrix3x4 other) { return this == other; }
 
         /// <summary>
         /// 
@@ -345,6 +413,72 @@ namespace Raster.Core.Math
             M23 = 0.0f;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="firstRow"></param>
+        /// <param name="secondRow"></param>
+        public void ExchangeRows(int firstRow, int secondRow)
+        {
+            if (firstRow == secondRow)
+            {
+                return;
+            }
+
+            float temp0 = this[secondRow, 0];
+            float temp1 = this[secondRow, 1];
+            float temp2 = this[secondRow, 2];
+            float temp3 = this[secondRow, 3];
+
+            this[secondRow, 0] = this[firstRow, 0];
+            this[secondRow, 1] = this[firstRow, 1];
+            this[secondRow, 2] = this[firstRow, 2];
+            this[secondRow, 3] = this[firstRow, 3];
+
+            this[firstRow, 0] = temp0;
+            this[firstRow, 1] = temp1;
+            this[firstRow, 2] = temp2;
+            this[firstRow, 3] = temp3;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="firstColumn"></param>
+        /// <param name="secondColumn"></param>
+        public void ExchangeColumns(int firstColumn, int secondColumn)
+        {
+            if (firstColumn == secondColumn)
+            {
+                return;
+            }
+
+            float temp0 = this[0, secondColumn];
+            float temp1 = this[1, secondColumn];
+            float temp2 = this[2, secondColumn];
+
+            this[0, secondColumn] = this[0, firstColumn];
+            this[1, secondColumn] = this[1, firstColumn];
+            this[2, secondColumn] = this[2, firstColumn];
+
+            this[0, firstColumn] = temp0;
+            this[1, firstColumn] = temp1;
+            this[2, firstColumn] = temp2;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public float[] ToArray()
+        {
+            return new float[]
+            {
+                M00, M01, M02, M03,
+                M10, M11, M12, M13,
+                M20, M21, M22, M23,
+            };
+        }
         #endregion Public Instance Methods
 
         #region Public Static Methods

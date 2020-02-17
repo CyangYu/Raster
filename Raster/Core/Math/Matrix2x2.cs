@@ -133,6 +133,78 @@ namespace Raster.Core.Math
                         M10 == 0.0f && M11 == 1.0f);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public float this[int index]
+        {
+            get
+            {
+                switch (index)
+                {
+                    case 0: return M00;
+                    case 1: return M01;
+                    case 2: return M10;
+                    case 3: return M11;
+                }
+
+                throw new ArgumentOutOfRangeException("index");
+            }
+
+            set
+            {
+                switch (index)
+                {
+                    case 0: M00 = value; break;
+                    case 1: M01 = value; break;
+                    case 2: M10 = value; break;
+                    case 3: M11 = value; break;
+                    default: throw new ArgumentOutOfRangeException("index");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <returns></returns>
+        public float this[int row, int column]
+        {
+            get
+            {
+                if (row < 0 || row > 1)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row 0 to 1");
+                }
+
+                if (column < 0 || column > 1)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row 0 to 1");
+                }
+
+                return this[row * 2 + column];
+            }
+
+            set
+            {
+                if (row < 0 || row > 1)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
+                }
+
+                if (column < 0 || column > 1)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
+                }
+
+                this[row * 2 + column] = value;
+            }
+        }
         #endregion Public Instance Properties
 
         #region Constructor
@@ -256,6 +328,75 @@ namespace Raster.Core.Math
         public void Transpose()
         {
             MathHelper.Swap(ref M01, ref M10);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="firstRow"></param>
+        /// <param name="secondRow"></param>
+        public void ExchangeRows(int firstRow, int secondRow)
+        {
+            if (firstRow == secondRow)
+            {
+                return;
+            }
+
+            float temp0 = this[secondRow, 0];
+            float temp1 = this[secondRow, 1];
+
+            this[secondRow, 0] = this[firstRow, 0];
+            this[secondRow, 1] = this[firstRow, 1];
+
+            this[firstRow, 0] = temp0;
+            this[firstRow, 1] = temp1;
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="firstColumn"></param>
+        /// <param name="secondColumn"></param>
+        public void ExchangeColumns(int firstColumn, int secondColumn)
+        {
+            if (firstColumn == secondColumn)
+            {
+                return;
+            }
+
+            float temp0 = this[0, secondColumn];
+            float temp1 = this[1, secondColumn];
+
+            this[0, secondColumn] = this[0, firstColumn];
+            this[1, secondColumn] = this[1, firstColumn];
+
+            this[0, firstColumn] = temp0;
+            this[1, firstColumn] = temp1;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public float[] ToArray(bool rowMajor)
+        {
+            if (rowMajor == true)
+            {
+                return new float[]
+                {
+                    M00, M01,
+                    M10, M11
+                };
+            }
+            else
+            {
+                return new float[]
+                {
+                    M00, M10,
+                    M01, M11
+                };
+            }
         }
 
         /// <summary>

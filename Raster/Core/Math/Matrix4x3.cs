@@ -186,6 +186,109 @@ namespace Raster.Core.Math
                 return 0.0f;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsZero
+        {
+            get
+            {
+                return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f &&
+                        M10 == 0.0f && M11 == 0.0f && M12 == 0.0f &&
+                        M20 == 0.0f && M21 == 0.0f && M22 == 0.0f &&
+                        M30 == 0.0f && M31 == 0.0f && M32 == 0.0f);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public float this[int index]
+        {
+            get
+            {
+                switch (index)
+                {
+                    case 0:  return M00;
+                    case 1:  return M01;
+                    case 2:  return M02;
+                    case 3:  return M10;
+                    case 4:  return M11;
+                    case 5:  return M12;
+                    case 6:  return M20;
+                    case 7:  return M21;
+                    case 8:  return M22;
+                    case 9:  return M30;
+                    case 10: return M31;
+                    case 11: return M32;
+                }
+
+                throw new ArgumentOutOfRangeException("index");
+            }
+
+            set
+            {
+                switch (index)
+                {
+                    case 0:  M00 = value; break;
+                    case 1:  M01 = value; break;
+                    case 2:  M02 = value; break;
+                    case 3:  M10 = value; break;
+                    case 4:  M11 = value; break;
+                    case 5:  M12 = value; break;
+                    case 6:  M20 = value; break;
+                    case 7:  M21 = value; break;
+                    case 8:  M22 = value; break;
+                    case 9:  M30 = value; break;
+                    case 10: M31 = value; break;
+                    case 11: M32 = value; break;
+                    default: throw new ArgumentOutOfRangeException("index");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <returns></returns>
+        public float this[int row, int column]
+        {
+            get
+            {
+                if (row < 0 || row > 3)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
+                }
+
+                if (column < 0 || column > 2)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
+                }
+
+                return this[row * 3 + column];
+            }
+
+            set
+            {
+                if (row < 0 || row > 3)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
+                }
+
+                if (column < 0 || column > 2)
+                {
+                    throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
+                }
+
+                this[row * 3 + column] = value;
+            }
+        }
         #endregion Public Instance Fields
 
         #region Constructor
@@ -289,10 +392,7 @@ namespace Raster.Core.Math
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(Matrix4x3 other)
-        {
-            return this == other;
-        }
+        public bool Equals(Matrix4x3 other) { return this == other; }
 
         /// <summary>
         /// 
@@ -320,18 +420,6 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        public bool IsZero()
-        {
-            return (M00 == 0.0f && M01 == 0.0f && M02 == 0.0f &&
-                    M10 == 0.0f && M11 == 0.0f && M12 == 0.0f &&
-                    M20 == 0.0f && M21 == 0.0f && M22 == 0.0f &&
-                    M30 == 0.0f && M31 == 0.0f && M32 == 0.0f);
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
         public void SetToZero()
         {
             M00 = 0.0f;
@@ -351,6 +439,73 @@ namespace Raster.Core.Math
             M32 = 0.0f;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="firstRow"></param>
+        /// <param name="secondRow"></param>
+        public void ExchangeRows(int firstRow, int secondRow)
+        {
+            if (firstRow == secondRow)
+            {
+                return;
+            }
+
+            float temp0 = this[secondRow, 0];
+            float temp1 = this[secondRow, 1];
+            float temp2 = this[secondRow, 2];
+
+            this[secondRow, 0] = this[firstRow, 0];
+            this[secondRow, 1] = this[firstRow, 1];
+            this[secondRow, 2] = this[firstRow, 2];
+
+            this[firstRow, 0] = temp0;
+            this[firstRow, 1] = temp1;
+            this[firstRow, 2] = temp2;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="firstColumn"></param>
+        /// <param name="secondColumn"></param>
+        public void ExchangeColumns(int firstColumn, int secondColumn)
+        {
+            if (firstColumn == secondColumn)
+            {
+                return;
+            }
+
+            float temp0 = this[0, secondColumn];
+            float temp1 = this[1, secondColumn];
+            float temp2 = this[2, secondColumn];
+            float temp3 = this[3, secondColumn];
+
+            this[0, secondColumn] = this[0, firstColumn];
+            this[1, secondColumn] = this[1, firstColumn];
+            this[2, secondColumn] = this[2, firstColumn];
+            this[3, secondColumn] = this[3, firstColumn];
+
+            this[0, firstColumn] = temp0;
+            this[1, firstColumn] = temp1;
+            this[2, firstColumn] = temp2;
+            this[3, firstColumn] = temp3;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public float[] ToArray()
+        {
+            return new float[]
+            {
+                M00, M01, M02,
+                M10, M11, M12,
+                M20, M21, M22,
+                M30, M31, M32,
+            };
+        }
         #endregion Public Instance Methods
 
         #region Public Static Methods

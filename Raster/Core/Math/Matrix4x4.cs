@@ -377,7 +377,7 @@ namespace Raster.Core.Math
         {
             get
             {
-                Matrix4x4.Inverse(this, out Matrix4x4 result);
+                Matrix4x4.Invert(this, out Matrix4x4 result);
                 return result;
             }
         }
@@ -454,7 +454,7 @@ namespace Raster.Core.Math
                     throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
                 }
 
-                if (column < 0 || row > 3)
+                if (column < 0 || column > 3)
                 {
                     throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
                 }
@@ -469,7 +469,7 @@ namespace Raster.Core.Math
                     throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
                 }
 
-                if (column < 0 || row > 3)
+                if (column < 0 || column > 3)
                 {
                     throw new ArgumentOutOfRangeException("row", "Row and column from 0 to 3");
                 }
@@ -557,10 +557,25 @@ namespace Raster.Core.Math
             float yz2 = rotation.Y * z2;
             float zz2 = rotation.Z * z2;
 
-            M00 = (1.0f - yy2 - zz2) * scale.X; M01 = (xy2 + wz2) * scale.X;        M02 = (xz2 - wy2) * scale.X;        M03 = 0.0f;
-            M10 = (xy2 - wz2) * scale.Y;        M11 = (1.0f - xx2 - zz2) * scale.Y; M12 = (yz2 + wx2) * scale.Y;        M13 = 0.0f;
-            M20 = (xz2 + wy2) * scale.Z;        M21 = (yz2 - wx2) * scale.Z;        M22 = (1.0f - xx2 - yy2) * scale.Z; M23 = 0.0f;
-            M30 = translation.X;                M31 = translation.Y;                M32 = translation.Z;                M33 = 1.0f;
+            M00 = (1.0f - yy2 - zz2) * scale.X; 
+            M01 = (xy2 + wz2) * scale.X;        
+            M02 = (xz2 - wy2) * scale.X;        
+            M03 = 0.0f;
+            
+            M10 = (xy2 - wz2) * scale.Y;        
+            M11 = (1.0f - xx2 - zz2) * scale.Y; 
+            M12 = (yz2 + wx2) * scale.Y;        
+            M13 = 0.0f;
+            
+            M20 = (xz2 + wy2) * scale.Z;        
+            M21 = (yz2 - wx2) * scale.Z;        
+            M22 = (1.0f - xx2 - yy2) * scale.Z; 
+            M23 = 0.0f;
+            
+            M30 = translation.X;                
+            M31 = translation.Y;                
+            M32 = translation.Z;                
+            M33 = 1.0f;
         }
 
         #endregion Constructor
@@ -814,18 +829,192 @@ namespace Raster.Core.Math
             MathHelper.Swap(ref M13, ref M31);
             MathHelper.Swap(ref M23, ref M32);
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="firstRow"></param>
+        /// <param name="secondRow"></param>
+        public void ExchangeRows(int firstRow, int secondRow)
+        {
+            if (firstRow == secondRow)
+            {
+                return;
+            }
+
+            float temp0 = this[secondRow, 0];
+            float temp1 = this[secondRow, 1];
+            float temp2 = this[secondRow, 2];
+            float temp3 = this[secondRow, 3];
+
+            this[secondRow, 0] = this[firstRow, 0];
+            this[secondRow, 1] = this[firstRow, 1];
+            this[secondRow, 2] = this[firstRow, 2];
+            this[secondRow, 3] = this[firstRow, 3];
+
+            this[firstRow, 0] = temp0;
+            this[firstRow, 1] = temp1;
+            this[firstRow, 2] = temp2;
+            this[firstRow, 3] = temp3;
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="other"></param>
-        public void CopyFrom(in Matrix4x4 other)
+        /// <param name="firstColumn"></param>
+        /// <param name="secondColumn"></param>
+        public void ExchangeColumns(int firstColumn, int secondColumn)
         {
-            M00 = other.M00; M01 = other.M01; M02 = other.M02; M03 = other.M03;
-            M10 = other.M10; M11 = other.M11; M12 = other.M12; M13 = other.M13;
-            M20 = other.M20; M21 = other.M21; M22 = other.M22; M23 = other.M23;
-            M30 = other.M30; M31 = other.M31; M32 = other.M32; M33 = other.M33;
+            if (firstColumn == secondColumn)
+            {
+                return;
+            }
+
+            float temp0 = this[0, secondColumn];
+            float temp1 = this[1, secondColumn];
+            float temp2 = this[2, secondColumn];
+            float temp3 = this[3, secondColumn];
+
+            this[0, secondColumn] = this[0, firstColumn];
+            this[1, secondColumn] = this[1, firstColumn];
+            this[2, secondColumn] = this[2, firstColumn];
+            this[3, secondColumn] = this[3, firstColumn];
+
+            this[0, firstColumn] = temp0;
+            this[1, firstColumn] = temp1;
+            this[2, firstColumn] = temp2;
+            this[3, firstColumn] = temp3;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public float[] ToArray(bool rowMajor)
+        {
+            if (rowMajor == true)
+            {
+                return new float[]
+                {
+                    M00, M01, M02, M03,
+                    M10, M11, M12, M13,
+                    M20, M21, M22, M23,
+                    M30, M31, M32, M33
+                };
+            }
+            else
+            {
+                return new float[]
+                {
+                    M00, M10, M20, M30,
+                    M01, M11, M21, M31,
+                    M02, M12, M22, M32,
+                    M03, M13, M23, M33
+                };
+            }
+        }
+
+        #region Decompose
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="translation"></param>
+        /// <param name="rotation"></param>
+        /// <param name="scale"></param>
+        /// <returns></returns>
+        public bool DecomposeTRS(out Vector3 translation, out Quaternion rotation, out Vector3 scale)
+        {
+            translation.X = M30;
+            translation.Y = M31;
+            translation.Z = M32;
+
+            scale.X = MathF.Sqrt(M00 * M00 + M01 * M01 + M02 * M02);
+            scale.Y = MathF.Sqrt(M10 * M10 + M11 * M11 + M12 * M12);
+            scale.Z = MathF.Sqrt(M20 * M20 + M21 * M21 + M22 * M22);
+
+            if (MathHelper.IsZero(scale.X) || MathHelper.IsZero(scale.Y) ||
+                MathHelper.IsZero(scale.Z))
+            {
+                rotation = Quaternion.Identity;
+                return false;
+            }
+
+            float invScaleX = 1.0f / scale.X;
+            float invScaleY = 1.0f / scale.Y;
+            float invScaleZ = 1.0f / scale.Z;
+
+            M00 *= invScaleX; M01 *= invScaleX; M02 *= invScaleX;
+            M10 *= invScaleY; M11 *= invScaleY; M12 *= invScaleY;
+            M20 *= invScaleZ; M21 *= invScaleZ; M22 *= invScaleZ;
+
+            Quaternion.FromRotationMatrix(this, out rotation);
+
+            M00 *= scale.X; M01 *= scale.X; M02 *= scale.X;
+            M10 *= scale.Y; M11 *= scale.Y; M12 *= scale.Y;
+            M20 *= scale.Z; M21 *= scale.Z; M22 *= scale.Z;
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="L"></param>
+        /// <param name="Q"></param>
+        public void DecomposeLQ(out Matrix4x4 L, out Matrix4x4 Q)
+        {
+            Matrix4x4.Orthonormalize(this, out Q);
+
+            L.M00 = Q.M00 * M00 + Q.M01 * M01 + Q.M02 * M02 + Q.M03 * M03;
+
+            L.M10 = Q.M00 * M10 + Q.M01 * M11 + Q.M02 * M12 + Q.M03 * M13;
+            L.M11 = Q.M10 * M10 + Q.M11 * M11 + Q.M12 * M12 + Q.M13 * M13;
+
+            L.M20 = Q.M00 * M20 + Q.M01 * M21 + Q.M02 * M22 + Q.M03 * M23;
+            L.M21 = Q.M10 * M20 + Q.M11 * M21 + Q.M12 * M22 + Q.M13 * M23;
+            L.M22 = Q.M20 * M20 + Q.M21 * M21 + Q.M22 * M22 + Q.M23 * M23;
+
+            L.M30 = Q.M00 * M30 + Q.M01 * M31 + Q.M02 * M32 + Q.M03 * M33;
+            L.M31 = Q.M01 * M30 + Q.M11 * M31 + Q.M12 * M32 + Q.M13 * M33;
+            L.M32 = Q.M02 * M30 + Q.M21 * M31 + Q.M22 * M32 + Q.M23 * M33;
+            L.M33 = Q.M03 * M30 + Q.M31 * M31 + Q.M32 * M32 + Q.M33 * M33;
+
+            L.M01 = L.M02 = L.M03 = 0.0f;
+            L.M12 = L.M13 = 0.0f;
+            L.M23 = 0.0f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Q"></param>
+        /// <param name="R"></param>
+        public void DecomposeQR(out Matrix4x4 Q, out Matrix4x4 R)
+        {
+            Matrix4x4.Transpose(this, out Matrix4x4 temp);
+            Matrix4x4.Orthonormalize(temp, out Q);
+
+            Q.Transpose();
+
+            R.M00 = Q.M00 * M00 + Q.M10 * M10 + Q.M20 * M20 + Q.M30 * M30;
+            R.M01 = Q.M00 * M01 + Q.M10 * M11 + Q.M20 * M21 + Q.M30 * M31;
+            R.M02 = Q.M00 * M02 + Q.M10 * M12 + Q.M20 * M22 + Q.M30 * M32;
+            R.M03 = Q.M00 * M03 + Q.M10 * M13 + Q.M20 * M23 + Q.M30 * M33;
+
+            R.M11 = Q.M01 * M01 + Q.M11 * M11 + Q.M21 * M21 + Q.M31 * M31;
+            R.M12 = Q.M01 * M02 + Q.M11 * M12 + Q.M21 * M22 + Q.M31 * M32;
+            R.M13 = Q.M01 * M03 + Q.M11 * M13 + Q.M21 * M23 + Q.M31 * M33;
+
+            R.M22 = Q.M02 * M02 + Q.M12 * M12 + Q.M22 * M22 + Q.M32 * M32;
+            R.M23 = Q.M02 * M03 + Q.M12 * M13 + Q.M22 * M23 + Q.M32 * M22;
+
+            R.M33 = Q.M03 * M03 + Q.M13 * M13 + Q.M23 * M23 + Q.M33 * M33;
+
+            R.M10 = 0.0f;
+            R.M20 = R.M21 = 0.0f;
+            R.M30 = R.M31 = R.M32 = 0.0f;
+        }
+
+        #endregion Decompose
 
         #region Affine Transform
         /// <summary>
@@ -834,14 +1023,15 @@ namespace Raster.Core.Math
         /// <param name="angle"></param>
         public void RotateX(float angle)
         {
-            float s = MathF.Sin(angle);
-            float c = MathF.Cos(angle);
-            float temp = 0.0f;
-
             // [  1  0  0  0 ]
             // [  0  c  s  0 ]
             // [  0 -s  c  0 ]
             // [  0  0  0  1 ]
+
+            float s = MathF.Sin(angle);
+            float c = MathF.Cos(angle);
+            float temp = 0.0f;
+
             M10 = (temp = M10) * c + M20 * s;
             M20 = M20 * c - temp * s;
 
@@ -862,16 +1052,38 @@ namespace Raster.Core.Math
         /// <param name="centerPoint"></param>
         public void RotateX(float angle, in Vector3 centerPoint)
         {
+            // [  1  0  0  0 ]
+            // [  0  c  s  0 ]
+            // [  0 -s  c  0 ]
+            // [  0  y  z  1 ]
+
             float c = MathF.Cos(angle);
             float s = MathF.Sin(angle);
 
             float y = centerPoint.Y * (1.0f - c) + centerPoint.Z * s;
             float z = centerPoint.Z * (1.0f - c) - centerPoint.Y * s;
 
-            // [  1  0  0  0 ]
-            // [  0  c  s  0 ]
-            // [  0 -s  c  0 ]
-            // [  0  y  z  1 ]
+            float m10 = M00;
+            float m11 = M11;
+            float m12 = M12;
+            float m13 = M13;
+
+            M10 = m10 * c + M20 * s;
+            M20 = M20 * c - m10 * s;
+
+            M11 = m11 * c + M21 * s;
+            M21 = M21 * c - m11 * s;
+
+            M12 = m12 * c + M22 * s;
+            M22 = M22 * c - m12 * s;
+
+            M13 = m13 * c + M23 * s;
+            M23 = M23 * c - m13 * s;
+
+            M30 += m10 * y + M20 * z;
+            M31 += m11 * y + M21 * z;
+            M32 += m12 * y + M22 * z;
+            M33 += m13 * y + M23 * z;
         }
 
         /// <summary>
@@ -880,14 +1092,15 @@ namespace Raster.Core.Math
         /// <param name="angle"></param>   
         public void RotateY(float angle)
         {
-            float s = MathF.Sin(angle);
-            float c = MathF.Cos(angle);
-            float temp = 0.0f;
-
             // [  c  0 -s  0 ]
             // [  0  1  0  0 ]
             // [  s  0  c  0 ]
             // [  0  0  0  1 ]
+
+            float s = MathF.Sin(angle);
+            float c = MathF.Cos(angle);
+            float temp = 0.0f;
+
             M20 = (temp = M20) * c + M00 * s;
             M00 = M00 * c - temp * s;
 
@@ -908,17 +1121,38 @@ namespace Raster.Core.Math
         /// <param name="centerPoint"></param>
         public void RotateY(float angle, in Vector3 centerPoint)
         {
+            // [  c  0 -s  0 ]
+            // [  0  1  0  0 ]
+            // [  s  0  c  0 ]
+            // [  x  0  z  1 ]
+
             float c = MathF.Cos(angle);
             float s = MathF.Sin(angle);
 
             float x = centerPoint.X * (1.0f - c) + centerPoint.Z * s;
             float z = centerPoint.Z * (1.0f - c) - centerPoint.X * s;
 
+            float m20 = M20;
+            float m21 = M21;
+            float m22 = M22;
+            float m23 = M23;
 
-            // [  c  0 -s  0 ]
-            // [  0  1  0  0 ]
-            // [  s  0  c  0 ]
-            // [  x  0  z  1 ]
+            M20 = m20 * c + M00 * s;
+            M00 = M00 * c - m20 * s;
+
+            M21 = m21 * c + M01 * s;
+            M01 = M01 * c - m21 * s;
+
+            M22 = m22 * c + M02 * s;
+            M02 = M02 * c - m22 * s;
+
+            M23 = m23 * c + M03 * s;
+            M03 = M03 * c - m23 * s;
+
+            M30 += M00 * x + m20 * z;
+            M31 += M01 * x + m21 * z;
+            M32 += M02 * x + m22 * z;
+            M33 += M03 * x + m23 * z;
         }
 
         /// <summary>
@@ -927,14 +1161,15 @@ namespace Raster.Core.Math
         /// <param name="angle"></param>
         public void RotateZ(float angle)
         {
-            float s = MathF.Sin(angle);
-            float c = MathF.Cos(angle);
-            float temp = 0.0f;
-
             // [  c  s  0  0 ]
             // [ -s  c  0  0 ]
             // [  0  0  0  0 ]
             // [  0  0  0  1 ]
+
+            float s = MathF.Sin(angle);
+            float c = MathF.Cos(angle);
+            float temp = 0.0f;
+
             M00 = (temp = M00) * c + M10 * s;
             M10 = M10 * c - temp * s;
 
@@ -955,16 +1190,38 @@ namespace Raster.Core.Math
         /// <param name="centerPoint"></param>
         public void RotateZ(float angle, in Vector3 centerPoint)
         {
+            // [  c  s  0  0 ]
+            // [ -s  c  0  0 ]
+            // [  0  0  1  0 ]
+            // [  x  y  0  1 ]
+
             float c = MathF.Cos(angle);
             float s = MathF.Sin(angle);
 
             float x = centerPoint.X * (1.0f - c) + centerPoint.Y * s;
             float y = centerPoint.Y * (1.0f - c) - centerPoint.X * s;
 
-            // [  c  s  0  0 ]
-            // [ -s  c  0  0 ]
-            // [  0  0  1  0 ]
-            // [  x  y  0  1 ]
+            float m00 = M00;
+            float m01 = M01;
+            float m02 = M02;
+            float m03 = M03;
+
+            M00 = m00 * c + M10 * s;
+            M10 = M10 * c - m00 * s;
+
+            M01 = m01 * c + M11 * s;
+            M11 = M11 * c - m01 * s;
+
+            M02 = m02 * c + M12 * s;
+            M12 = M12 * c - m02 * s;
+
+            M03 = m03 * c + M13 * s;
+            M13 = M13 * c - m03 * s;
+
+            M30 += m00 * x + M10 * y;
+            M31 += m01 * x + M11 * y;
+            M32 += m02 * x + M12 * y;
+            M33 += m03 * x + M13 * y;
         }
 
         /// <summary>
@@ -1126,51 +1383,30 @@ namespace Raster.Core.Math
             float yz2 = rotation.Y * z2;
             float zz2 = rotation.Z * z2;
 
-            M00 = (1.0f - yy2 - zz2) * scale.X; M01 = (xy2 + wz2) * scale.X;        M02 = (xz2 - wy2) * scale.X;        M03 = 0.0f;
-            M10 = (xy2 - wz2) * scale.Y;        M11 = (1.0f - xx2 - zz2) * scale.Y; M12 = (yz2 + wx2) * scale.Y;        M13 = 0.0f;
-            M20 = (xz2 + wy2) * scale.Z;        M21 = (yz2 - wx2) * scale.Z;        M22 = (1.0f - xx2 - yy2) * scale.Z; M23 = 0.0f;
-            M30 = translation.X;                M31 = translation.Y;                M32 = translation.Z;                M33 = 1.0f;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="translation"></param>
-        /// <param name="rotation"></param>
-        /// <param name="scale"></param>
-        /// <returns></returns>
-        public bool DecomposeTRS(out Vector3 translation, out Quaternion rotation, out Vector3 scale)
-        {
-            translation.X = M30;
-            translation.Y = M31;
-            translation.Z = M32;
-
-            scale.X = MathF.Sqrt(M00 * M00 + M01 * M01 + M02 * M02);
-            scale.Y = MathF.Sqrt(M10 * M10 + M11 * M11 + M12 * M12);
-            scale.Z = MathF.Sqrt(M20 * M20 + M21 * M21 + M22 * M22);
+            M00 = (1.0f - yy2 - zz2) * scale.X; 
+            M01 = (xy2 + wz2) * scale.X;        
+            M02 = (xz2 - wy2) * scale.X;        
+            M03 = 0.0f;
             
-            if (MathHelper.IsZero(scale.X) || MathHelper.IsZero(scale.Y) ||
-                MathHelper.IsZero(scale.Z))
-            {
-                rotation = Quaternion.Identity;
-                return false;
-            }
+            M10 = (xy2 - wz2) * scale.Y;        
+            M11 = (1.0f - xx2 - zz2) * scale.Y; 
+            M12 = (yz2 + wx2) * scale.Y;        
+            M13 = 0.0f;
 
-            float invScaleX = 1.0f / scale.X;
-            float invScaleY = 1.0f / scale.Y;
-            float invScaleZ = 1.0f / scale.Z;
+            M20 = (xz2 + wy2) * scale.Z;        
+            M21 = (yz2 - wx2) * scale.Z;        
+            M22 = (1.0f - xx2 - yy2) * scale.Z; 
+            M23 = 0.0f;
 
-            Matrix3x3 rot3x3;
-
-            rot3x3.M00 = M00 * invScaleX; rot3x3.M01 = M01 * invScaleX; rot3x3.M02 = M02 * invScaleX;
-            rot3x3.M10 = M10 * invScaleY; rot3x3.M11 = M11 * invScaleY; rot3x3.M12 = M12 * invScaleY;
-            rot3x3.M20 = M20 * invScaleZ; rot3x3.M21 = M21 * invScaleZ; rot3x3.M22 = M22 * invScaleZ;
-
-            Quaternion.FromRotationMatrix(rot3x3, out rotation);
-            return true;
+            M30 = translation.X;                
+            M31 = translation.Y;                
+            M32 = translation.Z;                
+            M33 = 1.0f;
         }
+
         #endregion Affine Transform
 
+        #region View Transform
         /// <summary>
         /// 
         /// </summary>
@@ -1322,6 +1558,7 @@ namespace Raster.Core.Math
             LookAtRH(eye.X, eye.Y, eye.Z, center.X, center.Y, center.Z, up.X, up.Y, up.Z);
 #endif
         }
+        #endregion View Transform
 
         #region Projection Transform
         /// <summary>
@@ -2819,6 +3056,17 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static Matrix4x4 Invert(in Matrix4x4 matrix)
+        {
+            Invert(matrix, out Matrix4x4 result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
         /// <param name="rotation"></param>
         /// <returns></returns>
         public static Matrix4x4 Transform(in Matrix4x4 matrix, in Quaternion rotation)
@@ -3415,8 +3663,101 @@ namespace Raster.Core.Math
         /// </summary>
         /// <param name="matrix"></param>
         /// <param name="result"></param>
-        public static bool Inverse(in Matrix4x4 matrix, out Matrix4x4 result)
+        public static bool Invert(in Matrix4x4 matrix, out Matrix4x4 result)
         {
+            //                                       -1
+            // If you have matrix M, inverse Matrix M   can compute
+            //
+            //     -1       1      
+            //    M   = --------- A
+            //            det(M)
+            //
+            // A is adjugate (adjoint) of M, where,
+            //
+            //      T
+            // A = C
+            //
+            // C is Cofactor matrix of M, where,
+            //           i + j
+            // C   = (-1)      * det(M  )
+            //  ij                    ij
+            //
+            //     [ a b c d ]
+            // M = [ e f g h ]
+            //     [ i j k l ]
+            //     [ m n o p ]
+            //
+            // First Row
+            //           2 | f g h |
+            // C   = (-1)  | j k l | = + ( f ( kp - lo ) - g ( jp - ln ) + h ( jo - kn ) )
+            //  11         | n o p |
+            //
+            //           3 | e g h |
+            // C   = (-1)  | i k l | = - ( e ( kp - lo ) - g ( ip - lm ) + h ( io - km ) )
+            //  12         | m o p |
+            //
+            //           4 | e f h |
+            // C   = (-1)  | i j l | = + ( e ( jp - ln ) - f ( ip - lm ) + h ( in - jm ) )
+            //  13         | m n p |
+            //
+            //           5 | e f g |
+            // C   = (-1)  | i j k | = - ( e ( jo - kn ) - f ( io - km ) + g ( in - jm ) )
+            //  14         | m n o |
+            //
+            // Second Row
+            //           3 | b c d |
+            // C   = (-1)  | j k l | = - ( b ( kp - lo ) - c ( jp - ln ) + d ( jo - kn ) )
+            //  21         | n o p |
+            //
+            //           4 | a c d |
+            // C   = (-1)  | i k l | = + ( a ( kp - lo ) - c ( ip - lm ) + d ( io - km ) )
+            //  22         | m o p |
+            //
+            //           5 | a b d |
+            // C   = (-1)  | i j l | = - ( a ( jp - ln ) - b ( ip - lm ) + d ( in - jm ) )
+            //  23         | m n p |
+            //
+            //           6 | a b c |
+            // C   = (-1)  | i j k | = + ( a ( jo - kn ) - b ( io - km ) + c ( in - jm ) )
+            //  24         | m n o |
+            //
+            // Third Row
+            //           4 | b c d |
+            // C   = (-1)  | f g h | = + ( b ( gp - ho ) - c ( fp - hn ) + d ( fo - gn ) )
+            //  31         | n o p |
+            //
+            //           5 | a c d |
+            // C   = (-1)  | e g h | = - ( a ( gp - ho ) - c ( ep - hm ) + d ( eo - gm ) )
+            //  32         | m o p |
+            //
+            //           6 | a b d |
+            // C   = (-1)  | e f h | = + ( a ( fp - hn ) - b ( ep - hm ) + d ( en - fm ) )
+            //  33         | m n p |
+            //
+            //           7 | a b c |
+            // C   = (-1)  | e f g | = - ( a ( fo - gn ) - b ( eo - gm ) + c ( en - fm ) )
+            //  34         | m n o |
+            //
+            // Fourth Row
+            //           5 | b c d |
+            // C   = (-1)  | f g h | = - ( b ( gl - hk ) - c ( fl - hj ) + d ( fk - gj ) )
+            //  41         | j k l |
+            //
+            //           6 | a c d |
+            // C   = (-1)  | e g h | = + ( a ( gl - hk ) - c ( el - hi ) + d ( ek - gi ) )
+            //  42         | i k l |
+            //
+            //           7 | a b d |
+            // C   = (-1)  | e f h | = - ( a ( fl - hj ) - b ( el - hi ) + d ( ej - fi ) )
+            //  43         | i j l |
+            //
+            //           8 | a b c |
+            // C   = (-1)  | e f g | = + ( a ( fk - gj ) - b ( ek - gi ) + c ( ej - fi ) )
+            //  44         | i j k |
+            //
+            // Cost of operation
+            // 53 adds, 104 muls, and 1 div.
+
             // a = M00, b = M01, c = M02, d = M03,
             // e = M10, f = M11, g = M12, h = M13,
             // i = M20, j = M21, k = M22, l = M23,
@@ -3479,6 +3820,146 @@ namespace Raster.Core.Math
             result.M33 = +(matrix.M00 * fk_gj - matrix.M01 * ek_gi + matrix.M02 * ej_fi) * invDet;
 
             return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        public static void Orthogonalize(in Matrix4x4 matrix, out Matrix4x4 result)
+        {
+            result = matrix;
+
+            float div0, div1, div2;
+            float dot0, dot1, dot2, dot3, dot4, dot5;
+           
+            dot0 = result.M00 * result.M00 + result.M01 * result.M01 +
+                   result.M02 * result.M02 + result.M03 * result.M03;
+            dot1 = result.M10 * result.M10 + result.M11 * result.M11 +
+                   result.M12 * result.M12 + result.M13 * result.M13;
+            dot2 = result.M20 * result.M20 + result.M21 * result.M21 +
+                   result.M22 * result.M22 + result.M23 * result.M23;
+
+            dot3 = result.M00 * result.M10 + result.M01 * result.M11 +
+                   result.M02 * result.M12 + result.M03 * result.M13;
+
+            div0 = dot3 / dot0;
+
+            result.M10 -= div0 * result.M00;
+            result.M11 -= div0 * result.M01;
+            result.M12 -= div0 * result.M02;
+            result.M13 -= div0 * result.M03;
+
+            dot3 = result.M00 * result.M20 + result.M01 * result.M21 +
+                   result.M02 * result.M22 + result.M03 * result.M23;
+            dot4 = result.M10 * result.M20 + result.M11 * result.M21 +
+                   result.M12 * result.M22 + result.M13 * result.M23;
+
+            div0 = dot3 / dot0;
+            div1 = dot4 / dot1;
+
+            result.M20 -= (div0 * result.M00 + div1 * result.M10);
+            result.M21 -= (div0 * result.M01 + div1 * result.M11);
+            result.M22 -= (div0 * result.M02 + div1 * result.M12);
+            result.M23 -= (div0 * result.M03 + div1 * result.M13);
+
+            dot3 = result.M00 * result.M30 + result.M01 * result.M31 +
+                   result.M02 * result.M32 + result.M03 * result.M33;
+            dot4 = result.M10 * result.M30 + result.M11 * result.M31 +
+                   result.M12 * result.M32 + result.M13 * result.M33;
+            dot5 = result.M20 * result.M30 + result.M21 * result.M31 +
+                   result.M22 * result.M32 + result.M23 * result.M33;
+
+            div0 = dot3 / dot0;
+            div1 = dot4 / dot1;
+            div2 = dot5 / dot2;
+
+            result.M30 -= (div0 * result.M00 + div1 * result.M10 + div2 * result.M20);
+            result.M31 -= (div0 * result.M01 + div1 * result.M11 + div2 * result.M21);
+            result.M32 -= (div0 * result.M02 + div1 * result.M12 + div2 * result.M22);
+            result.M33 -= (div0 * result.M03 + div1 * result.M13 + div2 * result.M23);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="result"></param>
+        public static void Orthonormalize(in Matrix4x4 matrix, out Matrix4x4 result)
+        {
+            result = matrix;
+
+            float dot0, dot1, dot2;
+            float invSqrt = MathHelper.FastSqrtInverse(result.M00 * result.M00 + result.M01 * result.M01 + 
+                                                       result.M02 * result.M02 + result.M03 * result.M03);
+            if (float.IsInfinity(invSqrt) == false)
+            {
+                result.M00 *= invSqrt;
+                result.M01 *= invSqrt;
+                result.M02 *= invSqrt;
+                result.M03 *= invSqrt;
+            }
+
+            dot0 = (result.M00 * result.M10 + result.M01 * result.M11 +
+                    result.M02 * result.M12 + result.M03 * result.M13);
+            
+            result.M10 -= dot0 * result.M00;
+            result.M11 -= dot0 * result.M01;
+            result.M12 -= dot0 * result.M02;
+            result.M13 -= dot0 * result.M03;
+
+            invSqrt = MathHelper.FastSqrtInverse(result.M10 * result.M10 + result.M11 * result.M11 +
+                                                 result.M12 * result.M12 + result.M13 * result.M13);
+            if (float.IsInfinity(invSqrt) == false)
+            {
+                result.M10 *= invSqrt;
+                result.M11 *= invSqrt;
+                result.M12 *= invSqrt;
+                result.M13 *= invSqrt;
+            }
+
+            dot0 = (result.M00 * result.M20 + result.M01 * result.M21 +
+                    result.M02 * result.M22 + result.M03 * result.M23);
+            dot1 = (result.M10 * result.M20 + result.M11 * result.M21 +
+                    result.M12 * result.M22 + result.M13 * result.M23);
+
+            result.M20 -= dot0 * result.M00 + dot1 * result.M10;
+            result.M21 -= dot0 * result.M01 + dot1 * result.M11;
+            result.M22 -= dot0 * result.M02 + dot1 * result.M12;
+            result.M23 -= dot0 * result.M03 + dot1 * result.M13;
+
+            invSqrt = MathHelper.FastSqrtInverse(result.M20 * result.M20 + result.M21 * result.M21 +
+                                                 result.M22 * result.M22 + result.M23 * result.M23);
+            if (float.IsInfinity(invSqrt) == false)
+            {
+                result.M20 *= invSqrt;
+                result.M21 *= invSqrt;
+                result.M22 *= invSqrt;
+                result.M23 *= invSqrt;
+            }
+
+            dot0 = (result.M00 * result.M30 + result.M01 * result.M31 +
+                    result.M02 * result.M32 + result.M03 * result.M33);
+            dot1 = (result.M10 * result.M30 + result.M11 * result.M31 +
+                    result.M12 * result.M32 + result.M13 * result.M33);
+            dot2 = (result.M20 * result.M30 + result.M21 * result.M31 +
+                    result.M22 * result.M32 + result.M23 * result.M33);
+
+            result.M30 -= dot0 * result.M00 + dot1 * result.M10 - dot2 * result.M30;
+            result.M31 -= dot0 * result.M01 + dot1 * result.M11 - dot2 * result.M31;
+            result.M32 -= dot0 * result.M02 + dot1 * result.M12 - dot2 * result.M32;
+            result.M33 -= dot0 * result.M03 + dot1 * result.M13 - dot2 * result.M33;
+
+            invSqrt = MathHelper.FastSqrtInverse(result.M30 * result.M30 + result.M31 * result.M31 +
+                                                 result.M32 * result.M32 + result.M33 * result.M33);
+            if (float.IsInfinity(invSqrt) == false)
+            {
+                result.M30 *= invSqrt;
+                result.M31 *= invSqrt;
+                result.M32 *= invSqrt;
+                result.M33 *= invSqrt;
+            }
         }
 
         /// <summary>

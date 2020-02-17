@@ -156,7 +156,7 @@ namespace Raster.Core.Math
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Quaternion: X = {0}, Y = {1}, Z = {2}, W = {3}", X, Y, Z, W);
+            return string.Format("X={0},Y={1},Z={2},W={3}", X, Y, Z, W);
         }
 
         /// <summary>

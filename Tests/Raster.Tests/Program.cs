@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
+using System.IO;
 
 namespace Raster.Tests
 {
@@ -14,27 +12,15 @@ namespace Raster.Tests
     {
         public static void Main(string[] args)
         {
-            int count = int.Parse(args[0]);
-            float distance = float.Parse(args[1]);
+            string content = File.ReadAllText(args[0]);
+            string[] numbers = content.Split(',');
 
-            float distanceSqr = distance * distance;
+            Matrix4x4 matrix = Matrix4x4.Zero;
 
-            Vector3[] array = new Vector3[count];
-            Vector3 pos = new Vector3(0.5f, 0.5f, 0.5f);
-
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < numbers.Length; i++)
             {
-                if (Vector3.DistanceSquared(pos, array[i]) < distanceSqr)
-                {
-                    
-                }
+                matrix[i] = float.Parse(numbers[i]);
             }
-
-            stopwatch.Stop();
-            Console.WriteLine(stopwatch.ElapsedMilliseconds);
         }
     }
 }

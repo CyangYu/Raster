@@ -79,7 +79,7 @@ namespace Raster.Core.Math
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("EulerAngles: Pitch = {0}, Yaw = {1}, Roll = {2}", Pitch, Yaw, Roll);
+            return string.Format("Pitch={0},Yaw={1},Roll={2}", Pitch, Yaw, Roll);
         }
             
         /// <summary>

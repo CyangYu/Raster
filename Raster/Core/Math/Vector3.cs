@@ -205,7 +205,7 @@ namespace Raster.Core.Math
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Vector3: X = {0}, Y = {1}, Z = {2}", X, Y, Z);
+            return string.Format("X={0},Y={1},Z={2}", X, Y, Z);
         }
 
         /// <summary>
