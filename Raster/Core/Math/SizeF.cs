@@ -2,44 +2,68 @@
 using System.Runtime.InteropServices;
 using Raster.Private;
 
-namespace Raster.Drawing.Primitive
+namespace Raster.Core.Math
 {
     /// <summary>
     /// 
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
-    public struct PointF : IEquatable<PointF>
+    public struct SizeF : IEquatable<SizeF>
     {
-        #region Public Instance Fields
+        #region Public Fields
         /// <summary>
         /// 
         /// </summary>
-        public float X;
+        public float Width;
         /// <summary>
         /// 
         /// </summary>
-        public float Y;
-        #endregion Public Instance Fields
+        public float Height;
+        #endregion
 
         #region Public Static Fields
         /// <summary>
         /// 
         /// </summary>
-        public static readonly PointF Empty = new PointF(0.0f, 0.0f);
+        public readonly static SizeF Empty = new SizeF(0.0f, 0.0f);
+
+        #region Public Instance Properties
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsEmpty
+        {
+            get
+            {
+                return Width == 0.0f && Height == 0.0f;
+            }
+        }
+        #endregion Public Instance Properties
+
         #endregion Public Static Fields
 
         #region Constructor
-        public PointF(in PointF other)
-            : this(other.X, other.Y)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        public SizeF(in SizeF other)
+            : this(other.Width, other.Height)
         {
         }
 
-        public PointF(float x, float y)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public SizeF(float width, float height)
         {
-            X = x;
-            Y = y;
+            Width = width;
+            Height = height;
         }
+
         #endregion Constructor
 
         #region Public Instance Methods
@@ -50,9 +74,9 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            if (obj is PointF)
+            if (obj is SizeF)
             {
-                return Equals((PointF)obj);
+                return Equals((SizeF)obj);
             }
 
             return false;
@@ -64,9 +88,8 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return HashHelpers.Combine(X.GetHashCode(), Y.GetHashCode());
+            return HashHelpers.Combine(Width.GetHashCode(), Height.GetHashCode());
         }
-
 
         /// <summary>
         /// 
@@ -74,29 +97,21 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("PointF X = {0} Y = {1}", X, Y);
+            return string.Format("Width={0},Height={1}", Width, Height);
         }
-
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(PointF other)
+        public bool Equals(SizeF other)
         {
-            return this.X == other.X && this.Y == other.Y;
+            return this.Width == other.Width &&
+                   this.Height == other.Height;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool IsEmpty()
-        {
-            return X == 0.0f && Y == 0.0f;
-        }
-
-        #endregion Public Instance Methods
+        #endregion Public Instance Method
 
         #region Operator Overload
         /// <summary>
@@ -105,9 +120,9 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static PointF operator +(in PointF left, in PointF right)
+        public static SizeF operator +(in SizeF left, in SizeF right)
         {
-            return new PointF(left.X + right.X, left.Y + right.Y);
+            return new SizeF(left.Width + right.Width, left.Height + right.Height);
         }
 
         /// <summary>
@@ -116,9 +131,9 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static PointF operator -(in PointF left, in PointF right)
+        public static SizeF operator -(in SizeF left, in SizeF right)
         {
-            return new PointF(left.X - right.X, left.Y - right.Y);
+            return new SizeF(left.Width - right.Width, left.Height - right.Height);
         }
 
         /// <summary>
@@ -127,9 +142,9 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static PointF operator *(in PointF left, float right)
+        public static SizeF operator *(in SizeF left, float right)
         {
-            return new PointF(left.X * right, left.Y * right);
+            return new SizeF(left.Width * right, left.Height * right);
         }
 
         /// <summary>
@@ -138,9 +153,9 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(in PointF left, in PointF right)
+        public static bool operator ==(in SizeF left, in SizeF right)
         {
-            return left.X == right.X && left.Y == right.Y;
+            return left.Width == right.Width && left.Height == right.Height;
         }
 
         /// <summary>
@@ -149,11 +164,11 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(in PointF left, in PointF right)
+        public static bool operator !=(in SizeF left, in SizeF right)
         {
-            return left.X != right.X || left.Y != right.Y;
+            return left.Width != right.Width || left.Height != right.Height;
         }
 
-        #endregion Operator Overload
+        #endregion Operator Overload     
     }
 }

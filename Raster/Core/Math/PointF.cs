@@ -2,46 +2,44 @@
 using System.Runtime.InteropServices;
 using Raster.Private;
 
-namespace Raster.Drawing.Primitive
+namespace Raster.Core.Math
 {
     /// <summary>
     /// 
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
-    public struct SizeF : IEquatable<SizeF>
+    public struct PointF : IEquatable<PointF>
     {
-        #region Public Fields
+        #region Public Instance Fields
         /// <summary>
         /// 
         /// </summary>
-        public float Width;
+        public float X;
         /// <summary>
         /// 
         /// </summary>
-        public float Height;
-        #endregion
+        public float Y;
+        #endregion Public Instance Fields
 
         #region Public Static Fields
         /// <summary>
         /// 
         /// </summary>
-        public readonly static SizeF Empty = new SizeF(0.0f, 0.0f);
-
+        public static readonly PointF Empty = new PointF(0.0f, 0.0f);
         #endregion Public Static Fields
 
         #region Constructor
-        public SizeF(in SizeF other)
-            : this(other.Width, other.Height)
+        public PointF(in PointF other)
+            : this(other.X, other.Y)
         {
         }
 
-        public SizeF(float width, float height)
+        public PointF(float x, float y)
         {
-            Width = width;
-            Height = height;
+            X = x;
+            Y = y;
         }
-
         #endregion Constructor
 
         #region Public Instance Methods
@@ -52,9 +50,9 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            if (obj is SizeF)
+            if (obj is PointF)
             {
-                return Equals((SizeF)obj);
+                return Equals((PointF)obj);
             }
 
             return false;
@@ -66,8 +64,9 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return HashHelpers.Combine(Width.GetHashCode(), Height.GetHashCode());
+            return HashHelpers.Combine(X.GetHashCode(), Y.GetHashCode());
         }
+
 
         /// <summary>
         /// 
@@ -75,30 +74,29 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("SizeF: Width = {0}, Height = {1}", Width, Height);
+            return string.Format("PointF X = {0} Y = {1}", X, Y);
         }
+
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(SizeF other)
+        public bool Equals(PointF other)
         {
-            return this.Width == other.Width &&
-                   this.Height == other.Height;
+            return this.X == other.X && this.Y == other.Y;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
         public bool IsEmpty()
         {
-            return Width == 0.0f && Height == 0.0f;
+            return X == 0.0f && Y == 0.0f;
         }
 
-        #endregion Public Instance Method
+        #endregion Public Instance Methods
 
         #region Operator Overload
         /// <summary>
@@ -107,9 +105,9 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static SizeF operator +(in SizeF left, in SizeF right)
+        public static PointF operator +(in PointF left, in PointF right)
         {
-            return new SizeF(left.Width + right.Width, left.Height + right.Height);
+            return new PointF(left.X + right.X, left.Y + right.Y);
         }
 
         /// <summary>
@@ -118,9 +116,9 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static SizeF operator -(in SizeF left, in SizeF right)
+        public static PointF operator -(in PointF left, in PointF right)
         {
-            return new SizeF(left.Width - right.Width, left.Height - right.Height);
+            return new PointF(left.X - right.X, left.Y - right.Y);
         }
 
         /// <summary>
@@ -129,9 +127,9 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static SizeF operator *(in SizeF left, float right)
+        public static PointF operator *(in PointF left, float right)
         {
-            return new SizeF(left.Width * right, left.Height * right);
+            return new PointF(left.X * right, left.Y * right);
         }
 
         /// <summary>
@@ -140,9 +138,9 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator ==(in SizeF left, in SizeF right)
+        public static bool operator ==(in PointF left, in PointF right)
         {
-            return left.Width == right.Width && left.Height == right.Height;
+            return left.X == right.X && left.Y == right.Y;
         }
 
         /// <summary>
@@ -151,11 +149,11 @@ namespace Raster.Drawing.Primitive
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool operator !=(in SizeF left, in SizeF right)
+        public static bool operator !=(in PointF left, in PointF right)
         {
-            return left.Width != right.Width || left.Height != right.Height;
+            return left.X != right.X || left.Y != right.Y;
         }
 
-        #endregion Operator Overload     
+        #endregion Operator Overload
     }
 }

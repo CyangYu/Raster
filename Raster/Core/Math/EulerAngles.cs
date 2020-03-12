@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using static Raster.Core.Math.MathF;
 using Raster.Private;
 
 namespace Raster.Core.Math
@@ -28,16 +29,59 @@ namespace Raster.Core.Math
 		#endregion Public Fields
 		
 		#region Constructor
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vec3"></param>
         public EulerAngles(Vector3 vec3)
             : this(vec3.X, vec3.Y, vec3.Z)
         {
         }
 		
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="euler"></param>
 		public EulerAngles(in EulerAngles euler)
 			: this(euler.Pitch, euler.Yaw, euler.Roll)
 		{
 		}
-		
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="quaternion"></param>
+        public EulerAngles(in Quaternion quaternion)
+        {
+            EulerAngles.FromQuaternion(quaternion, out this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rotationMatrix"></param>
+        /// <param name="order"></param>
+        public EulerAngles(in Matrix3x3 rotationMatrix, RotationOrder order)
+        {
+            EulerAngles.FromRotationMatrix(rotationMatrix, order, out this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rotationMatrix"></param>
+        /// <param name="order"></param>
+        public EulerAngles(in Matrix4x4 rotationMatrix, RotationOrder order)
+        {
+            EulerAngles.FromRotationMatrix(rotationMatrix, order, out this);
+        }
+
+		/// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pitch"></param>
+        /// <param name="yaw"></param>
+        /// <param name="roll"></param>
         public EulerAngles(float pitch, float yaw, float roll)
         {
             Pitch = pitch;
@@ -123,6 +167,18 @@ namespace Raster.Core.Math
         public static EulerAngles FromQuaternion(in Quaternion quaternion)
         {
             FromQuaternion(in quaternion, out EulerAngles result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixTo(in Matrix3x3 matrix, RotationOrder order)
+        {
+            FromRotationMatrix(matrix, order, out EulerAngles result);
             return result;
         }
 
@@ -255,6 +311,19 @@ namespace Raster.Core.Math
         public static EulerAngles FromRotationMatrixToZYZ(in Matrix3x3 matrix)
         {
             FromRotationMatrixToZYZ(matrix, out EulerAngles result);
+            return result;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public static EulerAngles FromRotationMatrixTo(in Matrix4x4 matrix, RotationOrder order)
+        {
+            FromRotationMatrix(matrix, order, out EulerAngles result);
             return result;
         }
 
@@ -442,6 +511,60 @@ namespace Raster.Core.Math
             {
                 result.Roll = 0.0f;
                 result.Yaw = MathF.Atan2(-2.0f * (xy - zw), 1.0f - 2.0f * (yy + zz));
+            }
+        }
+
+        public static void FromRotationMatrix(in Matrix3x3 matrix, RotationOrder order, out EulerAngles angles)
+        {
+            switch (order)
+            {
+                case RotationOrder.XYX:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+
+                case RotationOrder.XYZ:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+
+                case RotationOrder.XZX:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+                
+                case RotationOrder.XZY:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+                
+                case RotationOrder.YXY:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+                
+                case RotationOrder.YXZ:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+                
+                case RotationOrder.YZX:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+                
+                case RotationOrder.ZXY:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+                
+                case RotationOrder.ZXZ:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+                
+                case RotationOrder.ZYX:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+                
+                case RotationOrder.ZYZ:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+                
+                default:
+                    FromRotationMatrixToXYZ(matrix, out angles);
+                    break;
             }
         }
 
@@ -802,6 +925,60 @@ namespace Raster.Core.Math
                 result.Yaw = 0.0f;
                 result.Roll = MathF.Atan2(matrix.M10, matrix.M11);
                 result.Pitch = 0.0f;
+            }
+        }
+
+        public static void FromRotationMatrix(in Matrix4x4 matrix, RotationOrder order, out EulerAngles angles)
+        {
+            switch (order)
+            {
+                case RotationOrder.XYX:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+
+                case RotationOrder.XYZ:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+
+                case RotationOrder.XZX:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+
+                case RotationOrder.XZY:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+
+                case RotationOrder.YXY:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+
+                case RotationOrder.YXZ:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+
+                case RotationOrder.YZX:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+
+                case RotationOrder.ZXY:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+
+                case RotationOrder.ZXZ:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+
+                case RotationOrder.ZYX:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+
+                case RotationOrder.ZYZ:
+                    FromRotationMatrixToXYX(matrix, out angles);
+                    break;
+
+                default:
+                    FromRotationMatrixToXYZ(matrix, out angles);
+                    break;
             }
         }
 

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using SysMath = System.Math;
 
-namespace Raster.Drawing.Primitive
+namespace Raster.Core.Math
 {
     /// <summary>
     /// 
@@ -42,10 +41,13 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        public float Left
+        public bool IsEmpty
         {
-            get { return X; }
-            set { X = value; }
+            get
+            {
+                return X == 0.0f && Y == 0.0f &&
+                       Width == 0.0f && Height == 0.0f;
+            }
         }
 
         /// <summary>
@@ -55,6 +57,15 @@ namespace Raster.Drawing.Primitive
         {
             get { return Y; }
             set { Y = value; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public float Left
+        {
+            get { return X; }
+            set { X = value; }
         }
 
         /// <summary>
@@ -148,16 +159,32 @@ namespace Raster.Drawing.Primitive
         #endregion Public Instance Properties
 
         #region Constructor
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public RectangleF(in RectangleF other)
             : this(other.X, other.Y, other.Width, other.Height)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="size"></param>
         public RectangleF(in PointF location, in SizeF size)
             : this(location.X, location.Y, size.Width, size.Height)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         public RectangleF(float x, float y, float width, float height)
         {
             X       = x;
@@ -190,7 +217,8 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return X.GetHashCode() ^ Y.GetHashCode() ^ Width.GetHashCode() ^ Height.GetHashCode();
+            return X.GetHashCode() ^ Y.GetHashCode() ^ 
+                   Width.GetHashCode() ^ Height.GetHashCode();
         }
 
         /// <summary>
@@ -199,7 +227,7 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public override string ToString()
 		{
-            return string.Format("RectangeF X = {0}, Y = {1}, Width = {2}, Height = {3}",
+            return string.Format("X={0},Y={1},Width={2},Height={3}",
 								 X, Y, Width, Height);
 		}
 
@@ -217,12 +245,6 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        public bool IsEmpty() => 
-            X == 0.0f && Y == 0.0f && Width == 0.0f && Height == 0.0f;
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
@@ -236,7 +258,7 @@ namespace Raster.Drawing.Primitive
         /// </summary>
         /// <param name="pt"></param>
         /// <returns></returns>
-        public bool Contain(in Point pt) { return Contain(pt.X, pt.Y); }
+        public bool Contain(in PointF pt) { return Contain(pt.X, pt.Y); }
 
         /// <summary>
         /// 
@@ -344,10 +366,10 @@ namespace Raster.Drawing.Primitive
         /// <param name="result"></param>
         public static void Intersect(in RectangleF value1, in RectangleF value2, out RectangleF result)
         {
-            float left      = SysMath.Max(value1.X, value2.X);
-            float top       = SysMath.Max(value1.Y, value2.Y);
-            float right     = SysMath.Min(value1.X + value1.Width, value2.X + value2.Width);
-            float bottom    = SysMath.Min(value2.Y + value2.Height, value2.Y + value2.Height);
+            float left      = MathF.Max(value1.X, value2.X);
+            float top       = MathF.Max(value1.Y, value2.Y);
+            float right     = MathF.Min(value1.X + value1.Width, value2.X + value2.Width);
+            float bottom    = MathF.Min(value2.Y + value2.Height, value2.Y + value2.Height);
 
             if (right > left && bottom > top)
             {
@@ -370,10 +392,10 @@ namespace Raster.Drawing.Primitive
         /// <param name="result"></param>
         public static void Union(in RectangleF value1, in RectangleF value2, out RectangleF result)
         {
-            float left      = SysMath.Max(value1.X, value2.X);
-            float top       = SysMath.Max(value1.Y, value2.Y);
-            float right     = SysMath.Min(value1.X + value1.Width, value2.X + value2.Width);
-            float bottom    = SysMath.Min(value2.Y + value2.Height, value2.Y + value2.Height);
+            float left      = MathF.Max(value1.X, value2.X);
+            float top       = MathF.Max(value1.Y, value2.Y);
+            float right     = MathF.Min(value1.X + value1.Width, value2.X + value2.Width);
+            float bottom    = MathF.Min(value2.Y + value2.Height, value2.Y + value2.Height);
 
             result.X        = left;
             result.Y        = top;

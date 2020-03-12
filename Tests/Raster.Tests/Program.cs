@@ -12,15 +12,10 @@ namespace Raster.Tests
     {
         public static void Main(string[] args)
         {
-            string content = File.ReadAllText(args[0]);
-            string[] numbers = content.Split(',');
+            Vector3 v0 = new Vector3(0.1f, 0.2f, 0.3f);
+            Vector3 v1 = v0;
 
-            Matrix4x4 matrix = Matrix4x4.Zero;
-
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                matrix[i] = float.Parse(numbers[i]);
-            }
+            Console.WriteLine(v1.ToString());
         }
     }
 }

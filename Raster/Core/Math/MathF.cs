@@ -181,6 +181,21 @@ namespace Raster.Core.Math
         #endregion Public Static Fields
 
         #region Public Static Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="degree"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float DegreeToRadian(float degree) { return MathF.PI * degree / 180.0f; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radian"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float RadianToDegree(float radian) { return 180.0f * radian / MathF.PI; }
 
         /// <summary>
         /// 
@@ -1602,14 +1617,6 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="degree"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float DegToRad(float degree) { return MathF.PI * degree / 180.0f; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
@@ -2111,6 +2118,15 @@ namespace Raster.Core.Math
         /// <returns></returns>
         public static Vector4 Min(in Vector4 x, in Vector4 y) { return new Vector4(Min(x.X, y.X), Min(x.Y, y.Y), Min(x.Z, y.Z), Min(x.W, y.W)); }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Mix(float x, float y, float a) { return x * (1.0f - a) + y * a; }
 
         /// <summary>
         /// 
@@ -2120,7 +2136,37 @@ namespace Raster.Core.Math
         /// <param name="a"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Mix(float x, float y, float a) { return x * (1 - a) + y * a; }
+        public static double Mix(double x, double y, double a) { return x * (1.0 - a) + y * a; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Mix(in Vector2 x, in Vector2 y, in Vector2 a) { return x * (1.0f - a) + y * a; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Mix(in Vector3 x, in Vector3 y, in Vector3 a) { return x * (1.0f - a) + y * a; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Mix(in Vector4 x, in Vector4 y, in Vector4 a) { return x * (1.0f - a) + y * a; }
 
         /// <summary>
         /// 
@@ -2130,15 +2176,6 @@ namespace Raster.Core.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Mod(float x, float y) { return y * Floor(x / y); }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="radian"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float RadToDeg(float radian) { return 180.0f * radian / MathF.PI; }
 
         /// <summary>
         /// 
@@ -2303,6 +2340,20 @@ namespace Raster.Core.Math
         public static Vector3 SmoothSetp(in Vector3 edge0, in Vector3 edge1, in Vector3 x)
         {
             Vector3 t = Stature((x - edge0) / (edge1 - edge0));
+            return t * t * (3.0f - (2.0f * t));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="edge0"></param>
+        /// <param name="edge1"></param>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 SmoothSetp(in Vector4 edge0, in Vector4 edge1, in Vector4 x)
+        {
+            Vector4 t = Stature((x - edge0) / (edge1 - edge0));
             return t * t * (3.0f - (2.0f * t));
         }
 
@@ -2492,7 +2543,7 @@ namespace Raster.Core.Math
         /// <param name="y"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Step(float x, float y) { return Select(0.0f, 1.0f, x >= y); }
+        public static float Step(float edge, float x) { return Select(0.0f, 1.0f, edge >= x); }
 
         /// <summary>
         /// 
@@ -2501,7 +2552,49 @@ namespace Raster.Core.Math
         /// <param name="y"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double Step(double x, double y) { return Select(0.0, 1.0, x >= y); }
+        public static double Step(double edge, double x) { return Select(0.0, 1.0, edge >= x); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Step(in Vector2 edge, in Vector2 x)
+        {
+            return new Vector2(edge.X >= x.X ? 1.0f : 0.0f,
+                               edge.Y >= x.Y ? 1.0f : 0.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Step(in Vector3 edge, in Vector3 x)
+        {
+            return new Vector3(edge.X >= x.X ? 1.0f : 0.0f,
+                               edge.Y >= x.Y ? 1.0f : 0.0f,
+                               edge.Z >= x.Z ? 1.0f : 0.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Step(in Vector4 edge, in Vector4 x)
+        {
+            return new Vector4(edge.X >= x.X ? 1.0f : 0.0f,
+                               edge.Y >= x.Y ? 1.0f : 0.0f,
+                               edge.Z >= x.Z ? 1.0f : 0.0f,
+                               edge.W >= x.W ? 1.0f : 0.0f);
+        }
 
         /// <summary>
         /// 

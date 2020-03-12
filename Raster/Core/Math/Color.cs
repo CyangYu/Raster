@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using Raster.Core.Math;
 using Raster.Private;
 
-namespace Raster.Drawing.Primitive
+namespace Raster.Core.Math
 {
     /// <summary>
     ///
@@ -71,11 +71,39 @@ namespace Raster.Drawing.Primitive
         #endregion Public Instance Properties
 
         #region Constructor
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public Color(in Color other)
-            : this(other.R, other.G, other.B, other.A)
         {
+            this.r = other.r;
+            this.g = other.g;
+            this.b = other.b;
+            this.a = other.a;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        public Color(float value)
+        {
+            float v = MathF.Clamp(value, 0.0f, 1.0f);
+
+            this.r = v;
+            this.g = v;
+            this.b = v;
+            this.a = v;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        /// <param name="a"></param>
         public Color(float r, float g, float b, float a)
         {
             this.r = MathF.Clamp(r, 0.0f, 1.0f);
@@ -119,7 +147,7 @@ namespace Raster.Drawing.Primitive
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Color: Red = {0}, Green = {1}, Blue = {2}, Alpha = {3}", R, G, B, A);
+            return string.Format("R={0},G={1},B={2},A={3}", r, g, b, a);
         }
 
         /// <summary>
@@ -136,31 +164,53 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="r"></param>
-        /// <param name="g"></param>
-        /// <param name="right"></param>
-        /// <param name="left"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Set(float r, float g, float b, float a)
+        /// <param name="other"></param>
+        public void Add(in Color other)
         {
-            this.r = MathF.Clamp(r, 0.0f, 1.0f);
-            this.g = MathF.Clamp(g, 0.0f, 1.0f);
-            this.b = MathF.Clamp(b, 0.0f, 1.0f);
-            this.a = MathF.Clamp(a, 0.0f, 1.0f);
+            this.r = MathF.Min(this.r + other.r, 1.0f);
+            this.g = MathF.Min(this.g + other.g, 1.0f);
+            this.b = MathF.Min(this.b + other.b, 1.0f);
+            this.a = MathF.Min(this.a + other.a, 1.0f);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Rgba ToRgba()
+        /// <param name="other"></param>
+        public void Subtract(in Color other)
         {
-            return new Rgba(
-                (byte)(R * 0xFF),
-                (byte)(G * 0xFF),
-                (byte)(B * 0xFF),
-                (byte)(A * 0xFF));
+            this.r = MathF.Max(this.r - other.r, 0.0f);
+            this.g = MathF.Max(this.g - other.g, 0.0f);
+            this.b = MathF.Max(this.b - other.b, 0.0f);
+            this.a = MathF.Max(this.a - other.a, 0.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        public void Multiply(in Color other)
+        {
+            this.r = MathF.Clamp(this.r * other.r, 0.0f, 1.0f);
+            this.g = MathF.Clamp(this.g * other.g, 0.0f, 1.0f);
+            this.b = MathF.Clamp(this.b * other.b, 0.0f, 1.0f);
+            this.a = MathF.Clamp(this.a * other.a, 0.0f, 1.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="right"></param>
+        /// <param name="left"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Reset(float r, float g, float b, float a)
+        {
+            this.r = MathF.Clamp(r, 0.0f, 1.0f);
+            this.g = MathF.Clamp(g, 0.0f, 1.0f);
+            this.b = MathF.Clamp(b, 0.0f, 1.0f);
+            this.a = MathF.Clamp(a, 0.0f, 1.0f);
         }
 
         #endregion Public Instance Methods
@@ -169,17 +219,176 @@ namespace Raster.Drawing.Primitive
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="rgba"></param>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="t"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color FromRgba(in Rgba rgba)
+        public static Color Lerp(in Color a, in Color b, float t)
         {
-            return new Color(
-                rgba.R / byte.MaxValue,
-                rgba.G / byte.MaxValue,
-                rgba.B / byte.MaxValue,
-                rgba.A / byte.MaxValue
-            );
+            Lerp(a, b, t, out Color result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color LerpUnclamped(in Color a, in Color b, float t)
+        {
+            Lerp(a, b, t, out Color result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Clamp(in Color value, in Color min, in Color max, out Color result)
+        {
+            result.r = (min.r > value.r) ? min.r : value.r;
+            result.r = (max.r < value.r) ? max.r : value.r;
+
+            result.g = (min.g > value.g) ? min.g : value.g;
+            result.g = (max.g < value.g) ? max.g : value.g;
+
+            result.b = (min.b > value.b) ? min.b : value.b;
+            result.b = (max.b < value.b) ? max.b : value.b;
+
+            result.a = (min.a > value.a) ? min.a : value.a;
+            result.a = (max.a < value.a) ? max.a : value.a;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="t"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Lerp(in Color a, in Color b, float t, out Color result)
+        {
+            t = MathF.Clamp(t, 0.0f, 1.0f);
+
+            result.r = MathF.Clamp(a.r + (b.r - a.r) * t, 0.0f, 1.0f);
+            result.g = MathF.Clamp(a.g + (b.g - a.g) * t, 0.0f, 1.0f);
+            result.b = MathF.Clamp(a.b + (b.b - a.b) * t, 0.0f, 1.0f);
+            result.a = MathF.Clamp(a.a + (b.a - a.a) * t, 0.0f, 1.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="t"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void LerpUnclamped(in Color a, in Color b, float t, out Color result)
+        {
+            t = MathF.Clamp(t, 0.0f, 1.0f);
+
+            result.r = MathF.Clamp(a.r + (b.r - a.r) * t, 0.0f, 1.0f);
+            result.g = MathF.Clamp(a.g + (b.g - a.g) * t, 0.0f, 1.0f);
+            result.b = MathF.Clamp(a.b + (b.b - a.b) * t, 0.0f, 1.0f);
+            result.a = MathF.Clamp(a.a + (b.a - a.a) * t, 0.0f, 1.0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Max(in Color x, in Color y, out Color result)
+        {
+            result.r = x.r > y.r ? x.r : y.r;
+            result.g = x.g > y.g ? x.g : y.g;
+            result.b = x.b > y.b ? x.b : y.b;
+            result.a = x.a > y.a ? x.a : y.a;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Min(in Color x, in Color y, out Color result)
+        {
+            result.r = x.r < y.r ? x.r : y.r;
+            result.g = x.g < y.g ? x.g : y.g;
+            result.b = x.b < y.b ? x.b : y.b;
+            result.a = x.a < y.a ? x.a : y.a;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="a"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Mix(in Color x, in Color y, in Color a, out Color result)
+        {
+            result.r = x.r * (1.0f - a.r) + y.r * a.r;
+            result.g = x.g * (1.0f - a.g) + y.g * a.g;
+            result.b = x.b * (1.0f - a.b) + y.b * a.b;
+            result.a = x.a * (1.0f - a.a) + y.a * a.a;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="edge0"></param>
+        /// <param name="edge1"></param>
+        /// <param name="x"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SmoothStep(in Color edge0, in Color edge1, in Color x, out Color result)
+        {
+            float t = MathF.Clamp((x.r - edge0.r) / (edge1.r - edge0.r), 0.0f, 1.0f);
+            float step = t * t * (3.0f - 2.0f * t);
+            result.r = edge0.r + (edge1.r - edge0.r) * step;
+
+            t = MathF.Clamp((x.g - edge0.g) / (edge1.g - edge0.g), 0.0f, 1.0f);
+            step = t * t * (3.0f - 2.0f * t);
+            result.g = edge0.g + (edge1.g - edge0.g) * step;
+
+            t = MathF.Clamp((x.b - edge0.b) / (edge1.b - edge0.b), 0.0f, 1.0f);
+            step = t * t * (3.0f - 2.0f * t);
+            result.b = edge0.b + (edge1.b - edge0.b) * step;
+
+            t = MathF.Clamp((x.a - edge0.a) / (edge1.a - edge0.a), 0.0f, 1.0f);
+            step = t * t * (3.0f - 2.0f * t);
+            result.a = edge0.a + (edge1.a - edge0.a) * step;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="edge"></param>
+        /// <param name="x"></param>
+        /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Step(in Color edge, in Color x, out Color result)
+        {
+            result.r = edge.r >= x.r ? 1.0f : 0.0f;
+            result.g = edge.g >= x.g ? 1.0f : 0.0f;
+            result.b = edge.b >= x.b ? 1.0f : 0.0f;
+            result.a = edge.a >= x.a ? 1.0f : 0.0f;
         }
 
         /// <summary>
