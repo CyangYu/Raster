@@ -574,7 +574,10 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="scale"></param>        
-        public void Scale(in Vector2 scale) { Scale(scale.X, scale.Y); }
+        public void Scale(in Vector2 scale) 
+        { 
+            Scale(scale.X, scale.Y); 
+        }
 
         /// <summary>
         /// 
@@ -592,7 +595,22 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="translate"></param>       
-        public void Translate(in Vector2 translate) { Translate(translate.X, translate.Y); }
+        public void Translate(in Vector2 translate) 
+        { 
+            Translate(translate.X, translate.Y); 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="scaling"></param>
+        /// <param name="rotationCenter"></param>
+        /// <param name="rotationAngle"></param>
+        /// <param name="translation"></param>
+        public void AffineTransformation2D(in Vector2 scaling, in Vector2 rotationCenter, float rotationAngle, in Vector2 translation)
+        {
+
+        }
 
         #endregion Public Instance Methods
 

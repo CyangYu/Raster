@@ -12,10 +12,12 @@ namespace Raster.Core.Math
     public struct AxisAngle : IEquatable<AxisAngle>
     {
         #region Private Instance Fields
+
         /// <summary>
         /// 
         /// </summary>
         public Vector3 Axis;
+
         /// <summary>
         /// 
         /// </summary>
@@ -23,6 +25,7 @@ namespace Raster.Core.Math
         #endregion Private Instance Fields
 
         #region Public Static Fields
+
         /// <summary>
         /// 
         /// </summary>
@@ -30,22 +33,40 @@ namespace Raster.Core.Math
         #endregion
 
         #region Constructor
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="axisAngle"></param>
         public AxisAngle(in AxisAngle axisAngle)
             : this(axisAngle.Axis, axisAngle.Angle)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <param name="angle"></param>
         public AxisAngle(in Vector3 axis, float angle)
         {
-            Axis = axis.Normalized;
-            Angle  = angle;
+            Axis = axis;
+            Angle = angle;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="angle"></param>
         public AxisAngle(float x, float y, float z, float angle)
         {
             Axis = new Vector3(x, y, z).Normalized;
             Angle = angle;
         }
+
         #endregion Constructor
 
         #region Public Instance Methods
@@ -79,8 +100,7 @@ namespace Raster.Core.Math
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("AxisAngle: Axis  R = {0}, Y = {1}, Z = {2} Angle = {3}",
-                                 Axis.X, Axis.Y, Axis.Z, Angle);
+            return string.Format("X={0},Y={1},Z={2},Angle={3}", Axis.X, Axis.Y, Axis.Z, Angle);
         }
 
         /// <summary>
@@ -91,11 +111,10 @@ namespace Raster.Core.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(AxisAngle other)
         {
-            return this.Axis.X == other.Axis.X &&
-                   this.Axis.Y == other.Axis.Y &&
-                   this.Axis.Z == other.Axis.Z &&
+            return this.Axis == other.Axis &&
                    this.Angle == other.Angle;
         }
+
         #endregion Public Instance Methods
 
         #region Public Static Methods

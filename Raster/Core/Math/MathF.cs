@@ -181,22 +181,7 @@ namespace Raster.Core.Math
         #endregion Public Static Fields
 
         #region Public Static Methods
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="degree"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float DegreeToRadian(float degree) { return MathF.PI * degree / 180.0f; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="radian"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float RadianToDegree(float radian) { return 180.0f * radian / MathF.PI; }
-
+       
         /// <summary>
         /// 
         /// </summary>
@@ -377,6 +362,102 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="radian"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Degree(float radian) { return MathF.Rad2Deg * radian; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radian"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Degree(double radian) { return MathF.Rad2Deg * radian; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radian"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Degree(in Vector2 radian) { return new Vector2(Degree(radian.X), Degree(radian.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radian"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Degree(in Vector3 radian) { return new Vector3(Degree(radian.X), Degree(radian.Y), Degree(radian.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radian"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Degree(in Vector4 radian) { return new Vector4(Degree(radian.X), Degree(radian.Y), Degree(radian.Z), Degree(radian.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radian"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static EulerAngles Degree(in EulerAngles radian) { return new EulerAngles(Degree(radian.Pitch), Degree(radian.Yaw), Degree(radian.Roll)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="degree"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Radian(float degree) { return MathF.Deg2Rad * degree; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="degree"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Radian(double degree) { return MathF.Deg2Rad * degree; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="degree"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Radian(in Vector2 degree) { return new Vector2(Radian(degree.X), Radian(degree.Y)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="degree"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Radian(in Vector3 degree) { return new Vector3(Radian(degree.X), Radian(degree.Y), Radian(degree.Z)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="degree"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Radian(in Vector4 degree) { return new Vector4(Radian(degree.X), Radian(degree.Y), Radian(degree.Z), Radian(degree.W)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radian"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static EulerAngles Radian(in EulerAngles radian) { return new EulerAngles(Radian(radian.Pitch), Radian(radian.Yaw), Radian(radian.Roll)); }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -453,7 +534,6 @@ namespace Raster.Core.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Acos(in Vector4 x) { return new Vector4(Acos(x.X), Acos(x.Y), Acos(x.Z), Acos(x.W)); }
-
 
         /// <summary>
         /// 

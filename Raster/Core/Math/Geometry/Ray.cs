@@ -526,7 +526,7 @@ namespace Raster.Core.Math.Geometry
         /// <returns></returns>
         public static Ray GetPickRay(int x, int y,
                                      in Matrix4x4 worldViewProjection,
-                                     in Viewport viewport)
+                                     in ViewportF viewport)
         {
             GetPickRay(x, y, worldViewProjection, viewport, out Ray result);
             return result;
@@ -542,13 +542,13 @@ namespace Raster.Core.Math.Geometry
         /// <param name="result"></param>
         public static void GetPickRay(int x, int y,
                                       in Matrix4x4 worldViewProjection,
-                                      in Viewport viewport,
+                                      in ViewportF viewport,
                                       out Ray result)
         {
             Vector3 nearPoint = new Vector3(x, y, 0.0f);
             Vector3 farPoint = new Vector3(x, y, 1.0f);
-
-            Matrix4x4.Inverse(worldViewProjection, out Matrix4x4 invertedWorldViewProjection);
+            
+            Matrix4x4.Invert(worldViewProjection, out Matrix4x4 invertedWorldViewProjection);
 
             Vector3.Unproject(nearPoint, invertedWorldViewProjection, viewport, out nearPoint);
             Vector3.Unproject(farPoint, invertedWorldViewProjection, viewport, out farPoint);

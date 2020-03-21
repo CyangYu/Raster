@@ -856,13 +856,13 @@ namespace Raster.Core.Math
         /// <param name="factor"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Lerp(in Vector3 a, in Vector3 b, float t, out Vector3 result)
+        public static void Lerp(in Vector3 x, in Vector3 y, float t, out Vector3 result)
         {
             t = MathF.Clamp(t, 0.0f, 1.0f);
 
-            result.X = a.X + (b.X - a.X) * t;
-            result.Y = a.Y + (b.Y - a.Y) * t;
-            result.Z = a.Z + (b.Z - a.Z) * t;
+            result.X = x.X + (y.X - x.X) * t;
+            result.Y = x.Y + (y.Y - x.Y) * t;
+            result.Z = x.Z + (y.Z - x.Z) * t;
         }
         
         /// <summary>
@@ -873,11 +873,11 @@ namespace Raster.Core.Math
         /// <param name="factor"></param>
         /// <param name="result"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void LerpUnclamped(in Vector3 a, in Vector3 b, float t, out Vector3 result)
+        public static void LerpUnclamped(in Vector3 x, in Vector3 y, float t, out Vector3 result)
         {
-            result.X = a.X + (b.X - a.X) * t;
-            result.Y = a.Y + (b.Y - a.Y) * t;
-            result.Z = a.Z + (b.Z - a.Z) * t;
+            result.X = x.X + (y.X - x.X) * t;
+            result.Y = x.Y + (y.Y - x.Y) * t;
+            result.Z = x.Z + (y.Z - x.Z) * t;
         }
 
         /// <summary>

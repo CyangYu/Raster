@@ -164,20 +164,6 @@ namespace Raster.Drawing.Primitive
 #endif
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Color ToColor()
-        {
-            return new Color(
-                r / byte.MaxValue,
-                g / byte.MaxValue,
-                b / byte.MaxValue,
-                a / byte.MaxValue);
-        }
-
         #endregion Public Instance Fields
 
         #region Public Static Methods

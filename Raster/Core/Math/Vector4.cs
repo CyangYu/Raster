@@ -1240,7 +1240,8 @@ namespace Raster.Core.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 operator +(in Vector4 left, in Vector4 right)
         {
-            return new Vector4(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+            Add(left, right, out Vector4 result);
+            return result;
         }
 
         /// <summary>
