@@ -1371,6 +1371,17 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="scaling"></param>
+        /// <param name="rotation"></param>
+        /// <param name="translation"></param>
+        public void AffineTransformation(in Vector3 scaling, in Quaternion rotation, in Vector3 translation)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="scaling"></param>
         /// <param name="rotationCenter"></param>
         /// <param name="rotation"></param>
         /// <param name="translation"></param>
@@ -1786,12 +1797,16 @@ namespace Raster.Core.Math
         /// <param name="zFar"></param>
         public void Frustum(float left, float right, float bottom, float top, float zNear, float zFar)
         {
-#if RASTER_CLIP_SPACE_D3D && RASTER_USE_LEFT_HAND
+#if RASTER_USE_LEFT_HAND_AND_NEGATE_NDC
             FrustrumLH_NO(left, right, bottom, top, zNear, zFar);
-#else
+#elif RASTER_USE_LEFT_HAND_AND_ZERO_NDC
             FrustrumLH_ZO(left, right, bottom, top, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND_AND_NEGATE_NDC
             FrustrumRH_NO(left, right, bottom, top, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND_AND_ZERO_NDC
             FrustrumRH_ZO(left, right, bottom, top, zNear, zFar);
+#else 
+            FrustrumRH_NO(left, right, bottom, top, zNear, zFar);
 #endif
         }
 
@@ -1807,6 +1822,8 @@ namespace Raster.Core.Math
         public void FrustumLH(float left, float right, float bottom, float top, float zNear, float zFar)
         {
 #if RASTER_USE_NEGATE_NDC
+            FrustrumLH_NO(left, right, bottom, top, zNear, zFar);
+#elif RASTER_USE_ZERO_NDC 
             FrustrumLH_ZO(left, right, bottom, top, zNear, zFar);
 #else
             FrustrumLH_NO(left, right, bottom, top, zNear, zFar);
@@ -1826,8 +1843,10 @@ namespace Raster.Core.Math
         {
 #if RASTER_USE_NEGATE_NDC
             FrustrumRH_NO(left, right, bottom, top, zNear, zFar);
-#else
+#elif RASTER_USE_ZERO_NDC 
             FrustrumRH_ZO(left, right, bottom, top, zNear, zFar);
+#else
+            FrustrumRH_NO(left, right, bottom, top, zNear, zFar);
 #endif
         }
 
@@ -1844,8 +1863,10 @@ namespace Raster.Core.Math
         {
 #if RASTER_USE_LEFT_HAND
             FrustrumLH_NO(left, right, bottom, top, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND 
+            FrustrumRH_NO(left, right, bottom, top, zNear, zFar);
 #else
-            FrustrumRH_ZO(left, right, bottom, top, zNear, zFar);
+            FrustrumRH_NO(left, right, bottom, top, zNear, zFar);
 #endif
         }
 
@@ -1862,6 +1883,8 @@ namespace Raster.Core.Math
         {
 #if RASTER_USE_LEFT_HAND
             FrustrumLH_ZO(left, right, bottom, top, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND 
+            FrustrumRH_ZO(left, right, bottom, top, zNear, zFar);
 #else
             FrustrumRH_ZO(left, right, bottom, top, zNear, zFar);
 #endif
@@ -2018,14 +2041,19 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Orthographic(float width, float height, float zNear, float zFar)
         {
 #if RASTER_USE_LEFT_HAND_AND_NEGATE_NDC
             OrthographicLH_NO(width, height, zNear, zFar);
 #elif RASTER_USE_LEFT_HAND_AND_ZERO_NDC
             OrthographicLH_ZO(width, height, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND_AND_NEGATE_NDC
             OrthographicRH_NO(width, height, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND_AND_ZERO_NDC
             OrthographicRH_ZO(width, height, zNear, zFar);
+#else 
+            OrthographicRH_NO(width, height, zNear, zFar);
 #endif
         }
 
@@ -2036,12 +2064,15 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OrthographicLH(float width, float height, float zNear, float zFar)
         {
 #if RASTER_USE_NEGATE_NDC
             OrthographicLH_NO(width, height, zNear, zFar);
 #elif RASTER_USE_ZERO_NDC
             OrthographicLH_ZO(width, height, zNear, zFar);
+#else 
+            OrthographicLH_NO(width, height, zNear, zFar);
 #endif
         }
 
@@ -2052,26 +2083,13 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OrthographicRH(float width, float height, float zNear, float zFar)
         {
 #if RASTER_USE_NEGATE_NDC
             OrthographicRH_NO(width, height, zNear, zFar);
-#else
+#elif RASTER_USE_ZERO_NDC
             OrthographicRH_ZO(width, height, zNear, zFar);
-#endif
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <param name="zNear"></param>
-        /// <param name="zFar"></param>
-        public void OrthographicNO(float width, float height, float zNear, float zFar)
-        {
-#if RASTER_USE_LEFT_HAND
-            OrthographicLH_NO(width, height, zNear, zFar);
 #else
             OrthographicRH_NO(width, height, zNear, zFar);
 #endif
@@ -2084,10 +2102,32 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void OrthographicNO(float width, float height, float zNear, float zFar)
+        {
+#if RASTER_USE_LEFT_HAND
+            OrthographicLH_NO(width, height, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND 
+            OrthographicRH_NO(width, height, zNear, zFar);
+#else
+            OrthographicRH_NO(width, height, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OrthographicZO(float width, float height, float zNear, float zFar)
         {
 #if RASTER_USE_LEFT_HAND
             OrthographicLH_ZO(width, height, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND 
+            OrthographicRH_ZO(width, height, zNear, zFar);
 #else
             OrthographicRH_ZO(width, height, zNear, zFar);
 #endif
@@ -2236,6 +2276,7 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OrthographicOffCenter(float left, float right, float bottom, float top, float zNear, float zFar)
         {
 #if RASTER_USE_LEFT_HAND_AND_NEGATE_NDC
@@ -2246,6 +2287,8 @@ namespace Raster.Core.Math
             OrthographicOffCenterRH_NO(left, right, bottom, top, zNear, zFar);
 #elif RASTER_USE_RIGHT_HAND_AND_ZERO_NDC
             OrthographicOffcenterRH_ZO(left, right, bottom, top, zNear, zFar);
+#else 
+            OrthographicOffCenterRH_NO(left, right, bottom, top, zNear, zFar);
 #endif
         }
 
@@ -2256,12 +2299,15 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OrthographicOffCenterLH(float left, float right, float bottom, float top, float zNear, float zFar)
         {
 #if RASTER_USE_NEGATE_NDC
             OrthographicOffCenterLH_NO(left, right, bottom, top, zNear, zFar);
 #elif RASTER_USE_ZERO_NDC
             OrthographicOffCenterLH_ZO(left, right, bottom, top, zNear, zFar);
+#else 
+            OrthographicOffCenterLH_NO(left, right, bottom, top, zNear, zFar);
 #endif
         }
 
@@ -2272,26 +2318,13 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OrthographicOffcenterRH(float left, float right, float bottom, float top, float zNear, float zFar)
         {
 #if RASTER_USE_NEGATE_NDC
             OrthographicOffCenterRH_NO(left, right, bottom, top, zNear, zFar);
-#else
+#elif RASTER_USE_ZERO_NDC 
             OrthographicOffCenterRH_ZO(left, right, bottom, top, zNear, zFar);
-#endif
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <param name="zNear"></param>
-        /// <param name="zFar"></param>
-        public void OrthographicOffCenterNO(float left, float right, float bottom, float top, float zNear, float zFar)
-        {
-#if RASTER_USE_LEFT_HAND
-            OrthographicOffCenterLH_NO(left, right, bottom, top, zNear, zFar);
 #else
             OrthographicOffCenterRH_NO(left, right, bottom, top, zNear, zFar);
 #endif
@@ -2304,10 +2337,32 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void OrthographicOffCenterNO(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+#if RASTER_USE_LEFT_HAND
+            OrthographicOffCenterLH_NO(left, right, bottom, top, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND 
+            OrthographicOffCenterRH_NO(left, right, bottom, top, zNear, zFar);
+#else
+            OrthographicOffCenterRH_NO(left, right, bottom, top, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OrthographicOffCenterZO(float left, float right, float bottom, float top, float zNear, float zFar)
         {
 #if RASTER_USE_LEFT_HAND
             OrthographicOffCenterLH_ZO(left, right, bottom, top, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND 
+            OrthographicOffCenterRH_ZO(left, right, bottom, top, zNear, zFar);
 #else
             OrthographicOffCenterRH_ZO(left, right, bottom, top, zNear, zFar);
 #endif
@@ -2464,14 +2519,19 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Perspective(float width, float height, float zNear, float zFar)
         {
 #if RASTER_USE_LEFT_HAND_AND_NEGATE_NDC
         PerspectiveLH_NO(width, height, zNear, zFar);
-#else
+#elif RASTER_USE_LEFT_HAND_AND_ZERO_NDC
         PerspectiveLH_ZO(width, height, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND_AND_NEGATE_NDC
         PerspectiveRH_NO(width, height, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND_AND_NEGATE_NDC
         PerspectiveRH_ZO(width, height, zNear, zFar);
+#else
+        PerspectiveRH_NO(width, height, zNear, zFar);
 #endif
         }
 
@@ -2482,12 +2542,15 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PerspectiveLH(float width, float height, float zNear, float zFar)
         {
 #if RASTER_USE_NEGATE_NDC
             PerspectiveLH_NO(width, height, zNear, zFar);
-#else
+#elif RASTER_USE_ZERO_NDC 
             PerspectiveLH_ZO(width, height, zNear, zFar);
+#else
+            PerspectiveLH_NO(width, height, zNear, zFar);
 #endif
         }
 
@@ -2498,12 +2561,15 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PerspectiveRH(float width, float height, float zNear, float zFar)
         {
 #if RASTER_USE_NEGATE_NDC
             PerspectiveRH_NO(width, height, zNear, zFar);
-#else
-            PerspectiveRH_ZO(width, height, zNear, zFar);
+#elif RASTER_USE_ZERO_NDC 
+            PerspectiveRH_ZO(width, height, zNear zFar);
+#else 
+            PerspectiveRH_NO(width, height, zNear, zFar);
 #endif
         }
 
@@ -2514,10 +2580,13 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PerspectiveNO(float width, float height, float zNear, float zFar)
         {
 #if RASTER_USE_LEFT_HAND
             PerspectiveLH_NO(width, height, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND 
+            PerspectiveRH_NO(width, height, zNear, zFar);
 #else
             PerspectiveRH_NO(width, height, zNear, zFar);
 #endif
@@ -2530,10 +2599,13 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PerspectiveZO(float width, float height, float zNear, float zFar)
         {
 #if RASTER_USE_LEFT_HAND
             PerspectiveLH_ZO(width, height, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND 
+            PerspectiveRH_ZO(width, height, zNear zFar);
 #else
             PerspectiveRH_ZO(width, height, zNear, zFar);
 #endif
@@ -2546,6 +2618,7 @@ namespace Raster.Core.Math
         /// <param name="height"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PerspectiveLH_NO(float width, float height, float zNear, float zFar)
         {
             float invWidth = 1.0f / width;
@@ -2682,6 +2755,7 @@ namespace Raster.Core.Math
         /// <param name="aspect"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PerspectiveFov(float fov, float aspect, float zNear, float zFar)
         {
 #if RASTER_USE_LEFT_HAND_AND_NEGATE_NDC
@@ -2692,22 +2766,8 @@ namespace Raster.Core.Math
             PerspectiveFovRH_NO(fov, aspect, zNear, zFar);
 #elif RASTER_USE_RIGHT_HAND_AND_ZERO_NDC
             PerspectiveFovRH_ZO(fov, aspect, zNear, zFar);
-#endif
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fov"></param>
-        /// <param name="aspect"></param>
-        /// <param name="zNear"></param>
-        /// <param name="zFar"></param>
-        public void PerspectiveFovLH(float fov, float aspect, float zNear, float zFar)
-        {
-#if RASTER_USE_NEGATE_NDC
-            PerspectiveFovLH_NO(fov, aspect, zNear, zFar);
-#elif RASTER_USE_ZERO_NDC
-            PerspectiveFovLH_ZO(fov, aspect, zNear, zFar);
+#else 
+            PerspectiveFovRH_NO(fov, aspect, zNear, zFar);
 #endif
         }
 
@@ -2718,10 +2778,32 @@ namespace Raster.Core.Math
         /// <param name="aspect"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void PerspectiveFovLH(float fov, float aspect, float zNear, float zFar)
+        {
+#if RASTER_USE_NEGATE_NDC
+            PerspectiveFovLH_NO(fov, aspect, zNear, zFar);
+#elif RASTER_USE_ZERO_NDC
+            PerspectiveFovLH_ZO(fov, aspect, zNear, zFar);
+#else 
+            PerspectiveFovLH_NO(fov, aspect, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fov"></param>
+        /// <param name="aspect"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PerspectiveFovRH(float fov, float aspect, float zNear, float zFar)
         {
 #if RASTER_USE_NEGATE_NDC
             PerspectiveFovRH_NO(fov, aspect, zNear, zFar);
+#elif RASTER_USE_ZERO_NDC 
+            PerspectiveFovRH_ZO(fov, aspect, zNear, zFar);
 #else
             PerspectiveFovRH_ZO(fov, aspect, zNear, zFar);
 #endif
@@ -2734,26 +2816,32 @@ namespace Raster.Core.Math
         /// <param name="aspect"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PerspectiveFovNO(float fov, float aspect, float zNear, float zFar)
         {
 #if RASTER_USE_LEFT_HAND
             PerspectiveFovLH_NO(fov, aspect, zNear, zFar);
-#else
+#elif RASTER_USE_RIGHT_HAND
+            PerspectiveFovRH_NO(fov, aspect, zNear, zFar);
+#else 
             PerspectiveFovRH_NO(fov, aspect, zNear, zFar);
 #endif
         }
 
-       /// <summary>
-       /// 
-       /// </summary>
-       /// <param name="fov"></param>
-       /// <param name="aspect"></param>
-       /// <param name="zNear"></param>
-       /// <param name="zFar"></param>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fov"></param>
+        /// <param name="aspect"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PerspectiveFovZO(float fov, float aspect, float zNear, float zFar)
         {
 #if RASTER_USE_LEFT_HAND
             PerspectiveFovLH_ZO(fov, aspect, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND 
+            PerspectiveFovRH_ZO(fov, aspect, zNear, zFar);
 #else
             PerspectiveFovRH_ZO(fov, aspect, zNear, zFar);
 #endif
@@ -2900,12 +2988,20 @@ namespace Raster.Core.Math
         /// <param name="top"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PerspectiveOffCenter(float left, float right, float bottom, float top, float zNear, float zFar)
         {
+#if RASTER_USE_LEFT_HAND_AND_NEGATE_NDC
             PerspectiveOffCenterLH_NO(left, right, bottom, top, zNear, zFar);
+#elif RASTER_USE_LEFT_HAND_AND_ZERO_NDC
             PerspectiveOffCenterLH_ZO(left, right, bottom, top, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND_AND_NEGATE_NDC
             PerspectiveOffCenterRH_NO(left, right, bottom, top, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND_AND_ZERO_NDC
             PerspectiveOffCenterRH_ZO(left, right, bottom, top, zNear, zFar);
+#else 
+            PerspectiveOffCenterRH_NO(left, right, bottom, top, zNear, zFar);
+#endif
         }
 
         /// <summary>
@@ -2917,12 +3013,15 @@ namespace Raster.Core.Math
         /// <param name="top"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PerspectiveOffCenterLH(float left, float right, float bottom, float top, float zNear, float zFar)
         {
 #if RASTER_USE_NEGATE_NDC
             PerspectiveOffCenterLH_NO(left, right, bottom, top, zNear, zFar);
-#else
+#elif RASTER_USE_ZERO_NDC
             PerspectiveOffCenterRH_ZO(left, right, bottom, top, zNear, zFar);
+#else
+            PerspectiveOffCenterRH_NO(left, right, bottom, top, zNear, zFar);
 #endif
         }
 
@@ -2935,28 +3034,13 @@ namespace Raster.Core.Math
         /// <param name="top"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PerspectiveOffCenterRH(float left, float right, float bottom, float top, float zNear, float zFar)
         {
 #if RASTER_USE_NEGATE_NDC
             PerspectiveOffCenterRH_NO(left, right, bottom, top, zNear, zFar);
-#else
+#elif RASTER_USE_ZERO_NDC
             PerspectiveOffCenterRH_ZO(left, right, bottom, top, zNear, zFar);
-#endif
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <param name="bottom"></param>
-        /// <param name="top"></param>
-        /// <param name="zNear"></param>
-        /// <param name="zFar"></param>
-        public void PerspectiveOffCenterNO(float left, float right, float bottom, float top, float zNear, float zFar)
-        {
-#if RASTER_USE_LEFT_HAND
-            PerspectiveOffCenterLH_NO(left, right, bottom, top, zNear, zFar);
 #else
             PerspectiveOffCenterRH_NO(left, right, bottom, top, zNear, zFar);
 #endif
@@ -2971,10 +3055,34 @@ namespace Raster.Core.Math
         /// <param name="top"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void PerspectiveOffCenterNO(float left, float right, float bottom, float top, float zNear, float zFar)
+        {
+#if RASTER_USE_LEFT_HAND
+            PerspectiveOffCenterLH_NO(left, right, bottom, top, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND
+            PerspectiveOffCenterRH_NO(left, right, bottom, top, zNear, zFar);
+#else
+            PerspectiveOffCenterRH_NO(left, right, bottom, top, zNear, zFar);
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        /// <param name="top"></param>
+        /// <param name="zNear"></param>
+        /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PerspectiveOffCenterZO(float left, float right, float bottom, float top, float zNear, float zFar)
         {
 #if RASTER_USE_LEFT_HAND
             PerspectiveOffCenterLH_ZO(left, right, bottom, top, zNear, zFar);
+#elif RASTER_USE_RIGHT_HAND
+            PerspectiveOffCenterRH_ZO(left, right, bottom, top, zNear, zFar);
 #else
             PerspectiveOffCenterRH_ZO(left, right, bottom, top, zNear, zFar);
 #endif
@@ -2989,6 +3097,7 @@ namespace Raster.Core.Math
         /// <param name="top"></param>
         /// <param name="zNear"></param>
         /// <param name="zFar"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PerspectiveOffCenterLH_NO(float left, float right, float bottom, float top, float zNear, float zFar)
         {
             float invWidth = 1.0f / (right - left);
@@ -3127,7 +3236,7 @@ namespace Raster.Core.Math
         #endregion Projection Transform
 
         #region View Transform
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -3173,7 +3282,7 @@ namespace Raster.Core.Math
             Viewport(viewport.Bounds.X, viewport.Bounds.Y, viewport.Bounds.Width, viewport.Bounds.Height, viewport.MinDepth, viewport.MaxDepth);
         }
         
-        #endregion View Transform
+#endregion View Transform
 
         /// <summary>
         /// 

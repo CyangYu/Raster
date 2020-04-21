@@ -12,10 +12,12 @@ namespace Raster.Core.Math
     public struct PointF : IEquatable<PointF>
     {
         #region Public Instance Fields
+
         /// <summary>
         /// 
         /// </summary>
         public float X;
+
         /// <summary>
         /// 
         /// </summary>
@@ -29,12 +31,32 @@ namespace Raster.Core.Math
         public static readonly PointF Empty = new PointF(0.0f, 0.0f);
         #endregion Public Static Fields
 
+        #region Public Instance Properties
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsZero
+        {
+            get { return X == 0.0f && Y == 0.0f; }
+        }
+        #endregion Public Instance Properties 
+        
         #region Constructor
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
         public PointF(in PointF other)
             : this(other.X, other.Y)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public PointF(float x, float y)
         {
             X = x;
@@ -86,14 +108,6 @@ namespace Raster.Core.Math
         public bool Equals(PointF other)
         {
             return this.X == other.X && this.Y == other.Y;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool IsEmpty()
-        {
-            return X == 0.0f && Y == 0.0f;
         }
 
         #endregion Public Instance Methods

@@ -9,27 +9,17 @@ namespace Raster.Transform
     public class Transform
     {
         #region Public Instance Fields
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector3 Up;
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector3 Right;
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector3 Forward;
 
         /// <summary>
         /// 
         /// </summary>
         public Vector3 Position;
+
         /// <summary>
         /// 
         /// </summary>
         public Quaternion Rotation;
+
         /// <summary>
         /// 
         /// </summary>
@@ -61,6 +51,7 @@ namespace Raster.Transform
         public void RotateAround()
         {
         }
+
         #endregion Public Instance Methods
     }
 }

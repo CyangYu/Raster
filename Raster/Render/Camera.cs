@@ -9,10 +9,6 @@ namespace Raster.Render
     public class Camera
     {
         #region Public Instance Fields;
-        /// <summary>
-        /// 
-        /// </summary>
-        private Vector3 position;
 
         #endregion Public Instance Fields
 
