@@ -130,9 +130,9 @@ namespace Raster.Core.Math.Geometry
         /// <param name="delta></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector3 GetPoint(float distance)
+        public Vector3 PointAt(float distance)
         {
-            GetPoint(this, distance, out Vector3 result);
+            PointAt(this, distance, out Vector3 result);
             return result;
         }
 
@@ -603,7 +603,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="distance"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void GetPoint(in Ray ray, float distance, out Vector3 result)
+        public static void PointAt(in Ray ray, float distance, out Vector3 result)
         {
             result.X = ray.Origin.X + distance * ray.Direction.X;
             result.Y = ray.Origin.Y + distance * ray.Direction.Y;

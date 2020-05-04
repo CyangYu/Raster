@@ -186,6 +186,7 @@ namespace Raster.Core.Math
         #endregion Constructor
 
         #region Public Instance Methods
+
         /// <summary>
         /// 
         /// </summary>
@@ -195,7 +196,7 @@ namespace Raster.Core.Math
         {
             if (obj is Vector4)
             {
-                return Equals((Vector4)obj);
+                return this == (Vector4)obj;
             }
 
             return false;
@@ -212,6 +213,10 @@ namespace Raster.Core.Math
             return HashHelpers.Combine(hash1, hash2);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return string.Format("Vector4: X = {0}, Y = {1}, Z = {2} W = {3}", X, Y, Z, W);
@@ -224,6 +229,24 @@ namespace Raster.Core.Math
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Vector4 other) { return this == other; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Inverse()
+        {
+            float lenSqr = X * X + Y * Y + Z * Z + W * W;
+
+            if (!MathHelper.IsZero(lenSqr))
+            {
+                float invNorm = 1.0f / lenSqr;
+                X *= invNorm;
+                Y *= invNorm;
+                Z *= invNorm;
+                W *= invNorm;
+            }
+        }
 
         /// <summary>
         /// 
@@ -265,6 +288,7 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Add(float value)
         {
             X += value;
@@ -289,7 +313,24 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="w"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Add(float x, float y, float z, float w)
+        {
+            X += x;
+            Y += y;
+            Z += z;
+            W += w;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Subtract(float value)
         {
             X -= value;
@@ -309,6 +350,22 @@ namespace Raster.Core.Math
             Y -= other.Y;
             Z -= other.Z;
             W -= other.W;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="w"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Subtract(float x, float y, float z, float w)
+        {
+            X -= x;
+            Y -= y;
+            Z -= z;
+            W -= w;
         }
 
         /// <summary>
@@ -335,6 +392,22 @@ namespace Raster.Core.Math
             Y *= other.Y;
             Z *= other.Z;
             W *= other.W;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="w"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Mulitply(float x, float y, float z, float w)
+        {
+            X *= x;
+            Y *= y;
+            Z *= z;
+            W *= w;
         }
 
         /// <summary>

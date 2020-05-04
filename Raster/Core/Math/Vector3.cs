@@ -160,6 +160,7 @@ namespace Raster.Core.Math
         #endregion Public Instance Properties
 
         #region Constructor
+
         /// <summary>
         /// 
         /// </summary>
@@ -212,7 +213,7 @@ namespace Raster.Core.Math
         {
             if (obj is Vector3)
             {
-                return Equals((Vector3)obj);
+                return this == (Vector3)obj;
             }
 
             return false;
@@ -247,7 +248,24 @@ namespace Raster.Core.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Vector3 other)
         {
-            return X == other.X && Y == other.Y && Z == other.Z;
+            return this == other;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Inverse()
+        {
+            float lenSqr = X * X + Y * Y + Z * Z;
+
+            if (!MathHelper.IsZero(lenSqr))
+            {
+                float invNorm = 1.0f / lenSqr;
+                X *= invNorm;
+                Y *= invNorm;
+                Z *= invNorm;
+            }
         }
 
         /// <summary>
@@ -289,13 +307,14 @@ namespace Raster.Core.Math
         /// 
         /// </summary>
         /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Add(float value)
         {
             X += value;
             Y += value;
             Z += value;
         }
-
+            
         /// <summary>
         /// 
         /// </summary>
@@ -311,7 +330,22 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Add(float x, float y, float z)
+        {
+            X += x;
+            Y += y;
+            Z += z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Subtract(float value)
         {
             X -= value;
@@ -329,6 +363,20 @@ namespace Raster.Core.Math
             X -= other.X;
             Y -= other.Y;
             Z -= other.Z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Subtract(float x, float y, float z)
+        {
+            X -= x;
+            Y -= y;
+            Z -= z;
         }
 
         /// <summary>
@@ -353,6 +401,20 @@ namespace Raster.Core.Math
             X *= other.X;
             Y *= other.Y;
             Z *= other.Z;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Multiply(float x, float y, float z)
+        {
+            X *= x;
+            Y *= y;
+            Z *= z;
         }
 
         /// <summary>

@@ -291,6 +291,20 @@ namespace Raster.Core.Math
         /// </summary>
         public Vector3 Forward
         {
+            get { return new Vector3(M20, M21, M22); }
+            set
+            {
+                M20 = value.X;
+                M21 = value.Y;
+                M22 = value.Z;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Backward
+        {
             get { return new Vector3(-M20, -M21, -M22); }
             set
             {
@@ -303,14 +317,47 @@ namespace Raster.Core.Math
         /// <summary>
         /// 
         /// </summary>
-        public Vector3 Backward
+        public Quaternion Rotation
         {
-            get { return new Vector3(M20, M21, M22); }
+            get { return Quaternion.Identity; }
             set
             {
-                M20 = value.X;
-                M21 = value.Y;
-                M22 = value.Z;
+
+            }
+        }
+
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Scale
+        {
+            get 
+            {
+                return new Vector3(
+                    MathF.Sqrt(M00 * M00 + M01 * M01 + M02 * M02),
+                    MathF.Sqrt(M10 * M10 + M11 * M11 + M12 * M12),
+                    MathF.Sqrt(M20 * M20 + M21 * M21 + M22 * M22));
+            }
+            set
+            {
+                
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 Translation
+        {
+            get { return new Vector3(M30, M31, M32); }
+            set
+            {
+                M30 = value.X;
+                M31 = value.Y;
+                M32 = value.Z;
             }
         }
 

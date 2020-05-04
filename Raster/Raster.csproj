@@ -169,6 +169,7 @@
     <Compile Include="Core\Math\ViewportF.cs" />
     <Compile Include="Core\Transform\RectTransform.cs" />
     <Compile Include="Core\Transform\Transform.cs" />
+    <Compile Include="Core\Transform\Transform2D.cs" />
     <Compile Include="Drawing\Drawing2D\Canvas.cs" />
     <Compile Include="Drawing\Drawing2D\Palette.cs" />
     <Compile Include="Drawing\Drawing2D\PixelFormat.cs" />

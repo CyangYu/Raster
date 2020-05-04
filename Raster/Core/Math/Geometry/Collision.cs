@@ -66,7 +66,9 @@ namespace Raster.Core.Math.Geometry
             Line line0 = new Line(segment);
             ClosetPointLineLine(line, line0, out distance0, out distance1);
 
-            result = line.Origin + distance0 * line.Direction;
+            result.X = line.Origin.X + distance0 * line.Direction.X;
+            result.Y = line.Origin.Y + distance0 * line.Direction.Y;
+            result.Z = line.Origin.Z + distance0 * line.Direction.Z;
         }
 
 
@@ -185,7 +187,9 @@ namespace Raster.Core.Math.Geometry
             Vector3.Subtract(point, line.Origin, out Vector3 sub);
             distance = Vector3.Dot(sub, line.Direction);
 
-            result = line.Origin + distance * line.Direction;
+            result.X = line.Origin.X + distance * line.Direction.X;
+            result.Y = line.Origin.Y + distance * line.Direction.Y;
+            result.Z = line.Origin.Z + distance * line.Direction.Z;
         }
 
         /// <summary>
@@ -201,7 +205,9 @@ namespace Raster.Core.Math.Geometry
             distance = Vector3.Dot(point - segment.Start, direction) / direction.LengthSquared;
 
             distance = MathF.Clamp(distance, 0.0f, 1.0f);
-            result = segment.Start + distance * direction;
+            result.X = segment.Start.X + distance * direction.X;
+            result.Y = segment.Start.Y + distance * direction.Y;
+            result.Z = segment.Start.Z + distance * direction.Z;
         }
 
         /// <summary>
@@ -210,12 +216,15 @@ namespace Raster.Core.Math.Geometry
         /// <param name="plane"></param>
         /// <param name="point"></param>
         /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ClosetPointPointPlane(in Vector3 point, in Plane plane, out Vector3 result)
         {
             float dot = Vector3.Dot(plane.Normal, point);
             float t = dot - plane.Distance;
 
-            result = point - (t * plane.Normal);
+            result.X = point.X - t * plane.Normal.X;
+            result.Y = point.Y - t * plane.Normal.Y;
+            result.Z = point.Z - t * plane.Normal.Z;
         }
 
         /// <summary>
@@ -225,6 +234,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="ray"></param>
         /// <param name="distance0"></param>
         /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ClosetPointPointRay(in Vector3 point, in Ray ray, out float distance, out Vector3 result)
         {
             distance = MathF.Max(Vector3.Dot(point - ray.Origin, ray.Direction), 0.0f);
@@ -237,6 +247,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="sphere"></param>
         /// <param name="point"></param>
         /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ClosetPointPointSphere(in Sphere sphere, in Vector3 point, out Vector3 result)
         {
             Vector3.Subtract(point, sphere.Center, out result);
@@ -252,6 +263,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="point"></param>
         /// <param name="triangle"></param>
         /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ClosetPointPointTriangle(in Vector3 point, in Triangle triangle, out Vector3 result)
         {
             Vector3 edgeA = triangle.Vertex1 - triangle.Vertex0;
@@ -325,6 +337,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="distance0"></param>
         /// <param name="distance1"></param>
         /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ClosetPointRayLine(in Ray ray, in Line line, out float distance0, out float distance1, out Vector3 result)
         {
             Line line0 = new Line(ray);
@@ -349,6 +362,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="distance0"></param>
         /// <param name="distance1"></param>
         /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ClosetPointRayLineSegment(in Ray ray, in LineSegment segment, out float distance0, out float distance1, out Vector3 result)
         {
             Line line0 = new Line(ray);
@@ -415,6 +429,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="distance0"></param>
         /// <param name="distance1"></param>
         /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ClosetPointRayRay(in Ray ray0, in Ray ray1, out float distance0, out float distance1, out Vector3 result)
         {
             Line line0 = new Line(ray0);
@@ -453,7 +468,7 @@ namespace Raster.Core.Math.Geometry
             }
             else
             {
-                result = ray0.Origin + distance0 * ray0.Direction;
+                Ray.PointAt(ray0, distance0, out result);
             }
         }
 
@@ -463,6 +478,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="sphere0"></param>
         /// <param name="sphere1"></param>
         /// <param name="result"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ClosetPointSphereSphere(in Sphere sphere0, in Sphere sphere1, out Vector3 result)
         {
             Vector3.Subtract(sphere0.Center, sphere1.Center, out result);
@@ -478,6 +494,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="box0"></param>
         /// <param name="box1"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float DistanceBoxBox(in BoundingBox box0, in BoundingBox box1)
         {
             float distance = 0.0f;
@@ -525,6 +542,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="box"></param>
         /// <param name="point"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float DistanceBoxPoint(in BoundingBox box, ref Vector3 point)
         {
             float distance = 0.0f;
@@ -565,6 +583,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="line"></param>
         /// <param name="capsule"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float DistanceLineCapsule(in Line line, in Capsule capsule)
         {
             float d = DistanceLineLineSegment(line, capsule.Segment, out float distance0, out float distance1);
@@ -579,6 +598,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="distance0"></param>
         /// <param name="distance1"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float DistanceLineLine(in Line line0, in Line line1, out float distance0, out float distance1)
         {
             ClosetPointLineLine(line0, line1, out distance0, out distance1, out Vector3 point0);
@@ -595,6 +615,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="distance0"></param>
         /// <param name="distance1"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float DistanceLineLineSegment(in Line line, in LineSegment segment, out float distance0, out float distance1)
         {
             ClosetPointLineLineSegment(line, segment, out distance0, out distance1, out Vector3 point0);
@@ -610,6 +631,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="point"></param>
         /// <param name="distance"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float DistanceLinePoint(in Line line, in Vector3 point, out float distance)
         {
             ClosetPointPointLine(point, line, out distance, out Vector3 result);
@@ -622,6 +644,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="line"></param>
         /// <param name="sphere"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float DistanceLineSphere(in Line line, in Sphere sphere)
         {
             float d = DistanceLinePoint(line, sphere.Center, out float distance);
@@ -634,6 +657,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="segment"></param>
         /// <param name="capsule"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float DistanceLineSegmentCapsule(in LineSegment segment, in Capsule capsule)
         {
             float d = DistanceLineSegmentLineSegment(segment, capsule.Segment, out float distance0, out float distance1);
@@ -648,6 +672,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="distance0"></param>
         /// <param name="distance1"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float DistanceLineSegmentLineSegment(in LineSegment segment0, in LineSegment segment1, out float distance0, out float distance1)
         {
             ClosetPointLineSegmentLineSegment(segment0, segment1, out distance0, out distance1, out Vector3 result);
@@ -663,6 +688,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="segment"></param>
         /// <param name="plane"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float DistanceLineSegmentPlane(in LineSegment segment, in Plane plane)
         {
             float distance0 = Plane.SignedDistance(plane, segment.Start);
@@ -819,6 +845,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="sphere0"></param>
         /// <param name="sphere1"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float DistanceSphereSphere(in Sphere sphere0, in Sphere sphere1)
         {
             float distance = Vector3.Distance(sphere0.Center, sphere1.Center);
@@ -833,6 +860,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="ray"></param>
         /// <param name="capsule"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool RayIntersectsCapsule(in Ray ray, in Capsule capsule)
         {
             float distance = DistanceRayLineSegment(ray, capsule.Segment, out float distance0, out float distance1);
@@ -846,6 +874,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="plane"></param>
         /// <param name="distance"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool RayIntersectsPlane(in Ray ray, in Plane plane, out float distance)
         {
             float direction = Vector3.Dot(plane.Normal, ray.Direction);
@@ -875,6 +904,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="plane"></param>
         /// <param name="point"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool RayIntersectsPlane(in Ray ray, in Plane plane, out float distance, out Vector3 point)
         {
             if (!RayIntersectsPlane(ray, plane, out distance))
@@ -893,6 +923,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="ray"></param>
         /// <param name="point"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool RayIntersectsPoint(in Ray ray, Vector3 point)
         {
             Vector3.Subtract(ray.Origin, point, out Vector3 temp);
@@ -921,6 +952,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="ray1"></param>
         /// <param name="point"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool RayIntersectsRay(in Ray ray0, in Ray ray1, out Vector3 point)
         {
             Vector3.Cross(ray0.Direction, ray1.Direction, out Vector3 cross);
@@ -983,6 +1015,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="box"></param>
         /// <param name="distance"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool RayIntersectsBox(in Ray ray, in BoundingBox box, out float distance)
         {
             distance = 0.0f;
@@ -1092,6 +1125,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="distance"></param>
         /// <param name="point"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool RayIntersectsBox(in Ray ray, in BoundingBox box, out float distance, out Vector3 point)
         {
             if (!RayIntersectsBox(ray, box, out distance))
@@ -1110,6 +1144,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="ray"></param>
         /// <param name="sphere"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool RayIntersectsSphere(in Ray ray, in Sphere sphere, out float distance)
         {
             Vector3.Subtract(ray.Origin, sphere.Center, out Vector3 temp);
@@ -1123,7 +1158,7 @@ namespace Raster.Core.Math.Geometry
                 return false;
             }
 
-            float discriminant = b * b - c;
+            float discriminant = b * b - 4.0f * c;
 
             if (discriminant < 0.0f)
             {
@@ -1147,6 +1182,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="sphere"></param>
         /// <param name="result"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool RayIntersectsSphere(in Ray ray, in Sphere sphere, out float distance, out Vector3 point)
         {
             if (!RayIntersectsSphere(ray, sphere, out distance))
@@ -1166,6 +1202,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="triange"></param>
         /// <param name="distance"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool RayIntersectsTriangle(in Ray ray, in Triangle triange, out float distance)
         {
             Vector3.Subtract(triange.Vertex1, triange.Vertex0, out Vector3 edge0);
@@ -1239,6 +1276,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="distance"></param>
         /// <param name="point"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool RayIntersectsTriangle(in Ray ray, in Triangle triangle, out float distance, out Vector3 point)
         {
             if (!RayIntersectsTriangle(ray, triangle, out distance))
@@ -1257,6 +1295,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="plane0"></param>
         /// <param name="plane1"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool PlaneIntersectsPlane(in Plane plane0, in Plane plane1)
         {
             Vector3.Cross(plane0.Normal, in plane1.Normal, out Vector3 direction);
@@ -1277,6 +1316,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="sphere1"></param>
         /// <param name="tolerance"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool SphereIntersectSphere(in Sphere sphere0, in Sphere sphere1)
         {
             float radiisum = sphere0.Radius + sphere1.Radius;
@@ -1289,6 +1329,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="box0"></param>
         /// <param name="box1"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool BoxIntersectsBox(in BoundingBox box0, in BoundingBox box1)
         {
             if (box0.Minimum.X > box1.Maximum.X || box1.Minimum.X > box0.Maximum.X)
@@ -1315,6 +1356,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="box"></param>
         /// <param name="sphere"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool BoxIntersectsSphere(in BoundingBox box, in Sphere sphere)
         {
             Vector3.Clamp(sphere.Center, box.Minimum, box.Maximum, out Vector3 vector);
@@ -1329,6 +1371,7 @@ namespace Raster.Core.Math.Geometry
         /// <param name="sphere"></param>
         /// <param name="triange"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool SphereIntersectsTriangle(in Sphere sphere, in Triangle triange)
         {
             ClosetPointPointTriangle(sphere.Center, triange, out Vector3 point);
